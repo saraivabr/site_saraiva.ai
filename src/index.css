@@ -96,31 +96,337 @@
     @apply bg-background text-foreground font-premium;
     font-feature-settings: "cv11", "ss01";
     font-variant: normal;
+    overflow-x: hidden;
   }
 }
 
 @layer components {
   .hero-gradient {
-    background: linear-gradient(135deg, #000000 0%, #1a1a1a 100%);
+    background: linear-gradient(135deg, #000000 0%, #1a1a1a 50%, #000000 100%);
+    background-size: 400% 400%;
+    animation: gradientShift 8s ease-in-out infinite;
   }
-  
+
+  .neon-gradient {
+    background: linear-gradient(45deg, #ff006e, #fb5607, #ffbe0b, #8338ec, #3a86ff);
+    background-size: 400% 400%;
+    animation: gradientShift 5s ease-in-out infinite;
+  }
+
+  .glass-effect {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+  }
+
+  .floating-card {
+    transform: translateY(0px);
+    animation: float 6s ease-in-out infinite;
+  }
+
   .text-shadow-strong {
-    text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+    text-shadow: 0 4px 8px rgba(0,0,0,0.5), 0 2px 4px rgba(0,0,0,0.3);
   }
-  
+
+  .text-neon {
+    text-shadow: 0 0 10px currentColor, 0 0 20px currentColor, 0 0 30px currentColor;
+  }
+
   .btn-primary {
-    @apply bg-black text-white hover:bg-gray-900 transition-all duration-300 transform hover:scale-105 font-bold py-4 px-8 rounded-lg shadow-lg;
+    @apply relative bg-gradient-to-r from-black via-gray-900 to-black text-white hover:from-gray-900 hover:via-black hover:to-gray-900 transition-all duration-500 transform hover:scale-105 font-bold py-4 px-8 rounded-lg shadow-2xl overflow-hidden;
   }
-  
+
+  .btn-primary::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+    transition: left 0.7s;
+  }
+
+  .btn-primary:hover::before {
+    left: 100%;
+  }
+
   .btn-secondary {
-    @apply bg-white text-black border-2 border-black hover:bg-black hover:text-white transition-all duration-300 transform hover:scale-105 font-bold py-4 px-8 rounded-lg;
+    @apply relative bg-white text-black border-2 border-black hover:bg-black hover:text-white transition-all duration-500 transform hover:scale-105 font-bold py-4 px-8 rounded-lg shadow-xl overflow-hidden;
   }
-  
+
+  .btn-neon {
+    @apply relative bg-black text-white border-2 border-cyan-400 hover:bg-cyan-400 hover:text-black transition-all duration-300 transform hover:scale-105 font-bold py-4 px-8 rounded-lg shadow-lg;
+    box-shadow: 0 0 20px rgba(34, 211, 238, 0.5);
+  }
+
   .section-spacing {
-    @apply py-20 lg:py-32;
+    @apply py-24 lg:py-40;
   }
-  
+
   .container-max {
     @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+  }
+
+  .parallax-bg {
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
+
+  .morphing-bg {
+    background: linear-gradient(-45deg, #ff006e, #fb5607, #ffbe0b, #8338ec, #3a86ff, #000000);
+    background-size: 1000% 1000%;
+    animation: morphing 15s ease-in-out infinite;
+  }
+
+  .text-gradient {
+    background: linear-gradient(45deg, #ff006e, #fb5607, #ffbe0b, #8338ec, #3a86ff);
+    background-size: 400% 400%;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: gradientShift 3s ease-in-out infinite;
+  }
+
+  .card-3d {
+    transform-style: preserve-3d;
+    transition: transform 0.6s;
+  }
+
+  .card-3d:hover {
+    transform: rotateY(15deg) rotateX(10deg) scale(1.05);
+  }
+
+  .spinning-border {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .spinning-border::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    padding: 2px;
+    background: linear-gradient(45deg, #ff006e, #fb5607, #ffbe0b, #8338ec, #3a86ff);
+    border-radius: inherit;
+    mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    mask-composite: xor;
+    animation: spin 3s linear infinite;
+  }
+}
+
+@keyframes gradientShift {
+  0%, 100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
+@keyframes morphing {
+  0%, 100% {
+    background-position: 0% 50%;
+  }
+  25% {
+    background-position: 100% 50%;
+  }
+  50% {
+    background-position: 50% 100%;
+  }
+  75% {
+    background-position: 50% 0%;
+  }
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-20px);
+  }
+}
+
+@keyframes glow {
+  0%, 100% {
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
+  }
+  50% {
+    box-shadow: 0 0 40px rgba(255, 255, 255, 0.4), 0 0 60px rgba(255, 255, 255, 0.2);
+  }
+}
+
+@keyframes textGlow {
+  0%, 100% {
+    text-shadow: 0 0 10px currentColor;
+  }
+  50% {
+    text-shadow: 0 0 20px currentColor, 0 0 30px currentColor;
+  }
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes slideInFromLeft {
+  0% {
+    transform: translateX(-100%) scale(0.8);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(0) scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes slideInFromRight {
+  0% {
+    transform: translateX(100%) scale(0.8);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(0) scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes zoomIn {
+  0% {
+    transform: scale(0.5) rotate(-10deg);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1) rotate(0deg);
+    opacity: 1;
+  }
+}
+
+@keyframes typewriter {
+  from {
+    width: 0;
+  }
+  to {
+    width: 100%;
+  }
+}
+
+@keyframes blink {
+  50% {
+    border-color: transparent;
+  }
+}
+
+.animate-slide-left {
+  animation: slideInFromLeft 1s ease-out;
+}
+
+.animate-slide-right {
+  animation: slideInFromRight 1s ease-out;
+}
+
+.animate-zoom-in {
+  animation: zoomIn 0.8s ease-out;
+}
+
+.animate-glow {
+  animation: glow 2s ease-in-out infinite;
+}
+
+.animate-text-glow {
+  animation: textGlow 2s ease-in-out infinite;
+}
+
+.animate-typewriter {
+  overflow: hidden;
+  border-right: 3px solid;
+  white-space: nowrap;
+  animation: typewriter 4s steps(40) 1s forwards, blink 0.75s step-end infinite;
+}
+
+.perspective-1000 {
+  perspective: 1000px;
+}
+
+.backface-hidden {
+  backface-visibility: hidden;
+}
+
+/* Creative hover effects */
+.hover-lift {
+  transition: all 0.3s ease;
+}
+
+.hover-lift:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+}
+
+.hover-tilt {
+  transition: all 0.3s ease;
+}
+
+.hover-tilt:hover {
+  transform: perspective(1000px) rotateX(10deg) rotateY(10deg);
+}
+
+.hover-scale-rotate {
+  transition: all 0.5s ease;
+}
+
+.hover-scale-rotate:hover {
+  transform: scale(1.1) rotate(5deg);
+}
+
+/* Neon effects */
+.neon-box {
+  box-shadow: 
+    0 0 10px currentColor,
+    0 0 20px currentColor,
+    0 0 30px currentColor,
+    inset 0 0 10px currentColor;
+}
+
+/* Glass morphism enhanced */
+.glass-card {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+}
+
+/* Magnetic button effect */
+.magnetic-btn {
+  transition: all 0.3s cubic-bezier(0.23, 1, 0.320, 1);
+}
+
+.magnetic-btn:hover {
+  transform: scale(1.05);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+}
+
+/* Liquid animation */
+.liquid-bg {
+  background: linear-gradient(45deg, #ff006e, #fb5607, #ffbe0b, #8338ec, #3a86ff);
+  background-size: 400% 400%;
+  animation: liquid 8s ease-in-out infinite;
+}
+
+@keyframes liquid {
+  0%, 100% {
+    border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+    background-position: 0% 50%;
+  }
+  50% {
+    border-radius: 30% 60% 70% 40% / 50% 60% 30% 60%;
+    background-position: 100% 50%;
   }
 }
