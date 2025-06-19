@@ -14,35 +14,35 @@ const Header = () => {
   };
 
   return (
-    <header className="fixed top-0 w-full z-50 bg-white border-b-4 border-black">
+    <header className="fixed top-0 w-full z-50 bg-white border-b-2 border-black">
       <div className="container-max">
-        <div className="flex items-center justify-between py-6">
-          <div className="font-bold text-2xl font-mono tracking-tight">
+        <div className="flex items-center justify-between py-4">
+          <div className="font-black text-xl font-mono tracking-tight">
             SARAIVA.AI
           </div>
           
-          <nav className="hidden md:flex items-center space-x-8">
+          <nav className="hidden md:flex items-center space-x-6">
             <button 
               onClick={() => scrollToSection('sobre')}
-              className="text-black hover:bg-black hover:text-white px-4 py-2 transition-all font-mono font-bold uppercase text-sm"
+              className="text-black hover:bg-black hover:text-white px-3 py-2 transition-all font-mono font-bold uppercase text-xs border border-black"
             >
               SOBRE
             </button>
             <button 
               onClick={() => scrollToSection('produtos')}
-              className="text-black hover:bg-black hover:text-white px-4 py-2 transition-all font-mono font-bold uppercase text-sm"
+              className="text-black hover:bg-black hover:text-white px-3 py-2 transition-all font-mono font-bold uppercase text-xs border border-black"
             >
               PRODUTOS
             </button>
             <button 
               onClick={() => scrollToSection('mentoria')}
-              className="text-black hover:bg-black hover:text-white px-4 py-2 transition-all font-mono font-bold uppercase text-sm"
+              className="text-black hover:bg-black hover:text-white px-3 py-2 transition-all font-mono font-bold uppercase text-xs border border-black"
             >
               MENTORIA
             </button>
             <button 
               onClick={() => scrollToSection('depoimentos')}
-              className="text-black hover:bg-black hover:text-white px-4 py-2 transition-all font-mono font-bold uppercase text-sm"
+              className="text-black hover:bg-black hover:text-white px-3 py-2 transition-all font-mono font-bold uppercase text-xs border border-black"
             >
               PROVAS
             </button>
@@ -50,7 +50,7 @@ const Header = () => {
 
           <Button 
             onClick={handleWhatsApp}
-            className="btn-primary font-mono font-bold text-sm px-6 py-3"
+            className="bg-black text-white hover:bg-white hover:text-black border-2 border-black font-mono font-bold text-xs px-4 py-2 transition-all"
           >
             PARAR DE ESTUDAR
           </Button>
