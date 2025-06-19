@@ -1,11 +1,9 @@
 
 import { Button } from "@/components/ui/button";
-import { Card, CardContent } from "@/components/ui/card";
 import { useState, useEffect, useRef } from "react";
 
 const Products = () => {
   const [isVisible, setIsVisible] = useState(false);
-  const [hoveredCard, setHoveredCard] = useState<number | null>(null);
   const sectionRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
@@ -26,41 +24,37 @@ const Products = () => {
   }, []);
 
   const handleWhatsApp = (product: string) => {
-    window.open(`https://wa.me/5511999999999?text=Olá! Quero saber mais sobre ${product}!`, '_blank');
+    window.open(`https://wa.me/5511999999999?text=Quero parar de estudar e lucrar com ${product}`, '_blank');
   };
 
   const products = [
     {
-      title: "Mentoria em IA Aplicada",
-      description: "Aprenda a transformar IA em dinheiro rápido. Método prático, direto e sem enrolação.",
-      icon: "🎯",
-      cta: "Quero a Mentoria",
-      gradient: "from-purple-500 to-pink-500",
-      glowColor: "rgba(168, 85, 247, 0.4)"
+      title: "MENTORIA",
+      subtitle: "PARE DE ESTUDAR",
+      description: "Transforme IA em dinheiro em 7 dias. Sem teoria. Só resultados.",
+      price: "R$ 5.000",
+      period: "/mês"
     },
     {
-      title: "Consultoria para Empresas", 
-      description: "Automatize vendas, atendimento e processos. ROI garantido em 30 dias.",
-      icon: "🚀",
-      cta: "Automatizar Empresa",
-      gradient: "from-blue-500 to-cyan-500",
-      glowColor: "rgba(59, 130, 246, 0.4)"
+      title: "CONSULTORIA",
+      subtitle: "AUTOMATIZE TUDO",
+      description: "Sua empresa vendendo sozinha. Enquanto você viaja.",
+      price: "R$ 50.000",
+      period: "/projeto"
     },
     {
-      title: "Ligação.AI",
-      description: "IA que liga, fala, vende, cobra e fecha sem precisar de você. 24/7 no piloto automático.",
-      icon: "📞",
-      cta: "Conhecer Ligação.AI",
-      gradient: "from-green-500 to-emerald-500",
-      glowColor: "rgba(34, 197, 94, 0.4)"
+      title: "LIGAÇÃO.AI",
+      subtitle: "VENDA DORMINDO",
+      description: "IA que liga, convence e fecha vendas. 24h por dia.",
+      price: "R$ 3.000",
+      period: "/mês"
     },
     {
-      title: "Escreve.AI",
-      description: "Transforma áudios do WhatsApp em texto e resumo automático. Economize horas diárias.",
-      icon: "✍️",
-      cta: "Testar Escreve.AI",
-      gradient: "from-orange-500 to-red-500",
-      glowColor: "rgba(249, 115, 22, 0.4)"
+      title: "ESCREVE.AI",
+      subtitle: "NUNCA MAIS DIGITE",
+      description: "Áudio do WhatsApp vira texto e resumo. Automático.",
+      price: "R$ 500",
+      period: "/mês"
     }
   ];
 
@@ -68,107 +62,68 @@ const Products = () => {
     <section 
       ref={sectionRef}
       id="produtos" 
-      className="section-spacing bg-black text-white relative overflow-hidden"
+      className="section-spacing bg-white"
     >
-      {/* Animated background */}
-      <div className="absolute inset-0">
-        <div className="absolute inset-0 bg-gradient-to-br from-purple-900/20 via-transparent to-blue-900/20"></div>
-        {[...Array(15)].map((_, i) => (
-          <div
-            key={i}
-            className="absolute w-1 h-1 bg-white rounded-full animate-float opacity-30"
-            style={{
-              left: `${Math.random() * 100}%`,
-              top: `${Math.random() * 100}%`,
-              animationDelay: `${Math.random() * 8}s`,
-              animationDuration: `${8 + Math.random() * 4}s`
-            }}
-          />
-        ))}
-      </div>
-
-      <div className="container-max relative z-10">
-        {/* Title section */}
-        <div className={`text-center mb-20 transition-all duration-1000 ${isVisible ? 'animate-zoom-in' : 'opacity-0 scale-75'}`}>
-          <h2 className="text-5xl md:text-6xl font-black mb-8">
-            O Que Eu Faço —{" "}
-            <span className="text-gradient">Meus Produtos</span>
+      <div className="container-max">
+        {/* Anti-marketing title */}
+        <div className={`text-center mb-20 transition-all duration-1000 ${isVisible ? 'fade-in-up' : ''}`}>
+          <h2 className="text-6xl md:text-7xl font-bold mb-8 leading-none">
+            NÃO VENDO<br/>
+            <span className="border-4 border-black p-4 inline-block">PRODUTOS</span>
           </h2>
-          
-          <div className="max-w-4xl mx-auto">
-            <p className="text-2xl text-gray-300 mb-8">
-              Cada produto foi criado para resolver um problema real e gerar resultados imediatos.
-            </p>
-            <div className="w-32 h-1 bg-gradient-to-r from-purple-500 to-pink-500 mx-auto rounded-full"></div>
-          </div>
+          <p className="text-3xl font-bold text-black max-w-3xl mx-auto">
+            Vendo tempo livre, dinheiro automático e liberdade total.
+          </p>
         </div>
         
-        {/* Products grid */}
+        {/* Brutal product grid */}
         <div className="grid md:grid-cols-2 gap-8 mb-16">
           {products.map((product, index) => (
             <div
               key={index}
-              className={`transition-all duration-1000 delay-${index * 200} ${
-                isVisible ? 'animate-slide-left' : 'opacity-0 translate-y-10'
+              className={`transition-all duration-1000 delay-${index * 100} ${
+                isVisible ? 'fade-in-up' : ''
               }`}
             >
-              <Card 
-                className="border-0 bg-transparent relative group cursor-pointer h-full"
-                onMouseEnter={() => setHoveredCard(index)}
-                onMouseLeave={() => setHoveredCard(null)}
-              >
-                <div className="absolute inset-0 bg-gradient-to-br from-white/10 to-white/5 rounded-2xl backdrop-blur-sm border border-white/20"></div>
-                
-                {/* Glow effect */}
-                <div 
-                  className={`absolute inset-0 rounded-2xl transition-all duration-500 ${
-                    hoveredCard === index ? 'opacity-100' : 'opacity-0'
-                  }`}
-                  style={{
-                    boxShadow: `0 0 40px ${product.glowColor}, 0 0 80px ${product.glowColor}`
-                  }}
-                ></div>
-
-                <CardContent className="p-8 relative z-10 h-full flex flex-col">
-                  {/* Icon with gradient background */}
-                  <div className={`w-20 h-20 rounded-2xl bg-gradient-to-r ${product.gradient} flex items-center justify-center mb-6 text-3xl floating-card shadow-lg`}>
-                    {product.icon}
+              <div className="minimal-card h-full flex flex-col brutalist-shadow">
+                <div className="flex-1">
+                  <div className="mb-6">
+                    <h3 className="text-4xl font-bold mb-2">{product.title}</h3>
+                    <p className="font-mono text-sm uppercase tracking-wider">{product.subtitle}</p>
                   </div>
                   
-                  <h3 className="text-3xl font-black mb-6 text-white group-hover:text-gradient transition-all duration-300">
-                    {product.title}
-                  </h3>
-                  
-                  <p className="text-gray-300 mb-8 leading-relaxed text-lg flex-grow">
+                  <p className="text-xl mb-8 leading-relaxed">
                     {product.description}
                   </p>
                   
-                  <Button 
-                    onClick={() => handleWhatsApp(product.title)}
-                    className={`w-full relative overflow-hidden group/btn bg-gradient-to-r ${product.gradient} hover:scale-105 transition-all duration-300 text-lg font-bold py-4 border-0`}
-                    size="lg"
-                  >
-                    <span className="relative z-10">{product.cta}</span>
-                    <div className="absolute inset-0 bg-white/20 translate-x-[-100%] group-hover/btn:translate-x-[100%] transition-transform duration-700"></div>
-                  </Button>
-                </CardContent>
-              </Card>
+                  <div className="flex items-baseline mb-8">
+                    <span className="text-4xl font-bold">{product.price}</span>
+                    <span className="text-lg font-mono ml-2">{product.period}</span>
+                  </div>
+                </div>
+                
+                <Button 
+                  onClick={() => handleWhatsApp(product.title)}
+                  className="btn-primary w-full text-lg font-bold py-4"
+                >
+                  PARAR DE ESTUDAR
+                </Button>
+              </div>
             </div>
           ))}
         </div>
         
-        {/* CTA section */}
-        <div className={`text-center transition-all duration-1000 delay-1000 ${isVisible ? 'animate-zoom-in' : 'opacity-0 scale-75'}`}>
-          <div className="glass-card p-8 rounded-2xl max-w-2xl mx-auto">
-            <p className="text-xl mb-6 text-gray-300">
-              Pronto para transformar sua vida com IA?
+        {/* Brutal CTA */}
+        <div className={`text-center transition-all duration-1000 delay-800 ${isVisible ? 'fade-in-up' : ''}`}>
+          <div className="border-4 border-black p-8 bg-white max-w-2xl mx-auto brutalist-shadow">
+            <p className="text-2xl font-bold mb-6">
+              Enquanto você decide, seus concorrentes já decidiram.
             </p>
             <Button 
               onClick={() => handleWhatsApp('todos os produtos')}
-              className="btn-neon text-xl px-12 py-4 magnetic-btn"
-              size="lg"
+              className="btn-primary text-xl px-12 py-4"
             >
-              🌟 Ver Todos os Produtos
+              DECIDIR AGORA
             </Button>
           </div>
         </div>

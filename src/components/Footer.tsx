@@ -12,99 +12,81 @@ const Footer = () => {
   };
 
   return (
-    <footer className="bg-black text-white py-16">
+    <footer className="bg-black text-white py-16 border-t-4 border-white">
       <div className="container-max">
-        <div className="grid md:grid-cols-4 gap-8 mb-12">
+        <div className="grid md:grid-cols-4 gap-12 mb-16">
           <div>
-            <div className="font-black text-2xl mb-4">
-              SARAIVA.<span className="text-gray-400">AI</span>
+            <div className="font-bold text-2xl mb-6 font-mono">
+              SARAIVA.AI
             </div>
-            <p className="text-gray-400 text-sm leading-relaxed">
-              Transformando pessoas comuns em especialistas em IA que dominam mercados e geram liberdade financeira.
+            <p className="font-mono text-sm leading-relaxed">
+              Paramos de ensinar IA.<br/>
+              Começamos a ensinar lucro.
             </p>
           </div>
           
           <div>
-            <h4 className="font-bold text-lg mb-4">Links Rápidos</h4>
-            <div className="space-y-2 text-sm">
+            <h4 className="font-bold text-lg mb-6 font-mono uppercase">LINKS</h4>
+            <div className="space-y-3 text-sm font-mono">
               <button 
                 onClick={() => scrollToSection('sobre')}
-                className="block text-gray-400 hover:text-white transition-colors"
+                className="block hover:bg-white hover:text-black px-2 py-1 transition-all uppercase"
               >
-                Sobre
+                SOBRE
               </button>
               <button 
                 onClick={() => scrollToSection('produtos')}
-                className="block text-gray-400 hover:text-white transition-colors"
+                className="block hover:bg-white hover:text-black px-2 py-1 transition-all uppercase"
               >
-                Produtos
+                PRODUTOS
               </button>
               <button 
                 onClick={() => scrollToSection('mentoria')}
-                className="block text-gray-400 hover:text-white transition-colors"
+                className="block hover:bg-white hover:text-black px-2 py-1 transition-all uppercase"
               >
-                Mentoria
+                MENTORIA
               </button>
               <button 
                 onClick={handleWhatsApp}
-                className="block text-gray-400 hover:text-white transition-colors"
+                className="block hover:bg-white hover:text-black px-2 py-1 transition-all uppercase"
               >
-                Contato
+                CONTATO
               </button>
             </div>
           </div>
           
           <div>
-            <h4 className="font-bold text-lg mb-4">Produtos</h4>
-            <div className="space-y-2 text-sm">
-              <div className="text-gray-400">Mentoria IA</div>
-              <div className="text-gray-400">Consultoria</div>
-              <div className="text-gray-400">Ligação.AI</div>
-              <div className="text-gray-400">Escreve.AI</div>
+            <h4 className="font-bold text-lg mb-6 font-mono uppercase">PRODUTOS</h4>
+            <div className="space-y-3 text-sm font-mono">
+              <div>MENTORIA</div>
+              <div>CONSULTORIA</div>
+              <div>LIGAÇÃO.AI</div>
+              <div>ESCREVE.AI</div>
             </div>
           </div>
           
           <div>
-            <h4 className="font-bold text-lg mb-4">Redes Sociais</h4>
-            <div className="space-y-3">
-              <a 
-                href="https://instagram.com/saraiva.ai" 
-                target="_blank" 
-                rel="noopener noreferrer"
-                className="flex items-center space-x-2 text-gray-400 hover:text-white transition-colors"
-              >
-                <span>📱</span>
-                <span className="text-sm">Instagram</span>
-              </a>
+            <h4 className="font-bold text-lg mb-6 font-mono uppercase">CONTATO</h4>
+            <div className="space-y-4">
               <button 
                 onClick={handleWhatsApp}
-                className="flex items-center space-x-2 text-gray-400 hover:text-white transition-colors"
+                className="block border-2 border-white px-4 py-2 hover:bg-white hover:text-black transition-all font-mono font-bold text-sm"
               >
-                <span>💬</span>
-                <span className="text-sm">WhatsApp</span>
+                WHATSAPP
               </button>
-              <a 
-                href="https://youtube.com/@saraiva.ai" 
-                target="_blank" 
-                rel="noopener noreferrer"
-                className="flex items-center space-x-2 text-gray-400 hover:text-white transition-colors"
-              >
-                <span>📺</span>
-                <span className="text-sm">YouTube</span>
-              </a>
             </div>
           </div>
         </div>
         
-        <div className="border-t border-gray-800 pt-8">
+        <div className="border-t-2 border-white pt-8">
           <div className="flex flex-col md:flex-row justify-between items-center">
-            <div className="text-sm text-gray-400 mb-4 md:mb-0">
-              © 2025 Saraiva.AI. Todos os direitos reservados.
+            <div className="font-mono text-sm mb-4 md:mb-0">
+              © 2025 SARAIVA.AI — PARE DE ESTUDAR. COMECE A LUCRAR.
             </div>
             
-            <div className="flex space-x-6 text-sm text-gray-400">
-              <a href="#" className="hover:text-white transition-colors">Termos de Uso</a>
-              <a href="#" className="hover:text-white transition-colors">Política de Privacidade</a>
+            <div className="flex space-x-6 text-sm font-mono">
+              <a href="#" className="hover:bg-white hover:text-black px-2 py-1 transition-all">TERMOS</a>
+              <a href="#" className="hover:bg-white hover:text-black px-2 py-1 transition-all">PRIVACIDADE</a>
             </div>
           </div>
         </div>

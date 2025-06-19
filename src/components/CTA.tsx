@@ -43,7 +43,7 @@ const CTA = () => {
   }, []);
 
   const handleWhatsApp = () => {
-    window.open('https://wa.me/5511999999999?text=Olá! Estou pronto para transformar minha vida com IA!', '_blank');
+    window.open('https://wa.me/5511999999999?text=Quero parar de estudar e começar a lucrar AGORA.', '_blank');
   };
 
   const scrollToMentoria = () => {
@@ -56,134 +56,77 @@ const CTA = () => {
   return (
     <section 
       ref={sectionRef}
-      className="section-spacing hero-gradient text-white relative overflow-hidden"
+      className="section-spacing bg-white"
     >
-      {/* Dynamic background */}
-      <div className="absolute inset-0">
-        <div className="absolute inset-0 bg-gradient-to-br from-red-900/30 via-transparent to-purple-900/30"></div>
-        {[...Array(25)].map((_, i) => (
-          <div
-            key={i}
-            className="absolute w-1 h-1 bg-red-400 rounded-full animate-float opacity-40"
-            style={{
-              left: `${Math.random() * 100}%`,
-              top: `${Math.random() * 100}%`,
-              animationDelay: `${Math.random() * 10}s`,
-              animationDuration: `${10 + Math.random() * 5}s`
-            }}
-          />
-        ))}
-      </div>
-      
-      <div className="container-max relative z-10">
-        <div className="text-center max-w-5xl mx-auto">
-          {/* Countdown timer */}
-          <div className={`mb-12 transition-all duration-1000 ${isVisible ? 'animate-zoom-in' : 'opacity-0 scale-75'}`}>
-            <p className="text-lg mb-4 text-red-300 font-medium">OFERTA EXPIRA EM:</p>
-            <div className="flex justify-center space-x-4 mb-8">
-              {[
-                { label: 'HORAS', value: countdown.hours },
-                { label: 'MIN', value: countdown.minutes },
-                { label: 'SEG', value: countdown.seconds }
-              ].map((item, index) => (
-                <div key={index} className="glass-card p-4 rounded-xl text-center min-w-[80px]">
-                  <div className="text-3xl font-black text-red-400 animate-pulse">
-                    {String(item.value).padStart(2, '0')}
-                  </div>
-                  <div className="text-xs text-gray-300 font-medium">{item.label}</div>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          {/* Main headline */}
-          <div className={`mb-12 transition-all duration-1000 delay-300 ${isVisible ? 'animate-slide-left' : 'opacity-0 translate-x-[-100px]'}`}>
-            <h2 className="text-6xl md:text-8xl font-black mb-8 leading-tight text-shadow-strong">
-              Ou você aprende IA…{" "}
-              <span className="text-red-500 neon-box inline-block px-6 py-3 rounded-2xl">
-                ou vai trabalhar pra quem aprendeu.
-              </span>
-            </h2>
-          </div>
-          
-          {/* Subheadline */}
-          <div className={`mb-16 transition-all duration-1000 delay-600 ${isVisible ? 'animate-slide-right' : 'opacity-0 translate-x-[100px]'}`}>
-            <p className="text-3xl md:text-4xl font-bold text-gray-200">
-              Não existe meio termo. A única escolha é{" "}
-              <strong className="text-white text-neon animate-pulse">agora.</strong>
-            </p>
-          </div>
-          
-          {/* Action buttons */}
-          <div className={`flex flex-col sm:flex-row gap-8 justify-center items-center mb-20 transition-all duration-1000 delay-900 ${isVisible ? 'animate-zoom-in' : 'opacity-0 scale-75'}`}>
-            <Button 
-              onClick={scrollToMentoria}
-              className="relative overflow-hidden group bg-gradient-to-r from-red-600 via-red-500 to-red-600 hover:from-red-500 hover:via-red-400 hover:to-red-500 text-xl w-full sm:w-auto font-black py-6 px-12 rounded-xl shadow-2xl magnetic-btn"
-              size="lg"
-            >
-              <span className="relative z-10 flex items-center">
-                🔥 QUERO DOMINAR IA AGORA
-              </span>
-              <div className="absolute inset-0 bg-gradient-to-r from-yellow-400 to-orange-400 opacity-0 group-hover:opacity-30 transition-opacity duration-300"></div>
-            </Button>
-            
-            <Button 
-              onClick={handleWhatsApp}
-              className="btn-neon text-xl w-full sm:w-auto py-6 px-12 hover-scale-rotate"
-              size="lg"
-            >
-              💬 Falar Direto no WhatsApp
-            </Button>
-          </div>
-          
-          {/* Features grid */}
-          <div className={`grid grid-cols-1 md:grid-cols-3 gap-8 transition-all duration-1000 delay-1200 ${isVisible ? 'opacity-100' : 'opacity-0'}`}>
+      <div className="container-max text-center">
+        {/* Brutal countdown */}
+        <div className={`mb-16 transition-all duration-1000 ${isVisible ? 'fade-in-up' : ''}`}>
+          <p className="text-lg font-mono uppercase tracking-wider mb-8">TEMPO PERDIDO:</p>
+          <div className="flex justify-center space-x-8">
             {[
-              {
-                icon: "⚡",
-                title: "Resultados Imediatos",
-                desc: "Primeiros lucros em 7 dias",
-                color: "from-green-400 to-emerald-500"
-              },
-              {
-                icon: "🎯",
-                title: "Método Comprovado",
-                desc: "Testado por +1.000 pessoas",
-                color: "from-blue-400 to-cyan-500"
-              },
-              {
-                icon: "🚀",
-                title: "Suporte Vitalício",
-                desc: "Acesso direto ao Saraiva",
-                color: "from-purple-400 to-pink-500"
-              }
-            ].map((feature, index) => (
-              <div 
-                key={index}
-                className="glass-card rounded-2xl p-8 floating-card hover-lift card-3d"
-                style={{animationDelay: `${index + 2}s`}}
-              >
-                <div className={`w-16 h-16 mx-auto mb-4 rounded-2xl bg-gradient-to-r ${feature.color} flex items-center justify-center text-2xl shadow-lg`}>
-                  {feature.icon}
+              { label: 'HORAS', value: countdown.hours },
+              { label: 'MIN', value: countdown.minutes },
+              { label: 'SEG', value: countdown.seconds }
+            ].map((item, index) => (
+              <div key={index} className="border-4 border-black p-6 bg-white brutalist-shadow">
+                <div className="text-5xl font-bold text-black counter-text">
+                  {String(item.value).padStart(2, '0')}
                 </div>
-                <div className="text-xl font-bold mb-2 text-white">{feature.title}</div>
-                <div className="text-gray-300">{feature.desc}</div>
+                <div className="font-mono text-sm uppercase tracking-wider">{item.label}</div>
               </div>
             ))}
           </div>
+        </div>
 
-          {/* Final urgency message */}
-          <div className={`mt-16 transition-all duration-1000 delay-1500 ${isVisible ? 'animate-zoom-in' : 'opacity-0 scale-75'}`}>
-            <div className="glass-card p-8 rounded-2xl border-2 border-red-500/50 max-w-3xl mx-auto">
-              <p className="text-xl font-bold text-red-300 mb-4">
-                ⚠️ ÚLTIMA CHAMADA
-              </p>
-              <p className="text-lg text-gray-200">
-                Enquanto você pensa, seus concorrentes já estão dominando o mercado com IA.
-                <br />
-                <strong className="text-white">Não seja deixado para trás.</strong>
-              </p>
-            </div>
+        {/* Ultimate confrontation */}
+        <div className={`mb-16 transition-all duration-1000 delay-300 ${isVisible ? 'fade-in-up' : ''}`}>
+          <h2 className="text-7xl md:text-9xl font-bold mb-8 leading-none">
+            <span className="block">ÚLTIMA</span>
+            <span className="block border-4 border-black p-4 inline-block brutalist-shadow">CHANCE</span>
+          </h2>
+        </div>
+        
+        {/* Binary choice */}
+        <div className={`mb-20 transition-all duration-1000 delay-600 ${isVisible ? 'fade-in-up' : ''}`}>
+          <div className="border-4 border-black p-12 bg-white max-w-5xl mx-auto brutalist-shadow">
+            <p className="text-3xl md:text-4xl font-bold text-black leading-tight mb-8">
+              ESCOLHA 1: Continue estudando IA para sempre.
+            </p>
+            <div className="border-t-4 border-black my-8"></div>
+            <p className="text-3xl md:text-4xl font-bold text-black leading-tight">
+              ESCOLHA 2: <span className="bg-black text-white px-4 py-2">Comece a lucrar hoje.</span>
+            </p>
+          </div>
+        </div>
+        
+        {/* Final brutal buttons */}
+        <div className={`flex flex-col sm:flex-row gap-8 justify-center items-center mb-20 transition-all duration-1000 delay-900 ${isVisible ? 'fade-in-up' : ''}`}>
+          <Button 
+            onClick={scrollToMentoria}
+            className="btn-primary text-2xl font-bold py-8 px-16 brutalist-shadow hover:-translate-y-2 hover:shadow-none transition-all"
+          >
+            PARAR DE ESTUDAR
+          </Button>
+          
+          <Button 
+            onClick={handleWhatsApp}
+            className="btn-secondary text-2xl font-bold py-8 px-16 brutalist-shadow hover:-translate-y-2 hover:shadow-none transition-all"
+          >
+            COMEÇAR A LUCRAR
+          </Button>
+        </div>
+        
+        {/* Brutal truth */}
+        <div className={`transition-all duration-1000 delay-1200 ${isVisible ? 'fade-in-up' : ''}`}>
+          <div className="border-4 border-black p-8 bg-white max-w-3xl mx-auto brutalist-shadow">
+            <p className="text-xl font-bold text-black">
+              ⚠️ AVISO FINAL
+            </p>
+            <p className="text-lg text-black mt-4">
+              Seus concorrentes já pararam de estudar.<br/>
+              Eles já estão lucrando.<br/>
+              <span className="font-bold">Você vai ficar para trás para sempre?</span>
+            </p>
           </div>
         </div>
       </div>

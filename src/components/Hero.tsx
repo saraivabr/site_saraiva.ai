@@ -6,23 +6,23 @@ const Hero = () => {
   const [currentText, setCurrentText] = useState(0);
   const [isVisible, setIsVisible] = useState(false);
 
-  const dynamicTexts = [
-    "transformar IA em dinheiro, tempo e liberdade.",
-    "dominar mercados com automação inteligente.",
-    "construir máquinas de lucro 24/7.",
-    "eliminar trabalho manual para sempre."
+  const disruptiveTexts = [
+    "Pare de estudar IA.",
+    "Comece a lucrar com IA.",
+    "Seus concorrentes já lucraram.",
+    "Você ainda está estudando."
   ];
 
   useEffect(() => {
     setIsVisible(true);
     const interval = setInterval(() => {
-      setCurrentText((prev) => (prev + 1) % dynamicTexts.length);
-    }, 4000);
+      setCurrentText((prev) => (prev + 1) % disruptiveTexts.length);
+    }, 3000);
     return () => clearInterval(interval);
   }, []);
 
   const handleWhatsApp = () => {
-    window.open('https://wa.me/5511999999999?text=Olá! Quero saber mais sobre IA e como transformar em dinheiro!', '_blank');
+    window.open('https://wa.me/5511999999999?text=Quero parar de estudar e começar a lucrar com IA.', '_blank');
   };
 
   const scrollToMentoria = () => {
@@ -33,101 +33,74 @@ const Hero = () => {
   };
 
   return (
-    <section className="morphing-bg min-h-screen flex items-center justify-center text-white relative overflow-hidden">
-      {/* Floating particles */}
-      <div className="absolute inset-0">
-        {[...Array(20)].map((_, i) => (
-          <div
-            key={i}
-            className="absolute w-2 h-2 bg-white/40 rounded-full animate-float"
-            style={{
-              left: `${Math.random() * 100}%`,
-              top: `${Math.random() * 100}%`,
-              animationDelay: `${Math.random() * 6}s`,
-              animationDuration: `${6 + Math.random() * 4}s`
-            }}
-          />
-        ))}
-      </div>
+    <section className="min-h-screen bg-white flex items-center justify-center relative">
+      <div className="container-max text-center">
+        {/* Anti-hero headline */}
+        <div className={`transition-all duration-1000 ${isVisible ? 'fade-in-up' : ''}`}>
+          <h1 className="text-7xl md:text-9xl font-bold leading-none mb-16 tracking-tight">
+            <span className="block text-black">VOCÊ NÃO</span>
+            <span className="block text-black">PRECISA</span>
+            <span className="block text-black border-4 border-black p-4 inline-block mt-8 brutalist-shadow">
+              ENTENDER IA
+            </span>
+          </h1>
+        </div>
 
-      {/* Stronger gradient overlay for better text contrast */}
-      <div className="absolute inset-0 bg-gradient-to-br from-black/80 via-black/60 to-black/80"></div>
-      
-      {/* Main content */}
-      <div className="container-max relative z-10">
-        <div className="text-center max-w-6xl mx-auto">
-          {/* Dynamic headline with stronger contrast */}
-          <div className={`transition-all duration-1000 ${isVisible ? 'animate-zoom-in' : 'opacity-0'}`}>
-            <h1 className="text-5xl md:text-7xl lg:text-8xl font-black leading-tight mb-8 text-white drop-shadow-2xl">
-              Eu ensino pessoas comuns a{" "}
-              <span className="text-gradient animate-text-glow block mt-4 font-black">
-                {dynamicTexts[currentText]}
-              </span>
-              <span className="text-red-400 neon-box inline-block mt-6 px-6 py-4 rounded-lg font-black bg-black/50 backdrop-blur-sm border-2 border-red-400">
-                Antes que seja tarde.
-              </span>
-            </h1>
-          </div>
-          
-          {/* Animated subheadline with better contrast */}
-          <div className={`transition-all duration-1000 delay-500 ${isVisible ? 'animate-slide-left' : 'opacity-0 translate-x-[-100px]'}`}>
-            <p className="text-2xl md:text-3xl font-bold mb-16 text-white max-w-5xl mx-auto leading-relaxed drop-shadow-xl">
-              Enquanto os outros tentam entender, meus clientes já estão{" "}
-              <strong className="text-yellow-300 text-neon font-black">lucrando, automatizando e dominando mercados.</strong>
+        {/* Dynamic disruptive text */}
+        <div className={`mb-16 transition-all duration-1000 delay-500 ${isVisible ? 'fade-in-up' : ''}`}>
+          <p className="text-3xl md:text-4xl font-bold text-black typewriter">
+            {disruptiveTexts[currentText]}
+          </p>
+        </div>
+
+        {/* Brutal truth */}
+        <div className={`mb-20 transition-all duration-1000 delay-1000 ${isVisible ? 'fade-in-up' : ''}`}>
+          <div className="border-4 border-black p-8 bg-white max-w-4xl mx-auto brutalist-shadow">
+            <p className="text-2xl md:text-3xl font-bold text-black leading-tight">
+              Enquanto você perde tempo estudando,<br/>
+              <span className="bg-black text-white px-4 py-2">meus clientes já faturaram R$ 50 milhões.</span>
             </p>
           </div>
+        </div>
+
+        {/* Anti-conventional buttons */}
+        <div className={`flex flex-col sm:flex-row gap-8 justify-center items-center transition-all duration-1000 delay-1500 ${isVisible ? 'fade-in-up' : ''}`}>
+          <Button 
+            onClick={handleWhatsApp}
+            className="btn-primary text-xl font-bold py-6 px-12 brutalist-shadow hover:-translate-y-1 hover:shadow-none transition-all"
+          >
+            PARE DE ESTUDAR
+          </Button>
           
-          {/* Creative buttons */}
-          <div className={`flex flex-col sm:flex-row gap-8 justify-center items-center mb-20 transition-all duration-1000 delay-1000 ${isVisible ? 'animate-slide-right' : 'opacity-0 translate-x-[100px]'}`}>
-            <Button 
-              onClick={handleWhatsApp}
-              className="btn-primary text-xl w-full sm:w-auto magnetic-btn relative overflow-hidden group font-black"
-              size="lg"
-            >
-              <span className="relative z-10 font-black">🚀 Falar no WhatsApp</span>
-              <div className="absolute inset-0 bg-gradient-to-r from-purple-500 to-pink-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-            </Button>
-            
-            <Button 
-              onClick={scrollToMentoria}
-              className="btn-neon text-xl w-full sm:w-auto hover-scale-rotate font-black"
-              size="lg"
-            >
-              ⚡ Quero Dominar IA
-            </Button>
-          </div>
+          <Button 
+            onClick={scrollToMentoria}
+            className="btn-secondary text-xl font-bold py-6 px-12 brutalist-shadow hover:-translate-y-1 hover:shadow-none transition-all"
+          >
+            COMECE A LUCRAR
+          </Button>
+        </div>
 
-          {/* Creative stats with better readability */}
-          <div className={`grid grid-cols-1 md:grid-cols-3 gap-8 mb-16 transition-all duration-1000 delay-1500 ${isVisible ? 'opacity-100' : 'opacity-0'}`}>
-            <div className="glass-card-strong p-8 rounded-2xl floating-card hover-lift">
-              <div className="text-5xl font-black text-green-300 mb-4 animate-text-glow drop-shadow-lg">1000+</div>
-              <div className="text-xl font-bold text-white">Vidas Transformadas</div>
-            </div>
-            
-            <div className="glass-card-strong p-8 rounded-2xl floating-card hover-lift" style={{animationDelay: '1s'}}>
-              <div className="text-5xl font-black text-yellow-300 mb-4 animate-text-glow drop-shadow-lg">R$ 50M+</div>
-              <div className="text-xl font-bold text-white">Gerados por Clientes</div>
-            </div>
-            
-            <div className="glass-card-strong p-8 rounded-2xl floating-card hover-lift" style={{animationDelay: '2s'}}>
-              <div className="text-5xl font-black text-blue-300 mb-4 animate-text-glow drop-shadow-lg">24/7</div>
-              <div className="text-xl font-bold text-white">Automação Total</div>
-            </div>
+        {/* Minimalist stats */}
+        <div className={`grid grid-cols-3 gap-8 mt-32 transition-all duration-1000 delay-2000 ${isVisible ? 'fade-in-up' : ''}`}>
+          <div className="text-center">
+            <div className="text-6xl font-bold text-black counter-text">1000+</div>
+            <div className="text-sm font-mono uppercase tracking-wider mt-2">TRANSFORMADOS</div>
+          </div>
+          <div className="text-center">
+            <div className="text-6xl font-bold text-black counter-text">R$ 50M</div>
+            <div className="text-sm font-mono uppercase tracking-wider mt-2">FATURADOS</div>
+          </div>
+          <div className="text-center">
+            <div className="text-6xl font-bold text-black counter-text">0</div>
+            <div className="text-sm font-mono uppercase tracking-wider mt-2">ENROLAÇÃO</div>
           </div>
         </div>
-      </div>
-      
-      {/* Creative scroll indicator */}
-      <div className="absolute bottom-10 left-1/2 transform -translate-x-1/2">
-        <div className="w-8 h-16 border-4 border-white rounded-full flex justify-center relative overflow-hidden">
-          <div className="w-3 h-6 bg-white rounded-full mt-4 animate-bounce"></div>
-          <div className="absolute inset-0 bg-gradient-to-b from-transparent to-white/30 animate-pulse"></div>
+
+        {/* Scroll indicator */}
+        <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2">
+          <div className="w-0.5 h-16 bg-black"></div>
         </div>
       </div>
-
-      {/* Liquid blob decoration */}
-      <div className="absolute top-20 right-20 w-32 h-32 liquid-bg opacity-40 floating-card"></div>
-      <div className="absolute bottom-20 left-20 w-24 h-24 liquid-bg opacity-30 floating-card" style={{animationDelay: '3s'}}></div>
     </section>
   );
 };

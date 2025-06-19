@@ -10,49 +10,49 @@ const Header = () => {
   };
 
   const handleWhatsApp = () => {
-    window.open('https://wa.me/5511999999999?text=Olá! Quero saber mais sobre IA e como transformar em dinheiro!', '_blank');
+    window.open('https://wa.me/5511999999999?text=Quero parar de estudar IA e começar a lucrar.', '_blank');
   };
 
   return (
-    <header className="fixed top-0 w-full z-50 bg-white/95 backdrop-blur-sm border-b border-gray-100">
+    <header className="fixed top-0 w-full z-50 bg-white border-b-4 border-black">
       <div className="container-max">
-        <div className="flex items-center justify-between py-4">
-          <div className="font-black text-2xl tracking-tight">
-            SARAIVA.<span className="text-gray-600">AI</span>
+        <div className="flex items-center justify-between py-6">
+          <div className="font-bold text-2xl font-mono tracking-tight">
+            SARAIVA.AI
           </div>
           
           <nav className="hidden md:flex items-center space-x-8">
             <button 
               onClick={() => scrollToSection('sobre')}
-              className="text-gray-700 hover:text-black transition-colors font-medium"
+              className="text-black hover:bg-black hover:text-white px-4 py-2 transition-all font-mono font-bold uppercase text-sm"
             >
-              Sobre
+              SOBRE
             </button>
             <button 
               onClick={() => scrollToSection('produtos')}
-              className="text-gray-700 hover:text-black transition-colors font-medium"
+              className="text-black hover:bg-black hover:text-white px-4 py-2 transition-all font-mono font-bold uppercase text-sm"
             >
-              Produtos
+              PRODUTOS
             </button>
             <button 
               onClick={() => scrollToSection('mentoria')}
-              className="text-gray-700 hover:text-black transition-colors font-medium"
+              className="text-black hover:bg-black hover:text-white px-4 py-2 transition-all font-mono font-bold uppercase text-sm"
             >
-              Mentoria
+              MENTORIA
             </button>
             <button 
               onClick={() => scrollToSection('depoimentos')}
-              className="text-gray-700 hover:text-black transition-colors font-medium"
+              className="text-black hover:bg-black hover:text-white px-4 py-2 transition-all font-mono font-bold uppercase text-sm"
             >
-              Resultados
+              PROVAS
             </button>
           </nav>
 
           <Button 
             onClick={handleWhatsApp}
-            className="btn-primary text-sm"
+            className="btn-primary font-mono font-bold text-sm px-6 py-3"
           >
-            WhatsApp
+            PARAR DE ESTUDAR
           </Button>
         </div>
       </div>
