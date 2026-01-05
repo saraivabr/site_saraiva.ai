@@ -89,7 +89,7 @@ const Testimonials = () => {
         <div className={`mb-16 transition-all duration-1000 ease-out ${isVisible ? 'fade-in-up' : ''}`}>
           <div className="max-w-5xl mx-auto relative">
             {/* Giant opening quotation mark */}
-            <div className="absolute -top-16 -left-8 text-[12rem] font-serif opacity-10 leading-none" style={{ lineHeight: '0.7' }}>"</div>
+            <div className="absolute -top-16 -left-8 text-[12rem] font-serif opacity-10 leading-none" style={{ lineHeight: '0.7' }} aria-hidden="true">"</div>
             
             <div className="border border-white/10 p-16 bg-black relative z-10">
               <blockquote className="text-3xl md:text-5xl font-black mb-12 leading-tight" style={{ letterSpacing: '-0.02em', lineHeight: '1.2' }}>
@@ -118,7 +118,7 @@ const Testimonials = () => {
             </div>
             
             {/* Giant closing quotation mark */}
-            <div className="absolute -bottom-16 -right-8 text-[12rem] font-serif opacity-10 leading-none rotate-180" style={{ lineHeight: '0.7' }}>"</div>
+            <div className="absolute -bottom-16 -right-8 text-[12rem] font-serif opacity-10 leading-none rotate-180" style={{ lineHeight: '0.7' }} aria-hidden="true">"</div>
           </div>
         </div>
 
@@ -133,7 +133,7 @@ const Testimonials = () => {
                   ? 'w-12 h-2 bg-white' 
                   : 'w-2 h-2 bg-white/30 hover:bg-white/50'
               }`}
-              aria-label={`Ver depoimento ${index + 1}`}
+              aria-label={`View testimonial ${index + 1}`}
             />
           ))}
         </div>

@@ -139,7 +139,7 @@ const Products = () => {
                 
                 <Button 
                   onClick={() => handleWhatsApp(product.title)}
-                  className="w-full text-base font-bold py-4 bg-black text-white group-hover:bg-white group-hover:text-black border border-black/10 group-hover:border-white transition-all duration-300 ease-out"
+                  className="w-full text-base font-bold py-4 bg-black text-white group-hover:bg-white group-hover:text-black border border-black/10 group-hover:border-white transition-all duration-300 ease-out focus:outline-2 focus:outline-black focus:outline-offset-2"
                 >
                   PARAR DE ESTUDAR
                 </Button>
