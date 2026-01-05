@@ -76,6 +76,16 @@
     @apply bg-white text-black font-mono;
     font-weight: 400;
     overflow-x: hidden;
+    letter-spacing: 0.01em;
+  }
+  
+  h1, h2, h3 {
+    letter-spacing: -0.02em;
+    line-height: 1.1;
+  }
+  
+  p {
+    line-height: 1.6;
   }
 }
 
@@ -130,15 +140,24 @@
   .fade-in-up {
     opacity: 0;
     transform: translateY(30px);
-    animation: fadeInUp 1s ease-out forwards;
+    animation: fadeInUp 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
   }
 
   .minimal-card {
-    @apply border border-black/20 p-8 bg-white hover:bg-black hover:text-white transition-all duration-500 ease-out;
+    @apply border border-black/20 p-8 bg-white hover:bg-black hover:text-white transition-all duration-700 ease-out;
   }
 
   .counter-text {
     font-variant-numeric: tabular-nums;
+  }
+  
+  /* Custom cursor (optional) */
+  * {
+    cursor: default;
+  }
+  
+  a, button {
+    cursor: pointer;
   }
 }
 
@@ -159,6 +178,10 @@
 }
 
 @keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+  }
   to {
     opacity: 1;
     transform: translateY(0);
@@ -185,4 +208,9 @@
 
 ::-webkit-scrollbar-thumb {
   background: black;
+}
+
+/* Smooth scroll behavior */
+html {
+  scroll-behavior: smooth;
 }
