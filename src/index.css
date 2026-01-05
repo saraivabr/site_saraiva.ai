@@ -89,11 +89,11 @@
   }
 
   .btn-primary {
-    @apply bg-black text-white hover:bg-gray-900 border-2 border-black font-mono font-bold py-4 px-8 transition-all duration-300;
+    @apply bg-black text-white hover:opacity-90 border border-black font-mono font-bold py-4 px-8 transition-all duration-300 ease-out;
   }
 
   .btn-secondary {
-    @apply bg-white text-black border-2 border-black hover:bg-black hover:text-white font-mono font-bold py-4 px-8 transition-all duration-300;
+    @apply bg-white text-black border border-black hover:bg-black hover:text-white font-mono font-bold py-4 px-8 transition-all duration-300 ease-out;
   }
 
   .glitch {
@@ -127,13 +127,6 @@
     -webkit-background-clip: text;
   }
 
-  .typewriter {
-    overflow: hidden;
-    border-right: 3px solid black;
-    white-space: nowrap;
-    animation: typing 4s steps(40, end), blink-caret 0.75s step-end infinite;
-  }
-
   .fade-in-up {
     opacity: 0;
     transform: translateY(30px);
@@ -141,11 +134,7 @@
   }
 
   .minimal-card {
-    @apply border border-black p-8 bg-white hover:bg-black hover:text-white transition-all duration-500;
-  }
-
-  .brutalist-shadow {
-    box-shadow: 8px 8px 0px black;
+    @apply border border-black/20 p-8 bg-white hover:bg-black hover:text-white transition-all duration-500 ease-out;
   }
 
   .counter-text {
@@ -169,20 +158,19 @@
   80% { transform: translateX(-4px); }
 }
 
-@keyframes typing {
-  from { width: 0; }
-  to { width: 100%; }
-}
-
-@keyframes blink-caret {
-  from, to { border-color: transparent; }
-  50% { border-color: black; }
-}
-
 @keyframes fadeInUp {
   to {
     opacity: 1;
     transform: translateY(0);
+  }
+}
+
+@keyframes slideDown {
+  0% {
+    transform: translateY(-100%);
+  }
+  100% {
+    transform: translateY(100%);
   }
 }
 
