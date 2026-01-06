@@ -133,34 +133,15 @@ const CTA = () => {
           </motion.div>
         </motion.div>
 
-        {/* Final truth */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={isVisible ? { opacity: 1, y: 0 } : {}}
+        {/* Final truth - simplified */}
+        <motion.p
+          className="text-base sm:text-lg md:text-xl font-mono opacity-50 max-w-2xl mx-auto"
+          initial={{ opacity: 0 }}
+          animate={isVisible ? { opacity: 0.5 } : {}}
           transition={{ delay: 0.9, duration: 0.8 }}
         >
-          <motion.div
-            className="border border-white/20 p-6 sm:p-8 md:p-10 bg-white/5 max-w-3xl mx-auto backdrop-blur-sm"
-            whileHover={{ boxShadow: "0 0 30px rgba(255,255,255,0.1)", borderColor: "rgba(255,255,255,0.4)" }}
-            transition={{ duration: 0.3 }}
-          >
-            <p className="text-xs sm:text-sm md:text-base font-mono uppercase tracking-wider md:tracking-widest mb-3 md:mb-4 opacity-60">
-              AVISO FINAL
-            </p>
-            <p className="text-base sm:text-lg md:text-xl font-medium leading-relaxed opacity-90">
-              Seus concorrentes já pararam de estudar.<br/>
-              Eles já estão lucrando.<br/>
-              <motion.span
-                className="font-black block mt-3"
-                initial={{ scale: 0.8, opacity: 0 }}
-                animate={isVisible ? { scale: 1, opacity: 1 } : {}}
-                transition={{ delay: 1.2, duration: 0.6 }}
-              >
-                Você vai ficar para trás para sempre?
-              </motion.span>
-            </p>
-          </motion.div>
-        </motion.div>
+          Seus concorrentes já pararam de estudar. Eles já estão lucrando.
+        </motion.p>
       </div>
     </section>
   );

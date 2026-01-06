@@ -78,7 +78,7 @@ const About = () => {
               animate={isVisible ? { opacity: 1, y: 0 } : {}}
               transition={{ delay: 0.6, duration: 0.8 }}
             >
-              <div className="absolute -top-4 sm:-top-6 md:-top-8 -left-2 sm:-left-3 md:-left-4 text-6xl sm:text-7xl md:text-9xl font-serif opacity-20" style={{ lineHeight: '0.8' }}>"</div>
+              <div className="absolute -top-8 sm:-top-12 md:-top-16 -left-4 sm:-left-6 md:-left-8 text-[8rem] sm:text-[10rem] md:text-[14rem] font-serif opacity-10 select-none" style={{ lineHeight: '0.6' }}>"</div>
               <div className="relative z-10 pl-8 sm:pl-10 md:pl-12">
                 <p className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-bold leading-tight mb-3 md:mb-4">
                   Tem gente ganhando R$ 100k/mês<br/>
@@ -101,12 +101,24 @@ const About = () => {
               whileHover={{ boxShadow: "0 0 30px rgba(255,255,255,0.1)" }}
               transition={{ duration: 0.3 }}
             >
-              {/* Abstract geometric pattern */}
+              {/* Abstract geometric pattern - multiple shapes */}
               <div className="absolute inset-0 flex items-center justify-center">
                 <motion.div
-                  className="w-32 h-32 border border-white/20 transition-transform duration-700 ease-out"
+                  className="w-24 h-24 sm:w-32 sm:h-32 border border-white/20"
                   animate={{ rotate: 45 }}
                   whileHover={{ rotate: 90 }}
+                  transition={{ duration: 0.8 }}
+                />
+                <motion.div
+                  className="absolute w-16 h-16 sm:w-20 sm:h-20 border border-white/10"
+                  animate={{ rotate: -45 }}
+                  whileHover={{ rotate: -90, scale: 1.2 }}
+                  transition={{ duration: 0.8 }}
+                />
+                <motion.div
+                  className="absolute w-2 h-2 bg-white/30"
+                  animate={{ scale: [1, 1.5, 1] }}
+                  transition={{ duration: 2, repeat: Infinity }}
                 />
               </div>
             </motion.div>

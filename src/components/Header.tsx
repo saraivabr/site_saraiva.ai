@@ -74,9 +74,9 @@ const Header = () => {
         <div className="flex items-center justify-between py-4 md:py-5">
           {/* Logo - More discrete */}
           <motion.div
-            className="font-medium text-base md:text-lg font-mono tracking-wide opacity-70"
-            whileHover={{ scale: 1.05 }}
-            transition={{ duration: 0.2 }}
+            className="font-medium text-sm md:text-base font-mono tracking-wider opacity-50"
+            whileHover={{ opacity: 0.8 }}
+            transition={{ duration: 0.3 }}
           >
             SARAIVA.AI
           </motion.div>

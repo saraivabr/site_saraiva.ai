@@ -33,8 +33,8 @@ const Products = () => {
       number: "01",
       icon: (
         <svg className="w-12 h-12" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <circle cx="24" cy="24" r="20" stroke="currentColor" strokeWidth="2"/>
-          <path d="M24 14 L24 34 M14 24 L34 24" stroke="currentColor" strokeWidth="2"/>
+          <circle cx="24" cy="24" r="20" stroke="currentColor" strokeWidth="1.5"/>
+          <path d="M24 14 L24 34 M14 24 L34 24" stroke="currentColor" strokeWidth="1.5"/>
         </svg>
       ),
       title: "MENTORIA",
@@ -47,8 +47,8 @@ const Products = () => {
       number: "02",
       icon: (
         <svg className="w-12 h-12" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <rect x="8" y="8" width="32" height="32" stroke="currentColor" strokeWidth="2"/>
-          <path d="M16 24 L24 32 L32 16" stroke="currentColor" strokeWidth="2"/>
+          <rect x="8" y="8" width="32" height="32" stroke="currentColor" strokeWidth="1.5"/>
+          <path d="M16 24 L24 32 L32 16" stroke="currentColor" strokeWidth="1.5"/>
         </svg>
       ),
       title: "CONSULTORIA",
@@ -61,7 +61,7 @@ const Products = () => {
       number: "03",
       icon: (
         <svg className="w-12 h-12" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M12 24 L24 12 L36 24 L24 36 Z" stroke="currentColor" strokeWidth="2"/>
+          <path d="M12 24 L24 12 L36 24 L24 36 Z" stroke="currentColor" strokeWidth="1.5"/>
         </svg>
       ),
       title: "LIGAÇÃO.AI",
@@ -74,7 +74,7 @@ const Products = () => {
       number: "04",
       icon: (
         <svg className="w-12 h-12" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M8 16 L40 16 M8 24 L40 24 M8 32 L40 32" stroke="currentColor" strokeWidth="2"/>
+          <path d="M8 16 L40 16 M8 24 L40 24 M8 32 L40 32" stroke="currentColor" strokeWidth="1.5"/>
         </svg>
       ),
       title: "ESCREVE.AI",
@@ -119,8 +119,8 @@ const Products = () => {
             >
               <motion.div
                 className="border border-black/10 p-6 sm:p-8 md:p-10 bg-white h-full flex flex-col group hover:bg-black hover:text-white transition-all duration-500 ease-out cursor-pointer"
-                whileHover={{ scale: 1.02, boxShadow: "0 20px 40px rgba(0,0,0,0.1)" }}
-                transition={{ duration: 0.3 }}
+                whileHover={{ scale: 1.02 }}
+                transition={{ duration: 0.4 }}
               >
                 <div className="flex items-start justify-between mb-6 md:mb-8">
                   <div className="text-6xl sm:text-7xl md:text-8xl font-black opacity-10 group-hover:opacity-20 transition-opacity duration-500" style={{ letterSpacing: '-0.05em' }}>

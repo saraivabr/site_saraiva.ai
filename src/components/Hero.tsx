@@ -167,7 +167,7 @@ const Hero = () => {
             <div className="text-[0.6rem] sm:text-xs font-mono uppercase tracking-wider md:tracking-widest opacity-60">TRANSFORMADOS</div>
           </motion.div>
           <motion.div
-            className="text-center border-l border-r border-black/10"
+            className="text-center"
             initial={{ opacity: 0, scale: 0.8 }}
             animate={isVisible ? { opacity: 1, scale: 1 } : {}}
             transition={{ delay: 1.7, duration: 0.6 }}
