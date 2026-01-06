@@ -22,11 +22,11 @@ export function ScrollHero() {
         }
       >
         <img
-          src="https://images.unsplash.com/photo-1551650975-87deedd944c3?w=1400&h=720&fit=crop&q=80"
-          alt="Dashboard de resultados"
+          src="/5c489265-f17c-4b19-92fd-a618e7fc7fc9.png"
+          alt="Mentor de IA"
           height={720}
           width={1400}
-          className="mx-auto rounded-2xl object-cover h-full object-left-top"
+          className="mx-auto rounded-2xl object-cover h-full object-center"
           draggable={false}
         />
       </ContainerScroll>
