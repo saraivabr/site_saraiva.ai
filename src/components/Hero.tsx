@@ -2,10 +2,12 @@
 import { Button } from "@/components/ui/button";
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import ContactModal from "./ContactModal";
 
 const Hero = () => {
   const [currentText, setCurrentText] = useState(0);
   const [isVisible, setIsVisible] = useState(false);
+  const [isContactModalOpen, setIsContactModalOpen] = useState(false);
 
   const disruptiveTexts = [
     "Pare de estudar IA.",
@@ -33,6 +35,9 @@ const Hero = () => {
     }
   };
 
+  const openContactModal = () => {
+    setIsContactModalOpen(true);
+  };
   return (
     <section className="min-h-screen bg-white flex items-center justify-center relative overflow-hidden">
       {/* Animated vertical line */}
@@ -129,10 +134,10 @@ const Hero = () => {
             whileTap={{ scale: 0.95 }}
           >
             <Button
-              onClick={handleWhatsApp}
+              onClick={openContactModal}
               className="bg-black text-white hover:opacity-90 font-mono font-bold text-base sm:text-lg md:text-xl py-5 sm:py-6 md:py-7 px-8 sm:px-10 md:px-14 transition-all duration-300 ease-out w-full sm:w-auto min-h-[44px]"
             >
-              PARE DE ESTUDAR
+              FALE CONOSCO
             </Button>
           </motion.div>
 
@@ -193,6 +198,12 @@ const Hero = () => {
           </div>
         </div>
       </div>
+
+      {/* Contact Modal */}
+      <ContactModal 
+        isOpen={isContactModalOpen} 
+        onClose={() => setIsContactModalOpen(false)} 
+      />
     </section>
   );
 };
