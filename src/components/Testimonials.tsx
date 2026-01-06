@@ -147,9 +147,9 @@ const Testimonials = () => {
           </div>
         </motion.div>
 
-        {/* Minimalist dots navigation */}
+        {/* Minimalist dots navigation - smaller, more spaced */}
         <motion.div
-          className="flex justify-center space-x-3 mb-20"
+          className="flex justify-center gap-4 mb-20"
           initial={{ opacity: 0 }}
           animate={isVisible ? { opacity: 1 } : {}}
           transition={{ delay: 0.6, duration: 0.6 }}
@@ -158,13 +158,13 @@ const Testimonials = () => {
             <motion.button
               key={index}
               onClick={() => setActiveTestimonial(index)}
-              className={`transition-all duration-300 ease-out ${
+              className={`transition-all duration-400 ease-out ${
                 activeTestimonial === index
-                  ? 'w-12 h-2 bg-white'
-                  : 'w-2 h-2 bg-white/30 hover:bg-white/50'
+                  ? 'w-8 h-1.5 bg-white'
+                  : 'w-1.5 h-1.5 bg-white/20 hover:bg-white/40'
               }`}
               aria-label={`View testimonial ${index + 1}`}
-              whileHover={{ scale: 1.2 }}
+              whileHover={{ scale: 1.3 }}
               whileTap={{ scale: 0.9 }}
             />
           ))}

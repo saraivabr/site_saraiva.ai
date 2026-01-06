@@ -208,9 +208,9 @@ const Mentoria = () => {
                 transition={{ delay: 0.5 + index * 0.1 }}
               >
                 <motion.div
-                  className="border border-black/10 bg-white hover:bg-black hover:text-white transition-all duration-500 ease-out rounded-lg overflow-hidden"
-                  whileHover={{ scale: 1.03, boxShadow: "0 10px 20px rgba(0,0,0,0.1)" }}
-                  transition={{ duration: 0.3 }}
+                  className="border border-black/10 bg-white hover:bg-black hover:text-white transition-all duration-500 ease-out overflow-hidden"
+                  whileHover={{ scale: 1.02 }}
+                  transition={{ duration: 0.4 }}
                 >
                   <div className="p-6 sm:p-8">
                     <div className="flex items-start space-x-4 sm:space-x-6">
@@ -257,9 +257,9 @@ const Mentoria = () => {
                 </div>
 
                 {/* Minimalist progress bar */}
-                <div className="bg-black/5 h-2 mb-3 sm:mb-4 overflow-hidden rounded-full">
+                <div className="bg-black/5 h-1 mb-3 sm:mb-4 overflow-hidden">
                   <motion.div
-                    className="bg-black h-full rounded-full"
+                    className="bg-black h-full"
                     initial={{ width: 0 }}
                     animate={isVisible ? { width: '87%' } : {}}
                     transition={{ delay: 1, duration: 0.8 }}

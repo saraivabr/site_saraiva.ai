@@ -36,12 +36,12 @@ const Footer = () => {
           </p>
         </motion.div>
 
-        {/* Links in single line */}
+        {/* Links in single line - no separators */}
         <motion.div
-          className="flex flex-wrap justify-center items-center gap-x-4 sm:gap-x-6 md:gap-x-8 gap-y-3 sm:gap-y-4 mb-8 sm:mb-10 md:mb-12 text-xs sm:text-sm font-mono px-4"
+          className="flex flex-wrap justify-center items-center gap-6 sm:gap-8 md:gap-10 mb-8 sm:mb-10 md:mb-12 text-xs sm:text-sm font-mono px-4"
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
-          transition={{ duration: 0.6, staggerChildren: 0.1 }}
+          transition={{ duration: 0.6 }}
           viewport={{ once: true }}
         >
           {[
@@ -49,41 +49,22 @@ const Footer = () => {
             { label: "Produtos", action: () => scrollToSection('produtos') },
             { label: "Mentoria", action: () => scrollToSection('mentoria') },
             { label: "Contato", action: handleWhatsApp },
+            { label: "Termos", action: () => {} },
+            { label: "Privacidade", action: () => {} },
           ].map((item, index) => (
-            <motion.div
+            <motion.button
               key={index}
+              onClick={item.action}
+              className="hover:opacity-100 opacity-60 transition-opacity duration-300 ease-out uppercase tracking-widest min-h-[44px] flex items-center text-[0.65rem] sm:text-xs"
               initial={{ opacity: 0 }}
-              whileInView={{ opacity: 1 }}
-              transition={{ delay: index * 0.1 }}
+              whileInView={{ opacity: 0.6 }}
+              whileHover={{ opacity: 1 }}
+              transition={{ delay: index * 0.05 }}
               viewport={{ once: true }}
             >
-              <motion.button
-                onClick={item.action}
-                className="hover:opacity-70 transition-opacity duration-300 ease-out uppercase tracking-wider min-h-[44px] flex items-center"
-                whileHover={{ scale: 1.1 }}
-                whileTap={{ scale: 0.95 }}
-              >
-                {item.label}
-              </motion.button>
-              {index < 3 && <span className="opacity-30 mx-2">•</span>}
-            </motion.div>
+              {item.label}
+            </motion.button>
           ))}
-          <span className="opacity-30">•</span>
-          <motion.a
-            href="#"
-            className="hover:opacity-70 transition-opacity duration-300 ease-out uppercase tracking-wider min-h-[44px] flex items-center"
-            whileHover={{ scale: 1.1 }}
-          >
-            Termos
-          </motion.a>
-          <span className="opacity-30">•</span>
-          <motion.a
-            href="#"
-            className="hover:opacity-70 transition-opacity duration-300 ease-out uppercase tracking-wider min-h-[44px] flex items-center"
-            whileHover={{ scale: 1.1 }}
-          >
-            Privacidade
-          </motion.a>
         </motion.div>
 
         {/* Discreet copyright */}
