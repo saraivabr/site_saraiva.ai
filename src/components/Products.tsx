@@ -107,9 +107,10 @@ const Products = () => {
           {products.map((product, index) => (
             <div
               key={index}
-              className={`transition-all duration-1000 ease-out delay-${index * 100} ${
+              className={`transition-all duration-1000 ease-out ${
                 isVisible ? 'fade-in-up' : ''
               }`}
+              style={{ animationDelay: `${index * 100}ms` }}
             >
               <div className="border border-black/10 p-6 sm:p-8 md:p-10 bg-white h-full flex flex-col group hover:bg-black hover:text-white transition-all duration-500 ease-out">
                 <div className="flex items-start justify-between mb-6 md:mb-8">
