@@ -80,12 +80,12 @@
   }
   
   h1, h2, h3 {
-    letter-spacing: -0.03em;
-    line-height: 1.05;
+    letter-spacing: -0.02em;
+    line-height: 1.1;
   }
   
   p {
-    line-height: 1.65;
+    line-height: 1.6;
   }
 }
 
@@ -151,6 +151,22 @@
     font-variant-numeric: tabular-nums;
   }
   
+  .animate-slide-down {
+    animation: slideDown 0.6s ease-out;
+  }
+  
+  .animate-slide-left {
+    animation: slideLeft 0.6s ease-out;
+  }
+  
+  .animate-slide-right {
+    animation: slideRight 0.6s ease-out;
+  }
+  
+  .animate-zoom-in {
+    animation: zoomIn 0.6s ease-out;
+  }
+  
   /* Custom cursor (optional) */
   * {
     cursor: default;
@@ -188,19 +204,6 @@
   }
 }
 
-@keyframes slide-down {
-  0% {
-    transform: translateY(-100%);
-  }
-  100% {
-    transform: translateY(300%);
-  }
-}
-
-.animate-slide-down {
-  animation: slide-down 2s cubic-bezier(0.4, 0, 0.2, 1) infinite;
-}
-
 /* Minimal scrollbar */
 ::-webkit-scrollbar {
   width: 2px;
@@ -212,6 +215,50 @@
 
 ::-webkit-scrollbar-thumb {
   background: black;
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideLeft {
+  from {
+    opacity: 0;
+    transform: translateX(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideRight {
+  from {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes zoomIn {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
 }
 
 /* Smooth scroll behavior */
