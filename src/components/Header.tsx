@@ -2,7 +2,6 @@
 import { Button } from "@/components/ui/button";
 import { useState, useEffect } from "react";
 import { Menu, X } from "lucide-react";
-import { motion } from "framer-motion";
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -73,115 +72,80 @@ const Header = () => {
       <div className="container-max">
         <div className="flex items-center justify-between py-4 md:py-5">
           {/* Logo - More discrete */}
-          <motion.div
-            className="font-medium text-base md:text-lg font-mono tracking-wide opacity-70"
-            whileHover={{ scale: 1.05 }}
-            transition={{ duration: 0.2 }}
-          >
+          <div className="font-medium text-base md:text-lg font-mono tracking-wide opacity-70">
             SARAIVA.AI
-          </motion.div>
+          </div>
 
           {/* Desktop Navigation - Plain text with underline on hover */}
           <nav className="hidden md:flex items-center space-x-6 lg:space-x-8">
             {navigationItems.map((item) => (
-              <motion.button
+              <button
                 key={item.id}
                 onClick={() => scrollToSection(item.id)}
                 className={`text-black font-mono text-xs uppercase tracking-wider transition-all duration-300 ease-out relative pb-1 ${
-                  activeSection === item.id
-                    ? 'after:w-full after:opacity-100'
+                  activeSection === item.id 
+                    ? 'after:w-full after:opacity-100' 
                     : 'after:w-0 hover:after:w-full'
                 } after:content-[''] after:absolute after:bottom-0 after:left-0 after:h-[1px] after:bg-black after:transition-all after:duration-300 after:ease-out`}
                 aria-label={`Navegar para seção ${item.label}`}
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
               >
                 {item.label}
-              </motion.button>
+              </button>
             ))}
           </nav>
 
           {/* Mobile Menu Button */}
-          <motion.button
+          <button
             onClick={toggleMenu}
             className="md:hidden menu-toggle p-2 hover:opacity-70 transition-opacity duration-300"
             aria-label="Abrir menu de navegação"
             aria-expanded={isMenuOpen}
-            whileHover={{ scale: 1.1 }}
-            whileTap={{ scale: 0.9 }}
           >
-            <motion.div
-              animate={{ rotate: isMenuOpen ? 90 : 0 }}
-              transition={{ duration: 0.3 }}
-            >
-              {isMenuOpen ? <X size={20} /> : <Menu size={20} />}
-            </motion.div>
-          </motion.button>
+            {isMenuOpen ? <X size={20} /> : <Menu size={20} />}
+          </button>
 
           {/* CTA Button - Desktop - Single highlighted */}
-          <motion.div
-            className="hidden md:block"
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
+          <Button
+            onClick={handleWhatsApp}
+            className="hidden md:block bg-black text-white hover:opacity-90 font-mono font-bold text-xs px-6 py-3 transition-all duration-300 ease-out"
+            aria-label="Entrar em contato via WhatsApp"
           >
-            <Button
-              onClick={handleWhatsApp}
-              className="bg-black text-white hover:opacity-90 font-mono font-bold text-xs px-6 py-3 transition-all duration-300 ease-out"
-              aria-label="Entrar em contato via WhatsApp"
-            >
-              PARAR DE ESTUDAR
-            </Button>
-          </motion.div>
+            PARAR DE ESTUDAR
+          </Button>
         </div>
 
         {/* Mobile Navigation Menu */}
-        <motion.div
-          className={`md:hidden mobile-menu transition-all duration-300 ease-out overflow-hidden ${
-            isMenuOpen ? '' : ''
-          }`}
-          initial={{ height: 0, opacity: 0 }}
-          animate={{ height: isMenuOpen ? 'auto' : 0, opacity: isMenuOpen ? 1 : 0 }}
-          transition={{ duration: 0.3 }}
-        >
+        <div className={`md:hidden mobile-menu transition-all duration-300 ease-out ${
+          isMenuOpen ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0 overflow-hidden'
+        }`}>
           <nav className="py-4 border-t border-black/10">
             <div className="flex flex-col space-y-2">
-              {navigationItems.map((item, index) => (
-                <motion.button
+              {navigationItems.map((item) => (
+                <button
                   key={item.id}
                   onClick={() => scrollToSection(item.id)}
                   className={`text-left text-black px-4 py-3 transition-all duration-300 ease-out font-mono uppercase text-sm relative ${
-                    activeSection === item.id
-                      ? 'after:w-full'
+                    activeSection === item.id 
+                      ? 'after:w-full' 
                       : 'after:w-0 hover:after:w-full'
                   } after:content-[''] after:absolute after:bottom-0 after:left-4 after:h-[1px] after:bg-black after:transition-all after:duration-300`}
                   aria-label={`Navegar para seção ${item.label}`}
-                  initial={{ opacity: 0, x: -20 }}
-                  animate={isMenuOpen ? { opacity: 1, x: 0 } : {}}
-                  transition={{ delay: index * 0.05 }}
-                  whileHover={{ x: 5 }}
                 >
                   {item.label}
-                </motion.button>
+                </button>
               ))}
 
               {/* Mobile CTA Button */}
-              <motion.div
-                initial={{ opacity: 0, y: 10 }}
-                animate={isMenuOpen ? { opacity: 1, y: 0 } : {}}
-                transition={{ delay: navigationItems.length * 0.05 }}
-                whileHover={{ scale: 1.02 }}
+              <Button
+                onClick={handleWhatsApp}
+                className="mt-4 bg-black text-white hover:opacity-90 font-mono font-bold text-sm px-4 py-3 transition-all duration-300 ease-out w-full"
+                aria-label="Entrar em contato via WhatsApp"
               >
-                <Button
-                  onClick={handleWhatsApp}
-                  className="mt-4 bg-black text-white hover:opacity-90 font-mono font-bold text-sm px-4 py-3 transition-all duration-300 ease-out w-full"
-                  aria-label="Entrar em contato via WhatsApp"
-                >
-                  PARAR DE ESTUDAR
-                </Button>
-              </motion.div>
+                PARAR DE ESTUDAR
+              </Button>
             </div>
           </nav>
-        </motion.div>
+        </div>
       </div>
     </header>
   );
