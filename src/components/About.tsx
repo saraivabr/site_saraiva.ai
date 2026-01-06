@@ -32,35 +32,35 @@ const About = () => {
         <div className="grid lg:grid-cols-2 gap-24 items-center">
           {/* Contrarian text */}
           <div className={`transition-all duration-1000 ease-out ${isVisible ? 'fade-in-up' : ''}`}>
-            <h2 className="text-7xl md:text-8xl font-black mb-20 leading-[0.95]" style={{ letterSpacing: '-0.03em' }}>
+            <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-black mb-12 md:mb-20 leading-[0.95]" style={{ letterSpacing: '-0.03em' }}>
               EU NÃO<br/>
               ENSINO<br/>
               IA
             </h2>
             
-            <div className="space-y-16 text-xl md:text-2xl font-medium leading-relaxed">
-              <div className="pl-8 border-l border-white/30">
-                <p>Eu ensino você a <span className="bg-white text-black px-3 py-1 font-bold">PARAR DE TRABALHAR</span> usando IA.</p>
+            <div className="space-y-8 sm:space-y-12 md:space-y-16 text-base sm:text-lg md:text-xl lg:text-2xl font-medium leading-relaxed">
+              <div className="pl-4 sm:pl-6 md:pl-8 border-l border-white/30">
+                <p>Eu ensino você a <span className="bg-white text-black px-2 sm:px-3 py-1 font-bold">PARAR DE TRABALHAR</span> usando IA.</p>
               </div>
               
-              <div className="pl-8 border-l border-white/30">
-                <p>Eu ensino você a <span className="bg-white text-black px-3 py-1 font-bold">GANHAR DINHEIRO</span> enquanto dorme.</p>
+              <div className="pl-4 sm:pl-6 md:pl-8 border-l border-white/30">
+                <p>Eu ensino você a <span className="bg-white text-black px-2 sm:px-3 py-1 font-bold">GANHAR DINHEIRO</span> enquanto dorme.</p>
               </div>
               
-              <div className="pl-8 border-l border-white/30">
-                <p>Eu ensino você a <span className="bg-white text-black px-3 py-1 font-bold">DOMINAR MERCADOS</span> sem competir.</p>
+              <div className="pl-4 sm:pl-6 md:pl-8 border-l border-white/30">
+                <p>Eu ensino você a <span className="bg-white text-black px-2 sm:px-3 py-1 font-bold">DOMINAR MERCADOS</span> sem competir.</p>
               </div>
             </div>
             
             {/* Quote with giant quotation marks */}
-            <div className="mt-20 relative">
-              <div className="absolute -top-8 -left-4 text-9xl font-serif opacity-20" style={{ lineHeight: '0.8' }}>"</div>
-              <div className="relative z-10 pl-12">
-                <p className="text-2xl md:text-3xl font-bold leading-tight mb-4">
+            <div className="mt-12 md:mt-20 relative">
+              <div className="absolute -top-4 sm:-top-6 md:-top-8 -left-2 sm:-left-3 md:-left-4 text-6xl sm:text-7xl md:text-9xl font-serif opacity-20" style={{ lineHeight: '0.8' }}>"</div>
+              <div className="relative z-10 pl-8 sm:pl-10 md:pl-12">
+                <p className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-bold leading-tight mb-3 md:mb-4">
                   Tem gente ganhando R$ 100k/mês<br/>
                   enquanto você assiste YouTube sobre IA.
                 </p>
-                <p className="text-right font-mono text-sm opacity-70">— Saraiva</p>
+                <p className="text-right font-mono text-xs sm:text-sm opacity-70">— Saraiva</p>
               </div>
             </div>
           </div>
@@ -87,14 +87,14 @@ const About = () => {
 
         {/* Stats section - Asymmetric layout */}
         <div className={`transition-all duration-1000 ease-out delay-1000 ${isVisible ? 'fade-in-up' : ''}`}>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-16">
-            <div className="text-left">
-              <div className="text-7xl font-black mb-4 counter-text" style={{ letterSpacing: '-0.02em' }}>1000+</div>
-              <div className="font-mono uppercase tracking-widest text-sm opacity-60">PESSOAS QUE PARARAM DE ESTUDAR</div>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-16">
+            <div className="text-center md:text-left">
+              <div className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black mb-3 md:mb-4 counter-text" style={{ letterSpacing: '-0.02em' }}>1000+</div>
+              <div className="font-mono uppercase tracking-wider sm:tracking-widest text-xs sm:text-sm opacity-60">PESSOAS QUE PARARAM DE ESTUDAR</div>
             </div>
-            <div className="text-left md:text-right">
-              <div className="text-7xl font-black mb-4 counter-text" style={{ letterSpacing: '-0.02em' }}>R$ 50M+</div>
-              <div className="font-mono uppercase tracking-widest text-sm opacity-60">GERADOS ENQUANTO DORMEM</div>
+            <div className="text-center md:text-right">
+              <div className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black mb-3 md:mb-4 counter-text" style={{ letterSpacing: '-0.02em' }}>R$ 50M+</div>
+              <div className="font-mono uppercase tracking-wider sm:tracking-widest text-xs sm:text-sm opacity-60">GERADOS ENQUANTO DORMEM</div>
             </div>
           </div>
         </div>
