@@ -39,7 +39,7 @@ const Hero = () => {
     setIsContactModalOpen(true);
   };
   return (
-    <section className="min-h-screen bg-white flex items-center justify-center relative overflow-hidden">
+    <section className="min-h-screen bg-white flex items-center justify-center relative overflow-hidden pt-20">
       {/* Animated vertical line */}
       <motion.div
         className="absolute left-1/2 top-0 bottom-0 w-[1px] bg-black/10 overflow-hidden"

@@ -22,8 +22,8 @@ export function ScrollHero() {
         }
       >
         <img
-          src="https://images.unsplash.com/photo-1551650975-87deedd944c3?w=1400&h=720&fit=crop&q=80"
-          alt="Dashboard de resultados"
+          src="https://images.pexels.com/photos/3184430/pexels-photo-3184430.jpeg?auto=compress&cs=tinysrgb&w=1400&h=720&fit=crop"
+          alt="AI Business Dashboard - Resultados de Clientes"
           height={720}
           width={1400}
           className="mx-auto rounded-2xl object-cover h-full object-left-top"
