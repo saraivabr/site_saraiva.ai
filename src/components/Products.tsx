@@ -92,18 +92,18 @@ const Products = () => {
     >
       <div className="container-max">
         {/* Anti-marketing title */}
-        <div className={`text-center mb-24 transition-all duration-1000 ease-out ${isVisible ? 'fade-in-up' : ''}`}>
-          <h2 className="text-7xl md:text-8xl font-black mb-8 leading-[0.95]" style={{ letterSpacing: '-0.03em' }}>
+        <div className={`text-center mb-16 md:mb-24 transition-all duration-1000 ease-out ${isVisible ? 'fade-in-up' : ''}`}>
+          <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-black mb-6 md:mb-8 leading-[0.95]" style={{ letterSpacing: '-0.03em' }}>
             NÃO VENDO<br/>
             PRODUTOS
           </h2>
-          <p className="text-2xl md:text-3xl font-medium text-black max-w-3xl mx-auto" style={{ letterSpacing: '0.01em', lineHeight: '1.5' }}>
+          <p className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-medium text-black max-w-3xl mx-auto px-4" style={{ letterSpacing: '0.01em', lineHeight: '1.5' }}>
             Vendo tempo livre, dinheiro automático e liberdade total.
           </p>
         </div>
         
         {/* Clean product grid */}
-        <div className="grid md:grid-cols-2 gap-8 mb-20">
+        <div className="grid md:grid-cols-2 gap-6 md:gap-8 mb-12 md:mb-20">
           {products.map((product, index) => (
             <div
               key={index}
@@ -111,9 +111,9 @@ const Products = () => {
                 isVisible ? 'fade-in-up' : ''
               }`}
             >
-              <div className="border border-black/10 p-10 bg-white h-full flex flex-col group hover:bg-black hover:text-white transition-all duration-500 ease-out">
-                <div className="flex items-start justify-between mb-8">
-                  <div className="text-8xl font-black opacity-10 group-hover:opacity-20 transition-opacity duration-500" style={{ letterSpacing: '-0.05em' }}>
+              <div className="border border-black/10 p-6 sm:p-8 md:p-10 bg-white h-full flex flex-col group hover:bg-black hover:text-white transition-all duration-500 ease-out">
+                <div className="flex items-start justify-between mb-6 md:mb-8">
+                  <div className="text-6xl sm:text-7xl md:text-8xl font-black opacity-10 group-hover:opacity-20 transition-opacity duration-500" style={{ letterSpacing: '-0.05em' }}>
                     {product.number}
                   </div>
                   <div className="group-hover:text-white transition-colors duration-500 ease-out">
@@ -122,24 +122,24 @@ const Products = () => {
                 </div>
                 
                 <div className="flex-1">
-                  <div className="mb-6">
-                    <h3 className="text-3xl font-black mb-2" style={{ letterSpacing: '-0.01em' }}>{product.title}</h3>
-                    <p className="font-mono text-xs uppercase tracking-widest opacity-60">{product.subtitle}</p>
+                  <div className="mb-4 md:mb-6">
+                    <h3 className="text-2xl sm:text-3xl font-black mb-2" style={{ letterSpacing: '-0.01em' }}>{product.title}</h3>
+                    <p className="font-mono text-xs uppercase tracking-wider md:tracking-widest opacity-60">{product.subtitle}</p>
                   </div>
                   
-                  <p className="text-lg mb-8 leading-relaxed opacity-80">
+                  <p className="text-base sm:text-lg mb-6 md:mb-8 leading-relaxed opacity-80">
                     {product.description}
                   </p>
                   
-                  <div className="flex items-baseline mb-8">
-                    <span className="text-4xl font-black" style={{ letterSpacing: '-0.02em' }}>{product.price}</span>
-                    <span className="text-sm font-mono ml-2 opacity-60">{product.period}</span>
+                  <div className="flex items-baseline mb-6 md:mb-8">
+                    <span className="text-3xl sm:text-4xl font-black" style={{ letterSpacing: '-0.02em' }}>{product.price}</span>
+                    <span className="text-xs sm:text-sm font-mono ml-2 opacity-60">{product.period}</span>
                   </div>
                 </div>
                 
                 <Button 
                   onClick={() => handleWhatsApp(product.title)}
-                  className="w-full text-base font-bold py-4 bg-black text-white group-hover:bg-white group-hover:text-black border border-black/10 group-hover:border-white transition-all duration-300 ease-out focus:outline-2 focus:outline-black focus:outline-offset-2"
+                  className="w-full text-sm sm:text-base font-bold py-3 sm:py-4 bg-black text-white group-hover:bg-white group-hover:text-black border border-black/10 group-hover:border-white transition-all duration-300 ease-out focus:outline-2 focus:outline-black focus:outline-offset-2 min-h-[44px]"
                 >
                   PARAR DE ESTUDAR
                 </Button>
@@ -150,13 +150,13 @@ const Products = () => {
         
         {/* Clean CTA */}
         <div className={`text-center transition-all duration-1000 ease-out delay-800 ${isVisible ? 'fade-in-up' : ''}`}>
-          <div className="border border-black/10 p-10 bg-white max-w-2xl mx-auto">
-            <p className="text-2xl font-bold mb-6" style={{ lineHeight: '1.4' }}>
+          <div className="border border-black/10 p-6 sm:p-8 md:p-10 bg-white max-w-2xl mx-auto">
+            <p className="text-lg sm:text-xl md:text-2xl font-bold mb-4 md:mb-6" style={{ lineHeight: '1.4' }}>
               Enquanto você decide, seus concorrentes já decidiram.
             </p>
             <Button 
               onClick={() => handleWhatsApp('todos os produtos')}
-              className="bg-black text-white hover:opacity-90 text-lg px-12 py-4 font-bold transition-all duration-300 ease-out"
+              className="bg-black text-white hover:opacity-90 text-base sm:text-lg px-8 sm:px-10 md:px-12 py-3 sm:py-4 font-bold transition-all duration-300 ease-out w-full sm:w-auto min-h-[44px]"
             >
               DECIDIR AGORA
             </Button>
