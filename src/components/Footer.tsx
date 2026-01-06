@@ -12,82 +12,57 @@ const Footer = () => {
   };
 
   return (
-    <footer className="bg-black text-white py-16 border-t-4 border-white">
+    <footer className="bg-black text-white py-16 border-t border-white/10">
       <div className="container-max">
-        <div className="grid md:grid-cols-4 gap-12 mb-16">
-          <div>
-            <div className="font-bold text-2xl mb-6 font-mono">
-              SARAIVA.AI
-            </div>
-            <p className="font-mono text-sm leading-relaxed">
-              Paramos de ensinar IA.<br/>
-              Começamos a ensinar lucro.
-            </p>
+        {/* Logo and tagline */}
+        <div className="text-center mb-12">
+          <div className="font-black text-2xl mb-3 font-mono" style={{ letterSpacing: '-0.01em' }}>
+            SARAIVA.AI
           </div>
-          
-          <div>
-            <h4 className="font-bold text-lg mb-6 font-mono uppercase">LINKS</h4>
-            <div className="space-y-3 text-sm font-mono">
-              <button 
-                onClick={() => scrollToSection('sobre')}
-                className="block hover:bg-white hover:text-black px-2 py-1 transition-all uppercase"
-              >
-                SOBRE
-              </button>
-              <button 
-                onClick={() => scrollToSection('produtos')}
-                className="block hover:bg-white hover:text-black px-2 py-1 transition-all uppercase"
-              >
-                PRODUTOS
-              </button>
-              <button 
-                onClick={() => scrollToSection('mentoria')}
-                className="block hover:bg-white hover:text-black px-2 py-1 transition-all uppercase"
-              >
-                MENTORIA
-              </button>
-              <button 
-                onClick={handleWhatsApp}
-                className="block hover:bg-white hover:text-black px-2 py-1 transition-all uppercase"
-              >
-                CONTATO
-              </button>
-            </div>
-          </div>
-          
-          <div>
-            <h4 className="font-bold text-lg mb-6 font-mono uppercase">PRODUTOS</h4>
-            <div className="space-y-3 text-sm font-mono">
-              <div>MENTORIA</div>
-              <div>CONSULTORIA</div>
-              <div>LIGAÇÃO.AI</div>
-              <div>ESCREVE.AI</div>
-            </div>
-          </div>
-          
-          <div>
-            <h4 className="font-bold text-lg mb-6 font-mono uppercase">CONTATO</h4>
-            <div className="space-y-4">
-              <button 
-                onClick={handleWhatsApp}
-                className="block border-2 border-white px-4 py-2 hover:bg-white hover:text-black transition-all font-mono font-bold text-sm"
-              >
-                WHATSAPP
-              </button>
-            </div>
-          </div>
+          <p className="font-mono text-sm opacity-60">
+            Pare de estudar. Comece a lucrar.
+          </p>
         </div>
         
-        <div className="border-t-2 border-white pt-8">
-          <div className="flex flex-col md:flex-row justify-between items-center">
-            <div className="font-mono text-sm mb-4 md:mb-0">
-              © 2025 SARAIVA.AI — PARE DE ESTUDAR. COMECE A LUCRAR.
-            </div>
-            
-            <div className="flex space-x-6 text-sm font-mono">
-              <a href="#" className="hover:bg-white hover:text-black px-2 py-1 transition-all">TERMOS</a>
-              <a href="#" className="hover:bg-white hover:text-black px-2 py-1 transition-all">PRIVACIDADE</a>
-            </div>
+        {/* Links in single line */}
+        <div className="flex flex-wrap justify-center items-center gap-x-8 gap-y-4 mb-12 text-sm font-mono">
+          <button 
+            onClick={() => scrollToSection('sobre')}
+            className="hover:opacity-70 transition-opacity duration-300 ease-out uppercase tracking-wider"
+          >
+            Sobre
+          </button>
+          <span className="opacity-30">•</span>
+          <button 
+            onClick={() => scrollToSection('produtos')}
+            className="hover:opacity-70 transition-opacity duration-300 ease-out uppercase tracking-wider"
+          >
+            Produtos
+          </button>
+          <span className="opacity-30">•</span>
+          <button 
+            onClick={() => scrollToSection('mentoria')}
+            className="hover:opacity-70 transition-opacity duration-300 ease-out uppercase tracking-wider"
+          >
+            Mentoria
+          </button>
+          <span className="opacity-30">•</span>
+          <button 
+            onClick={handleWhatsApp}
+            className="hover:opacity-70 transition-opacity duration-300 ease-out uppercase tracking-wider"
+          >
+            Contato
+          </button>
+          <span className="opacity-30">•</span>
+          <a href="#" className="hover:opacity-70 transition-opacity duration-300 ease-out uppercase tracking-wider">Termos</a>
+          <span className="opacity-30">•</span>
+          <a href="#" className="hover:opacity-70 transition-opacity duration-300 ease-out uppercase tracking-wider">Privacidade</a>
+        </div>
+        
+        {/* Discreet copyright */}
+        <div className="text-center">
+          <div className="font-mono text-xs opacity-40">
+            © 2025 SARAIVA.AI
           </div>
         </div>
       </div>

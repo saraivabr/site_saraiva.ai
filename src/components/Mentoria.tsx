@@ -49,22 +49,19 @@ const Mentoria = () => {
 
   const modules = [
     {
-      icon: "🎯",
+      symbol: "+",
       title: "Módulo 1: Fundamentos",
-      desc: "Domine os conceitos essenciais e prepare sua mente para o sucesso com IA.",
-      gradient: "from-purple-500 to-pink-500"
+      desc: "Domine os conceitos essenciais e prepare sua mente para o sucesso com IA."
     },
     {
-      icon: "💰",
+      symbol: "×",
       title: "Módulo 2: Monetização",
-      desc: "Estratégias práticas para gerar os primeiros R$ 10.000 com IA.",
-      gradient: "from-green-500 to-emerald-500"
+      desc: "Estratégias práticas para gerar os primeiros R$ 10.000 com IA."
     },
     {
-      icon: "🚀",
+      symbol: "/",
       title: "Módulo 3: Escala",
-      desc: "Como transformar seu negócio em uma máquina automatizada de lucro.",
-      gradient: "from-blue-500 to-cyan-500"
+      desc: "Como transformar seu negócio em uma máquina automatizada de lucro."
     }
   ];
 
@@ -76,61 +73,61 @@ const Mentoria = () => {
     >
       <div className="container-max relative z-10">
         {/* Title section */}
-        <div className={`text-center mb-20 transition-all duration-1000 ${isVisible ? 'animate-zoom-in' : 'opacity-0 scale-75'}`}>
-          <h2 className="text-5xl md:text-6xl font-black mb-8 text-black">
+        <div className={`text-center mb-24 transition-all duration-1000 ease-out ${isVisible ? 'animate-zoom-in' : 'opacity-0 scale-75'}`}>
+          <h2 className="text-7xl md:text-8xl font-black mb-8 text-black leading-[0.95]" style={{ letterSpacing: '-0.03em' }}>
             Mentoria{" "}
             <span className="text-black">Saraiva.AI</span>
           </h2>
           
-          <p className="text-2xl text-black max-w-4xl mx-auto mb-8">
+          <p className="text-xl md:text-2xl text-black max-w-4xl mx-auto opacity-80" style={{ lineHeight: '1.6' }}>
             O único programa que te ensina a transformar IA em uma máquina de fazer dinheiro.
           </p>
           
-          <div className="w-32 h-1 bg-black mx-auto"></div>
+          <div className="w-20 h-[1px] bg-black/20 mx-auto mt-8"></div>
         </div>
         
-        <div className="grid lg:grid-cols-2 gap-20 items-center">
+        <div className="grid lg:grid-cols-2 gap-20 items-start">
           {/* Pricing card */}
-          <div className={`transition-all duration-1000 ${isVisible ? 'animate-slide-left' : 'opacity-0 translate-x-[-100px]'}`}>
+          <div className={`transition-all duration-1000 ease-out ${isVisible ? 'animate-slide-left' : 'opacity-0 translate-x-[-100px]'}`}>
             <div className="relative">
-              <div className="relative border-2 border-black bg-white p-8 brutalist-shadow">
-                {/* Price section */}
-                <div className="text-center mb-8">
-                  <div className="inline-block bg-black text-white px-6 py-2 mb-4 font-bold">
-                    🔥 PROMOÇÃO LIMITADA
+              <div className="relative border border-black/10 bg-white p-10">
+                {/* Price section - More typographic emphasis */}
+                <div className="text-center mb-10">
+                  <div className="inline-block bg-black text-white px-6 py-2 mb-6 font-mono text-xs uppercase tracking-widest">
+                    PROMOÇÃO LIMITADA
                   </div>
                   
-                  <div className="relative">
-                    <div className="text-7xl font-black text-black mb-2">
+                  <div className="relative mb-6">
+                    <div className="text-8xl font-black text-black" style={{ letterSpacing: '-0.04em' }}>
                       R$ 2.997
                     </div>
-                    <div className="absolute -top-4 -right-8 text-2xl text-gray-400 line-through rotate-12">
+                    <div className="absolute -top-6 -right-12 text-xl text-gray-400 line-through rotate-12 opacity-50">
                       R$ 9.997
                     </div>
                   </div>
                   
-                  <div className="text-lg text-black mb-6">
+                  <div className="text-base text-black/60 font-mono">
                     ou 12x de R$ 297 sem juros
                   </div>
                 </div>
                 
                 {/* Benefits with animation */}
-                <div className="space-y-4 mb-8">
+                <div className="space-y-3 mb-10">
                   {benefits.map((benefit, index) => (
                     <div 
                       key={index}
-                      className={`flex items-center space-x-4 p-3 transition-all duration-500 ${
+                      className={`flex items-center space-x-4 p-4 transition-all duration-500 ease-out border border-transparent ${
                         currentBenefit === index 
-                          ? 'bg-black text-white scale-105' 
-                          : 'hover:bg-gray-100'
+                          ? 'bg-black text-white border-black' 
+                          : 'hover:border-black/10'
                       }`}
                     >
-                      <div className={`text-2xl transition-all duration-300 ${
-                        currentBenefit === index ? 'scale-125' : ''
+                      <div className={`text-xl font-mono transition-all duration-300 ${
+                        currentBenefit === index ? 'scale-110' : ''
                       }`}>
-                        ✅
+                        +
                       </div>
-                      <div className={`font-medium ${
+                      <div className={`font-medium text-sm ${
                         currentBenefit === index ? 'text-white font-bold' : 'text-black'
                       }`}>
                         {benefit}
@@ -142,20 +139,20 @@ const Mentoria = () => {
                 {/* Main CTA */}
                 <Button 
                   onClick={handleWhatsApp}
-                  className="w-full bg-black text-white hover:bg-gray-900 font-black py-6 text-xl brutalist-shadow mb-6"
+                  className="w-full bg-black text-white hover:opacity-90 font-black py-6 text-lg transition-all duration-300 ease-out mb-6"
                   size="lg"
                 >
-                  🎯 QUERO MINHA VAGA AGORA
+                  QUERO MINHA VAGA AGORA
                 </Button>
                 
                 {/* Security badges */}
-                <div className="text-center text-sm text-black space-y-2">
+                <div className="text-center text-xs text-black/60 space-y-2 font-mono">
                   <div className="flex items-center justify-center space-x-4">
-                    <span>🔒 Pagamento 100% Seguro</span>
+                    <span>Pagamento 100% Seguro</span>
                     <span>•</span>
-                    <span>✅ Garantia de 7 dias</span>
+                    <span>Garantia de 7 dias</span>
                   </div>
-                  <div className="text-xs">
+                  <div className="text-xs opacity-70">
                     Não satisfeito? Devolvemos 100% do seu dinheiro
                   </div>
                 </div>
@@ -163,26 +160,26 @@ const Mentoria = () => {
             </div>
           </div>
           
-          {/* Modules section */}
-          <div className={`space-y-8 transition-all duration-1000 delay-500 ${isVisible ? 'animate-slide-right' : 'opacity-0 translate-x-[100px]'}`}>
+          {/* Modules section - Simpler cards */}
+          <div className={`space-y-6 transition-all duration-1000 ease-out delay-500 ${isVisible ? 'animate-slide-right' : 'opacity-0 translate-x-[100px]'}`}>
             {modules.map((module, index) => (
               <Card 
                 key={index}
-                className="border-2 border-black bg-white brutalist-shadow"
+                className="border border-black/10 bg-white hover:bg-black hover:text-white transition-all duration-500 ease-out"
               >
                 <CardContent className="p-8">
                   <div className="flex items-start space-x-6">
-                    {/* Icon */}
-                    <div className="w-16 h-16 border-2 border-black bg-white flex items-center justify-center text-2xl text-black">
-                      {module.icon}
+                    {/* Typographic symbol */}
+                    <div className="w-14 h-14 border border-black/10 bg-white flex items-center justify-center text-4xl text-black font-light">
+                      {module.symbol}
                     </div>
                     
                     {/* Content */}
                     <div className="flex-1">
-                      <h3 className="text-2xl font-black mb-3 text-black">
+                      <h3 className="text-xl font-black mb-3 text-black group-hover:text-white" style={{ letterSpacing: '-0.01em' }}>
                         {module.title}
                       </h3>
-                      <p className="text-black leading-relaxed text-lg">
+                      <p className="text-black/70 group-hover:text-white/80 leading-relaxed text-base">
                         {module.desc}
                       </p>
                     </div>
@@ -193,25 +190,24 @@ const Mentoria = () => {
           </div>
         </div>
         
-        {/* Urgency section */}
-        <div className={`text-center mt-20 transition-all duration-1000 delay-1000 ${isVisible ? 'animate-zoom-in' : 'opacity-0 scale-75'}`}>
+        {/* Urgency section - More minimalist progress bar */}
+        <div className={`text-center mt-24 transition-all duration-1000 ease-out delay-1000 ${isVisible ? 'animate-zoom-in' : 'opacity-0 scale-75'}`}>
           <div className="max-w-3xl mx-auto">
-            <Card className="border-2 border-black bg-white brutalist-shadow">
-              <CardContent className="p-8">
-                <div className="text-4xl mb-4">⏰</div>
-                <div className="font-black text-2xl mb-4 text-black">
-                  ATENÇÃO: Apenas 50 Vagas!
+            <Card className="border border-black/10 bg-white">
+              <CardContent className="p-10">
+                <div className="font-black text-2xl mb-4 text-black" style={{ letterSpacing: '-0.01em' }}>
+                  ATENÇÃO: Apenas 50 Vagas
                 </div>
-                <div className="text-lg text-black mb-6">
-                  Esta turma está quase esgotada. Garante sua vaga antes que seja tarde!
+                <div className="text-base text-black/70 mb-8 font-mono">
+                  Esta turma está quase esgotada. Garanta sua vaga antes que seja tarde.
                 </div>
                 
-                {/* Progress bar */}
-                <div className="bg-gray-200 border-2 border-black h-4 mb-4">
-                  <div className="bg-black h-full" style={{width: '87%'}}></div>
+                {/* Minimalist progress bar */}
+                <div className="bg-black/5 h-2 mb-4 overflow-hidden">
+                  <div className="bg-black h-full transition-all duration-1000 ease-out" style={{width: '87%'}}></div>
                 </div>
-                <div className="text-sm text-black">
-                  <strong>43 vagas preenchidas</strong> • Restam apenas 7 vagas
+                <div className="text-sm text-black/60 font-mono">
+                  <strong className="text-black">43 vagas preenchidas</strong> • Restam apenas 7 vagas
                 </div>
               </CardContent>
             </Card>

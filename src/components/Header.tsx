@@ -68,23 +68,25 @@ const Header = () => {
   ];
 
   return (
-    <header className="fixed top-0 w-full z-50 bg-white border-b-2 border-black backdrop-blur-sm">
+    <header className="fixed top-0 w-full z-50 bg-white/95 backdrop-blur-sm border-b border-black/10">
       <div className="container-max">
-        <div className="flex items-center justify-between py-3 md:py-4">
-          {/* Logo */}
-          <div className="font-black text-lg md:text-xl font-mono tracking-tight">
+        <div className="flex items-center justify-between py-4 md:py-5">
+          {/* Logo - More discrete */}
+          <div className="font-medium text-base md:text-lg font-mono tracking-wide opacity-70">
             SARAIVA.AI
           </div>
 
-          {/* Desktop Navigation */}
-          <nav className="hidden md:flex items-center space-x-4 lg:space-x-6">
+          {/* Desktop Navigation - Plain text with underline on hover */}
+          <nav className="hidden md:flex items-center space-x-6 lg:space-x-8">
             {navigationItems.map((item) => (
               <button
                 key={item.id}
                 onClick={() => scrollToSection(item.id)}
-                className={`text-black hover:bg-black hover:text-white px-3 py-2 transition-all duration-300 font-mono font-bold uppercase text-xs border border-black transform hover:scale-105 ${
-                  activeSection === item.id ? 'bg-black text-white' : ''
-                }`}
+                className={`text-black font-mono text-xs uppercase tracking-wider transition-all duration-300 ease-out relative pb-1 ${
+                  activeSection === item.id 
+                    ? 'after:w-full after:opacity-100' 
+                    : 'after:w-0 hover:after:w-full'
+                } after:content-[''] after:absolute after:bottom-0 after:left-0 after:h-[1px] after:bg-black after:transition-all after:duration-300 after:ease-out`}
                 aria-label={`Navegar para seção ${item.label}`}
               >
                 {item.label}
@@ -95,17 +97,17 @@ const Header = () => {
           {/* Mobile Menu Button */}
           <button
             onClick={toggleMenu}
-            className="md:hidden menu-toggle p-2 border border-black hover:bg-black hover:text-white transition-all duration-300"
+            className="md:hidden menu-toggle p-2 hover:opacity-70 transition-opacity duration-300"
             aria-label="Abrir menu de navegação"
             aria-expanded={isMenuOpen}
           >
             {isMenuOpen ? <X size={20} /> : <Menu size={20} />}
           </button>
 
-          {/* CTA Button - Desktop */}
+          {/* CTA Button - Desktop - Single highlighted */}
           <Button
             onClick={handleWhatsApp}
-            className="hidden md:block bg-black text-white hover:bg-white hover:text-black border-2 border-black font-mono font-bold text-xs px-4 py-2 transition-all duration-300 transform hover:scale-105"
+            className="hidden md:block bg-black text-white hover:opacity-90 font-mono font-bold text-xs px-6 py-3 transition-all duration-300 ease-out"
             aria-label="Entrar em contato via WhatsApp"
           >
             PARAR DE ESTUDAR
@@ -113,18 +115,20 @@ const Header = () => {
         </div>
 
         {/* Mobile Navigation Menu */}
-        <div className={`md:hidden mobile-menu transition-all duration-300 ease-in-out ${
+        <div className={`md:hidden mobile-menu transition-all duration-300 ease-out ${
           isMenuOpen ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0 overflow-hidden'
         }`}>
-          <nav className="py-4 border-t border-black">
-            <div className="flex flex-col space-y-3">
+          <nav className="py-4 border-t border-black/10">
+            <div className="flex flex-col space-y-2">
               {navigationItems.map((item) => (
                 <button
                   key={item.id}
                   onClick={() => scrollToSection(item.id)}
-                  className={`text-left text-black hover:bg-black hover:text-white px-4 py-3 transition-all duration-300 font-mono font-bold uppercase text-sm border border-black ${
-                    activeSection === item.id ? 'bg-black text-white' : ''
-                  }`}
+                  className={`text-left text-black px-4 py-3 transition-all duration-300 ease-out font-mono uppercase text-sm relative ${
+                    activeSection === item.id 
+                      ? 'after:w-full' 
+                      : 'after:w-0 hover:after:w-full'
+                  } after:content-[''] after:absolute after:bottom-0 after:left-4 after:h-[1px] after:bg-black after:transition-all after:duration-300`}
                   aria-label={`Navegar para seção ${item.label}`}
                 >
                   {item.label}
@@ -134,7 +138,7 @@ const Header = () => {
               {/* Mobile CTA Button */}
               <Button
                 onClick={handleWhatsApp}
-                className="mt-4 bg-black text-white hover:bg-white hover:text-black border-2 border-black font-mono font-bold text-sm px-4 py-3 transition-all duration-300 w-full"
+                className="mt-4 bg-black text-white hover:opacity-90 font-mono font-bold text-sm px-4 py-3 transition-all duration-300 ease-out w-full"
                 aria-label="Entrar em contato via WhatsApp"
               >
                 PARAR DE ESTUDAR
