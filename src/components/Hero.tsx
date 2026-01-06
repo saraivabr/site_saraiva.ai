@@ -42,60 +42,60 @@ const Hero = () => {
       <div className="container-max text-center relative z-10">
         {/* Anti-hero headline - Larger and bolder */}
         <div className={`transition-all duration-1000 ease-out ${isVisible ? 'fade-in-up' : ''}`}>
-          <h1 className="text-8xl md:text-[12rem] font-black leading-[0.9] mb-20 tracking-tighter">
+          <h1 className="text-5xl sm:text-6xl md:text-8xl lg:text-[10rem] xl:text-[12rem] font-black leading-[0.9] mb-12 md:mb-20 tracking-tighter">
             <span className="block text-black">VOCÊ NÃO</span>
             <span className="block text-black">PRECISA</span>
-            <span className="block text-black mt-8">
+            <span className="block text-black mt-4 md:mt-8">
               ENTENDER IA
             </span>
           </h1>
         </div>
 
         {/* Dynamic disruptive text - Smoother transition */}
-        <div className={`mb-20 transition-all duration-1000 ease-out delay-500 ${isVisible ? 'fade-in-up' : ''}`}>
-          <p className="text-3xl md:text-5xl font-bold text-black transition-all duration-700 ease-out" style={{ letterSpacing: '0.02em' }}>
+        <div className={`mb-12 md:mb-20 transition-all duration-1000 ease-out delay-500 ${isVisible ? 'fade-in-up' : ''}`}>
+          <p className="text-xl sm:text-2xl md:text-4xl lg:text-5xl font-bold text-black transition-all duration-700 ease-out" style={{ letterSpacing: '0.02em' }}>
             {disruptiveTexts[currentText]}
           </p>
         </div>
 
         {/* Brutal truth - No border box */}
-        <div className={`mb-24 transition-all duration-1000 ease-out delay-1000 ${isVisible ? 'fade-in-up' : ''}`}>
-          <p className="text-2xl md:text-4xl font-bold text-black leading-tight max-w-5xl mx-auto">
-            Enquanto você perde tempo estudando,<br/>
-            <span className="bg-black text-white px-6 py-2">meus clientes já faturaram R$ 50 milhões.</span>
+        <div className={`mb-16 md:mb-24 transition-all duration-1000 ease-out delay-1000 ${isVisible ? 'fade-in-up' : ''}`}>
+          <p className="text-lg sm:text-xl md:text-3xl lg:text-4xl font-bold text-black leading-tight max-w-5xl mx-auto px-4">
+            Enquanto você perde tempo estudando,<br className="hidden sm:block"/>
+            <span className="bg-black text-white px-3 sm:px-4 md:px-6 py-1 md:py-2 inline-block mt-2 sm:mt-0">meus clientes já faturaram R$ 50 milhões.</span>
           </p>
         </div>
 
         {/* Anti-conventional buttons */}
-        <div className={`flex flex-col sm:flex-row gap-8 justify-center items-center transition-all duration-1000 ease-out delay-1500 ${isVisible ? 'fade-in-up' : ''}`}>
+        <div className={`flex flex-col sm:flex-row gap-4 md:gap-8 justify-center items-center transition-all duration-1000 ease-out delay-1500 ${isVisible ? 'fade-in-up' : ''}`}>
           <Button 
             onClick={handleWhatsApp}
-            className="bg-black text-white hover:opacity-90 font-mono font-bold text-xl py-7 px-14 transition-all duration-300 ease-out"
+            className="bg-black text-white hover:opacity-90 font-mono font-bold text-base sm:text-lg md:text-xl py-5 sm:py-6 md:py-7 px-8 sm:px-10 md:px-14 transition-all duration-300 ease-out w-full sm:w-auto min-h-[44px]"
           >
             PARE DE ESTUDAR
           </Button>
           
           <Button 
             onClick={scrollToMentoria}
-            className="bg-white text-black border border-black hover:bg-black hover:text-white font-mono font-bold text-xl py-7 px-14 transition-all duration-300 ease-out"
+            className="bg-white text-black border border-black hover:bg-black hover:text-white font-mono font-bold text-base sm:text-lg md:text-xl py-5 sm:py-6 md:py-7 px-8 sm:px-10 md:px-14 transition-all duration-300 ease-out w-full sm:w-auto min-h-[44px]"
           >
             COMECE A LUCRAR
           </Button>
         </div>
 
         {/* Minimalist stats - No boxes */}
-        <div className={`grid grid-cols-3 gap-12 mt-32 transition-all duration-1000 ease-out delay-2000 ${isVisible ? 'fade-in-up' : ''}`}>
+        <div className={`grid grid-cols-3 gap-4 sm:gap-8 md:gap-12 mt-16 md:mt-32 transition-all duration-1000 ease-out delay-2000 ${isVisible ? 'fade-in-up' : ''}`}>
           <div className="text-center">
-            <div className="text-7xl font-black text-black counter-text mb-3" style={{ letterSpacing: '-0.02em' }}>1000+</div>
-            <div className="text-xs font-mono uppercase tracking-widest opacity-60">TRANSFORMADOS</div>
+            <div className="text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-black text-black counter-text mb-2 md:mb-3" style={{ letterSpacing: '-0.02em' }}>1000+</div>
+            <div className="text-[0.6rem] sm:text-xs font-mono uppercase tracking-wider md:tracking-widest opacity-60">TRANSFORMADOS</div>
           </div>
           <div className="text-center border-l border-r border-black/10">
-            <div className="text-7xl font-black text-black counter-text mb-3" style={{ letterSpacing: '-0.02em' }}>R$ 50M</div>
-            <div className="text-xs font-mono uppercase tracking-widest opacity-60">FATURADOS</div>
+            <div className="text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-black text-black counter-text mb-2 md:mb-3" style={{ letterSpacing: '-0.02em' }}>R$ 50M</div>
+            <div className="text-[0.6rem] sm:text-xs font-mono uppercase tracking-wider md:tracking-widest opacity-60">FATURADOS</div>
           </div>
           <div className="text-center">
-            <div className="text-7xl font-black text-black counter-text mb-3" style={{ letterSpacing: '-0.02em' }}>0</div>
-            <div className="text-xs font-mono uppercase tracking-widest opacity-60">ENROLAÇÃO</div>
+            <div className="text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-black text-black counter-text mb-2 md:mb-3" style={{ letterSpacing: '-0.02em' }}>0</div>
+            <div className="text-[0.6rem] sm:text-xs font-mono uppercase tracking-wider md:tracking-widest opacity-60">ENROLAÇÃO</div>
           </div>
         </div>
 
