@@ -3,7 +3,7 @@ import { cn } from '@/lib/utils';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Check, AlertCircle, Eye, EyeOff } from 'lucide-react';
+import { Check, CircleAlert as AlertCircle, Eye, EyeOff } from 'lucide-react';
 
 interface FormInputProps {
   name: string;

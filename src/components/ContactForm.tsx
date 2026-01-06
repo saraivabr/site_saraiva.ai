@@ -4,7 +4,7 @@ import { useFormValidation } from '@/hooks/use-form-validation';
 import { FormInput } from '@/components/ui/form-input';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { CheckCircle, AlertCircle, Send, Loader2 } from 'lucide-react';
+import { CircleCheck as CheckCircle, CircleAlert as AlertCircle, Send, Loader as Loader2 } from 'lucide-react';
 
 interface ContactFormProps {
   onClose?: () => void;
