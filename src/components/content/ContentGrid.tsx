@@ -9,16 +9,27 @@ interface ContentGridProps {
 const ContentGrid = ({ items, columns = 3 }: ContentGridProps) => {
   if (items.length === 0) {
     return (
-      <div className="text-center py-16">
-        <p className="font-mono text-sm opacity-50">Nenhum conteúdo encontrado.</p>
+      <div className="text-center py-24">
+        <p className="font-mono text-xs uppercase tracking-widest opacity-30 mb-2">
+          Nenhum resultado
+        </p>
+        <p className="font-mono text-sm opacity-50">
+          Tente buscar por outro termo ou explore as categorias.
+        </p>
       </div>
     );
   }
 
   return (
-    <div className={`grid gap-6 ${columns === 3 ? 'md:grid-cols-2 lg:grid-cols-3' : 'md:grid-cols-2'}`}>
-      {items.map(item => (
-        <ArticleCard key={`${item.meta.category}-${item.meta.slug}`} item={item} />
+    <div className={`grid gap-px bg-black/[0.06] ${
+      columns === 3 ? 'md:grid-cols-2 lg:grid-cols-3' : 'md:grid-cols-2'
+    }`}>
+      {items.map((item, i) => (
+        <ArticleCard
+          key={`${item.meta.category}-${item.meta.slug}`}
+          item={item}
+          featured={i === 0 && columns === 3}
+        />
       ))}
     </div>
   );

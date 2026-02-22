@@ -7,9 +7,15 @@ import TableOfContents from '@/components/content/TableOfContents';
 import ShareButtons from '@/components/content/ShareButtons';
 import ContentGrid from '@/components/content/ContentGrid';
 import SEOHead from '@/components/content/SEOHead';
-import { ArrowLeft } from 'lucide-react';
+import { ArrowLeft, Clock, User } from 'lucide-react';
 
 const Footer = lazy(() => import('@/components/Footer'));
+
+const DIFFICULTY_LABELS: Record<string, string> = {
+  iniciante: 'Iniciante',
+  intermediario: 'Intermediario',
+  avancado: 'Avancado',
+};
 
 const ArticlePage = () => {
   const { category, slug } = useParams<{ category: string; slug: string }>();
@@ -30,6 +36,7 @@ const ArticlePage = () => {
   }
 
   const { meta, content } = item;
+  const readingTime = Math.max(3, Math.ceil(content.split(/\s+/).length / 200));
 
   return (
     <div className="min-h-screen pt-20">
@@ -42,103 +49,164 @@ const ArticlePage = () => {
         publishedTime={meta.date}
         tags={meta.tags}
       />
-      <main id="main-content" className="container-max py-12 sm:py-16">
-        <Link
-          to={`/conteudo/${meta.category}`}
-          className="inline-flex items-center gap-2 font-mono text-xs uppercase tracking-wider opacity-50 hover:opacity-100 transition-opacity mb-8"
-        >
-          <ArrowLeft size={14} />
-          {catInfo.label}
-        </Link>
+      <main id="main-content">
+        {/* Breadcrumb bar */}
+        <div className="border-b border-black/[0.06]">
+          <div className="container-max py-4">
+            <nav className="flex items-center gap-2 font-mono text-[0.6rem] uppercase tracking-widest opacity-40" aria-label="Breadcrumb">
+              <Link to="/conteudo" className="hover:opacity-100 transition-opacity">Conteudo</Link>
+              <span>/</span>
+              <Link to={`/conteudo/${meta.category}`} className="hover:opacity-100 transition-opacity">{catInfo.label}</Link>
+              <span>/</span>
+              <span className="opacity-70 truncate max-w-[200px]">{meta.title}</span>
+            </nav>
+          </div>
+        </div>
 
-        <div className="flex gap-12">
-          <article className="flex-1 min-w-0">
-            <header className="mb-8">
-              <div className="flex items-center gap-2 mb-4">
-                <span className="font-mono text-[0.65rem] uppercase tracking-wider opacity-50">
-                  {catInfo.icon} {catInfo.label}
+        {/* Article header */}
+        <div className="border-b border-black/[0.06]">
+          <div className="container-max py-12 sm:py-16 md:py-20 max-w-4xl">
+            <Link
+              to={`/conteudo/${meta.category}`}
+              className="inline-flex items-center gap-2 font-mono text-[0.65rem] uppercase tracking-widest opacity-30 hover:opacity-70 transition-opacity mb-8"
+            >
+              <ArrowLeft size={12} />
+              Voltar para {catInfo.label}
+            </Link>
+
+            {/* Category badge */}
+            <div className="flex items-center gap-3 mb-6 flex-wrap">
+              <span className="font-mono text-[0.6rem] uppercase tracking-widest bg-black text-white px-3 py-1.5">
+                {catInfo.icon} {catInfo.label}
+              </span>
+              {meta.difficulty && (
+                <span className="font-mono text-[0.6rem] uppercase tracking-widest bg-black/[0.06] px-3 py-1.5">
+                  {DIFFICULTY_LABELS[meta.difficulty] || meta.difficulty}
                 </span>
-                <span className="opacity-20">·</span>
-                <time className="font-mono text-[0.65rem] opacity-50" dateTime={meta.date}>
-                  {new Date(meta.date).toLocaleDateString('pt-BR', { day: 'numeric', month: 'long', year: 'numeric' })}
-                </time>
-                {meta.difficulty && (
+              )}
+              {meta.featured && (
+                <span className="font-mono text-[0.6rem] uppercase tracking-widest bg-black/[0.06] px-3 py-1.5">
+                  Destaque
+                </span>
+              )}
+            </div>
+
+            {/* Title */}
+            <h1 className="text-3xl sm:text-4xl md:text-5xl font-black leading-[1.05] mb-6" style={{ letterSpacing: '-0.03em' }}>
+              {meta.title}
+            </h1>
+
+            {/* Description */}
+            <p className="font-mono text-sm sm:text-base opacity-50 mb-8 max-w-2xl leading-relaxed">
+              {meta.description}
+            </p>
+
+            {/* Meta info */}
+            <div className="flex items-center gap-4 flex-wrap font-mono text-[0.65rem] opacity-40">
+              <span className="inline-flex items-center gap-1.5">
+                <User size={12} />
+                {meta.author}
+              </span>
+              <span className="opacity-30">|</span>
+              <time dateTime={meta.date}>
+                {new Date(meta.date).toLocaleDateString('pt-BR', { day: 'numeric', month: 'long', year: 'numeric' })}
+              </time>
+              <span className="opacity-30">|</span>
+              <span className="inline-flex items-center gap-1.5">
+                <Clock size={12} />
+                {readingTime} min de leitura
+              </span>
+            </div>
+
+            {/* Rating box for tools */}
+            {meta.category === 'ferramentas' && meta.rating && (
+              <div className="flex items-center gap-6 mt-8 p-5 bg-black/[0.02] border-l-2 border-black">
+                <div>
+                  <span className="font-mono text-[0.6rem] uppercase tracking-widest opacity-40 block mb-1">Nota</span>
+                  <div className="flex items-center gap-2">
+                    <span className="text-2xl font-black">{meta.rating}</span>
+                    <span className="text-sm opacity-40">/5</span>
+                    <div className="flex gap-0.5 ml-2">
+                      {Array.from({ length: 5 }).map((_, i) => (
+                        <div key={i} className={`w-2 h-2 rounded-full ${i < (meta.rating || 0) ? 'bg-black' : 'bg-black/10'}`} />
+                      ))}
+                    </div>
+                  </div>
+                </div>
+                {meta.pricing && (
                   <>
-                    <span className="opacity-20">·</span>
-                    <span className="font-mono text-[0.65rem] uppercase tracking-wider bg-black/5 px-2 py-0.5">
-                      {meta.difficulty}
-                    </span>
+                    <div className="w-px h-10 bg-black/10" />
+                    <div>
+                      <span className="font-mono text-[0.6rem] uppercase tracking-widest opacity-40 block mb-1">Modelo</span>
+                      <span className="font-mono text-sm font-bold uppercase">{meta.pricing}</span>
+                    </div>
                   </>
                 )}
               </div>
-
-              <h1 className="font-mono text-xl sm:text-2xl md:text-3xl font-black mb-4" style={{ letterSpacing: '-0.02em' }}>
-                {meta.title}
-              </h1>
-
-              <p className="font-mono text-sm opacity-60 mb-6">
-                {meta.description}
-              </p>
-
-              {meta.image && (
-                <div className="aspect-video mb-6 overflow-hidden bg-black/5">
-                  <img src={meta.image} alt={meta.title} className="w-full h-full object-cover" />
-                </div>
-              )}
-
-              <div className="flex flex-wrap gap-1 mb-6">
-                {meta.tags.map(tag => (
-                  <span key={tag} className="font-mono text-[0.6rem] uppercase tracking-wider bg-black/5 px-2 py-0.5">
-                    {tag}
-                  </span>
-                ))}
-              </div>
-
-              {meta.category === 'ferramentas' && meta.rating && (
-                <div className="flex items-center gap-4 mb-6 p-4 border border-black/10">
-                  <div>
-                    <span className="font-mono text-xs opacity-50 block">Rating</span>
-                    <span className="font-mono text-lg font-bold">{meta.rating}/5</span>
-                  </div>
-                  {meta.pricing && (
-                    <div>
-                      <span className="font-mono text-xs opacity-50 block">Preço</span>
-                      <span className="font-mono text-sm font-bold uppercase">{meta.pricing}</span>
-                    </div>
-                  )}
-                </div>
-              )}
-            </header>
-
-            <ArticleRenderer content={content} />
-
-            <div className="mt-12 pt-8 border-t border-black/10">
-              <ShareButtons title={meta.title} />
-            </div>
-
-            {meta.source && (
-              <div className="mt-6">
-                <a
-                  href={meta.source}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="font-mono text-xs opacity-50 hover:opacity-100 transition-opacity underline underline-offset-2"
-                >
-                  Fonte original
-                </a>
-              </div>
             )}
-          </article>
 
-          <aside className="hidden xl:block w-56 flex-shrink-0">
-            <TableOfContents content={content} />
-          </aside>
+            {/* Tags */}
+            <div className="flex flex-wrap gap-1.5 mt-8">
+              {meta.tags.map(tag => (
+                <span key={tag} className="font-mono text-[0.55rem] uppercase tracking-widest bg-black/[0.04] px-2.5 py-1">
+                  {tag}
+                </span>
+              ))}
+            </div>
+          </div>
         </div>
 
+        {/* Article body */}
+        <div className="container-max py-12 sm:py-16">
+          <div className="flex gap-16 max-w-4xl">
+            <article className="flex-1 min-w-0">
+              <ArticleRenderer content={content} />
+
+              {/* Share + Source */}
+              <div className="mt-14 pt-8 border-t border-black/10 space-y-6">
+                <ShareButtons title={meta.title} />
+
+                {meta.source && meta.source.length > 0 && (
+                  <a
+                    href={meta.source}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-block font-mono text-[0.6rem] uppercase tracking-widest opacity-30 hover:opacity-70 transition-opacity underline underline-offset-4 decoration-black/20"
+                  >
+                    Ver fonte original
+                  </a>
+                )}
+              </div>
+
+              {/* Author card */}
+              <div className="mt-12 p-6 bg-black/[0.02] flex items-start gap-4">
+                <div className="w-10 h-10 bg-black text-white flex items-center justify-center font-mono text-sm font-bold flex-shrink-0">
+                  S
+                </div>
+                <div>
+                  <span className="font-mono text-xs font-bold block mb-1">Saraiva</span>
+                  <p className="font-mono text-[0.65rem] opacity-50 leading-relaxed">
+                    Especialista em IA aplicada a negocios. Ajudo empreendedores a parar de estudar e comecar a lucrar com inteligencia artificial.
+                  </p>
+                </div>
+              </div>
+            </article>
+
+            <aside className="hidden xl:block w-52 flex-shrink-0">
+              <TableOfContents content={content} />
+            </aside>
+          </div>
+        </div>
+
+        {/* Related content */}
         {related.length > 0 && (
-          <section className="mt-16 pt-12 border-t border-black/10">
-            <h2 className="font-mono text-lg font-bold mb-8">Conteúdo relacionado</h2>
-            <ContentGrid items={related} columns={3} />
+          <section className="border-t border-black/[0.06]">
+            <div className="container-max py-12 sm:py-16">
+              <h2 className="font-mono text-xs uppercase tracking-widest opacity-40 mb-8">
+                Conteudo relacionado
+              </h2>
+              <ContentGrid items={related} columns={3} />
+            </div>
           </section>
         )}
       </main>

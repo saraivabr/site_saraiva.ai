@@ -50,17 +50,21 @@ const TableOfContents = ({ content }: TableOfContentsProps) => {
   if (items.length < 3) return null;
 
   return (
-    <nav className="hidden xl:block sticky top-24" aria-label="Sumário do artigo">
-      <h4 className="font-mono text-xs uppercase tracking-wider font-bold mb-4 opacity-50">
-        Sumário
+    <nav className="sticky top-24" aria-label="Sumario do artigo">
+      <h4 className="font-mono text-[0.6rem] uppercase tracking-widest opacity-30 mb-5 pb-3 border-b border-black/[0.06]">
+        Neste artigo
       </h4>
-      <ul className="space-y-2">
+      <ul className="space-y-1">
         {items.map(item => (
-          <li key={item.id} style={{ paddingLeft: `${(item.level - 2) * 12}px` }}>
+          <li key={item.id}>
             <a
               href={`#${item.id}`}
-              className={`font-mono text-xs block py-1 transition-all duration-200 ${
-                activeId === item.id ? 'opacity-100 font-bold' : 'opacity-50 hover:opacity-80'
+              className={`font-mono text-[0.65rem] leading-snug block py-1.5 transition-all duration-200 border-l-2 ${
+                item.level === 3 ? 'pl-5' : 'pl-3'
+              } ${
+                activeId === item.id
+                  ? 'border-black opacity-100 font-bold'
+                  : 'border-transparent opacity-35 hover:opacity-70 hover:border-black/20'
               }`}
             >
               {item.text}
