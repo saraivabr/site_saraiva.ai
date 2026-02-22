@@ -33,6 +33,7 @@ const modules = [
 const Mentoria = () => {
   const [isVisible, setIsVisible] = useState(false);
   const [currentBenefit, setCurrentBenefit] = useState(0);
+  const [isPaused, setIsPaused] = useState(false);
   const sectionRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
@@ -53,13 +54,23 @@ const Mentoria = () => {
   }, []);
 
   useEffect(() => {
-    if (isVisible) {
+    if (isVisible && !isPaused) {
       const interval = setInterval(() => {
         setCurrentBenefit((prev) => (prev + 1) % benefits.length);
-      }, 3000);
+      }, 5000);
       return () => clearInterval(interval);
     }
-  }, [isVisible]);
+  }, [isVisible, isPaused]);
+
+  const handleBenefitsKeyDown = (e: React.KeyboardEvent) => {
+    if (e.key === 'ArrowDown' || e.key === 'ArrowRight') {
+      e.preventDefault();
+      setCurrentBenefit((prev) => (prev + 1) % benefits.length);
+    } else if (e.key === 'ArrowUp' || e.key === 'ArrowLeft') {
+      e.preventDefault();
+      setCurrentBenefit((prev) => (prev - 1 + benefits.length) % benefits.length);
+    }
+  };
 
   const handleWhatsApp = () => {
     window.open('https://wa.me/5511999999999?text=Olá! Quero me inscrever na mentoria de IA!', '_blank');
@@ -103,7 +114,7 @@ const Mentoria = () => {
                     <div className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-black text-black" style={{ letterSpacing: '-0.04em' }}>
                       R$ 2.997
                     </div>
-                    <div className="absolute -top-4 sm:-top-6 -right-6 sm:-right-12 text-base sm:text-xl text-gray-400 line-through rotate-12 opacity-50">
+                    <div className="absolute -top-4 sm:-top-6 -right-6 sm:-right-12 text-base sm:text-xl text-gray-400 line-through rotate-12 opacity-70">
                       R$ 9.997
                     </div>
                   </div>
@@ -114,14 +125,26 @@ const Mentoria = () => {
                 </div>
                 
                 {/* Benefits with animation */}
-                <div className="space-y-2 sm:space-y-3 mb-8 md:mb-10" aria-live="polite">
+                <div
+                  className="space-y-2 sm:space-y-3 mb-8 md:mb-10"
+                  role="region"
+                  aria-roledescription="carousel"
+                  aria-label="Beneficios da mentoria"
+                  aria-live="polite"
+                  tabIndex={0}
+                  onKeyDown={handleBenefitsKeyDown}
+                  onFocus={() => setIsPaused(true)}
+                  onBlur={() => setIsPaused(false)}
+                  onMouseEnter={() => setIsPaused(true)}
+                  onMouseLeave={() => setIsPaused(false)}
+                >
                   {benefits.map((benefit, index) => (
                     <div
                       key={index}
-                      className={`flex items-center space-x-3 sm:space-x-4 p-3 sm:p-4 transition-all duration-500 ease-out border border-transparent ${
+                      className={`flex items-center space-x-3 sm:space-x-4 p-3 sm:p-4 transition-all duration-500 ease-out border-l-2 ${
                         currentBenefit === index
-                          ? 'bg-black text-white border-black'
-                          : 'hover:border-black/10'
+                          ? 'border-l-black bg-black/5'
+                          : 'border-l-transparent hover:bg-black/[0.02]'
                       }`}
                     >
                       <div className={`text-lg sm:text-xl font-mono transition-all duration-300 ${
@@ -130,7 +153,7 @@ const Mentoria = () => {
                         +
                       </div>
                       <div className={`font-medium text-xs sm:text-sm ${
-                        currentBenefit === index ? 'text-white font-bold' : 'text-black'
+                        currentBenefit === index ? 'text-black font-bold' : 'text-black'
                       }`}>
                         {benefit}
                       </div>
@@ -141,7 +164,7 @@ const Mentoria = () => {
                 {/* Main CTA */}
                 <Button 
                   onClick={handleWhatsApp}
-                  className="w-full bg-black text-white hover:opacity-90 font-black py-5 sm:py-6 text-base sm:text-lg transition-all duration-300 ease-out mb-4 sm:mb-6 min-h-[44px]"
+                  className="w-full bg-accent text-accent-foreground hover:opacity-90 font-black py-5 sm:py-6 text-base sm:text-lg transition-all duration-300 ease-out mb-4 sm:mb-6 min-h-[44px]"
                   size="lg"
                 >
                   QUERO MINHA VAGA AGORA
@@ -167,7 +190,7 @@ const Mentoria = () => {
             {modules.map((module, index) => (
               <Card 
                 key={index}
-                className="border border-black/10 bg-white hover:bg-black hover:text-white transition-all duration-500 ease-out"
+                className="group border border-black/10 bg-white hover:bg-black hover:text-white transition-all duration-500 ease-out"
               >
                 <CardContent className="p-6 sm:p-8">
                   <div className="flex items-start space-x-4 sm:space-x-6">

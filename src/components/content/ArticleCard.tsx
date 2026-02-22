@@ -23,26 +23,26 @@ const ArticleCard = ({ item, featured = false }: ArticleCardProps) => {
   return (
     <Link
       to={`/conteudo/${meta.category}/${meta.slug}`}
-      className={`group relative block bg-white transition-all duration-500 ease-out ${
+      className={`group relative block bg-white hover:-translate-y-1 transition-all duration-300 ease-out focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black ${
         featured
           ? 'border border-black/10 hover:border-black/40 p-8 sm:p-10'
           : 'border border-black/[0.06] hover:border-black/20 p-6'
       }`}
     >
       {/* Top accent line on hover */}
-      <div className="absolute top-0 left-0 right-0 h-[2px] bg-black scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left" />
+      <div className="absolute top-0 left-0 right-0 h-[2px] bg-accent scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left" />
 
       {/* Category + Date + Reading time */}
       <div className="flex items-center gap-2 mb-4 flex-wrap">
-        <span className="font-mono text-[0.6rem] uppercase tracking-widest opacity-40">
+        <span className="font-mono text-[0.6rem] uppercase tracking-widest opacity-60">
           {catInfo?.icon} {catInfo?.label}
         </span>
-        <span className="opacity-10">|</span>
-        <time className="font-mono text-[0.6rem] opacity-30" dateTime={meta.date}>
+        <span className="opacity-20">|</span>
+        <time className="font-mono text-[0.6rem] opacity-60" dateTime={meta.date}>
           {new Date(meta.date).toLocaleDateString('pt-BR', { day: '2-digit', month: 'short' })}
         </time>
-        <span className="opacity-10">|</span>
-        <span className="font-mono text-[0.6rem] opacity-30">{readingTime} min</span>
+        <span className="opacity-20">|</span>
+        <span className="font-mono text-[0.6rem] opacity-60">{readingTime} min</span>
       </div>
 
       {/* Title */}
@@ -53,7 +53,7 @@ const ArticleCard = ({ item, featured = false }: ArticleCardProps) => {
       </h3>
 
       {/* Description */}
-      <p className={`font-mono opacity-45 line-clamp-2 mb-5 ${featured ? 'text-sm' : 'text-xs'}`}>
+      <p className={`font-mono opacity-60 line-clamp-2 mb-5 ${featured ? 'text-sm' : 'text-xs'}`}>
         {meta.description}
       </p>
 
@@ -83,7 +83,7 @@ const ArticleCard = ({ item, featured = false }: ArticleCardProps) => {
             ))}
           </div>
           {meta.pricing && (
-            <span className="font-mono text-[0.55rem] uppercase tracking-widest opacity-40">
+            <span className="font-mono text-[0.55rem] uppercase tracking-widest opacity-60">
               {meta.pricing}
             </span>
           )}

@@ -35,7 +35,7 @@ const CategoryPage = () => {
           <div className="container-max py-16 sm:py-20">
             <Link
               to="/conteudo"
-              className="inline-flex items-center gap-2 font-mono text-[0.65rem] uppercase tracking-widest opacity-30 hover:opacity-70 transition-opacity mb-8"
+              className="inline-flex items-center gap-2 font-mono text-[0.65rem] uppercase tracking-widest opacity-60 hover:opacity-100 transition-opacity mb-8 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
             >
               <ArrowLeft size={12} />
               Todos os artigos
@@ -47,10 +47,10 @@ const CategoryPage = () => {
                 <h1 className="text-3xl sm:text-4xl md:text-5xl font-black leading-[0.95] mb-3" style={{ letterSpacing: '-0.03em' }}>
                   {catInfo.label}
                 </h1>
-                <p className="font-mono text-sm opacity-50 max-w-lg">
+                <p className="font-mono text-sm opacity-60 max-w-lg">
                   {catInfo.description}
                 </p>
-                <p className="font-mono text-[0.65rem] uppercase tracking-widest opacity-30 mt-4">
+                <p className="font-mono text-[0.65rem] uppercase tracking-widest opacity-60 mt-4">
                   {items.length} {items.length === 1 ? 'artigo' : 'artigos'}
                 </p>
               </div>

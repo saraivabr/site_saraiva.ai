@@ -1,9 +1,12 @@
+import { useState } from 'react';
+
 interface ShareButtonsProps {
   title: string;
   url?: string;
 }
 
 const ShareButtons = ({ title, url }: ShareButtonsProps) => {
+  const [copied, setCopied] = useState(false);
   const shareUrl = url || (typeof window !== 'undefined' ? window.location.href : '');
   const encodedUrl = encodeURIComponent(shareUrl);
   const encodedTitle = encodeURIComponent(title);
@@ -41,6 +44,8 @@ const ShareButtons = ({ title, url }: ShareButtonsProps) => {
   const handleCopy = async () => {
     try {
       await navigator.clipboard.writeText(shareUrl);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
     } catch {
       // silently fail
     }
@@ -48,7 +53,7 @@ const ShareButtons = ({ title, url }: ShareButtonsProps) => {
 
   return (
     <div className="flex items-center gap-2 flex-wrap">
-      <span className="font-mono text-[0.6rem] uppercase tracking-widest opacity-30 mr-2">
+      <span className="font-mono text-[0.6rem] uppercase tracking-widest opacity-60 mr-2">
         Compartilhar
       </span>
       {links.map(link => (
@@ -57,7 +62,7 @@ const ShareButtons = ({ title, url }: ShareButtonsProps) => {
           href={link.href}
           target="_blank"
           rel="noopener noreferrer"
-          className="inline-flex items-center gap-1.5 font-mono text-[0.65rem] uppercase tracking-wider bg-black/[0.04] hover:bg-black hover:text-white px-3 py-2 transition-all duration-300"
+          className="inline-flex items-center gap-1.5 font-mono text-[0.65rem] uppercase tracking-wider bg-black/[0.04] hover:bg-black hover:text-white px-3 py-2 transition-all duration-300 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
           aria-label={`Compartilhar via ${link.label}`}
         >
           {link.icon}
@@ -66,10 +71,14 @@ const ShareButtons = ({ title, url }: ShareButtonsProps) => {
       ))}
       <button
         onClick={handleCopy}
-        className="font-mono text-[0.65rem] uppercase tracking-wider bg-black/[0.04] hover:bg-black hover:text-white px-3 py-2 transition-all duration-300"
+        className={`font-mono text-[0.65rem] uppercase tracking-wider px-3 py-2 transition-all duration-300 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black ${
+          copied
+            ? 'bg-black text-white'
+            : 'bg-black/[0.04] hover:bg-black hover:text-white'
+        }`}
         aria-label="Copiar link"
       >
-        Copiar link
+        {copied ? 'Copiado!' : 'Copiar link'}
       </button>
     </div>
   );

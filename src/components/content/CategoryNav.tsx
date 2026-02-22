@@ -9,9 +9,9 @@ const CategoryNav = () => {
       <div className="flex gap-1.5 min-w-max pb-2">
         <Link
           to="/conteudo"
-          className={`font-mono text-[0.65rem] uppercase tracking-widest px-4 py-2.5 transition-all duration-300 whitespace-nowrap ${
+          className={`font-mono text-[0.65rem] uppercase tracking-widest px-4 py-2.5 transition-all duration-300 whitespace-nowrap focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black ${
             !category
-              ? 'bg-black text-white'
+              ? 'bg-accent text-accent-foreground'
               : 'bg-black/[0.03] hover:bg-black/[0.08] opacity-60 hover:opacity-100'
           }`}
         >
@@ -21,9 +21,9 @@ const CategoryNav = () => {
           <Link
             key={cat.id}
             to={`/conteudo/${cat.id}`}
-            className={`font-mono text-[0.65rem] uppercase tracking-widest px-4 py-2.5 transition-all duration-300 whitespace-nowrap ${
+            className={`font-mono text-[0.65rem] uppercase tracking-widest px-4 py-2.5 transition-all duration-300 whitespace-nowrap focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black ${
               category === cat.id
-                ? 'bg-black text-white'
+                ? 'bg-accent text-accent-foreground'
                 : 'bg-black/[0.03] hover:bg-black/[0.08] opacity-60 hover:opacity-100'
             }`}
           >

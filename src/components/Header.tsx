@@ -1,7 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { useState, useEffect, useCallback, useRef } from "react";
 import { Menu, X } from "lucide-react";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { trackEvent } from "@/hooks/use-analytics";
 
 const Header = () => {
@@ -11,9 +11,18 @@ const Header = () => {
   const isHome = location.pathname === '/';
   const isContent = location.pathname.startsWith('/conteudo');
 
+  const navigate = useNavigate();
+
   const scrollToSection = (sectionId: string) => {
     if (!isHome) {
-      window.location.href = `/#${sectionId}`;
+      navigate('/');
+      setTimeout(() => {
+        const element = document.getElementById(sectionId);
+        if (element) {
+          element.scrollIntoView({ behavior: 'smooth' });
+        }
+      }, 100);
+      setIsMenuOpen(false);
       return;
     }
     const element = document.getElementById(sectionId);
@@ -99,7 +108,7 @@ const Header = () => {
 
       <div className="container-max">
         <div className="flex items-center justify-between py-4 md:py-5">
-          <Link to="/" className="font-medium text-base md:text-lg font-mono tracking-wide opacity-70 hover:opacity-100 transition-opacity">
+          <Link to="/" className="font-medium text-base md:text-lg font-mono tracking-wide opacity-70 hover:opacity-100 transition-opacity focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black">
             SARAIVA.AI
           </Link>
 
@@ -108,22 +117,22 @@ const Header = () => {
               <button
                 key={item.id}
                 onClick={() => scrollToSection(item.id)}
-                className={`text-black font-mono text-xs uppercase tracking-wider transition-all duration-300 ease-out relative pb-1 ${
+                className={`text-black font-mono text-xs uppercase tracking-wider transition-all duration-300 ease-out relative pb-1 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black ${
                   isHome && activeSection === item.id
                     ? 'after:w-full after:opacity-100'
                     : 'after:w-0 hover:after:w-full'
-                } after:content-[''] after:absolute after:bottom-0 after:left-0 after:h-[1px] after:bg-black after:transition-all after:duration-300 after:ease-out`}
+                } after:content-[''] after:absolute after:bottom-0 after:left-0 after:h-[1px] after:bg-accent after:transition-all after:duration-300 after:ease-out`}
               >
                 {item.label}
               </button>
             ))}
             <Link
               to="/conteudo"
-              className={`text-black font-mono text-xs uppercase tracking-wider transition-all duration-300 ease-out relative pb-1 ${
+              className={`text-black font-mono text-xs uppercase tracking-wider transition-all duration-300 ease-out relative pb-1 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black ${
                 isContent
                   ? 'after:w-full after:opacity-100'
                   : 'after:w-0 hover:after:w-full'
-              } after:content-[''] after:absolute after:bottom-0 after:left-0 after:h-[1px] after:bg-black after:transition-all after:duration-300 after:ease-out`}
+              } after:content-[''] after:absolute after:bottom-0 after:left-0 after:h-[1px] after:bg-accent after:transition-all after:duration-300 after:ease-out`}
             >
               CONTEÚDO
             </Link>
@@ -131,7 +140,7 @@ const Header = () => {
 
           <button
             onClick={toggleMenu}
-            className="md:hidden menu-toggle p-2 hover:opacity-70 transition-opacity duration-300"
+            className="md:hidden menu-toggle p-2 hover:opacity-70 transition-opacity duration-300 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
             aria-label={isMenuOpen ? "Fechar menu de navegação" : "Abrir menu de navegação"}
             aria-expanded={isMenuOpen}
             aria-controls="mobile-navigation"
@@ -141,7 +150,7 @@ const Header = () => {
 
           <Button
             onClick={handleWhatsApp}
-            className="hidden md:block bg-black text-white hover:opacity-90 font-mono font-bold text-xs px-6 py-3 transition-all duration-300 ease-out"
+            className="hidden md:block bg-accent text-accent-foreground hover:opacity-90 font-mono font-bold text-xs px-6 py-3 transition-all duration-300 ease-out"
             aria-label="Entrar em contato via WhatsApp"
           >
             PARAR DE ESTUDAR
@@ -150,8 +159,8 @@ const Header = () => {
 
         <div
           id="mobile-navigation"
-          className={`md:hidden mobile-menu transition-all duration-300 ease-out ${
-            isMenuOpen ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0 overflow-hidden'
+          className={`md:hidden mobile-menu transition-all duration-300 ease-in-out ${
+            isMenuOpen ? 'max-h-screen opacity-100' : 'max-h-0 opacity-0 overflow-hidden'
           }`}
           role="region"
           aria-label="Menu de navegação mobile"
@@ -162,7 +171,7 @@ const Header = () => {
                 <button
                   key={item.id}
                   onClick={() => scrollToSection(item.id)}
-                  className="text-left text-black px-4 py-3 transition-all duration-300 ease-out font-mono uppercase text-sm"
+                  className="text-left text-black px-4 py-3 transition-all duration-300 ease-out font-mono uppercase text-sm focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
                 >
                   {item.label}
                 </button>
@@ -177,7 +186,7 @@ const Header = () => {
               </Link>
               <Button
                 onClick={handleWhatsApp}
-                className="mt-4 bg-black text-white hover:opacity-90 font-mono font-bold text-sm px-4 py-3 transition-all duration-300 ease-out w-full"
+                className="mt-4 bg-accent text-accent-foreground hover:opacity-90 font-mono font-bold text-sm px-4 py-3 transition-all duration-300 ease-out w-full"
               >
                 PARAR DE ESTUDAR
               </Button>

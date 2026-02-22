@@ -36,7 +36,7 @@ const ContentSearch = ({ onSearch }: ContentSearchProps) => {
       {query && (
         <button
           onClick={handleClear}
-          className="absolute right-4 top-1/2 -translate-y-1/2 opacity-30 hover:opacity-70 transition-opacity"
+          className="absolute right-4 top-1/2 -translate-y-1/2 opacity-60 hover:opacity-100 transition-opacity focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
           aria-label="Limpar busca"
         >
           <X size={14} />
