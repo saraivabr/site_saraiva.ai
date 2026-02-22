@@ -19,4 +19,14 @@ export default defineConfig(({ mode }) => ({
       "@": path.resolve(__dirname, "./src"),
     },
   },
+  build: {
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          'content-engine': ['gray-matter', 'react-markdown', 'remark-gfm', 'rehype-slug', 'rehype-autolink-headings'],
+          'seo': ['react-helmet-async'],
+        },
+      },
+    },
+  },
 }));

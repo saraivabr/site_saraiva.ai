@@ -23,10 +23,12 @@ const About = () => {
   }, []);
 
   return (
-    <section 
+    <section
       ref={sectionRef}
-      id="sobre" 
+      id="sobre"
       className="section-spacing bg-black text-white"
+      role="region"
+      aria-label="Sobre o Saraiva"
     >
       <div className="container-max">
         <div className="grid lg:grid-cols-2 gap-24 items-center">

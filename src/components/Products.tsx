@@ -1,6 +1,7 @@
 
 import { Button } from "@/components/ui/button";
 import { useState, useEffect, useRef } from "react";
+import { trackEvent } from "@/hooks/use-analytics";
 
 const Products = () => {
   const [isVisible, setIsVisible] = useState(false);
@@ -24,6 +25,7 @@ const Products = () => {
   }, []);
 
   const handleWhatsApp = (product: string) => {
+    trackEvent('product', 'click', product);
     window.open(`https://wa.me/5511999999999?text=Quero parar de estudar e lucrar com ${product}`, '_blank');
   };
 
@@ -85,10 +87,12 @@ const Products = () => {
   ];
 
   return (
-    <section 
+    <section
       ref={sectionRef}
-      id="produtos" 
+      id="produtos"
       className="section-spacing bg-white"
+      role="region"
+      aria-label="Produtos e serviços"
     >
       <div className="container-max">
         {/* Anti-marketing title */}
@@ -138,9 +142,10 @@ const Products = () => {
                   </div>
                 </div>
                 
-                <Button 
+                <Button
                   onClick={() => handleWhatsApp(product.title)}
                   className="w-full text-sm sm:text-base font-bold py-3 sm:py-4 bg-black text-white group-hover:bg-white group-hover:text-black border border-black/10 group-hover:border-white transition-all duration-300 ease-out focus:outline-2 focus:outline-black focus:outline-offset-2 min-h-[44px]"
+                  aria-label={`Contratar ${product.title} via WhatsApp`}
                 >
                   PARAR DE ESTUDAR
                 </Button>

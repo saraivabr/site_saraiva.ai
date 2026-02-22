@@ -1,6 +1,41 @@
 
 import { useState, useEffect, useRef } from "react";
 
+const testimonials = [
+  {
+    text: "Parei de estudar IA. Comecei a ganhar R$ 80k/mês com IA.",
+    author: "Marcus Silva",
+    role: "Ex-estudante de IA",
+    result: "R$ 80.000/mês",
+    before: "Estudava IA há 2 anos",
+    after: "Lucra em 30 dias"
+  },
+  {
+    text: "3 anos estudando. 7 dias com Saraiva = R$ 50k no primeiro mês.",
+    author: "Ana Carolina",
+    role: "Ex-analista de dados",
+    result: "R$ 50.000/mês",
+    before: "3 anos estudando",
+    after: "Rica em 7 dias"
+  },
+  {
+    text: "Saí do YouTube. Entrei no mercado. Agora ganho mais que meu chefe.",
+    author: "Roberto Mendes",
+    role: "Ex-funcionário",
+    result: "R$ 120.000/mês",
+    before: "Assistia tutoriais",
+    after: "Dono do próprio negócio"
+  },
+  {
+    text: "Minha empresa vende sozinha. Eu durmo. Acordo com dinheiro na conta.",
+    author: "Camila Santos",
+    role: "Ex-workaholic",
+    result: "R$ 200.000/mês",
+    before: "Trabalhava 12h/dia",
+    after: "Trabalha 2h/semana"
+  }
+] as const;
+
 const Testimonials = () => {
   const [isVisible, setIsVisible] = useState(false);
   const [activeTestimonial, setActiveTestimonial] = useState(0);
@@ -32,46 +67,13 @@ const Testimonials = () => {
     }
   }, [isVisible]);
 
-  const testimonials = [
-    {
-      text: "Parei de estudar IA. Comecei a ganhar R$ 80k/mês com IA.",
-      author: "Marcus Silva",
-      role: "Ex-estudante de IA",
-      result: "R$ 80.000/mês",
-      before: "Estudava IA há 2 anos",
-      after: "Lucra em 30 dias"
-    },
-    {
-      text: "3 anos estudando. 7 dias com Saraiva = R$ 50k no primeiro mês.",
-      author: "Ana Carolina", 
-      role: "Ex-analista de dados",
-      result: "R$ 50.000/mês",
-      before: "3 anos estudando",
-      after: "Rica em 7 dias"
-    },
-    {
-      text: "Saí do YouTube. Entrei no mercado. Agora ganho mais que meu chefe.",
-      author: "Roberto Mendes",
-      role: "Ex-funcionário",
-      result: "R$ 120.000/mês",
-      before: "Assistia tutoriais",
-      after: "Dono do próprio negócio"
-    },
-    {
-      text: "Minha empresa vende sozinha. Eu durmo. Acordo com dinheiro na conta.",
-      author: "Camila Santos",
-      role: "Ex-workaholic",
-      result: "R$ 200.000/mês",
-      before: "Trabalhava 12h/dia",
-      after: "Trabalha 2h/semana"
-    }
-  ];
-
   return (
-    <section 
+    <section
       ref={sectionRef}
-      id="depoimentos" 
+      id="depoimentos"
       className="section-spacing bg-black text-white"
+      role="region"
+      aria-label="Depoimentos de alunos"
     >
       <div className="container-max">
         {/* Anti-social proof title */}
@@ -91,7 +93,7 @@ const Testimonials = () => {
             {/* Giant opening quotation mark */}
             <div className="absolute -top-8 sm:-top-12 md:-top-16 -left-4 sm:-left-6 md:-left-8 text-[8rem] sm:text-[10rem] md:text-[12rem] font-serif opacity-10 leading-none" style={{ lineHeight: '0.7' }} aria-hidden="true">"</div>
             
-            <div className="border border-white/10 p-8 sm:p-12 md:p-16 bg-black relative z-10">
+            <div className="border border-white/10 p-8 sm:p-12 md:p-16 bg-black relative z-10" aria-live="polite">
               <blockquote className="text-xl sm:text-2xl md:text-4xl lg:text-5xl font-black mb-8 sm:mb-10 md:mb-12 leading-tight" style={{ letterSpacing: '-0.02em', lineHeight: '1.2' }}>
                 {testimonials[activeTestimonial].text}
               </blockquote>
@@ -133,7 +135,7 @@ const Testimonials = () => {
                   ? 'w-12 h-2 bg-white' 
                   : 'w-2 h-2 bg-white/30 hover:bg-white/50'
               }`}
-              aria-label={`View testimonial ${index + 1}`}
+              aria-label={`Ver depoimento ${index + 1} de ${testimonials.length}`}
             />
           ))}
         </div>

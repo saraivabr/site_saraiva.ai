@@ -7,6 +7,7 @@ import { Check, CircleAlert as AlertCircle, Eye, EyeOff } from 'lucide-react';
 
 interface FormInputProps {
   name: string;
+  id?: string;
   type?: string;
   placeholder?: string;
   value: string;
@@ -26,6 +27,7 @@ interface FormInputProps {
 
 export const FormInput: React.FC<FormInputProps> = ({
   name,
+  id,
   type = 'text',
   placeholder,
   value,
@@ -73,6 +75,7 @@ export const FormInput: React.FC<FormInputProps> = ({
     <div className="relative">
       <div className="relative">
         <InputComponent
+          id={id}
           type={inputType}
           placeholder={placeholder}
           value={value}
@@ -82,6 +85,8 @@ export const FormInput: React.FC<FormInputProps> = ({
           disabled={disabled}
           className={inputClasses}
           rows={multiline ? rows : undefined}
+          aria-invalid={touched && !!error}
+          aria-describedby={touched && error ? `${id || name}-error` : helpText ? `${id || name}-help` : undefined}
         />
         
         {/* Password toggle */}
@@ -130,6 +135,7 @@ export const FormInput: React.FC<FormInputProps> = ({
       {/* Help text */}
       {helpText && !hasError && !isFocused && (
         <motion.p
+          id={`${id || name}-help`}
           initial={{ opacity: 0, y: -10 }}
           animate={{ opacity: 1, y: 0 }}
           className="text-sm text-gray-500 mt-1"
@@ -148,8 +154,8 @@ export const FormInput: React.FC<FormInputProps> = ({
             transition={{ duration: 0.2 }}
             className="overflow-hidden"
           >
-            <p className="text-red-500 text-sm mt-1 flex items-center gap-1">
-              <AlertCircle size={14} />
+            <p id={`${id || name}-error`} className="text-red-500 text-sm mt-1 flex items-center gap-1" role="alert">
+              <AlertCircle size={14} aria-hidden="true" />
               {error}
             </p>
           </motion.div>

@@ -3,6 +3,33 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { useState, useEffect, useRef } from "react";
 
+const benefits = [
+  "Acesso direto ao Saraiva por 90 dias",
+  "Método step-by-step para lucrar com IA",
+  "Ferramentas e automações prontas",
+  "Grupo VIP com outros alunos",
+  "Cases reais e estratégias testadas",
+  "Certificado de conclusão"
+] as const;
+
+const modules = [
+  {
+    symbol: "+",
+    title: "Módulo 1: Fundamentos",
+    desc: "Domine os conceitos essenciais e prepare sua mente para o sucesso com IA."
+  },
+  {
+    symbol: "×",
+    title: "Módulo 2: Monetização",
+    desc: "Estratégias práticas para gerar os primeiros R$ 10.000 com IA."
+  },
+  {
+    symbol: "/",
+    title: "Módulo 3: Escala",
+    desc: "Como transformar seu negócio em uma máquina automatizada de lucro."
+  }
+] as const;
+
 const Mentoria = () => {
   const [isVisible, setIsVisible] = useState(false);
   const [currentBenefit, setCurrentBenefit] = useState(0);
@@ -38,38 +65,13 @@ const Mentoria = () => {
     window.open('https://wa.me/5511999999999?text=Olá! Quero me inscrever na mentoria de IA!', '_blank');
   };
 
-  const benefits = [
-    "Acesso direto ao Saraiva por 90 dias",
-    "Método step-by-step para lucrar com IA",
-    "Ferramentas e automações prontas",
-    "Grupo VIP com outros alunos",
-    "Cases reais e estratégias testadas",
-    "Certificado de conclusão"
-  ];
-
-  const modules = [
-    {
-      symbol: "+",
-      title: "Módulo 1: Fundamentos",
-      desc: "Domine os conceitos essenciais e prepare sua mente para o sucesso com IA."
-    },
-    {
-      symbol: "×",
-      title: "Módulo 2: Monetização",
-      desc: "Estratégias práticas para gerar os primeiros R$ 10.000 com IA."
-    },
-    {
-      symbol: "/",
-      title: "Módulo 3: Escala",
-      desc: "Como transformar seu negócio em uma máquina automatizada de lucro."
-    }
-  ];
-
   return (
-    <section 
+    <section
       ref={sectionRef}
-      id="mentoria" 
+      id="mentoria"
       className="section-spacing bg-white relative overflow-hidden"
+      role="region"
+      aria-label="Mentoria Saraiva.AI"
     >
       <div className="container-max relative z-10">
         {/* Title section */}
@@ -112,13 +114,13 @@ const Mentoria = () => {
                 </div>
                 
                 {/* Benefits with animation */}
-                <div className="space-y-2 sm:space-y-3 mb-8 md:mb-10">
+                <div className="space-y-2 sm:space-y-3 mb-8 md:mb-10" aria-live="polite">
                   {benefits.map((benefit, index) => (
-                    <div 
+                    <div
                       key={index}
                       className={`flex items-center space-x-3 sm:space-x-4 p-3 sm:p-4 transition-all duration-500 ease-out border border-transparent ${
-                        currentBenefit === index 
-                          ? 'bg-black text-white border-black' 
+                        currentBenefit === index
+                          ? 'bg-black text-white border-black'
                           : 'hover:border-black/10'
                       }`}
                     >
@@ -203,7 +205,7 @@ const Mentoria = () => {
                 </div>
                 
                 {/* Minimalist progress bar */}
-                <div className="bg-black/5 h-2 mb-3 sm:mb-4 overflow-hidden">
+                <div className="bg-black/5 h-2 mb-3 sm:mb-4 overflow-hidden" role="progressbar" aria-valuenow={87} aria-valuemin={0} aria-valuemax={100} aria-label="Vagas preenchidas: 87%">
                   <div className="bg-black h-full transition-all duration-1000 ease-out" style={{width: '87%'}}></div>
                 </div>
                 <div className="text-xs sm:text-sm text-black/60 font-mono">

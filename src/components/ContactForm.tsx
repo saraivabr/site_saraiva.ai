@@ -1,10 +1,33 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useFormValidation } from '@/hooks/use-form-validation';
 import { FormInput } from '@/components/ui/form-input';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { CircleCheck as CheckCircle, CircleAlert as AlertCircle, Send, Loader as Loader2 } from 'lucide-react';
+import { trackEvent } from '@/hooks/use-analytics';
+
+const WHATSAPP_NUMBER = '5511999999999';
+const RATE_LIMIT_KEY = 'contactForm_submissions';
+const RATE_LIMIT_MAX = 3;
+const RATE_LIMIT_WINDOW_MS = 60 * 1000;
+
+function checkRateLimit(): boolean {
+  const now = Date.now();
+  const stored = localStorage.getItem(RATE_LIMIT_KEY);
+  const timestamps: number[] = stored ? JSON.parse(stored) : [];
+  const recent = timestamps.filter(t => now - t < RATE_LIMIT_WINDOW_MS);
+  return recent.length < RATE_LIMIT_MAX;
+}
+
+function recordSubmission(): void {
+  const now = Date.now();
+  const stored = localStorage.getItem(RATE_LIMIT_KEY);
+  const timestamps: number[] = stored ? JSON.parse(stored) : [];
+  const recent = timestamps.filter(t => now - t < RATE_LIMIT_WINDOW_MS);
+  recent.push(now);
+  localStorage.setItem(RATE_LIMIT_KEY, JSON.stringify(recent));
+}
 
 interface ContactFormProps {
   onClose?: () => void;
@@ -32,7 +55,7 @@ const validationRules = {
   },
   phone: {
     required: true,
-    pattern: /^(\+55\s?)?(\(?[1-9]{2}\)?[\s\-]?)?[9]?[0-9]{4}[\s\-]?[0-9]{4}$/
+    pattern: /^(\+55\s?)?(\(?[1-9]{2}\)?[\s-]?)?[9]?[0-9]{4}[\s-]?[0-9]{4}$/
   },
   company: {
     maxLength: 100
@@ -45,6 +68,8 @@ const validationRules = {
 };
 
 export const ContactForm: React.FC<ContactFormProps> = ({ onClose, className }) => {
+  const [honeypot, setHoneypot] = useState('');
+
   const {
     fields,
     updateField,
@@ -63,8 +88,19 @@ export const ContactForm: React.FC<ContactFormProps> = ({ onClose, className }) 
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    
+    trackEvent('form', 'submit', 'contact');
+
+    if (honeypot) {
+      setSubmitSuccess(true);
+      return;
+    }
+
     if (!validateAll()) {
+      return;
+    }
+
+    if (!checkRateLimit()) {
+      setSubmitError('Aguarde antes de enviar novamente.');
       return;
     }
 
@@ -72,20 +108,20 @@ export const ContactForm: React.FC<ContactFormProps> = ({ onClose, className }) 
     setSubmitError('');
 
     try {
-      // Simulate API call
-      await new Promise(resolve => setTimeout(resolve, 2000));
-      
-      // Simulate random success/failure for demo
-      if (Math.random() > 0.2) {
-        setSubmitSuccess(true);
-        // Auto close after success
-        if (onClose) {
-          setTimeout(() => {
-            onClose();
-          }, 3000);
-        }
-      } else {
-        throw new Error('Erro na conexão. Tente novamente.');
+      await new Promise(resolve => setTimeout(resolve, 500));
+
+      recordSubmission();
+
+      const data = getFormData();
+      const text = `Olá! Sou ${data.name} (${data.email}, ${data.phone}). ${data.message}`;
+      const url = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(text)}`;
+      window.open(url, '_blank');
+
+      setSubmitSuccess(true);
+      if (onClose) {
+        setTimeout(() => {
+          onClose();
+        }, 3000);
       }
     } catch (error) {
       setSubmitError(error instanceof Error ? error.message : 'Erro desconhecido');
@@ -172,11 +208,12 @@ export const ContactForm: React.FC<ContactFormProps> = ({ onClose, className }) 
             >
               {/* Name Field */}
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">
+                <label htmlFor="contact-name" className="block text-sm font-medium text-gray-700 mb-1">
                   Nome Completo *
                 </label>
                 <FormInput
                   name="name"
+                  id="contact-name"
                   placeholder="Seu nome completo"
                   value={fields.name.value}
                   error={fields.name.error}
@@ -190,11 +227,12 @@ export const ContactForm: React.FC<ContactFormProps> = ({ onClose, className }) 
 
               {/* Email Field */}
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">
+                <label htmlFor="contact-email" className="block text-sm font-medium text-gray-700 mb-1">
                   E-mail *
                 </label>
                 <FormInput
                   name="email"
+                  id="contact-email"
                   type="email"
                   placeholder="seu@email.com"
                   value={fields.email.value}
@@ -209,11 +247,12 @@ export const ContactForm: React.FC<ContactFormProps> = ({ onClose, className }) 
 
               {/* Phone Field */}
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">
+                <label htmlFor="contact-phone" className="block text-sm font-medium text-gray-700 mb-1">
                   Telefone/WhatsApp *
                 </label>
                 <FormInput
                   name="phone"
+                  id="contact-phone"
                   type="tel"
                   placeholder="(11) 99999-9999"
                   value={fields.phone.value}
@@ -228,11 +267,12 @@ export const ContactForm: React.FC<ContactFormProps> = ({ onClose, className }) 
 
               {/* Company Field */}
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">
+                <label htmlFor="contact-company" className="block text-sm font-medium text-gray-700 mb-1">
                   Empresa (opcional)
                 </label>
                 <FormInput
                   name="company"
+                  id="contact-company"
                   placeholder="Nome da sua empresa"
                   value={fields.company.value}
                   error={fields.company.error}
@@ -245,11 +285,12 @@ export const ContactForm: React.FC<ContactFormProps> = ({ onClose, className }) 
 
               {/* Message Field */}
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">
+                <label htmlFor="contact-message" className="block text-sm font-medium text-gray-700 mb-1">
                   Mensagem *
                 </label>
                 <FormInput
                   name="message"
+                  id="contact-message"
                   placeholder="Descreva como podemos te ajudar..."
                   value={fields.message.value}
                   error={fields.message.error}
@@ -260,6 +301,20 @@ export const ContactForm: React.FC<ContactFormProps> = ({ onClose, className }) 
                   multiline
                   rows={4}
                   helpText="Descreva seus objetivos ou dúvidas"
+                />
+              </div>
+
+              {/* Honeypot anti-spam (hidden from real users) */}
+              <div aria-hidden="true" style={{ position: 'absolute', left: '-9999px', opacity: 0, height: 0, overflow: 'hidden' }}>
+                <label htmlFor="website">Website</label>
+                <input
+                  id="website"
+                  name="website"
+                  type="text"
+                  tabIndex={-1}
+                  autoComplete="off"
+                  value={honeypot}
+                  onChange={(e) => setHoneypot(e.target.value)}
                 />
               </div>
 

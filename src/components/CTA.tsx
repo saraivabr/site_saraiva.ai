@@ -35,9 +35,11 @@ const CTA = () => {
   };
 
   return (
-    <section 
+    <section
       ref={sectionRef}
       className="section-spacing bg-black text-white"
+      role="region"
+      aria-label="Chamada para ação final"
     >
       <div className="container-max text-center">
         {/* Powerful single message */}

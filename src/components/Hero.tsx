@@ -1,20 +1,22 @@
 
 import { Button } from "@/components/ui/button";
 import { useState, useEffect } from "react";
+import { trackPageView } from "@/hooks/use-analytics";
+
+const disruptiveTexts = [
+  "Pare de estudar IA.",
+  "Comece a lucrar com IA.",
+  "Seus concorrentes já lucraram.",
+  "Você ainda está estudando."
+] as const;
 
 const Hero = () => {
   const [currentText, setCurrentText] = useState(0);
   const [isVisible, setIsVisible] = useState(false);
 
-  const disruptiveTexts = [
-    "Pare de estudar IA.",
-    "Comece a lucrar com IA.",
-    "Seus concorrentes já lucraram.",
-    "Você ainda está estudando."
-  ];
-
   useEffect(() => {
     setIsVisible(true);
+    trackPageView();
     const interval = setInterval(() => {
       setCurrentText((prev) => (prev + 1) % disruptiveTexts.length);
     }, 3000);
@@ -33,12 +35,12 @@ const Hero = () => {
   };
 
   return (
-    <section className="min-h-screen bg-white flex items-center justify-center relative">
+    <section id="main-content" className="min-h-screen bg-white flex items-center justify-center relative" role="region" aria-label="Apresentação principal">
       {/* Animated vertical line */}
-      <div className="absolute left-1/2 top-0 bottom-0 w-[1px] bg-black/10 overflow-hidden">
+      <div className="absolute left-1/2 top-0 bottom-0 w-[1px] bg-black/10 overflow-hidden" aria-hidden="true">
         <div className="w-full h-32 bg-gradient-to-b from-transparent via-black to-transparent animate-slide-down"></div>
       </div>
-      
+
       <div className="container-max text-center relative z-10">
         {/* Anti-hero headline - Larger and bolder */}
         <div className={`transition-all duration-1000 ease-out ${isVisible ? 'fade-in-up' : ''}`}>
@@ -53,7 +55,7 @@ const Hero = () => {
 
         {/* Dynamic disruptive text - Smoother transition */}
         <div className={`mb-12 md:mb-20 transition-all duration-1000 ease-out delay-500 ${isVisible ? 'fade-in-up' : ''}`}>
-          <p className="text-xl sm:text-2xl md:text-4xl lg:text-5xl font-bold text-black transition-all duration-700 ease-out" style={{ letterSpacing: '0.02em' }}>
+          <p aria-live="polite" className="text-xl sm:text-2xl md:text-4xl lg:text-5xl font-bold text-black transition-all duration-700 ease-out" style={{ letterSpacing: '0.02em' }}>
             {disruptiveTexts[currentText]}
           </p>
         </div>
@@ -100,7 +102,7 @@ const Hero = () => {
         </div>
 
         {/* Scroll indicator - Animated vertical line */}
-        <div className="absolute bottom-12 left-1/2 transform -translate-x-1/2">
+        <div className="absolute bottom-12 left-1/2 transform -translate-x-1/2" aria-hidden="true">
           <div className="w-[1px] h-20 bg-black/20 overflow-hidden">
             <div className="w-full h-10 bg-black animate-slide-down"></div>
           </div>

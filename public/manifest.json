@@ -1,0 +1,16 @@
+{
+  "name": "Saraiva.AI",
+  "short_name": "Saraiva.AI",
+  "description": "Eu ensino pessoas comuns a transformar IA em dinheiro, tempo e liberdade.",
+  "theme_color": "#000000",
+  "background_color": "#ffffff",
+  "display": "standalone",
+  "start_url": "/",
+  "icons": [
+    {
+      "src": "/favicon.ico",
+      "sizes": "48x48",
+      "type": "image/x-icon"
+    }
+  ]
+}
