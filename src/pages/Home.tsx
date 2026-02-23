@@ -204,9 +204,9 @@ const HomeMcpCard = ({ server, index }: { server: McpServer; index: number }) =>
 /* ═══════════════════════════════════════════════ */
 
 const Home = () => {
-  const { data: tools } = useContents("tool");
-  const { data: prompts } = useContents("prompt");
-  const { data: mcps } = useMcpServers();
+  const { data: tools, error: toolsError, isLoading: toolsLoading } = useContents("tool");
+  const { data: prompts, error: promptsError, isLoading: promptsLoading } = useContents("prompt");
+  const { data: mcps, error: mcpsError, isLoading: mcpsLoading } = useMcpServers();
 
   const latestTools = tools?.slice(0, 4) ?? [];
   const latestPrompts = prompts?.slice(0, 4) ?? [];
@@ -251,12 +251,22 @@ const Home = () => {
                   ))}
                 </ul>
 
-                <Link
-                  to="/explore"
-                  className="inline-flex items-center gap-2.5 px-7 py-3.5 rounded-xl bg-primary text-white font-semibold text-[15px] hover:opacity-90 transition-opacity shadow-lg shadow-primary/20"
-                >
-                  Explorar biblioteca
-                </Link>
+                <div className="flex flex-wrap gap-3">
+                  <Link
+                    to="/explore"
+                    className="inline-flex items-center gap-2.5 px-7 py-3.5 rounded-xl bg-primary text-white font-semibold text-[15px] hover:opacity-90 transition-opacity shadow-lg shadow-primary/20"
+                  >
+                    Explorar biblioteca
+                  </Link>
+                  <a
+                    href="https://wa.me/5511999999999?text=Oi%20Saraiva%2C%20quero%20saber%20mais%20sobre%20IA"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2.5 px-7 py-3.5 rounded-xl border border-border text-foreground font-semibold text-[15px] hover:bg-secondary transition-colors"
+                  >
+                    Falar comigo
+                  </a>
+                </div>
 
                 {/* Logos de ferramentas */}
                 <div className="mt-12">
@@ -307,7 +317,7 @@ const Home = () => {
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              className="text-3xl md:text-[2.5rem] font-bold text-foreground/30 mb-3"
+              className="text-3xl md:text-[2.5rem] font-bold text-foreground mb-3"
             >
               Tudo que você precisa, em um só lugar
             </motion.h2>
@@ -332,11 +342,11 @@ const Home = () => {
               >
                 <div className={`w-full h-36 rounded-xl bg-gradient-to-br ${item.gradient} flex items-center justify-center mb-6`}>
                   <div className="text-center">
-                    <item.icon className="w-10 h-10 text-foreground/20 mx-auto mb-2" />
-                    <span className="text-2xl font-bold text-foreground/25">{item.value}</span>
+                    <item.icon className="w-10 h-10 text-primary/60 mx-auto mb-2" />
+                    <span className="text-2xl font-bold text-primary">{item.value}</span>
                   </div>
                 </div>
-                <h3 className="text-lg font-bold text-foreground/30 mb-2">{item.title}</h3>
+                <h3 className="text-lg font-bold text-foreground mb-2">{item.title}</h3>
                 <p className="text-sm text-muted-foreground leading-relaxed">{item.desc}</p>
               </motion.div>
             ))}
@@ -344,91 +354,172 @@ const Home = () => {
         </section>
 
         {/* ─── Ferramentas em Destaque ─── */}
-        {latestTools.length > 0 && (
-          <section className="py-20 px-6 md:px-12">
-            <div className="max-w-7xl mx-auto">
-              <div className="flex items-end justify-between mb-3">
-                <div>
-                  <h2 className="text-3xl md:text-[2.5rem] font-bold text-foreground/30 mb-2">
-                    Ferramentas de IA em Destaque
-                  </h2>
-                  <p className="text-muted-foreground">
-                    Explore as melhores ferramentas de IA para criadores.
-                  </p>
-                </div>
-                <Link to="/ferramentas" className="hidden sm:inline-flex items-center gap-1.5 px-5 py-2.5 rounded-xl border border-border text-sm font-medium text-muted-foreground hover:text-foreground hover:border-foreground/20 transition-colors">
-                  Ver ferramentas
-                </Link>
+        <section className="py-20 px-6 md:px-12">
+          <div className="max-w-7xl mx-auto">
+            <div className="flex items-end justify-between mb-3">
+              <div>
+                <h2 className="text-3xl md:text-[2.5rem] font-bold text-foreground mb-2">
+                  Ferramentas de IA em Destaque
+                </h2>
+                <p className="text-muted-foreground">
+                  Explore as melhores ferramentas de IA para criadores.
+                </p>
               </div>
+              <Link to="/ferramentas" className="hidden sm:inline-flex items-center gap-1.5 px-5 py-2.5 rounded-xl border border-border text-sm font-medium text-muted-foreground hover:text-foreground hover:border-foreground/20 transition-colors">
+                Ver ferramentas
+              </Link>
+            </div>
 
-              <div className="h-px bg-border my-6" />
+            <div className="h-px bg-border my-6" />
 
+            {toolsLoading && (
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+                {[...Array(4)].map((_, i) => (
+                  <div key={i} className="rounded-2xl border border-border bg-card overflow-hidden animate-pulse">
+                    <div className="h-40 bg-secondary" />
+                    <div className="p-5 space-y-3">
+                      <div className="h-4 bg-secondary rounded w-3/4" />
+                      <div className="h-3 bg-secondary rounded w-full" />
+                      <div className="h-3 bg-secondary rounded w-1/2" />
+                    </div>
+                  </div>
+                ))}
+              </div>
+            )}
+
+            {toolsError && (
+              <p className="text-sm text-muted-foreground text-center py-8">
+                Nao foi possivel carregar as ferramentas. Tente novamente mais tarde.
+              </p>
+            )}
+
+            {!toolsLoading && !toolsError && latestTools.length === 0 && (
+              <p className="text-sm text-muted-foreground text-center py-8">
+                Nenhuma ferramenta encontrada no momento.
+              </p>
+            )}
+
+            {!toolsLoading && !toolsError && latestTools.length > 0 && (
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
                 {latestTools.map((content, index) => (
                   <FeaturedToolCard key={content.id} content={content} index={index} />
                 ))}
               </div>
-            </div>
-          </section>
-        )}
+            )}
+          </div>
+        </section>
 
-        {/* ─── Últimos Prompts ─── */}
-        {latestPrompts.length > 0 && (
-          <section className="py-20 px-6 md:px-12">
-            <div className="max-w-7xl mx-auto">
-              <div className="flex items-end justify-between mb-3">
-                <div>
-                  <h2 className="text-3xl md:text-[2.5rem] font-bold text-foreground/30 mb-2">
-                    Últimos Prompts de IA
-                  </h2>
-                  <p className="text-muted-foreground">
-                    Prompts prontos para usar — copie, cole e crie.
-                  </p>
-                </div>
-                <Link to="/prompts" className="hidden sm:inline-flex items-center gap-1.5 px-5 py-2.5 rounded-xl border border-border text-sm font-medium text-muted-foreground hover:text-foreground hover:border-foreground/20 transition-colors">
-                  Ver prompts
-                </Link>
+        {/* ─── Ultimos Prompts ─── */}
+        <section className="py-20 px-6 md:px-12">
+          <div className="max-w-7xl mx-auto">
+            <div className="flex items-end justify-between mb-3">
+              <div>
+                <h2 className="text-3xl md:text-[2.5rem] font-bold text-foreground mb-2">
+                  Ultimos Prompts de IA
+                </h2>
+                <p className="text-muted-foreground">
+                  Prompts prontos para usar — copie, cole e crie.
+                </p>
               </div>
+              <Link to="/prompts" className="hidden sm:inline-flex items-center gap-1.5 px-5 py-2.5 rounded-xl border border-border text-sm font-medium text-muted-foreground hover:text-foreground hover:border-foreground/20 transition-colors">
+                Ver prompts
+              </Link>
+            </div>
 
-              <div className="h-px bg-border my-6" />
+            <div className="h-px bg-border my-6" />
 
+            {promptsLoading && (
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+                {[...Array(4)].map((_, i) => (
+                  <div key={i} className="rounded-2xl border border-border bg-card overflow-hidden animate-pulse">
+                    <div className="h-44 bg-secondary" />
+                    <div className="p-5 space-y-3">
+                      <div className="h-4 bg-secondary rounded w-3/4" />
+                      <div className="h-3 bg-secondary rounded w-full" />
+                      <div className="h-3 bg-secondary rounded w-1/2" />
+                    </div>
+                  </div>
+                ))}
+              </div>
+            )}
+
+            {promptsError && (
+              <p className="text-sm text-muted-foreground text-center py-8">
+                Nao foi possivel carregar os prompts. Tente novamente mais tarde.
+              </p>
+            )}
+
+            {!promptsLoading && !promptsError && latestPrompts.length === 0 && (
+              <p className="text-sm text-muted-foreground text-center py-8">
+                Nenhum prompt encontrado no momento.
+              </p>
+            )}
+
+            {!promptsLoading && !promptsError && latestPrompts.length > 0 && (
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
                 {latestPrompts.map((content, index) => (
                   <HomeContentCard key={content.id} content={content} index={index} />
                 ))}
               </div>
-            </div>
-          </section>
-        )}
+            )}
+          </div>
+        </section>
 
         {/* ─── Servidores MCP em Destaque ─── */}
-        {latestMcps.length > 0 && (
-          <section className="py-20 px-6 md:px-12">
-            <div className="max-w-7xl mx-auto">
-              <div className="flex items-end justify-between mb-3">
-                <div>
-                  <h2 className="text-3xl md:text-[2.5rem] font-bold text-foreground/30 mb-2">
-                    Servidores MCP em Destaque
-                  </h2>
-                  <p className="text-muted-foreground">
-                    Conecte suas ferramentas de IA com servidores MCP.
-                  </p>
-                </div>
-                <Link to="/mcps" className="hidden sm:inline-flex items-center gap-1.5 px-5 py-2.5 rounded-xl border border-border text-sm font-medium text-muted-foreground hover:text-foreground hover:border-foreground/20 transition-colors">
-                  Ver MCPs
-                </Link>
+        <section className="py-20 px-6 md:px-12">
+          <div className="max-w-7xl mx-auto">
+            <div className="flex items-end justify-between mb-3">
+              <div>
+                <h2 className="text-3xl md:text-[2.5rem] font-bold text-foreground mb-2">
+                  Servidores MCP em Destaque
+                </h2>
+                <p className="text-muted-foreground">
+                  Conecte suas ferramentas de IA com servidores MCP.
+                </p>
               </div>
+              <Link to="/mcps" className="hidden sm:inline-flex items-center gap-1.5 px-5 py-2.5 rounded-xl border border-border text-sm font-medium text-muted-foreground hover:text-foreground hover:border-foreground/20 transition-colors">
+                Ver MCPs
+              </Link>
+            </div>
 
-              <div className="h-px bg-border my-6" />
+            <div className="h-px bg-border my-6" />
 
+            {mcpsLoading && (
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+                {[...Array(4)].map((_, i) => (
+                  <div key={i} className="rounded-2xl border border-border bg-card overflow-hidden animate-pulse">
+                    <div className="h-32 bg-secondary" />
+                    <div className="p-5 space-y-3">
+                      <div className="h-4 bg-secondary rounded w-3/4" />
+                      <div className="h-3 bg-secondary rounded w-full" />
+                      <div className="h-3 bg-secondary rounded w-1/2" />
+                    </div>
+                  </div>
+                ))}
+              </div>
+            )}
+
+            {mcpsError && (
+              <p className="text-sm text-muted-foreground text-center py-8">
+                Nao foi possivel carregar os servidores MCP. Tente novamente mais tarde.
+              </p>
+            )}
+
+            {!mcpsLoading && !mcpsError && latestMcps.length === 0 && (
+              <p className="text-sm text-muted-foreground text-center py-8">
+                Nenhum servidor MCP encontrado no momento.
+              </p>
+            )}
+
+            {!mcpsLoading && !mcpsError && latestMcps.length > 0 && (
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
                 {latestMcps.map((server, index) => (
                   <HomeMcpCard key={server.id} server={server} index={index} />
                 ))}
               </div>
-            </div>
-          </section>
-        )}
+            )}
+          </div>
+        </section>
 
         {/* ─── CTA Banner (gradiente roxo estilo aicreator) ─── */}
         <section className="py-20 px-6 md:px-12">
@@ -447,13 +538,21 @@ const Home = () => {
                   <p className="text-white/60 text-sm leading-relaxed mb-8">
                     Ferramentas, prompts, MCPs, templates e muito mais. Tudo curado em um só lugar.
                   </p>
-                  <div>
+                  <div className="flex flex-wrap gap-3">
                     <Link
                       to="/explore"
                       className="inline-flex items-center gap-2 px-6 py-3.5 rounded-xl bg-white text-foreground font-semibold text-sm hover:bg-white/90 transition-colors"
                     >
                       Explorar agora
                     </Link>
+                    <a
+                      href="https://wa.me/5511999999999?text=Oi%20Saraiva%2C%20quero%20saber%20mais%20sobre%20IA"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-2 px-6 py-3.5 rounded-xl border border-white/30 text-white font-semibold text-sm hover:bg-white/10 transition-colors"
+                    >
+                      Falar no WhatsApp
+                    </a>
                   </div>
                 </div>
 

@@ -9,6 +9,12 @@ function getCardProps(item: ExploreCardData) {
     case "content": {
       const c = item.data;
       const iconMap = { prompt: Sparkles, tool: Wrench, analysis: BarChart3, thought: BarChart3 };
+      const gradientMap = {
+        tool: "from-violet-100/80 to-indigo-100/80",
+        prompt: "from-amber-50/80 to-orange-100/80",
+        analysis: "from-slate-100/80 to-blue-100/80",
+        thought: "from-slate-100/80 to-blue-100/80",
+      };
       return {
         href: `/content/${c.id}`,
         title: c.title,
@@ -19,6 +25,7 @@ function getCardProps(item: ExploreCardData) {
         typeIcon: iconMap[c.category] ?? Sparkles,
         typeLabel: c.category === "tool" ? "Ferramenta" : c.category === "prompt" ? "Prompt" : "Análise",
         featured: c.featured,
+        gradient: gradientMap[c.category] ?? "from-slate-100/80 to-blue-100/80",
       };
     }
     case "mcp": {
@@ -33,6 +40,7 @@ function getCardProps(item: ExploreCardData) {
         typeIcon: Server,
         typeLabel: "MCP Server",
         featured: m.featured,
+        gradient: "from-emerald-50/80 to-teal-100/80",
       };
     }
     case "template": {
@@ -49,6 +57,7 @@ function getCardProps(item: ExploreCardData) {
         typeLabel: "Template",
         featured: t.featured ?? false,
         emoji: config.emoji,
+        gradient: "from-rose-50/80 to-pink-100/80",
       };
     }
   }
@@ -74,7 +83,7 @@ const ExploreCard = ({ item, index }: ExploreCardProps) => {
         className="group block rounded-xl border border-border overflow-hidden card-hover bg-card shadow-sm"
       >
         {/* Image area */}
-        <div className="relative h-36 bg-gradient-to-br from-primary/10 via-secondary to-primary/5 flex items-center justify-center overflow-hidden">
+        <div className={`relative h-36 bg-gradient-to-br ${props.gradient} flex items-center justify-center overflow-hidden`}>
           {props.imageUrl ? (
             <img
               src={props.imageUrl}
@@ -100,6 +109,10 @@ const ExploreCard = ({ item, index }: ExploreCardProps) => {
 
         {/* Content */}
         <div className="p-4">
+          <span className="inline-flex items-center gap-1 text-[10px] font-semibold uppercase tracking-wider text-muted-foreground mb-1.5">
+            <Icon className="w-3 h-3" />
+            {props.typeLabel}
+          </span>
           <h3 className="text-sm font-bold text-foreground leading-tight mb-1 group-hover:text-primary transition-colors line-clamp-1">
             {props.title}
           </h3>
@@ -117,7 +130,7 @@ const ExploreCard = ({ item, index }: ExploreCardProps) => {
                 </span>
               ))}
             </div>
-            <ArrowUpRight className="w-3.5 h-3.5 text-muted-foreground group-hover:text-primary transition-colors shrink-0" />
+            <ArrowUpRight className="w-3.5 h-3.5 text-muted-foreground/0 group-hover:text-primary transition-colors shrink-0" />
           </div>
         </div>
       </Link>

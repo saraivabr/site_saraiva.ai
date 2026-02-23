@@ -37,17 +37,32 @@ const Footer = () => {
             <div className="flex flex-col gap-2 text-sm">
               <Link to="/mcps" className="text-muted-foreground hover:text-foreground transition-colors">MCPs</Link>
               <Link to="/templates" className="text-muted-foreground hover:text-foreground transition-colors">Templates</Link>
+              <Link to="/prompts" className="text-muted-foreground hover:text-foreground transition-colors">Prompts</Link>
               <Link to="/analises" className="text-muted-foreground hover:text-foreground transition-colors">Análises</Link>
               <Link to="/pensamentos" className="text-muted-foreground hover:text-foreground transition-colors">Pensamentos</Link>
             </div>
           </div>
 
-          {/* Legal */}
+          {/* Contato */}
           <div>
-            <h4 className="text-sm font-semibold text-foreground mb-3">Legal</h4>
+            <h4 className="text-sm font-semibold text-foreground mb-3">Contato</h4>
             <div className="flex flex-col gap-2 text-sm">
-              <span className="text-muted-foreground">Privacidade</span>
-              <span className="text-muted-foreground">Termos de uso</span>
+              <a
+                href="https://wa.me/5511999999999?text=Oi%20Saraiva%2C%20quero%20saber%20mais%20sobre%20IA"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-muted-foreground hover:text-foreground transition-colors"
+              >
+                WhatsApp
+              </a>
+              <a
+                href="https://github.com/saraivabr"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-muted-foreground hover:text-foreground transition-colors"
+              >
+                GitHub
+              </a>
             </div>
           </div>
         </div>

@@ -29,9 +29,9 @@ const ExploreCardGrid = ({ items, isLoading }: ExploreCardGridProps) => {
 
   if (items.length === 0) {
     return (
-      <div className="flex flex-col items-center justify-center py-20 text-center">
-        <p className="text-muted-foreground text-sm">Nenhum resultado encontrado.</p>
-        <p className="text-muted-foreground text-xs mt-1">Tente ajustar os filtros ou a busca.</p>
+      <div className="text-center py-16">
+        <p className="text-lg font-medium text-foreground mb-2">Nenhum resultado encontrado</p>
+        <p className="text-sm text-muted-foreground">Tente ajustar seus filtros ou buscar por outro termo.</p>
       </div>
     );
   }

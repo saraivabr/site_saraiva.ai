@@ -1,17 +1,14 @@
 import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
-import { Menu, X, Sparkles, Wrench, BarChart3, Brain, BookOpen, Home, Server, Package, Compass } from "lucide-react";
+import { Menu, X, Wrench, BookOpen, Home, Server, Package, Compass } from "lucide-react";
 
 const navLinks = [
   { to: "/", label: "Início", icon: Home },
   { to: "/explore", label: "Explorar", icon: Compass },
   { to: "/mcps", label: "MCPs", icon: Server },
   { to: "/templates", label: "Templates", icon: Package },
-  { to: "/prompts", label: "Prompts", icon: Sparkles },
   { to: "/ferramentas", label: "Ferramentas", icon: Wrench },
-  { to: "/analises", label: "Análises", icon: BarChart3 },
-  { to: "/pensamentos", label: "Pensamentos", icon: Brain },
 ];
 
 const Navigation = () => {

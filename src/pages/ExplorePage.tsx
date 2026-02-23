@@ -128,6 +128,29 @@ const ExplorePage = () => {
             )}
           </div>
 
+          {/* Result count and clear */}
+          <div className="mb-4 flex items-center justify-between">
+            <p className="text-sm text-muted-foreground">
+              {isLoading ? (
+                "Carregando..."
+              ) : (
+                <>{results.length} {results.length === 1 ? "resultado" : "resultados"} encontrado{results.length === 1 ? "" : "s"}</>
+              )}
+            </p>
+            {(search || selectedCategory !== "all" || selectedPricing !== "all") && (
+              <button
+                onClick={() => {
+                  setSearch("");
+                  setSelectedCategory("all");
+                  setSelectedPricing("all");
+                }}
+                className="text-sm text-primary hover:text-primary/80 font-medium transition-colors"
+              >
+                Limpar filtros
+              </button>
+            )}
+          </div>
+
           {/* Content area */}
           <div className="flex gap-8">
             {/* Desktop sidebar */}
