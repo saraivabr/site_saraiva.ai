@@ -218,91 +218,128 @@ const Home = () => {
       <main>
 
         {/* ─── HERO ─── */}
-        <section className="pt-28 pb-20 px-6 md:px-12 overflow-hidden">
-          <div className="max-w-7xl mx-auto">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-              {/* Esquerda: texto */}
+        <section className="pt-32 pb-24 px-6 md:px-12 overflow-hidden relative">
+          {/* Subtle background gradient */}
+          <div className="absolute inset-0 bg-gradient-to-b from-primary/[0.03] via-transparent to-transparent pointer-events-none" />
+
+          <div className="max-w-7xl mx-auto relative">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
+              {/* Left: Copy */}
               <motion.div
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.7 }}
               >
-                <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-border text-sm text-muted-foreground font-medium mb-8">
-                  <Sparkles className="w-4 h-4 text-primary" />
+                {/* Floating badge */}
+                <motion.div
+                  initial={{ opacity: 0, scale: 0.9 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{ duration: 0.5, delay: 0.2 }}
+                  className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-primary/20 bg-primary/5 text-sm text-primary font-medium mb-8 shadow-sm"
+                >
+                  <Sparkles className="w-4 h-4" />
                   1000+ recursos de IA curados
-                </div>
+                </motion.div>
 
-                <h1 className="text-[2.75rem] sm:text-[3.5rem] md:text-[4rem] font-bold text-foreground leading-[1.05] tracking-tight mb-6">
+                <h1 className="text-[2.75rem] sm:text-[3.5rem] md:text-[4.5rem] font-bold text-foreground leading-[1.02] tracking-tight mb-6">
                   Tudo para{" "}
                   <span className="gradient-text">criar com IA</span>
-                  {" "}- em um só lugar
+                  <br />
+                  em um só lugar
                 </h1>
 
-                <p className="text-lg text-muted-foreground max-w-md leading-relaxed mb-8">
-                  A maior coleção de ferramentas, prompts, MCPs e templates de IA. Curado para criadores.
+                <p className="text-lg md:text-xl text-muted-foreground max-w-lg leading-relaxed mb-10">
+                  Ferramentas, prompts, MCPs e templates — curado para quem cria com inteligência artificial.
                 </p>
 
-                <ul className="space-y-3 mb-10">
-                  {bullets.map((item) => (
-                    <li key={item} className="flex items-center gap-3 text-[15px] text-foreground/80">
-                      <span className="text-primary">•</span>
+                {/* Bullet points with better styling */}
+                <ul className="space-y-4 mb-10">
+                  {bullets.map((item, i) => (
+                    <motion.li
+                      key={item}
+                      initial={{ opacity: 0, x: -20 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      transition={{ duration: 0.4, delay: 0.4 + i * 0.1 }}
+                      className="flex items-center gap-3 text-[15px] text-foreground/80"
+                    >
+                      <span className="w-6 h-6 rounded-full bg-primary/10 flex items-center justify-center shrink-0">
+                        <span className="w-2 h-2 rounded-full bg-primary" />
+                      </span>
                       {item}
-                    </li>
+                    </motion.li>
                   ))}
                 </ul>
 
-                <div className="flex flex-wrap gap-3">
+                {/* CTAs */}
+                <motion.div
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5, delay: 0.6 }}
+                  className="flex flex-wrap gap-3"
+                >
                   <Link
                     to="/explore"
-                    className="inline-flex items-center gap-2.5 px-7 py-3.5 rounded-xl bg-primary text-white font-semibold text-[15px] hover:opacity-90 transition-opacity shadow-lg shadow-primary/20"
+                    className="inline-flex items-center gap-2.5 px-8 py-4 rounded-xl bg-primary text-white font-semibold text-[15px] hover:opacity-90 transition-all shadow-lg shadow-primary/25 hover:shadow-xl hover:shadow-primary/30 hover:-translate-y-0.5"
                   >
                     Explorar biblioteca
+                    <ArrowRight className="w-4 h-4" />
                   </Link>
                   <a
                     href="https://wa.me/5511999999999?text=Oi%20Saraiva%2C%20quero%20saber%20mais%20sobre%20IA"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-2.5 px-7 py-3.5 rounded-xl border border-border text-foreground font-semibold text-[15px] hover:bg-secondary transition-colors"
+                    className="inline-flex items-center gap-2.5 px-8 py-4 rounded-xl border border-border text-foreground font-semibold text-[15px] hover:bg-secondary hover:-translate-y-0.5 transition-all"
                   >
                     Falar comigo
                   </a>
-                </div>
+                </motion.div>
 
-                {/* Logos de ferramentas */}
-                <div className="mt-12">
-                  <p className="text-sm text-muted-foreground mb-3">
-                    Cobrimos tutoriais, templates e prompts para <strong className="text-foreground">{logos.length} ferramentas</strong> e contando:
+                {/* Trust bar */}
+                <motion.div
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ duration: 0.6, delay: 0.8 }}
+                  className="mt-14 pt-8 border-t border-border/50"
+                >
+                  <p className="text-xs text-muted-foreground mb-3 uppercase tracking-widest font-medium">
+                    Cobrimos as principais ferramentas
                   </p>
                   <div className="flex flex-wrap gap-2">
                     {logos.map((name) => (
-                      <span key={name} className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full border border-border text-sm text-foreground/70 bg-white">
+                      <span key={name} className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-lg border border-border/60 text-sm text-foreground/70 bg-white hover:border-primary/30 hover:text-primary transition-colors">
                         {name}
                       </span>
                     ))}
                   </div>
-                </div>
+                </motion.div>
               </motion.div>
 
-              {/* Direita: grid masonry com imagens reais */}
+              {/* Right: Masonry grid with hover effects */}
               <motion.div
                 initial={{ opacity: 0, x: 40 }}
                 animate={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.8, delay: 0.2 }}
+                transition={{ duration: 0.8, delay: 0.3 }}
                 className="hidden lg:block relative"
               >
-                <div className="grid grid-cols-3 gap-3 auto-rows-[120px]">
+                {/* Decorative glow behind grid */}
+                <div className="absolute -inset-10 bg-gradient-to-br from-primary/10 via-transparent to-primary/5 rounded-[40px] blur-3xl pointer-events-none" />
+
+                <div className="relative grid grid-cols-3 gap-3 auto-rows-[130px]">
                   {heroImages.map((img, i) => (
-                    <div
+                    <motion.div
                       key={i}
-                      className={`rounded-2xl overflow-hidden ${img.span}`}
+                      initial={{ opacity: 0, scale: 0.9 }}
+                      animate={{ opacity: 1, scale: 1 }}
+                      transition={{ duration: 0.5, delay: 0.2 + i * 0.06 }}
+                      className={`rounded-2xl overflow-hidden ${img.span} group`}
                     >
                       <img
                         src={img.src}
                         alt=""
-                        className="w-full h-full object-cover"
+                        className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                         loading={i < 3 ? "eager" : "lazy"}
                       />
-                    </div>
+                    </motion.div>
                   ))}
                 </div>
               </motion.div>
@@ -310,67 +347,82 @@ const Home = () => {
           </div>
         </section>
 
-        {/* ─── "Tudo que você precisa" — 3 Cards de destaque ─── */}
-        <section className="py-20 px-6 md:px-12">
-          <div className="max-w-7xl mx-auto text-center mb-14">
-            <motion.h2
+        {/* ─── "Tudo que você precisa" — 3 Feature Cards ─── */}
+        <section className="py-24 px-6 md:px-12 relative">
+          <div className="max-w-7xl mx-auto">
+            {/* Section header */}
+            <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              className="text-3xl md:text-[2.5rem] font-bold text-foreground mb-3"
+              className="text-center mb-16"
             >
-              Tudo que você precisa, em um só lugar
-            </motion.h2>
-            <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
-              O Saraiva.ai te dá o toolkit completo de IA — ferramentas, prompts, MCPs e templates.
-            </p>
-          </div>
+              <span className="inline-block text-xs font-semibold uppercase tracking-[0.2em] text-primary mb-4">Biblioteca completa</span>
+              <h2 className="text-3xl md:text-[2.75rem] font-bold text-foreground mb-4 leading-tight">
+                Tudo que você precisa,{" "}
+                <span className="gradient-text">em um só lugar</span>
+              </h2>
+              <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
+                O toolkit completo de IA — descubra, copie e crie.
+              </p>
+            </motion.div>
 
-          <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-6">
-            {[
-              { icon: Wrench, value: "50+", title: "Ferramentas de IA", desc: "Descubra as melhores ferramentas de IA, testadas e curadas para criadores.", gradient: "from-violet-100 to-indigo-100" },
-              { icon: Sparkles, value: "150+", title: "Prompts Prontos", desc: "Prompts prontos para usar em qualquer ferramenta de IA. Copie e crie.", gradient: "from-amber-50 to-orange-100" },
-              { icon: Server, value: "18+", title: "Servidores MCP", desc: "Servidores MCP para conectar Claude, Cursor e outras ferramentas.", gradient: "from-emerald-50 to-teal-100" },
-            ].map((item, i) => (
-              <motion.div
-                key={item.title}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: i * 0.1 }}
-                className="rounded-2xl border border-border bg-card p-8 hover:shadow-md transition-shadow"
-              >
-                <div className={`w-full h-36 rounded-xl bg-gradient-to-br ${item.gradient} flex items-center justify-center mb-6`}>
-                  <div className="text-center">
-                    <item.icon className="w-10 h-10 text-primary/60 mx-auto mb-2" />
-                    <span className="text-2xl font-bold text-primary">{item.value}</span>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              {[
+                { icon: Wrench, value: "50+", title: "Ferramentas de IA", desc: "Testadas e curadas. De geração de texto a automação — as melhores do mercado.", gradient: "from-violet-500/10 to-indigo-500/10", iconColor: "text-violet-600", borderHover: "hover:border-violet-200" },
+                { icon: Sparkles, value: "150+", title: "Prompts Prontos", desc: "Copie, cole e crie. Prompts otimizados para cada ferramenta e caso de uso.", gradient: "from-amber-500/10 to-orange-500/10", iconColor: "text-amber-600", borderHover: "hover:border-amber-200" },
+                { icon: Server, value: "18+", title: "Servidores MCP", desc: "Conecte Claude, Cursor e outras ferramentas com servidores MCP verificados.", gradient: "from-emerald-500/10 to-teal-500/10", iconColor: "text-emerald-600", borderHover: "hover:border-emerald-200" },
+              ].map((item, i) => (
+                <motion.div
+                  key={item.title}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: i * 0.1 }}
+                  className={`group rounded-2xl border border-border bg-card p-8 hover:shadow-lg transition-all duration-300 ${item.borderHover}`}
+                >
+                  {/* Icon area */}
+                  <div className={`w-14 h-14 rounded-xl bg-gradient-to-br ${item.gradient} flex items-center justify-center mb-6 group-hover:scale-110 transition-transform`}>
+                    <item.icon className={`w-6 h-6 ${item.iconColor}`} />
                   </div>
-                </div>
-                <h3 className="text-lg font-bold text-foreground mb-2">{item.title}</h3>
-                <p className="text-sm text-muted-foreground leading-relaxed">{item.desc}</p>
-              </motion.div>
-            ))}
+
+                  {/* Big number */}
+                  <div className="flex items-baseline gap-2 mb-3">
+                    <span className="text-4xl font-bold text-foreground">{item.value}</span>
+                  </div>
+
+                  <h3 className="text-lg font-bold text-foreground mb-2">{item.title}</h3>
+                  <p className="text-sm text-muted-foreground leading-relaxed">{item.desc}</p>
+                </motion.div>
+              ))}
+            </div>
           </div>
         </section>
 
         {/* ─── Ferramentas em Destaque ─── */}
         <section className="py-20 px-6 md:px-12">
           <div className="max-w-7xl mx-auto">
-            <div className="flex items-end justify-between mb-3">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-10"
+            >
               <div>
-                <h2 className="text-3xl md:text-[2.5rem] font-bold text-foreground mb-2">
-                  Ferramentas de IA em Destaque
+                <span className="inline-block text-xs font-semibold uppercase tracking-[0.2em] text-violet-600 mb-2">Curadoria</span>
+                <h2 className="text-3xl md:text-[2.5rem] font-bold text-foreground leading-tight">
+                  Ferramentas de IA{" "}
+                  <span className="gradient-text">em Destaque</span>
                 </h2>
-                <p className="text-muted-foreground">
-                  Explore as melhores ferramentas de IA para criadores.
+                <p className="text-muted-foreground mt-2 max-w-md">
+                  As melhores ferramentas de IA, testadas e avaliadas pela comunidade.
                 </p>
               </div>
-              <Link to="/ferramentas" className="hidden sm:inline-flex items-center gap-1.5 px-5 py-2.5 rounded-xl border border-border text-sm font-medium text-muted-foreground hover:text-foreground hover:border-foreground/20 transition-colors">
-                Ver ferramentas
+              <Link to="/ferramentas" className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl border border-border text-sm font-medium text-muted-foreground hover:text-foreground hover:border-foreground/20 transition-colors shrink-0 group">
+                Ver todas
+                <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" />
               </Link>
-            </div>
-
-            <div className="h-px bg-border my-6" />
+            </motion.div>
 
             {toolsLoading && (
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
@@ -412,21 +464,27 @@ const Home = () => {
         {/* ─── Ultimos Prompts ─── */}
         <section className="py-20 px-6 md:px-12">
           <div className="max-w-7xl mx-auto">
-            <div className="flex items-end justify-between mb-3">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-10"
+            >
               <div>
-                <h2 className="text-3xl md:text-[2.5rem] font-bold text-foreground mb-2">
-                  Ultimos Prompts de IA
+                <span className="inline-block text-xs font-semibold uppercase tracking-[0.2em] text-amber-600 mb-2">Copie e use</span>
+                <h2 className="text-3xl md:text-[2.5rem] font-bold text-foreground leading-tight">
+                  Últimos Prompts{" "}
+                  <span className="gradient-text">de IA</span>
                 </h2>
-                <p className="text-muted-foreground">
-                  Prompts prontos para usar — copie, cole e crie.
+                <p className="text-muted-foreground mt-2 max-w-md">
+                  Prompts prontos para usar — copie, cole e crie em segundos.
                 </p>
               </div>
-              <Link to="/prompts" className="hidden sm:inline-flex items-center gap-1.5 px-5 py-2.5 rounded-xl border border-border text-sm font-medium text-muted-foreground hover:text-foreground hover:border-foreground/20 transition-colors">
-                Ver prompts
+              <Link to="/prompts" className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl border border-border text-sm font-medium text-muted-foreground hover:text-foreground hover:border-foreground/20 transition-colors shrink-0 group">
+                Ver todos
+                <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" />
               </Link>
-            </div>
-
-            <div className="h-px bg-border my-6" />
+            </motion.div>
 
             {promptsLoading && (
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
@@ -468,21 +526,27 @@ const Home = () => {
         {/* ─── Servidores MCP em Destaque ─── */}
         <section className="py-20 px-6 md:px-12">
           <div className="max-w-7xl mx-auto">
-            <div className="flex items-end justify-between mb-3">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-10"
+            >
               <div>
-                <h2 className="text-3xl md:text-[2.5rem] font-bold text-foreground mb-2">
-                  Servidores MCP em Destaque
+                <span className="inline-block text-xs font-semibold uppercase tracking-[0.2em] text-emerald-600 mb-2">Integração</span>
+                <h2 className="text-3xl md:text-[2.5rem] font-bold text-foreground leading-tight">
+                  Servidores MCP{" "}
+                  <span className="gradient-text">em Destaque</span>
                 </h2>
-                <p className="text-muted-foreground">
-                  Conecte suas ferramentas de IA com servidores MCP.
+                <p className="text-muted-foreground mt-2 max-w-md">
+                  Conecte suas ferramentas de IA com servidores MCP verificados.
                 </p>
               </div>
-              <Link to="/mcps" className="hidden sm:inline-flex items-center gap-1.5 px-5 py-2.5 rounded-xl border border-border text-sm font-medium text-muted-foreground hover:text-foreground hover:border-foreground/20 transition-colors">
-                Ver MCPs
+              <Link to="/mcps" className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl border border-border text-sm font-medium text-muted-foreground hover:text-foreground hover:border-foreground/20 transition-colors shrink-0 group">
+                Ver todos
+                <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" />
               </Link>
-            </div>
-
-            <div className="h-px bg-border my-6" />
+            </motion.div>
 
             {mcpsLoading && (
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
@@ -521,51 +585,79 @@ const Home = () => {
           </div>
         </section>
 
-        {/* ─── CTA Banner (gradiente roxo estilo aicreator) ─── */}
-        <section className="py-20 px-6 md:px-12">
+        {/* ─── CTA Banner ─── */}
+        <section className="py-24 px-6 md:px-12">
           <div className="max-w-7xl mx-auto">
-            <div className="rounded-3xl overflow-hidden" style={{ background: 'linear-gradient(135deg, hsl(245 100% 67%), hsl(260 80% 60%))' }}>
-              <div className="grid grid-cols-1 md:grid-cols-2">
-                {/* Texto esquerdo */}
-                <div className="p-10 md:p-14 flex flex-col justify-center">
-                  <div className="w-12 h-12 rounded-xl bg-white/20 flex items-center justify-center mb-6">
-                    <Sparkles className="w-6 h-6 text-white" />
-                  </div>
-                  <p className="text-white/70 text-sm font-medium mb-3">Comece sua jornada com IA hoje!</p>
-                  <h2 className="text-2xl md:text-3xl font-bold text-white leading-snug mb-4">
-                    Explore a biblioteca completa e crie com IA.
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className="rounded-3xl overflow-hidden relative"
+              style={{ background: 'linear-gradient(135deg, hsl(245 100% 67%), hsl(270 80% 55%), hsl(290 70% 50%))' }}
+            >
+              {/* Decorative elements */}
+              <div className="absolute top-0 right-0 w-96 h-96 bg-white/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2" />
+              <div className="absolute bottom-0 left-0 w-64 h-64 bg-white/5 rounded-full blur-3xl translate-y-1/2 -translate-x-1/2" />
+
+              <div className="relative grid grid-cols-1 md:grid-cols-2">
+                {/* Left: Content */}
+                <div className="p-10 md:p-16 flex flex-col justify-center">
+                  <motion.div
+                    initial={{ opacity: 0, scale: 0.9 }}
+                    whileInView={{ opacity: 1, scale: 1 }}
+                    viewport={{ once: true }}
+                    className="w-14 h-14 rounded-2xl bg-white/15 backdrop-blur-sm flex items-center justify-center mb-8 border border-white/10"
+                  >
+                    <Sparkles className="w-7 h-7 text-white" />
+                  </motion.div>
+
+                  <p className="text-white/60 text-sm font-medium uppercase tracking-widest mb-4">Comece agora</p>
+
+                  <h2 className="text-3xl md:text-4xl font-bold text-white leading-snug mb-4">
+                    Explore a biblioteca completa e{" "}
+                    <span className="text-white/90 underline decoration-white/30 underline-offset-4">crie com IA</span>.
                   </h2>
-                  <p className="text-white/60 text-sm leading-relaxed mb-8">
-                    Ferramentas, prompts, MCPs, templates e muito mais. Tudo curado em um só lugar.
+
+                  <p className="text-white/50 text-base leading-relaxed mb-10 max-w-md">
+                    Mais de 1000 recursos curados — ferramentas, prompts, MCPs e templates. Tudo que voce precisa para criar melhor.
                   </p>
+
                   <div className="flex flex-wrap gap-3">
                     <Link
                       to="/explore"
-                      className="inline-flex items-center gap-2 px-6 py-3.5 rounded-xl bg-white text-foreground font-semibold text-sm hover:bg-white/90 transition-colors"
+                      className="inline-flex items-center gap-2 px-7 py-4 rounded-xl bg-white text-foreground font-semibold text-sm hover:bg-white/90 transition-all shadow-lg hover:-translate-y-0.5"
                     >
                       Explorar agora
+                      <ArrowRight className="w-4 h-4" />
                     </Link>
                     <a
                       href="https://wa.me/5511999999999?text=Oi%20Saraiva%2C%20quero%20saber%20mais%20sobre%20IA"
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex items-center gap-2 px-6 py-3.5 rounded-xl border border-white/30 text-white font-semibold text-sm hover:bg-white/10 transition-colors"
+                      className="inline-flex items-center gap-2 px-7 py-4 rounded-xl border border-white/25 text-white font-semibold text-sm hover:bg-white/10 transition-all hover:-translate-y-0.5"
                     >
                       Falar no WhatsApp
                     </a>
                   </div>
                 </div>
 
-                {/* Grid decorativo com imagens */}
-                <div className="hidden md:grid grid-cols-4 grid-rows-3 gap-2 p-6">
-                  {heroImages.slice(0, 8).map((img, i) => (
-                    <div key={i} className="rounded-xl overflow-hidden">
-                      <img src={img.src} alt="" className="w-full h-full object-cover opacity-70" loading="lazy" />
-                    </div>
+                {/* Right: Image grid with overlay */}
+                <div className="hidden md:grid grid-cols-3 grid-rows-3 gap-2 p-8">
+                  {heroImages.slice(0, 9).map((img, i) => (
+                    <motion.div
+                      key={i}
+                      initial={{ opacity: 0, scale: 0.9 }}
+                      whileInView={{ opacity: 1, scale: 1 }}
+                      viewport={{ once: true }}
+                      transition={{ delay: i * 0.05 }}
+                      className="rounded-xl overflow-hidden"
+                    >
+                      <img src={img.src} alt="" className="w-full h-full object-cover opacity-60 hover:opacity-80 transition-opacity" loading="lazy" />
+                    </motion.div>
                   ))}
                 </div>
               </div>
-            </div>
+            </motion.div>
           </div>
         </section>
 
