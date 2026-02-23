@@ -12,6 +12,5 @@ binding = "CONTENT_PROCESSED"
 id = "9b102d64a2294764b363ad58e84658ae"
 
 [vars]
-GITHUB_REPO = "saraivabr/site_saraiva.ai"
 ARTICLES_PER_RUN = "3"
 CONTENT_LANG = "pt-BR"

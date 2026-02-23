@@ -1,20 +1,47 @@
-import type { Env, SourceItem, GeneratedArticle, Category } from './types';
+import type { Env, SourceItem, GeneratedArticle, ContentCategory } from './types';
 
-const SYSTEM_PROMPT = `Você é um jornalista especializado em IA e tecnologia, escrevendo para empreendedores brasileiros.
+const SYSTEM_PROMPT = `Você é um jornalista especializado em IA e tecnologia, escrevendo para empreendedores e criadores brasileiros.
 
 Regras:
 - Escreva em português do Brasil, tom direto e prático
-- 800-1500 palavras
+- 600-1200 palavras
 - Use H2 (##) e H3 (###) para estruturar
-- Inclua exemplos práticos e actionable insights
+- Inclua exemplos práticos e insights acionáveis
 - Termine com uma seção "O que fazer agora" com 2-3 ações concretas
-- NÃO use emojis
+- NÃO use emojis no corpo do texto
 - NÃO invente dados - baseie-se na fonte fornecida
-- Gere um frontmatter YAML completo no início`;
+- Retorne APENAS o conteúdo em JSON (sem markdown, sem code block)`;
+
+function buildPrompt(item: SourceItem, category: ContentCategory): string {
+  const categoryInstructions: Record<ContentCategory, string> = {
+    tool: 'Escreva um review da ferramenta. Estrutura: O que é > Funcionalidades > Pricing > Prós > Contras > Veredicto. Inclua "pricing" (Free/Freemium/Paid).',
+    prompt: 'Escreva um artigo com templates de prompts prontos para uso. Inclua os prompts formatados em blocos de código markdown.',
+    analysis: 'Escreva uma análise com dados e contexto do mercado. Use dados concretos quando disponíveis.',
+    thought: 'Escreva um artigo de opinião/reflexão. Tom pessoal e provocativo.',
+  };
+
+  return `Tema: "${item.title}"
+Fonte: ${item.url}
+Descrição: ${item.description}
+Data: ${item.date}
+
+Categoria: ${category}
+Instrução: ${categoryInstructions[category]}
+
+Retorne um JSON válido (sem code block, sem markdown wrapper) com esta estrutura:
+{
+  "title": "título em português",
+  "description": "descrição curta de 1-2 frases",
+  "body": "conteúdo completo em markdown",
+  "tags": ["tag1", "tag2", "tag3"],
+  "pricing": "Free" | "Freemium" | "Paid" | null,
+  "featured": false
+}`;
+}
 
 export async function generateArticle(
   sourceItem: SourceItem,
-  category: Category,
+  category: ContentCategory,
   env: Env
 ): Promise<GeneratedArticle | null> {
   try {
@@ -46,92 +73,63 @@ export async function generateArticle(
     const text = data.content[0]?.text;
     if (!text) return null;
 
-    return parseGeneratedContent(text, sourceItem, category);
+    return parseJsonResponse(text, sourceItem, category);
   } catch (err) {
     console.error('Content generation failed:', err);
     return null;
   }
 }
 
-function buildPrompt(item: SourceItem, category: Category): string {
-  const categoryInstructions: Record<Category, string> = {
-    blog: 'Escreva um artigo de notícia/análise sobre este tema.',
-    tutoriais: 'Escreva um tutorial passo-a-passo. Inclua "difficulty" no frontmatter (iniciante/intermediario/avancado).',
-    ferramentas: 'Escreva um review da ferramenta. Inclua "rating" (1-5) e "pricing" (free/freemium/paid) no frontmatter. Estrutura: O que é > Funcionalidades > Pricing > Prós > Contras > Veredicto.',
-    prompts: 'Escreva um artigo com templates de prompts prontos para uso. Inclua os prompts em blocos de código.',
-    analises: 'Escreva uma análise profunda com dados e comparações. Use tabelas markdown quando relevante.',
-    pensamentos: 'Escreva um artigo de opinião/reflexão. Tom pessoal e provocativo.',
-  };
-
-  return `Tema: "${item.title}"
-Fonte: ${item.url}
-Descrição: ${item.description}
-Data: ${item.date}
-
-Categoria: ${category}
-Instrução: ${categoryInstructions[category]}
-
-Gere o artigo completo com frontmatter YAML no início no formato:
----
-title: "..."
-slug: "..."
-category: "${category}"
-date: "${new Date().toISOString().split('T')[0]}"
-author: "Saraiva"
-description: "..."
-tags: [...]
-image: ""
-source: "${item.url}"
-featured: false
----
-
-Depois do frontmatter, escreva o artigo completo em markdown.`;
-}
-
-function parseGeneratedContent(
+function parseJsonResponse(
   text: string,
   sourceItem: SourceItem,
-  category: Category
+  category: ContentCategory
 ): GeneratedArticle | null {
-  const frontmatterMatch = text.match(/^---\n([\s\S]*?)\n---\n([\s\S]*)$/);
-  if (!frontmatterMatch) return null;
+  try {
+    // Clean up the response - remove code block markers if present
+    let cleaned = text.trim();
+    if (cleaned.startsWith('```json')) cleaned = cleaned.slice(7);
+    if (cleaned.startsWith('```')) cleaned = cleaned.slice(3);
+    if (cleaned.endsWith('```')) cleaned = cleaned.slice(0, -3);
+    cleaned = cleaned.trim();
 
-  const frontmatter = frontmatterMatch[1];
-  const content = frontmatterMatch[2].trim();
+    const parsed = JSON.parse(cleaned) as {
+      title?: string;
+      description?: string;
+      body?: string;
+      tags?: string[];
+      pricing?: string;
+      featured?: boolean;
+    };
 
-  const title = extractYamlValue(frontmatter, 'title') || sourceItem.title;
-  const slug = extractYamlValue(frontmatter, 'slug') || slugify(title);
-  const description = extractYamlValue(frontmatter, 'description') || sourceItem.description;
-  const tagsStr = extractYamlValue(frontmatter, 'tags') || '[]';
-  const tags = JSON.parse(tagsStr.replace(/'/g, '"')) as string[];
-
-  const article: GeneratedArticle = {
-    title,
-    slug,
-    category,
-    description,
-    tags,
-    content,
-    sourceUrl: sourceItem.url,
-  };
-
-  if (category === 'tutoriais') {
-    article.difficulty = (extractYamlValue(frontmatter, 'difficulty') as GeneratedArticle['difficulty']) || 'intermediario';
+    return {
+      title: parsed.title || sourceItem.title,
+      slug: slugify(parsed.title || sourceItem.title),
+      category,
+      description: parsed.description || sourceItem.description,
+      tags: parsed.tags || [],
+      body: parsed.body || '',
+      sourceUrl: sourceItem.url,
+      pricing: (['Free', 'Freemium', 'Paid'].includes(parsed.pricing || '') ? parsed.pricing : null) as GeneratedArticle['pricing'],
+      image_url: null,
+      featured: parsed.featured ?? false,
+    };
+  } catch (err) {
+    console.error('JSON parse failed, trying fallback:', err);
+    // Fallback: treat the entire text as body content
+    return {
+      title: sourceItem.title,
+      slug: slugify(sourceItem.title),
+      category,
+      description: sourceItem.description,
+      tags: [],
+      body: text,
+      sourceUrl: sourceItem.url,
+      pricing: null,
+      image_url: null,
+      featured: false,
+    };
   }
-  if (category === 'ferramentas') {
-    const ratingStr = extractYamlValue(frontmatter, 'rating');
-    article.rating = ratingStr ? parseInt(ratingStr) : 4;
-    article.pricing = (extractYamlValue(frontmatter, 'pricing') as GeneratedArticle['pricing']) || 'freemium';
-  }
-
-  return article;
-}
-
-function extractYamlValue(yaml: string, key: string): string | null {
-  const regex = new RegExp(`^${key}:\\s*(?:"([^"]*)"|(\\[.*\\])|(.+))$`, 'm');
-  const match = regex.exec(yaml);
-  if (!match) return null;
-  return match[1] || match[2] || match[3]?.trim() || null;
 }
 
 function slugify(text: string): string {

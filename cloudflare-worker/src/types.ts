@@ -1,8 +1,8 @@
 export interface Env {
   ANTHROPIC_API_KEY: string;
   HF_TOKEN: string;
-  GITHUB_TOKEN: string;
-  GITHUB_REPO: string;
+  SUPABASE_URL: string;
+  SUPABASE_SERVICE_KEY: string;
   ARTICLES_PER_RUN: string;
   CONTENT_LANG: string;
   CONTENT_PROCESSED: KVNamespace;
@@ -16,23 +16,23 @@ export interface SourceItem {
   date: string;
 }
 
+export type ContentCategory = 'prompt' | 'tool' | 'analysis' | 'thought';
+
 export interface GeneratedArticle {
   title: string;
   slug: string;
-  category: Category;
+  category: ContentCategory;
   description: string;
   tags: string[];
-  content: string;
+  body: string;
   sourceUrl: string;
-  difficulty?: 'iniciante' | 'intermediario' | 'avancado';
-  rating?: number;
-  pricing?: 'free' | 'freemium' | 'paid';
+  pricing?: 'Free' | 'Freemium' | 'Paid' | null;
+  image_url?: string | null;
+  featured?: boolean;
 }
-
-export type Category = 'blog' | 'tutoriais' | 'ferramentas' | 'prompts' | 'analises' | 'pensamentos';
 
 export interface DeduplicationEntry {
   slug: string;
   date: string;
-  category: Category;
+  category: ContentCategory;
 }

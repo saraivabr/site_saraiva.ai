@@ -1,41 +1,37 @@
-import type { Category, SourceItem } from './types';
+import type { ContentCategory, SourceItem } from './types';
 
-const CATEGORY_KEYWORDS: Record<Category, string[]> = {
-  ferramentas: ['tool', 'app', 'platform', 'software', 'launch', 'release', 'ferramenta', 'review', 'product'],
-  tutoriais: ['how to', 'guide', 'tutorial', 'step by step', 'getting started', 'como', 'guia', 'passo'],
-  blog: ['news', 'update', 'announce', 'report', 'trend', 'notícia', 'novidade', 'lançamento'],
-  analises: ['comparison', 'versus', 'benchmark', 'analysis', 'study', 'research', 'comparação', 'análise'],
-  prompts: ['prompt', 'template', 'example', 'cheat sheet', 'modelo', 'exemplo'],
-  pensamentos: ['opinion', 'future', 'ethics', 'impact', 'will', 'should', 'opinião', 'futuro', 'ética'],
+const CATEGORY_KEYWORDS: Record<ContentCategory, string[]> = {
+  tool: ['tool', 'app', 'platform', 'software', 'launch', 'release', 'ferramenta', 'review', 'product', 'startup', 'api'],
+  prompt: ['prompt', 'template', 'example', 'cheat sheet', 'modelo', 'exemplo', 'how to', 'guide', 'tutorial', 'step by step'],
+  analysis: ['comparison', 'versus', 'benchmark', 'analysis', 'study', 'research', 'comparação', 'análise', 'news', 'update', 'trend', 'report'],
+  thought: ['opinion', 'future', 'ethics', 'impact', 'will', 'should', 'opinião', 'futuro', 'ética', 'prediction'],
 };
 
-const SOURCE_BIAS: Record<string, Category> = {
-  'Futurepedia': 'ferramentas',
-  'Product Hunt': 'ferramentas',
-  'Hacker News': 'blog',
-  'The Rundown AI': 'blog',
-  'Anthropic Blog': 'blog',
-  'OpenAI Blog': 'blog',
-  'Google AI Blog': 'blog',
-  'Hugging Face Blog': 'blog',
+const SOURCE_BIAS: Record<string, ContentCategory> = {
+  'Futurepedia': 'tool',
+  'Product Hunt': 'tool',
+  'Hacker News': 'analysis',
+  'The Rundown AI': 'analysis',
+  'Anthropic Blog': 'analysis',
+  'OpenAI Blog': 'analysis',
+  'Google AI Blog': 'analysis',
+  'Hugging Face Blog': 'tool',
 };
 
-export function categorize(item: SourceItem): Category {
+export function categorize(item: SourceItem): ContentCategory {
   const text = `${item.title} ${item.description}`.toLowerCase();
 
-  const scores: Record<Category, number> = {
-    blog: 0,
-    tutoriais: 0,
-    ferramentas: 0,
-    prompts: 0,
-    analises: 0,
-    pensamentos: 0,
+  const scores: Record<ContentCategory, number> = {
+    tool: 0,
+    prompt: 0,
+    analysis: 0,
+    thought: 0,
   };
 
   for (const [category, keywords] of Object.entries(CATEGORY_KEYWORDS)) {
     for (const kw of keywords) {
       if (text.includes(kw)) {
-        scores[category as Category] += 1;
+        scores[category as ContentCategory] += 1;
       }
     }
   }
@@ -45,12 +41,12 @@ export function categorize(item: SourceItem): Category {
     scores[sourceBias] += 2;
   }
 
-  let bestCategory: Category = 'blog';
+  let bestCategory: ContentCategory = 'analysis';
   let bestScore = 0;
   for (const [cat, score] of Object.entries(scores)) {
     if (score > bestScore) {
       bestScore = score;
-      bestCategory = cat as Category;
+      bestCategory = cat as ContentCategory;
     }
   }
 

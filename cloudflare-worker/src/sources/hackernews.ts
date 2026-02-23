@@ -24,19 +24,19 @@ export async function fetchHackerNews(limit = 10): Promise<SourceItem[]> {
     const items = await Promise.all(
       topIds.map(async (id) => {
         const itemRes = await fetch(`${HN_ITEM_URL}/${id}.json`);
-        return itemRes.json();
+        return itemRes.json() as Promise<{ title?: string; url?: string; time?: number }>;
       })
     );
 
     return items
-      .filter((item: { title?: string; url?: string }) => item.title && item.url && isAIRelated(item.title))
+      .filter((item) => item.title && item.url && isAIRelated(item.title!))
       .slice(0, limit)
-      .map((item: { title: string; url: string; time: number }) => ({
-        title: item.title,
-        url: item.url,
-        description: item.title,
+      .map((item) => ({
+        title: item.title!,
+        url: item.url!,
+        description: item.title!,
         source: 'Hacker News',
-        date: new Date(item.time * 1000).toISOString().split('T')[0],
+        date: new Date((item.time ?? 0) * 1000).toISOString().split('T')[0],
       }));
   } catch (err) {
     console.error('HN fetch failed:', err);

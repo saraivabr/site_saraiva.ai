@@ -8,7 +8,7 @@ import { filterNew, markProcessed } from './dedup';
 import { categorize } from './categorizer';
 import { generateArticle } from './content-generator';
 import { generateImage } from './image-generator';
-import { commitArticle } from './github';
+import { publishToSupabase, uploadImageToSupabase } from './supabase';
 
 export default {
   async scheduled(controller: ScheduledController, env: Env, ctx: ExecutionContext): Promise<void> {
@@ -93,23 +93,25 @@ async function runContentPipeline(env: Env): Promise<{ success: boolean; article
         continue;
       }
 
-      // Generate thumbnail image (non-blocking, ok if fails)
-      let imageData: ArrayBuffer | null = null;
+      // Upload image to Supabase Storage (if available)
+      let imageUrl: string | null = null;
       try {
         const imageResult = await generateImage(article.title, article.slug, env);
-        imageData = imageResult?.imageData || null;
+        if (imageResult?.imageData) {
+          imageUrl = await uploadImageToSupabase(imageResult.imageData, article.slug, env);
+        }
       } catch (imgErr) {
         console.warn('Image generation skipped:', imgErr);
       }
 
-      // Commit to GitHub
-      const committed = await commitArticle(article, imageData, env);
-      if (committed) {
+      // Publish to Supabase
+      const published = await publishToSupabase(article, imageUrl, env);
+      if (published) {
         await markProcessed(item, article.slug, article.category, env);
         articlesPublished++;
-        console.log(`Published: ${article.category}/${article.slug}`);
+        console.log(`Published: ${article.category}/${article.title}`);
       } else {
-        errors.push(`Failed to commit: ${article.slug}`);
+        errors.push(`Failed to publish: ${article.title}`);
       }
     } catch (err) {
       errors.push(`Processing error: ${err}`);
