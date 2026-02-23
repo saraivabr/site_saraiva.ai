@@ -6,4 +6,108 @@
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
+  <url>
+    <loc>https://saraiva.ai/conteudo</loc>
+    <lastmod>2026-02-22</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <!-- Categorias -->
+  <url>
+    <loc>https://saraiva.ai/conteudo/blog</loc>
+    <lastmod>2026-02-22</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://saraiva.ai/conteudo/tutoriais</loc>
+    <lastmod>2026-02-22</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://saraiva.ai/conteudo/ferramentas</loc>
+    <lastmod>2026-02-22</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://saraiva.ai/conteudo/prompts</loc>
+    <lastmod>2026-02-22</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://saraiva.ai/conteudo/analises</loc>
+    <lastmod>2026-02-22</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://saraiva.ai/conteudo/pensamentos</loc>
+    <lastmod>2026-02-22</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <!-- Blog -->
+  <url><loc>https://saraiva.ai/conteudo/blog/tendencias-ia-2026</loc><lastmod>2026-02-22</lastmod><priority>0.7</priority></url>
+  <url><loc>https://saraiva.ai/conteudo/blog/gpt-5-tudo-que-sabemos</loc><lastmod>2026-02-22</lastmod><priority>0.7</priority></url>
+  <url><loc>https://saraiva.ai/conteudo/blog/claude-4-o-que-mudou</loc><lastmod>2026-02-22</lastmod><priority>0.7</priority></url>
+  <url><loc>https://saraiva.ai/conteudo/blog/gemini-ultra-google-ia</loc><lastmod>2026-02-22</lastmod><priority>0.7</priority></url>
+  <url><loc>https://saraiva.ai/conteudo/blog/ia-no-brasil-mercado-2026</loc><lastmod>2026-02-22</lastmod><priority>0.7</priority></url>
+  <url><loc>https://saraiva.ai/conteudo/blog/ia-para-pequenas-empresas</loc><lastmod>2026-02-22</lastmod><priority>0.7</priority></url>
+  <url><loc>https://saraiva.ai/conteudo/blog/ia-generativa-marketing-digital</loc><lastmod>2026-02-22</lastmod><priority>0.7</priority></url>
+  <url><loc>https://saraiva.ai/conteudo/blog/regulacao-ia-global-2026</loc><lastmod>2026-02-22</lastmod><priority>0.7</priority></url>
+  <url><loc>https://saraiva.ai/conteudo/blog/open-source-vs-proprietario-ia</loc><lastmod>2026-02-22</lastmod><priority>0.7</priority></url>
+  <url><loc>https://saraiva.ai/conteudo/blog/agentes-ia-autonomos-revolução</loc><lastmod>2026-02-22</lastmod><priority>0.7</priority></url>
+  <!-- Tutoriais -->
+  <url><loc>https://saraiva.ai/conteudo/tutoriais/como-usar-chatgpt-para-negocios</loc><lastmod>2026-02-22</lastmod><priority>0.7</priority></url>
+  <url><loc>https://saraiva.ai/conteudo/tutoriais/como-usar-claude-analise-documentos</loc><lastmod>2026-02-22</lastmod><priority>0.7</priority></url>
+  <url><loc>https://saraiva.ai/conteudo/tutoriais/como-criar-imagens-ia</loc><lastmod>2026-02-22</lastmod><priority>0.7</priority></url>
+  <url><loc>https://saraiva.ai/conteudo/tutoriais/automacao-make-ia</loc><lastmod>2026-02-22</lastmod><priority>0.7</priority></url>
+  <url><loc>https://saraiva.ai/conteudo/tutoriais/como-criar-agentes-claude-code</loc><lastmod>2026-02-22</lastmod><priority>0.7</priority></url>
+  <url><loc>https://saraiva.ai/conteudo/tutoriais/como-usar-cursor-programar-ia</loc><lastmod>2026-02-22</lastmod><priority>0.7</priority></url>
+  <url><loc>https://saraiva.ai/conteudo/tutoriais/prompts-avancados-chain-of-thought</loc><lastmod>2026-02-22</lastmod><priority>0.7</priority></url>
+  <url><loc>https://saraiva.ai/conteudo/tutoriais/como-usar-perplexity-pesquisa</loc><lastmod>2026-02-22</lastmod><priority>0.7</priority></url>
+  <url><loc>https://saraiva.ai/conteudo/tutoriais/como-criar-chatbot-whatsapp-ia</loc><lastmod>2026-02-22</lastmod><priority>0.7</priority></url>
+  <url><loc>https://saraiva.ai/conteudo/tutoriais/como-analisar-dados-ia</loc><lastmod>2026-02-22</lastmod><priority>0.7</priority></url>
+  <!-- Ferramentas -->
+  <url><loc>https://saraiva.ai/conteudo/ferramentas/review-chatgpt</loc><lastmod>2026-02-22</lastmod><priority>0.7</priority></url>
+  <url><loc>https://saraiva.ai/conteudo/ferramentas/review-claude</loc><lastmod>2026-02-22</lastmod><priority>0.7</priority></url>
+  <url><loc>https://saraiva.ai/conteudo/ferramentas/review-gemini</loc><lastmod>2026-02-22</lastmod><priority>0.7</priority></url>
+  <url><loc>https://saraiva.ai/conteudo/ferramentas/review-perplexity</loc><lastmod>2026-02-22</lastmod><priority>0.7</priority></url>
+  <url><loc>https://saraiva.ai/conteudo/ferramentas/review-midjourney</loc><lastmod>2026-02-22</lastmod><priority>0.7</priority></url>
+  <url><loc>https://saraiva.ai/conteudo/ferramentas/review-runway</loc><lastmod>2026-02-22</lastmod><priority>0.7</priority></url>
+  <url><loc>https://saraiva.ai/conteudo/ferramentas/review-elevenlabs</loc><lastmod>2026-02-22</lastmod><priority>0.7</priority></url>
+  <url><loc>https://saraiva.ai/conteudo/ferramentas/review-cursor</loc><lastmod>2026-02-22</lastmod><priority>0.7</priority></url>
+  <url><loc>https://saraiva.ai/conteudo/ferramentas/review-v0</loc><lastmod>2026-02-22</lastmod><priority>0.7</priority></url>
+  <url><loc>https://saraiva.ai/conteudo/ferramentas/review-lovable</loc><lastmod>2026-02-22</lastmod><priority>0.7</priority></url>
+  <!-- Prompts -->
+  <url><loc>https://saraiva.ai/conteudo/prompts/prompts-vendas-copywriting</loc><lastmod>2026-02-22</lastmod><priority>0.7</priority></url>
+  <url><loc>https://saraiva.ai/conteudo/prompts/prompts-analise-dados</loc><lastmod>2026-02-22</lastmod><priority>0.7</priority></url>
+  <url><loc>https://saraiva.ai/conteudo/prompts/prompts-criacao-conteudo</loc><lastmod>2026-02-22</lastmod><priority>0.7</priority></url>
+  <url><loc>https://saraiva.ai/conteudo/prompts/prompts-atendimento-cliente</loc><lastmod>2026-02-22</lastmod><priority>0.7</priority></url>
+  <url><loc>https://saraiva.ai/conteudo/prompts/prompts-codigo-desenvolvimento</loc><lastmod>2026-02-22</lastmod><priority>0.7</priority></url>
+  <url><loc>https://saraiva.ai/conteudo/prompts/prompts-email-profissional</loc><lastmod>2026-02-22</lastmod><priority>0.7</priority></url>
+  <url><loc>https://saraiva.ai/conteudo/prompts/prompts-redes-sociais</loc><lastmod>2026-02-22</lastmod><priority>0.7</priority></url>
+  <url><loc>https://saraiva.ai/conteudo/prompts/prompts-imagens-ia</loc><lastmod>2026-02-22</lastmod><priority>0.7</priority></url>
+  <url><loc>https://saraiva.ai/conteudo/prompts/prompts-automacao-processos</loc><lastmod>2026-02-22</lastmod><priority>0.7</priority></url>
+  <url><loc>https://saraiva.ai/conteudo/prompts/prompts-planejamento-estrategico</loc><lastmod>2026-02-22</lastmod><priority>0.7</priority></url>
+  <!-- Analises -->
+  <url><loc>https://saraiva.ai/conteudo/analises/chatgpt-vs-claude-vs-gemini</loc><lastmod>2026-02-22</lastmod><priority>0.7</priority></url>
+  <url><loc>https://saraiva.ai/conteudo/analises/ia-open-source-vs-proprietaria</loc><lastmod>2026-02-22</lastmod><priority>0.7</priority></url>
+  <url><loc>https://saraiva.ai/conteudo/analises/impacto-ia-mercado-trabalho-brasil</loc><lastmod>2026-02-22</lastmod><priority>0.7</priority></url>
+  <url><loc>https://saraiva.ai/conteudo/analises/roi-ferramentas-ia-empresas</loc><lastmod>2026-02-22</lastmod><priority>0.7</priority></url>
+  <url><loc>https://saraiva.ai/conteudo/analises/futuro-agentes-autonomos</loc><lastmod>2026-02-22</lastmod><priority>0.7</priority></url>
+  <url><loc>https://saraiva.ai/conteudo/analises/ia-ecommerce-vendas</loc><lastmod>2026-02-22</lastmod><priority>0.7</priority></url>
+  <url><loc>https://saraiva.ai/conteudo/analises/ia-educacao-transformacao</loc><lastmod>2026-02-22</lastmod><priority>0.7</priority></url>
+  <url><loc>https://saraiva.ai/conteudo/analises/ia-saude-revolucao-silenciosa</loc><lastmod>2026-02-22</lastmod><priority>0.7</priority></url>
+  <url><loc>https://saraiva.ai/conteudo/analises/privacidade-dados-era-ia</loc><lastmod>2026-02-22</lastmod><priority>0.7</priority></url>
+  <url><loc>https://saraiva.ai/conteudo/analises/custo-real-ia-empresa</loc><lastmod>2026-02-22</lastmod><priority>0.7</priority></url>
+  <!-- Pensamentos -->
+  <url><loc>https://saraiva.ai/conteudo/pensamentos/ia-vai-substituir-programadores</loc><lastmod>2026-02-22</lastmod><priority>0.6</priority></url>
+  <url><loc>https://saraiva.ai/conteudo/pensamentos/etica-vies-modelos-linguagem</loc><lastmod>2026-02-22</lastmod><priority>0.6</priority></url>
+  <url><loc>https://saraiva.ai/conteudo/pensamentos/papel-humano-era-ia</loc><lastmod>2026-02-22</lastmod><priority>0.6</priority></url>
+  <url><loc>https://saraiva.ai/conteudo/pensamentos/brasil-pode-liderar-ia-aplicada</loc><lastmod>2026-02-22</lastmod><priority>0.6</priority></url>
+  <url><loc>https://saraiva.ai/conteudo/pensamentos/ia-criatividade-complemento-substituicao</loc><lastmod>2026-02-22</lastmod><priority>0.6</priority></url>
 </urlset>
