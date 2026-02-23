@@ -1,6 +1,5 @@
 
 import { useState, useEffect, useRef } from "react";
-import { AnimatePresence, motion } from "framer-motion";
 
 const testimonials = [
   {
@@ -40,9 +39,7 @@ const testimonials = [
 const Testimonials = () => {
   const [isVisible, setIsVisible] = useState(false);
   const [activeTestimonial, setActiveTestimonial] = useState(0);
-  const [isPaused, setIsPaused] = useState(false);
   const sectionRef = useRef<HTMLElement>(null);
-  const carouselRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -62,23 +59,13 @@ const Testimonials = () => {
   }, []);
 
   useEffect(() => {
-    if (isVisible && !isPaused) {
+    if (isVisible) {
       const interval = setInterval(() => {
         setActiveTestimonial((prev) => (prev + 1) % testimonials.length);
       }, 5000);
       return () => clearInterval(interval);
     }
-  }, [isVisible, isPaused]);
-
-  const handleCarouselKeyDown = (e: React.KeyboardEvent) => {
-    if (e.key === 'ArrowLeft') {
-      e.preventDefault();
-      setActiveTestimonial((prev) => (prev - 1 + testimonials.length) % testimonials.length);
-    } else if (e.key === 'ArrowRight') {
-      e.preventDefault();
-      setActiveTestimonial((prev) => (prev + 1) % testimonials.length);
-    }
-  };
+  }, [isVisible]);
 
   return (
     <section
@@ -101,57 +88,35 @@ const Testimonials = () => {
         </div>
         
         {/* Giant quote display with typographic quotation marks */}
-        <div
-          ref={carouselRef}
-          className={`mb-12 md:mb-16 transition-all duration-1000 ease-out ${isVisible ? 'fade-in-up' : ''}`}
-          role="region"
-          aria-roledescription="carousel"
-          aria-label="Depoimentos"
-          tabIndex={0}
-          onKeyDown={handleCarouselKeyDown}
-          onFocus={() => setIsPaused(true)}
-          onBlur={() => setIsPaused(false)}
-          onMouseEnter={() => setIsPaused(true)}
-          onMouseLeave={() => setIsPaused(false)}
-        >
+        <div className={`mb-12 md:mb-16 transition-all duration-1000 ease-out ${isVisible ? 'fade-in-up' : ''}`}>
           <div className="max-w-5xl mx-auto relative px-4">
             {/* Giant opening quotation mark */}
             <div className="absolute -top-8 sm:-top-12 md:-top-16 -left-4 sm:-left-6 md:-left-8 text-[8rem] sm:text-[10rem] md:text-[12rem] font-serif opacity-10 leading-none" style={{ lineHeight: '0.7' }} aria-hidden="true">"</div>
             
             <div className="border border-white/10 p-8 sm:p-12 md:p-16 bg-black relative z-10" aria-live="polite">
-              <AnimatePresence mode="wait">
-                <motion.div
-                  key={activeTestimonial}
-                  initial={{ opacity: 0, y: 12 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -12 }}
-                  transition={{ duration: 0.4, ease: 'easeInOut' }}
-                >
-                  <blockquote className="text-xl sm:text-2xl md:text-4xl lg:text-5xl font-black mb-8 sm:mb-10 md:mb-12 leading-tight" style={{ letterSpacing: '-0.02em', lineHeight: '1.2' }}>
-                    {testimonials[activeTestimonial].text}
-                  </blockquote>
-
-                  {/* Before/After with more impact */}
-                  <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8 md:gap-10 pt-6 sm:pt-8 border-t border-white/10">
-                    <div>
-                      <div className="text-base sm:text-lg font-black mb-1">{testimonials[activeTestimonial].author}</div>
-                      <div className="font-mono text-[0.65rem] sm:text-xs uppercase tracking-wider md:tracking-widest opacity-60">{testimonials[activeTestimonial].role}</div>
-                    </div>
-
-                    <div className="border-l-0 md:border-l border-white/20 pl-0 md:pl-8">
-                      <div className="text-[0.65rem] sm:text-xs font-mono mb-2 uppercase tracking-wider md:tracking-widest opacity-60">ANTES:</div>
-                      <div className="font-medium text-sm sm:text-base">{testimonials[activeTestimonial].before}</div>
-                    </div>
-
-                    <div className="border-l-0 md:border-l border-white/20 pl-0 md:pl-8">
-                      <div className="text-[0.65rem] sm:text-xs font-mono mb-2 uppercase tracking-wider md:tracking-widest opacity-60">DEPOIS:</div>
-                      <div className="font-black text-xl sm:text-2xl bg-white text-black px-3 sm:px-4 py-2 inline-block" style={{ letterSpacing: '-0.01em' }}>
-                        {testimonials[activeTestimonial].result}
-                      </div>
-                    </div>
+              <blockquote className="text-xl sm:text-2xl md:text-4xl lg:text-5xl font-black mb-8 sm:mb-10 md:mb-12 leading-tight" style={{ letterSpacing: '-0.02em', lineHeight: '1.2' }}>
+                {testimonials[activeTestimonial].text}
+              </blockquote>
+              
+              {/* Before/After with more impact */}
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8 md:gap-10 pt-6 sm:pt-8 border-t border-white/10">
+                <div>
+                  <div className="text-base sm:text-lg font-black mb-1">{testimonials[activeTestimonial].author}</div>
+                  <div className="font-mono text-[0.65rem] sm:text-xs uppercase tracking-wider md:tracking-widest opacity-60">{testimonials[activeTestimonial].role}</div>
+                </div>
+                
+                <div className="border-l-0 md:border-l border-white/20 pl-0 md:pl-8">
+                  <div className="text-[0.65rem] sm:text-xs font-mono mb-2 uppercase tracking-wider md:tracking-widest opacity-40">ANTES:</div>
+                  <div className="font-medium text-sm sm:text-base">{testimonials[activeTestimonial].before}</div>
+                </div>
+                
+                <div className="border-l-0 md:border-l border-white/20 pl-0 md:pl-8">
+                  <div className="text-[0.65rem] sm:text-xs font-mono mb-2 uppercase tracking-wider md:tracking-widest opacity-40">DEPOIS:</div>
+                  <div className="font-black text-xl sm:text-2xl bg-white text-black px-3 sm:px-4 py-2 inline-block" style={{ letterSpacing: '-0.01em' }}>
+                    {testimonials[activeTestimonial].result}
                   </div>
-                </motion.div>
-              </AnimatePresence>
+                </div>
+              </div>
             </div>
             
             {/* Giant closing quotation mark */}
@@ -165,9 +130,9 @@ const Testimonials = () => {
             <button
               key={index}
               onClick={() => setActiveTestimonial(index)}
-              className={`transition-all duration-300 ease-out focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white ${
-                activeTestimonial === index
-                  ? 'w-12 h-2 bg-white'
+              className={`transition-all duration-300 ease-out ${
+                activeTestimonial === index 
+                  ? 'w-12 h-2 bg-white' 
                   : 'w-2 h-2 bg-white/30 hover:bg-white/50'
               }`}
               aria-label={`Ver depoimento ${index + 1} de ${testimonials.length}`}

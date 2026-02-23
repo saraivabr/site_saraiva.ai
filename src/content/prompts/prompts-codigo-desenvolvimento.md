@@ -1,332 +1,394 @@
 ---
-title: "Como Usar IA para Escrever Código Melhor: A Jornada do Dev que Para de Copiar Prompts"
+title: "15 Prompts para Codigo e Desenvolvimento"
 slug: "prompts-codigo-desenvolvimento"
 category: "prompts"
 date: "2026-02-22"
 author: "Saraiva"
-description: "Aprenda a pensar com IA para código: debug, refatoração, testes e arquitetura. Não é lista de prompts — é o raciocínio que transforma um dev junior em senior."
+description: "Prompts para code review, debug, refatoracao, testes, documentacao e arquitetura de software com IA."
 tags: ["codigo", "programacao", "dev"]
 image: ""
 source: ""
 featured: false
 ---
 
-# Como Usar IA para Escrever Código Melhor: A Jornada do Dev que Para de Copiar Prompts
+# 15 Prompts para Codigo e Desenvolvimento
 
-O Lucas é dev pleno numa fintech em São Paulo. Salário de R$ 9.000, squad de 5 pessoas, sprint de duas semanas. Toda segunda-feira ele abre o ChatGPT e cola código com um "me ajuda a debugar isso". A resposta vem genérica. Ele ajusta na mão, perde 40 minutos, e no final resolve do jeito que já sabia.
+Desenvolvedores de todos os niveis podem usar IA como um par programmer disponivel 24 horas. Estes prompts cobrem desde debug ate decisoes de arquitetura, ajudando voce a escrever codigo melhor e mais rapido.
 
-Na sexta passada, o tech lead dele rejeitou um PR com 14 comentários. Metade eram coisas que a IA deveria ter pego — variável sem tratamento de null, query N+1, teste sem edge case. O Lucas tinha usado IA o sprint inteiro. Mas usou errado.
+## Code Review
 
-Eu sei disso porque fui o Lucas por muito tempo.
+### 1. Revisao Completa de Codigo
 
-## Por que copiar prompts de código não funciona
-
-Você abre uma lista de "50 prompts para devs", copia um genérico de code review, cola seu código, e recebe de volta um textão que mistura observações óbvias com sugestões que não se aplicam ao seu contexto.
-
-O problema não é a IA. É que **prompt de código sem contexto é como pedir conselho médico sem dizer o sintoma**. A IA não sabe se seu código roda em produção com 10 mil requests por segundo ou num script que executa uma vez por mês. Não sabe se sua equipe usa TypeScript strict ou JavaScript solto. Não sabe se o PR vai ser revisado por um senior exigente ou se é projeto pessoal.
-
-O dev que tira valor real da IA não copia prompts. Ele entende o **princípio** por trás de cada interação e adapta em tempo real.
-
-## O princípio: IA como par programmer, não como oráculo
-
-Pense na IA como um colega de equipe muito rápido, com memória enciclopédica, mas que acabou de entrar no projeto. Ele não conhece seu codebase, não sabe suas convenções, não entende o domínio do negócio.
-
-Se você pede "revisa esse código", ele vai dar uma resposta genérica — do mesmo jeito que um dev novo daria. Mas se você diz "esse endpoint processa pagamento via Pix, precisa estar em conformidade com o Banco Central, roda em Node 20 com Fastify, e o último incidente foi um timeout na integração com a API do banco", a resposta muda completamente.
-
-O modelo mental é: **quanto mais contexto específico você dá, mais a resposta se aproxima da de um senior que conhece seu projeto**.
-
-A jornada abaixo não é uma lista. É uma sequência que espelha o fluxo real de trabalho de um desenvolvedor — do debug urgente à decisão de arquitetura.
-
-## A jornada: do bug de segunda-feira à arquitetura de sexta
-
-### Etapa 1 — O bug que trava tudo
-
-Segunda-feira, 9h. Deploy de sexta quebrou algo. Os logs mostram um erro que você não entende.
-
-**Prompt:**
+Para obter feedback detalhado sobre um trecho de codigo antes de fazer merge.
 
 ```
-Estou debugando um erro em produção. O sistema é uma API REST em Node.js 20 com Fastify 4, TypeScript strict, PostgreSQL 15. O serviço processa webhooks de pagamento do Stripe.
+Faca uma code review detalhada do codigo abaixo.
+Linguagem: [linguagem].
+Contexto: [o que o codigo faz].
 
-Erro no log:
-TypeError: Cannot read properties of undefined (reading 'payment_intent')
+Avalie os seguintes aspectos:
+1. Corretude: o codigo faz o que deveria?
+2. Performance: ha gargalos ou operacoes desnecessarias?
+3. Legibilidade: nomes, estrutura e organizacao estao claros?
+4. Seguranca: ha vulnerabilidades (SQL injection, XSS, etc.)?
+5. Tratamento de erros: edge cases estao cobertos?
+6. Boas praticas: segue os padroes da linguagem?
 
-Stack trace:
-  at processWebhook (/src/webhooks/stripe.ts:47)
-  at Layer.handle (/node_modules/fastify/lib/layer.js:95)
+Para cada problema encontrado, forneca:
+- Linha ou trecho afetado
+- Descricao do problema
+- Sugestao de correcao com codigo
 
-O erro começou após o deploy de sexta. A única mudança foi atualizar o SDK do Stripe de 14.x para 15.x.
-
-O que já tentei:
-1. Reverter o deploy (não é opção, tem migration de banco junto)
-2. Checar se o campo mudou de nome na v15 (não achei na changelog)
-
-Me dê: causa raiz provável, como confirmar, e fix mínimo para parar o sangramento.
+Codigo:
+[Cole o codigo aqui]
 ```
 
-**Por que funciona:** Você deu a stack completa, a versão exata, o contexto do que mudou, e o que já tentou. A IA não vai sugerir "verifique se o campo existe" — ela vai direto para a breaking change do SDK do Stripe entre v14 e v15, provavelmente a mudança de `payment_intent` para `paymentIntent` na nova versão.
+### 2. Review Focada em Seguranca
 
-**Output esperado:** A IA vai identificar que o Stripe SDK v15 mudou a serialização de snake_case para camelCase, mostrar a linha exata para corrigir, e sugerir um adapter temporário enquanto você migra o resto do código.
-
-**Variação:** Se o erro for intermitente, adicione "acontece em ~30% dos requests, sem padrão óbvio de horário" — isso muda completamente a direção do diagnóstico (provavelmente race condition ou timeout parcial).
-
-### Etapa 2 — Entendendo o código que você não escreveu
-
-O bug foi resolvido, mas você percebe que o módulo de webhooks é um espaguete que ninguém documenta há 2 anos.
-
-**Prompt:**
+Para auditar codigo que lida com dados sensiveis ou autenticacao.
 
 ```
-Preciso entender esse módulo antes de refatorar. É o handler de webhooks do Stripe no nosso sistema de pagamentos. Eu não escrevi esse código e o autor saiu da empresa.
+Analise o codigo abaixo focando exclusivamente em seguranca.
+Linguagem: [linguagem]. Framework: [framework].
+Contexto: [ex: endpoint de autenticacao, processamento de pagamento].
 
-Linguagem: TypeScript, Fastify.
+Verifique:
+1. Injection (SQL, NoSQL, Command, LDAP)
+2. Autenticacao e autorizacao
+3. Exposicao de dados sensiveis
+4. Criptografia adequada
+5. Validacao de entrada
+6. CSRF/XSS/SSRF
+7. Rate limiting
+8. Logging de informacoes sensiveis
 
-Para esse código, me explique:
-1. Fluxo de dados: de onde vem o request até onde o dado é persistido
-2. Decisões implícitas: por que o autor provavelmente fez X ao invés de Y
-3. Armadilhas: o que pode quebrar se eu mexer sem entender
-4. Dependências ocultas: efeitos colaterais, estado compartilhado, ordem importa?
+Para cada vulnerabilidade:
+- Severidade (critica/alta/media/baixa)
+- Como explorar
+- Correcao recomendada com codigo
 
-Código:
-[Cole o código do módulo inteiro, até 200 linhas]
+Codigo:
+[Cole o codigo]
 ```
 
-**Por que funciona:** A maioria dos devs pede "explica esse código" e recebe uma paráfrase linha por linha. Ao pedir decisões implícitas e armadilhas, você força a IA a fazer análise de risco — que é o que um senior faz quando herda código.
+## Debug
 
-**Output esperado:** Um mapa mental do módulo com os pontos quentes marcados. "A função `retryPayment` na linha 89 usa recursão sem limite — se o Stripe retornar 500 consistentemente, vai estourar a stack." Esse tipo de insight.
+### 3. Diagnostico de Bug
 
-### Etapa 3 — Code review que pega o que humano não pega
-
-Agora você vai mexer no código. Antes de abrir PR, passa pela IA.
-
-**Prompt:**
+Para quando voce esta preso em um bug e nao encontra a causa.
 
 ```
-Faça code review do diff abaixo como se fosse um tech lead senior de fintech. O código lida com processamento de pagamentos — bugs aqui significam perda de dinheiro real.
+Estou enfrentando o seguinte bug:
 
-Stack: TypeScript strict, Fastify 4, Prisma 5, PostgreSQL 15.
-Convenções do time: early returns, funções < 20 linhas, erros tipados com classe customizada.
+Comportamento esperado: [descreva]
+Comportamento atual: [descreva]
+Mensagem de erro: [cole se houver]
+Stack trace: [cole se houver]
 
-Foque em:
-1. Corretude: tem caso onde pagamento pode ser processado duas vezes?
-2. Concorrência: e se dois webhooks do mesmo pagamento chegam ao mesmo tempo?
-3. Tratamento de falha: se o banco cai no meio da transação, o que acontece?
-4. Tipo: algum cast implícito ou any escondido?
+Linguagem: [linguagem]. Framework: [framework].
+Versoes: [liste versoes relevantes]
 
-Para cada problema, classifique: blocker / warning / nit.
-Só me mostre blockers e warnings.
+Codigo relevante:
+[Cole o codigo]
 
-Diff:
-[Cole o diff do git]
+O que ja tentei:
+[Liste as tentativas]
+
+Me ajude a:
+1. Identificar a causa raiz mais provavel
+2. Sugerir 3 hipoteses em ordem de probabilidade
+3. Para cada hipotese, fornecer um teste para confirmar/descartar
+4. Apresentar a correcao para a causa mais provavel
 ```
 
-**Por que funciona:** Você deu um **persona** (tech lead de fintech), um **risco** (dinheiro real), **convenções** do time, e **categorias** de severidade. A IA não vai perder tempo com "considere renomear essa variável" — vai direto nos problemas que causam incidentes.
+### 4. Leitura e Explicacao de Erro
 
-**Output esperado:** "BLOCKER: Linhas 23-31 — a verificação de idempotência usa `findFirst` sem lock. Se dois webhooks chegam em 50ms de diferença, ambos passam na verificação e o pagamento é creditado duas vezes. Fix: usar `SELECT ... FOR UPDATE` ou advisory lock do PostgreSQL."
-
-**Variação:** Para código de frontend, troque o foco para "acessibilidade, performance de rendering, e memory leaks em useEffect".
-
-### Etapa 4 — Segurança como hábito, não como auditoria
-
-Revisou lógica, agora revisemos segurança. Dois prompts separados porque o foco muda.
-
-**Prompt:**
+Para entender mensagens de erro cripticas.
 
 ```
-Auditoria de segurança do endpoint abaixo. Contexto: API de fintech, dados bancários reais, usuários PF e PJ, compliance Banco Central.
+Explique o seguinte erro em linguagem simples:
 
-Endpoint: POST /api/v1/transfers
-Auth: JWT Bearer token (RS256)
-Input: body JSON com valor, conta destino, descrição
+[Cole a mensagem de erro completa ou stack trace]
 
-Verifique contra OWASP Top 10 2021 + CWE Top 25:
-- Injection (SQL, NoSQL, command)
-- Broken auth / broken access control
-- Mass assignment
-- Rate limiting / DDoS
-- Logging de dados sensíveis (CPF, conta, valor)
-- IDOR (posso transferir da conta de outro usuário?)
+Linguagem/Framework: [especifique]
+Contexto: [o que voce estava tentando fazer]
 
-Severidade: Crítica / Alta / Média
-Só liste Crítica e Alta. Para cada uma, mostre o exploit e o fix com código.
-
-Código:
-[Cole o código do endpoint]
+Inclua:
+1. O que o erro significa em portugues simples
+2. A causa mais comum desse erro
+3. Passo a passo para resolver
+4. Como prevenir esse erro no futuro
 ```
 
-**Por que funciona:** Você não pediu "verifique segurança" — listou os vetores de ataque relevantes para o domínio (fintech) e pediu exploit + fix. A IA vai tentar quebrar seu código, não só descrevê-lo.
+## Refatoracao
 
-**Output esperado:** "CRÍTICA — IDOR: O endpoint extrai `accountId` do body do request (linha 12) ao invés do JWT. Qualquer usuário autenticado pode transferir da conta de outro. Fix: `const accountId = request.user.accountId` ao invés de `request.body.accountId`."
+### 5. Refatoracao para Clean Code
 
-### Etapa 5 — Testes que testam de verdade
-
-O código está revisado e seguro. Hora de testar. Mas não qualquer teste — testes que pensam como testador.
-
-**Prompt:**
+Para melhorar a qualidade do codigo sem alterar o comportamento.
 
 ```
-Gere testes para a função transferFunds abaixo. Framework: Vitest + Prisma (mock com @prisma/client/testing).
+Refatore o codigo abaixo seguindo principios de clean code.
+Linguagem: [linguagem].
 
-Regras do negócio que os testes DEVEM cobrir:
-1. Transferência só ocorre se saldo >= valor + taxa (0,5% para PF, 0,2% para PJ)
-2. Valor mínimo: R$ 1,00. Máximo: R$ 50.000 por transação
-3. Limite diário: R$ 200.000 por conta
-4. Horário: transferências > R$ 5.000 só processam em dia útil entre 8h-17h BRT
-5. Conta destino deve existir e estar ativa
+Aplique:
+1. Nomes descritivos para variaveis e funcoes
+2. Funcoes pequenas (maximo 20 linhas)
+3. Principio de responsabilidade unica
+4. Remocao de codigo morto e duplicado
+5. Early returns ao inves de ifs aninhados
+6. Constantes nomeadas ao inves de magic numbers
 
-Quero testes para:
-- Happy path PF e PJ
-- Cada regra violada individualmente
-- Combinações perigosas (saldo exato no limite, transferência às 17:00:00 BRT, feriado nacional)
-- Concorrência (duas transferências simultâneas que estouram o limite)
+Forneca:
+- Codigo refatorado completo
+- Lista de mudancas feitas e por que
+- Antes/depois das partes mais significativas
 
-Padrão: describe > it, arrange-act-assert, mocks explícitos, nomes em português.
-
-Código:
-[Cole a função]
+Codigo original:
+[Cole o codigo]
 ```
 
-**Por que funciona:** Ao listar as regras de negócio explicitamente, você transformou a IA num testador de domínio. Ela não vai gerar testes genéricos de "null input" — vai gerar testes que refletem cenários reais. A combinação "saldo exato no limite" é o tipo de edge case que causa bugs em produção.
+### 6. Migracao de Codigo Legado
 
-**Output esperado:** 15-20 testes organizados por regra, incluindo um teste de "transferência de R$ 50.000,00 às 17:00:00 BRT na sexta-feira de Carnaval" — que é exatamente o tipo de cenário que passa no QA e falha em produção.
-
-### Etapa 6 — Refatoração sem medo
-
-Os testes passam. Hora de limpar o código legado que você herdou na Etapa 2.
-
-**Prompt:**
+Para modernizar codigo antigo de forma incremental.
 
 ```
-Refatore o módulo abaixo. As restrições são rígidas — este código está em produção e qualquer mudança de comportamento é um bug.
+Preciso migrar o seguinte codigo de [tecnologia antiga] para [tecnologia nova].
 
-Regras:
-1. Manter TODOS os testes existentes passando sem modificação
-2. Manter a mesma interface pública (exports, parâmetros, tipos de retorno)
-3. Aplicar: early returns, funções < 20 linhas, nomes descritivos em inglês
-4. Extrair: validação para camada separada, queries para repository, erros para classes tipadas
-5. Eliminar: any, type assertions, código morto, console.log
+Codigo atual:
+[Cole o codigo]
 
-Entregue:
-- Código refatorado com os mesmos exports
-- Lista de cada mudança e justificativa em 1 frase
-- Riscos: "mudei X, que PODERIA mudar comportamento se Y"
+Requisitos:
+1. Manter o mesmo comportamento externo
+2. Usar padroes modernos de [tecnologia nova]
+3. Aproveitar features nativas (ex: async/await, tipos, etc.)
+4. Manter compatibilidade com [dependencias que nao mudam]
 
-Código original (147 linhas):
-[Cole o código]
+Forneca:
+- Codigo migrado completo
+- Mapeamento: funcao antiga > funcao nova
+- Testes para validar que o comportamento nao mudou
+- Lista de breaking changes (se houver)
 ```
 
-**Por que funciona:** A restrição "manter testes passando sem modificação" é a âncora. A IA não vai reescrever do zero — vai refatorar incrementalmente, que é o que fazemos em código de produção. E a lista de riscos te dá o mapa para testar manualmente o que os testes automatizados podem não cobrir.
+## Testes
 
-**Output esperado:** Código dividido em 3 arquivos (handler, validator, repository), cada função com menos de 20 linhas, zero `any`, e uma lista de 3-4 riscos como "extraí a validação de horário para `isBusinessHour()` — se o timezone do server mudar, a lógica quebra".
+### 7. Geracao de Testes Unitarios
 
-### Etapa 7 — A query que trava o banco
-
-Quarta-feira. O DBA manda no Slack: "tem uma query consumindo 80% da CPU do banco". É sua.
-
-**Prompt:**
+Para criar testes abrangentes de forma rapida.
 
 ```
-Query lenta em produção. PostgreSQL 15, tabela transactions com 12M de linhas, ~50k inserts/dia.
+Gere testes unitarios para o codigo abaixo.
+Linguagem: [linguagem]. Framework de testes: [jest/pytest/junit/etc.].
 
-Query atual (executa em 4.2s, deveria ser < 100ms):
+Codigo:
+[Cole o codigo]
 
-SELECT t.*, u.name, u.email
-FROM transactions t
-JOIN users u ON u.id = t.user_id
-WHERE t.status = 'completed'
-  AND t.created_at > NOW() - INTERVAL '30 days'
-  AND t.amount > 1000
-ORDER BY t.created_at DESC
-LIMIT 50;
+Inclua testes para:
+1. Caso de sucesso (happy path)
+2. Entradas invalidas (null, undefined, vazio, tipo errado)
+3. Edge cases (limites, valores extremos)
+4. Comportamento com erro (excecoes, falhas de rede)
+5. Casos de fronteira especificos do dominio
 
-Índices existentes:
-- transactions_pkey (id)
-- transactions_user_id_idx (user_id)
-- transactions_status_idx (status)
+Para cada teste: nome descritivo, arrange-act-assert, e comentario breve explicando o que valida.
+Mocks: use [biblioteca de mock] para dependencias externas.
+```
 
-EXPLAIN ANALYZE:
-[Cole o output do EXPLAIN]
+### 8. Testes de Integracao
 
-Me dê:
-1. Por que está lento (análise do plano)
+Para validar que componentes funcionam juntos.
+
+```
+Crie testes de integracao para [modulo/endpoint/feature].
+Stack: [linguagem + frameworks].
+
+O que testar:
+1. Fluxo completo de [descreva o fluxo]
+2. Integracao com [banco/API/servico externo]
+3. Autenticacao e autorizacao
+4. Tratamento de falhas (timeout, erro 500, dado invalido)
+
+Para cada teste:
+- Setup necessario (dados de teste, mocks de servico externo)
+- Passos do teste
+- Assercoes esperadas
+- Cleanup apos o teste
+
+Use [framework de teste de integracao] e documente como rodar localmente.
+```
+
+## Documentacao
+
+### 9. Documentacao de API
+
+Para criar docs de API claras e completas.
+
+```
+Documente a seguinte API REST:
+[Cole o codigo dos endpoints ou descreva]
+
+Para cada endpoint, inclua:
+- Metodo HTTP e URL
+- Descricao (1 frase)
+- Headers obrigatorios
+- Parametros (path, query, body) com tipo e obrigatoriedade
+- Exemplo de request (curl)
+- Exemplo de response (JSON) para sucesso
+- Codigos de erro possiveis com mensagem
+- Rate limits (se aplicavel)
+
+Formato: Markdown compativel com [Swagger/Redoc/ReadMe].
+Inclua uma secao de autenticacao no inicio.
+```
+
+### 10. README de Projeto
+
+Para criar um README que realmente ajuda novos desenvolvedores.
+
+```
+Crie um README.md para o projeto [nome].
+Linguagem: [linguagem]. Tipo: [API/biblioteca/CLI/app].
+
+Secoes:
+1. Titulo + descricao (2 frases)
+2. Badges (build, coverage, versao)
+3. Instalacao (passo a passo)
+4. Uso rapido (exemplo minimo funcionando)
+5. Configuracao (variaveis de ambiente, arquivo de config)
+6. Estrutura do projeto (arvore de diretorios com descricao)
+7. Scripts disponiveis (build, test, lint, deploy)
+8. Contribuindo (como rodar localmente, padrao de commits)
+9. Licenca
+
+Tom: tecnico e direto. Assuma que o leitor e um dev pleno.
+```
+
+## Arquitetura
+
+### 11. Decisao de Arquitetura (ADR)
+
+Para documentar decisoes tecnicas importantes.
+
+```
+Crie um Architecture Decision Record (ADR) para a seguinte decisao:
+
+Titulo: [ex: Escolha do banco de dados para servico X]
+Contexto: [descreva o problema e restricoes]
+Opcoes consideradas: [liste 2-4 opcoes]
+
+Para cada opcao, analise:
+- Pros (minimo 3)
+- Contras (minimo 3)
+- Custo estimado de implementacao
+- Impacto na escalabilidade
+- Curva de aprendizado da equipe
+
+Decisao: recomende a melhor opcao com justificativa.
+Consequencias: o que muda apos esta decisao (positivo e negativo).
+Formato: ADR padrao (Status, Contexto, Decisao, Consequencias).
+```
+
+### 12. Design de Sistema
+
+Para planejar a arquitetura de um novo sistema ou feature.
+
+```
+Projete a arquitetura para [sistema/feature].
+
+Requisitos funcionais:
+[Liste os requisitos]
+
+Requisitos nao-funcionais:
+- Usuarios simultaneos esperados: [numero]
+- Latencia aceitavel: [ms]
+- Disponibilidade: [99.9%]
+- Volume de dados: [estimativa]
+
+Inclua:
+1. Diagrama de componentes (descricao textual)
+2. Tecnologias recomendadas para cada componente
+3. Fluxo de dados entre componentes
+4. Estrategia de banco de dados
+5. Pontos de cache
+6. Estrategia de deploy
+7. Monitoramento e alertas
+8. Plano de escalabilidade
+```
+
+## Performance e Otimizacao
+
+### 13. Analise de Performance
+
+Para identificar e resolver gargalos.
+
+```
+Analise o codigo abaixo quanto a performance.
+Linguagem: [linguagem]. Contexto: [ex: roda em loop, chamado 1000x/segundo].
+
+Codigo:
+[Cole o codigo]
+
+Identifique:
+1. Complexidade de tempo (Big O) das operacoes principais
+2. Gargalos de performance
+3. Alocacoes de memoria desnecessarias
+4. Operacoes de I/O que podem ser otimizadas
+5. Oportunidades de cache ou memoizacao
+
+Para cada otimizacao sugerida:
+- Impacto estimado (alto/medio/baixo)
+- Tradeoff (o que se perde)
+- Codigo otimizado
+```
+
+### 14. Query SQL Otimizada
+
+Para melhorar queries lentas.
+
+```
+Otimize a seguinte query SQL:
+
+[Cole a query]
+
+Banco: [PostgreSQL/MySQL/etc.]. Tabelas envolvidas: [descreva o schema relevante].
+Volume de dados: [linhas por tabela].
+Tempo atual de execucao: [tempo].
+
+Forneca:
+1. Analise do plano de execucao provavel
 2. Query otimizada
-3. Índices para criar (com CREATE INDEX exato)
-4. Se não der pra otimizar só com índice, alternativas (materialized view, partitioning, cache)
+3. Indices recomendados (com CREATE INDEX)
+4. Explicacao de cada mudanca
+5. Estimativa de melhoria
+6. Alternativas se a query nao puder ser otimizada (views materializadas, cache, etc.)
 ```
 
-**Por que funciona:** Você deu volume de dados (12M linhas), índices existentes, e o EXPLAIN ANALYZE. A IA pode fazer análise real ao invés de chutar. Provavelmente vai sugerir um índice composto em `(status, created_at, amount)` que cobre a query inteira.
+### 15. Checklist de Deploy
 
-**Output esperado:** "O índice `transactions_status_idx` filtra 12M para ~4M (33% são completed). Depois faz sequential scan nos 4M para filtrar por data e valor. Solução: `CREATE INDEX idx_transactions_fast ON transactions (status, created_at DESC, amount) INCLUDE (user_id);` — transforma em index-only scan, estimativa < 50ms."
-
-### Etapa 8 — Decisão de arquitetura documentada
-
-Sexta-feira. O time precisa decidir: microserviços ou monolito para o novo módulo de empréstimos.
-
-**Prompt:**
+Para garantir que nada seja esquecido antes de subir para producao.
 
 ```
-Preciso de um ADR (Architecture Decision Record) para a seguinte decisão:
+Crie um checklist de deploy para [tipo de aplicacao: API/frontend/mobile/etc.].
+Stack: [liste tecnologias].
+Ambiente: [AWS/GCP/Heroku/etc.].
 
-Contexto: Fintech com 50k usuários ativos, time de 12 devs (3 squads), monolito Node.js atual com 180k LOC. Queremos adicionar um módulo de empréstimos pessoais com análise de crédito, simulação, contratação e cobrança.
+Categorias:
+1. Pre-deploy (codigo, testes, review)
+2. Banco de dados (migrations, backups)
+3. Configuracao (env vars, secrets, DNS)
+4. Deploy (passos, rollback plan)
+5. Pos-deploy (smoke tests, monitoramento)
+6. Comunicacao (changelog, notificacao ao time)
 
-Opções:
-A) Módulo dentro do monolito atual
-B) Microserviço separado com comunicação via eventos (RabbitMQ)
-C) Módulo separado com Modular Monolith (bounded context no mesmo deploy)
-
-Para cada opção analise com dados concretos:
-- Custo de implementação (semanas-dev)
-- Custo de infraestrutura mensal (estimativa em BRL)
-- Complexidade operacional (deploy, monitoramento, debug)
-- Escalabilidade independente
-- Impacto se der errado (rollback, incidentes)
-
-Considere que: o time nunca operou microserviços, a infra atual é Heroku, e o módulo precisa estar em produção em 3 meses.
-
-Formato: ADR padrão (Status, Contexto, Decisão, Consequências).
+Para cada item: descricao + comando ou acao especifica.
+Formato: checklist com [ ] para marcar.
 ```
 
-**Por que funciona:** Você deu as restrições reais — time inexperiente em microserviços, deadline de 3 meses, infra simples. A IA não vai recomendar Kubernetes com service mesh. Vai provavelmente recomendar Modular Monolith (opção C) com um plano de extração futura.
+## Dicas de Uso
 
-**Output esperado:** Um ADR completo recomendando opção C, com argumento central "o time ganha 80% do benefício de microserviços (bounded contexts, contrato explícito entre módulos) sem a complexidade operacional, e mantém a opção de extrair para serviço separado quando o volume justificar (estimativa: > 500k transações/mês)."
-
-## Como montar seu próprio sistema
-
-O padrão que conecta todos esses prompts é uma fórmula de 4 elementos:
-
-1. **Contexto técnico específico** — linguagem, framework, versão, volume, infra
-2. **Restrição de domínio** — o que torna SEU problema diferente do genérico
-3. **Resultado com formato** — não peça "me ajuda", peça o formato exato (diff, ADR, teste, SQL)
-4. **Critério de qualidade** — o que separa resposta boa de ruim (severidade, riscos, tradeoffs)
-
-Salve esse template e preencha para qualquer situação:
-
-```
-Contexto: [stack completa + versões + volume]
-Domínio: [o que torna esse caso especial]
-Tarefa: [o que você quer, com formato de saída]
-Qualidade: [como julgar se a resposta é boa]
-Código/dados: [cole aqui]
-```
-
-Com esse sistema, cada interação com a IA vira uma consulta de alto nível ao invés de um tiro no escuro.
-
-## Resultado: o antes e o depois
-
-**Antes (Lucas genérico):**
-- Cola código sem contexto → resposta genérica → 40 min ajustando na mão
-- PR rejeitado com 14 comentários → retrabalho de 2 dias
-- Testes cobrem happy path → bug em produção na primeira edge case
-- Query lenta → "adiciona índice" sem saber qual → continua lenta
-- Decisão de arquitetura → opinião de quem gritou mais na reunião
-
-**Depois (Lucas com sistema):**
-- Prompt com contexto completo → resposta aplicável direto → 5 min de ajuste
-- Code review pela IA antes do PR → 2-3 comentários no máximo, todos são melhorias opcionais
-- Testes cobrem regras de negócio + edge cases + concorrência → 0 bugs em produção no último mês
-- Query com EXPLAIN + volume + índices → solução em 10 min, DBA aprovou sem mudança
-- ADR documentado com tradeoffs reais → decisão em 1 reunião de 30 min
-
-A diferença não é a IA. É o que você dá para ela trabalhar. Dev que trata IA como par programmer experiente — dando contexto, restrições e critérios — produz em 4 horas o que antes levava 2 dias. E o código é melhor.
-
-Não porque a IA é mágica. Porque ela te força a pensar antes de escrever.
+- **Sempre forneca contexto**: a IA gera codigo muito melhor quando sabe a linguagem, framework, versao e o que o codigo deve fazer. Nunca cole codigo sem contexto.
+- **Peca explicacoes**: adicione "explique cada linha" ou "comente o codigo" quando estiver aprendendo algo novo.
+- **Itere**: o primeiro resultado raramente e perfeito. Peca ajustes como "simplifique", "trate esse edge case" ou "use essa biblioteca ao inves".
+- **Valide sempre**: nunca copie codigo da IA para producao sem testar. Use os prompts de teste para gerar testes automaticamente.
+- **Combine com seu conhecimento**: a IA e um acelerador, nao um substituto. Revise criticamente as sugestoes e questione decisoes que nao fazem sentido para o seu contexto.
+- **Mantenha seguranca**: nunca cole credenciais, tokens ou dados sensiveis reais nos prompts. Use dados ficticios ou placeholders.

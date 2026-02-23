@@ -116,12 +116,12 @@ const Products = () => {
               }`}
               style={{ animationDelay: `${index * 100}ms` }}
             >
-              <div className="border border-black/10 p-6 sm:p-8 md:p-10 bg-white h-full flex flex-col group hover:bg-black hover:text-white hover:scale-[1.02] transition-all duration-300 ease-out">
+              <div className="border border-black/10 p-6 sm:p-8 md:p-10 bg-white h-full flex flex-col group hover:bg-black hover:text-white transition-all duration-500 ease-out">
                 <div className="flex items-start justify-between mb-6 md:mb-8">
-                  <div className="text-6xl sm:text-7xl md:text-8xl font-black opacity-10 group-hover:opacity-20 transition-opacity duration-300" style={{ letterSpacing: '-0.05em' }}>
+                  <div className="text-6xl sm:text-7xl md:text-8xl font-black opacity-10 group-hover:opacity-20 transition-opacity duration-500" style={{ letterSpacing: '-0.05em' }}>
                     {product.number}
                   </div>
-                  <div className="group-hover:text-white transition-colors duration-300 ease-out">
+                  <div className="group-hover:text-white transition-colors duration-500 ease-out">
                     {product.icon}
                   </div>
                 </div>

@@ -1,4 +1,4 @@
-import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { CATEGORIES } from '@/types/content';
 
 const Footer = () => {
@@ -9,17 +9,9 @@ const Footer = () => {
     window.open('https://wa.me/5511999999999', '_blank');
   };
 
-  const navigate = useNavigate();
-
   const scrollToSection = (sectionId: string) => {
     if (!isHome) {
-      navigate('/');
-      setTimeout(() => {
-        const element = document.getElementById(sectionId);
-        if (element) {
-          element.scrollIntoView({ behavior: 'smooth' });
-        }
-      }, 100);
+      window.location.href = `/#${sectionId}`;
       return;
     }
     const element = document.getElementById(sectionId);
@@ -41,32 +33,32 @@ const Footer = () => {
         </div>
 
         <nav className="flex flex-wrap justify-center items-center gap-x-4 sm:gap-x-6 md:gap-x-8 gap-y-3 sm:gap-y-4 mb-6 sm:mb-8 text-xs sm:text-sm font-mono px-4" aria-label="Navegação do rodapé">
-          <button onClick={() => scrollToSection('sobre')} className="hover:opacity-70 transition-opacity duration-300 ease-out uppercase tracking-wider min-h-[44px] flex items-center focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white">
+          <button onClick={() => scrollToSection('sobre')} className="hover:opacity-70 transition-opacity duration-300 ease-out uppercase tracking-wider min-h-[44px] flex items-center">
             Sobre
           </button>
           <span className="opacity-30" aria-hidden="true">·</span>
-          <button onClick={() => scrollToSection('produtos')} className="hover:opacity-70 transition-opacity duration-300 ease-out uppercase tracking-wider min-h-[44px] flex items-center focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white">
+          <button onClick={() => scrollToSection('produtos')} className="hover:opacity-70 transition-opacity duration-300 ease-out uppercase tracking-wider min-h-[44px] flex items-center">
             Produtos
           </button>
           <span className="opacity-30" aria-hidden="true">·</span>
-          <button onClick={() => scrollToSection('mentoria')} className="hover:opacity-70 transition-opacity duration-300 ease-out uppercase tracking-wider min-h-[44px] flex items-center focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white">
+          <button onClick={() => scrollToSection('mentoria')} className="hover:opacity-70 transition-opacity duration-300 ease-out uppercase tracking-wider min-h-[44px] flex items-center">
             Mentoria
           </button>
           <span className="opacity-30" aria-hidden="true">·</span>
-          <button onClick={handleWhatsApp} className="hover:opacity-70 transition-opacity duration-300 ease-out uppercase tracking-wider min-h-[44px] flex items-center focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white" aria-label="Contato via WhatsApp">
+          <button onClick={handleWhatsApp} className="hover:opacity-70 transition-opacity duration-300 ease-out uppercase tracking-wider min-h-[44px] flex items-center" aria-label="Contato via WhatsApp">
             Contato
           </button>
         </nav>
 
         <div className="flex flex-wrap justify-center items-center gap-x-4 gap-y-2 mb-8 sm:mb-10 md:mb-12">
-          <Link to="/conteudo" className="font-mono text-xs uppercase tracking-wider opacity-60 hover:opacity-100 transition-opacity min-h-[44px] flex items-center focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white">
+          <Link to="/conteudo" className="font-mono text-xs uppercase tracking-wider opacity-50 hover:opacity-80 transition-opacity min-h-[44px] flex items-center">
             Conteúdo
           </Link>
           {CATEGORIES.map(cat => (
             <Link
               key={cat.id}
               to={`/conteudo/${cat.id}`}
-              className="font-mono text-xs uppercase tracking-wider opacity-60 hover:opacity-100 transition-opacity min-h-[44px] flex items-center focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
+              className="font-mono text-xs uppercase tracking-wider opacity-50 hover:opacity-80 transition-opacity min-h-[44px] flex items-center"
             >
               {cat.label}
             </Link>
@@ -74,8 +66,8 @@ const Footer = () => {
         </div>
 
         <div className="text-center">
-          <div className="font-mono text-[0.65rem] sm:text-xs opacity-60">
-            © {new Date().getFullYear()} SARAIVA.AI
+          <div className="font-mono text-[0.65rem] sm:text-xs opacity-40">
+            © 2025 SARAIVA.AI
           </div>
         </div>
       </div>

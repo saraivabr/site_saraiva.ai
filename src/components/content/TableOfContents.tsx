@@ -51,7 +51,7 @@ const TableOfContents = ({ content }: TableOfContentsProps) => {
 
   return (
     <nav className="sticky top-24" aria-label="Sumario do artigo">
-      <h4 className="font-mono text-[0.6rem] uppercase tracking-widest opacity-60 mb-5 pb-3 border-b border-black/[0.06]">
+      <h4 className="font-mono text-[0.6rem] uppercase tracking-widest opacity-30 mb-5 pb-3 border-b border-black/[0.06]">
         Neste artigo
       </h4>
       <ul className="space-y-1">
@@ -59,12 +59,12 @@ const TableOfContents = ({ content }: TableOfContentsProps) => {
           <li key={item.id}>
             <a
               href={`#${item.id}`}
-              className={`font-mono text-[0.65rem] leading-snug block py-1.5 transition-all duration-200 border-l-2 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black ${
+              className={`font-mono text-[0.65rem] leading-snug block py-1.5 transition-all duration-200 border-l-2 ${
                 item.level === 3 ? 'pl-5' : 'pl-3'
               } ${
                 activeId === item.id
                   ? 'border-black opacity-100 font-bold'
-                  : 'border-transparent opacity-60 hover:opacity-100 hover:border-black/20'
+                  : 'border-transparent opacity-35 hover:opacity-70 hover:border-black/20'
               }`}
             >
               {item.text}

@@ -10,15 +10,7 @@ const CTA = lazy(() => import("@/components/CTA"));
 const Footer = lazy(() => import("@/components/Footer"));
 const CookieConsent = lazy(() => import("@/components/CookieConsent"));
 
-const SectionSkeleton = () => (
-  <div className="min-h-[300px] py-16 px-6">
-    <div className="container-max space-y-6 animate-pulse">
-      <div className="h-8 w-2/5 bg-black/5 rounded" />
-      <div className="h-4 w-3/4 bg-black/5 rounded" />
-      <div className="h-4 w-1/2 bg-black/5 rounded" />
-    </div>
-  </div>
-);
+const SectionFallback = () => <div className="min-h-[200px]" />;
 
 const Index = () => {
   return (
@@ -26,32 +18,32 @@ const Index = () => {
       <ErrorBoundary>
         <Hero />
       </ErrorBoundary>
-      <Suspense fallback={<SectionSkeleton />}>
+      <Suspense fallback={<SectionFallback />}>
         <ErrorBoundary>
           <About />
         </ErrorBoundary>
       </Suspense>
-      <Suspense fallback={<SectionSkeleton />}>
+      <Suspense fallback={<SectionFallback />}>
         <ErrorBoundary>
           <Products />
         </ErrorBoundary>
       </Suspense>
-      <Suspense fallback={<SectionSkeleton />}>
+      <Suspense fallback={<SectionFallback />}>
         <ErrorBoundary>
           <Mentoria />
         </ErrorBoundary>
       </Suspense>
-      <Suspense fallback={<SectionSkeleton />}>
+      <Suspense fallback={<SectionFallback />}>
         <ErrorBoundary>
           <Testimonials />
         </ErrorBoundary>
       </Suspense>
-      <Suspense fallback={<SectionSkeleton />}>
+      <Suspense fallback={<SectionFallback />}>
         <ErrorBoundary>
           <CTA />
         </ErrorBoundary>
       </Suspense>
-      <Suspense fallback={<SectionSkeleton />}>
+      <Suspense fallback={<SectionFallback />}>
         <Footer />
       </Suspense>
       <Suspense fallback={null}>

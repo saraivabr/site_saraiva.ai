@@ -1,6 +1,5 @@
 
 import { useState, useEffect, useRef } from "react";
-import { User } from "lucide-react";
 
 const About = () => {
   const [isVisible, setIsVisible] = useState(false);
@@ -68,13 +67,12 @@ const About = () => {
             </div>
           </div>
           
-          {/* Photo placeholder */}
-          <div className={`relative transition-all duration-1000 ease-out ${isVisible ? 'fade-in-up' : ''}`} style={{ animationDelay: '0.5s' }}>
-            <div className="aspect-square bg-gradient-to-br from-white/10 via-white/5 to-transparent border border-white/10 relative overflow-hidden group">
-              {/* User icon + overlay */}
-              <div className="absolute inset-0 flex flex-col items-center justify-center gap-4">
-                <User className="w-24 h-24 text-white/20 transition-all duration-500 group-hover:text-white/30 group-hover:scale-105" strokeWidth={1} />
-                <span className="font-mono text-xs uppercase tracking-widest text-white/30">Foto em breve</span>
+          {/* Abstract placeholder - Black square */}
+          <div className={`relative transition-all duration-1000 ease-out delay-500 ${isVisible ? 'fade-in-up' : ''}`}>
+            <div className="aspect-square bg-white/5 border border-white/10 relative overflow-hidden group">
+              {/* Abstract geometric pattern */}
+              <div className="absolute inset-0 flex items-center justify-center">
+                <div className="w-32 h-32 border border-white/20 rotate-45 transition-transform duration-700 ease-out group-hover:rotate-90"></div>
               </div>
             </div>
             
@@ -90,7 +88,7 @@ const About = () => {
         <div className="my-32 w-full h-[1px] bg-white/10"></div>
 
         {/* Stats section - Asymmetric layout */}
-        <div className={`transition-all duration-1000 ease-out ${isVisible ? 'fade-in-up' : ''}`} style={{ animationDelay: '1s' }}>
+        <div className={`transition-all duration-1000 ease-out delay-1000 ${isVisible ? 'fade-in-up' : ''}`}>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-16">
             <div className="text-center md:text-left">
               <div className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black mb-3 md:mb-4 counter-text" style={{ letterSpacing: '-0.02em' }}>1000+</div>

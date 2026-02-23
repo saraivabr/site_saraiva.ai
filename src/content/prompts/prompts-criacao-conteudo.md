@@ -1,279 +1,382 @@
 ---
-title: "A Jornada de Criar Conteudo Consistente Usando Prompts Inteligentes"
+title: "20 Prompts para Criacao de Conteudo com IA"
 slug: "prompts-criacao-conteudo"
 category: "prompts"
 date: "2026-02-22"
 author: "Saraiva"
-description: "Aprenda o raciocinio por tras dos prompts que transformam uma ideia vaga em conteudo real para blog, Instagram, YouTube e newsletter — sem depender de listas prontas."
+description: "Prompts para criar blog posts, carrosseis de Instagram, threads, newsletters e roteiros de YouTube com inteligencia artificial."
 tags: ["conteudo", "blog", "social-media"]
 image: ""
 source: ""
 featured: true
 ---
 
-# A Jornada de Criar Conteudo Consistente Usando Prompts Inteligentes
+# 20 Prompts para Criacao de Conteudo com IA
 
-A Fernanda gerencia o marketing de uma clinica odontologica em Belo Horizonte. Todo domingo a noite, ela senta na frente do computador com a mesma angustia: precisa de posts para a semana inteira, um artigo para o blog, e ainda tem aquele Reels que o dentista pediu. Ela abre o ChatGPT, digita "crie um post sobre clareamento dental" e recebe algo tao generico que da vergonha de publicar.
+Criar conteudo de qualidade e constante e um dos maiores desafios de qualquer marca ou criador. Estes 20 prompts cobrem os formatos mais populares e permitem que voce produza conteudo em escala sem perder qualidade.
 
-Eu ja passei por isso. E provavelmente voce tambem.
+## Blog Posts
 
-## Por que copiar prompts prontos nao funciona
+### 1. Artigo Completo de Blog
 
-O problema nao e a IA. O problema e que a maioria das pessoas trata a IA como um estagiario que acabou de chegar: joga um pedido vago e espera um milagre. "Escreva um post sobre X" e como pedir para alguem que nunca viu sua empresa criar conteudo que soa como voce.
-
-Prompts prontos de listas da internet tem o mesmo defeito. Eles nao sabem quem e seu publico. Nao conhecem seu tom de voz. Nao entendem o contexto do seu negocio. O resultado e sempre aquele texto morno que poderia ser de qualquer empresa.
-
-A verdade incomoda: voce nao precisa de mais prompts. Voce precisa aprender a pensar antes de escrever o prompt.
-
-## O principio por tras de prompts que funcionam
-
-Eu uso um modelo mental simples que chamo de **Contexto-Restricao-Formato**. Todo prompt bom responde a tres perguntas:
-
-1. **Contexto**: quem esta falando, para quem, sobre o que, em que situacao?
-2. **Restricao**: o que a IA NAO deve fazer? Qual o limite de tamanho, tom, estilo?
-3. **Formato**: como o resultado deve ser entregue? Bullet points? Roteiro? Carrossel?
-
-Quando voce domina esse triangulo, para de depender de templates. Voce consegue criar qualquer prompt do zero, para qualquer formato, em qualquer nicho.
-
-Vamos colocar isso em pratica com uma jornada completa — do planejamento ao conteudo publicado.
-
-## Etapa 1: Definir a voz antes de qualquer conteudo
-
-Antes de pedir um unico post, voce precisa ensinar a IA quem voce e. Eu faco isso uma vez e reutilizo em tudo.
-
-**Quando usar:** no comeco de qualquer projeto de conteudo, ou quando trocar de ferramenta de IA.
+Para criar um post otimizado para SEO do zero.
 
 ```
-Analise estes 3 exemplos de conteudo que eu ja publiquei:
+Escreva um artigo de blog sobre [tema] com 1500 palavras.
+Publico-alvo: [descreva].
+Palavra-chave principal: [palavra-chave].
 
-[Cole 3 textos reais seus — posts, emails, artigos]
+Estrutura:
+- Titulo otimizado para SEO (maximo 60 caracteres)
+- Introducao com gancho (100 palavras)
+- 5-7 subtitulos (H2) logicamente conectados
+- Conclusao com CTA
+- Meta description (maximo 155 caracteres)
 
-A partir deles, defina:
-1. Tom de voz dominante (3 adjetivos)
-2. Palavras e expressoes que uso com frequencia
-3. Palavras e expressoes que NUNCA uso
-4. Tamanho medio de frase
-5. Como eu abro e fecho textos
-
-Formate como um "guia de voz" que eu possa colar no inicio de qualquer conversa futura.
+Tom: [informativo/conversacional/tecnico]. Inclua dados e exemplos praticos.
 ```
 
-**Por que funciona:** a IA e excelente em identificar padroes linguisticos. Ao analisar textos reais seus, ela extrai um perfil de escrita que voce mesmo talvez nao soubesse descrever. Isso elimina o problema do "conteudo generico" de uma vez.
+### 2. Lista de Ideias de Blog para o Mes
 
-**Exemplo de output:**
-
-> **Guia de voz — Clinica Sorriso BH**
-> Tom: acolhedor, direto, levemente bem-humorado
-> Expressoes frequentes: "na pratica", "o que muda pra voce", "sem enrolacao"
-> Nunca usa: jargao tecnico sem explicacao, "venha nos visitar", emojis excessivos
-> Frases curtas (media 12 palavras). Abertura com pergunta ou situacao. Fechamento com convite leve.
-
-**Variacao:** para marcas pessoais, cole legendas do Instagram em vez de artigos. Para empresas B2B, use emails e apresentacoes comerciais como referencia.
-
-## Etapa 2: Gerar ideias com intencao, nao no automatico
-
-A maioria das pessoas pede "10 ideias de post" e recebe 10 obviedades. O segredo e dar contexto estrategico.
-
-**Quando usar:** no planejamento semanal ou mensal de conteudo.
+Para planejar o calendario editorial de uma vez.
 
 ```
-Voce e estrategista de conteudo para [tipo de negocio] que atende [publico].
-
-Objetivo do mes: [ex: gerar leads para o servico X / educar sobre o tema Y / aumentar engajamento].
-
-Gere 12 ideias de conteudo distribuidas assim:
-- 4 educativas (ensinam algo pratico)
-- 3 de autoridade (posicionam como referencia)
-- 3 de conexao (geram identificacao e comentarios)
-- 2 de conversao (levam a uma acao)
-
-Para cada ideia:
-- Titulo
-- Formato ideal (carrossel, video, artigo, post unico)
-- Angulo especifico (o que torna diferente do que ja existe)
-- Pergunta que esse conteudo responde na cabeca do publico
-
-[Cole aqui seu guia de voz]
+Gere 20 ideias de artigos de blog para uma empresa de [segmento] que atende [publico].
+Para cada ideia, inclua:
+- Titulo do artigo
+- Palavra-chave alvo
+- Angulo unico (o que diferencia de artigos existentes)
+- Tipo de conteudo (tutorial, lista, opiniao, case study)
+Agrupe por temas/pilares de conteudo.
 ```
 
-**Por que funciona:** ao separar por intencao (educar, conectar, converter), voce evita o erro classico de so vender ou so entreter. O campo "angulo especifico" forca a IA a sair do obvio. E a "pergunta do publico" garante que cada conteudo resolve algo real.
+### 3. Transformar Artigo em Outros Formatos
 
-**Exemplo de output (para a clinica odontologica):**
-
-> **Ideia 3 — Conexao**
-> Titulo: "O dia que um paciente me ensinou mais que a faculdade"
-> Formato: post unico com foto
-> Angulo: historia pessoal do dentista, nao dica tecnica
-> Pergunta do publico: "Sera que esse dentista me entende de verdade?"
-
-**Variacao:** troque as categorias por pilares do seu negocio. Uma SaaS pode usar "produto, cultura, cliente, tendencia". Um restaurante pode usar "prato, bastidores, historia, comunidade".
-
-## Etapa 3: Criar o artigo de blog que ranqueia e engaja
-
-Pedir "escreva um artigo sobre X" e jogar dinheiro fora. O prompt precisa carregar a estrategia junto.
-
-**Quando usar:** para cada artigo do blog, especialmente se SEO importa.
+Para reaproveitar conteudo ja publicado.
 
 ```
-[Cole seu guia de voz]
+Tenho o seguinte artigo de blog:
+[Cole o artigo ou o resumo]
 
-Escreva um artigo de blog sobre [tema].
-Publico: [descreva com detalhes — idade, dor, nivel de conhecimento].
-Palavra-chave: [palavra-chave principal].
+Transforme em:
+1. 5 posts para LinkedIn (150 palavras cada)
+2. 1 thread para Twitter/X (10 tweets)
+3. 1 roteiro de video curto (60 segundos)
+4. 1 carrossel de Instagram (8 slides)
+5. 1 email para newsletter
 
-Regras:
-- Titulo com maximo 60 caracteres, inclua a palavra-chave
-- Abertura de 3 linhas que descreva uma situacao real do leitor (sem "neste artigo vamos...")
-- 5-7 subtitulos (H2) que formem uma progressao logica
-- Cada secao: maximo 150 palavras, com exemplo pratico ou dado
-- Conclusao: 3 frases + 1 CTA claro
-- Meta description: maximo 155 caracteres
-- NAO use: "neste artigo", "e importante ressaltar", "em conclusao"
-
-Tamanho total: 1200-1500 palavras.
+Mantenha a mensagem central mas adapte o formato e tom para cada canal.
 ```
 
-**Por que funciona:** as restricoes negativas ("NAO use") eliminam os cliches que a IA adora repetir. Pedir uma "situacao real do leitor" na abertura forca a IA a comecar com gancho, nao com introducao escolar. E o limite por secao evita aqueles paragrafos interminaveis que ninguem le.
+## Instagram
 
-**Exemplo de output (abertura):**
+### 4. Carrossel Educativo
 
-> Voce escova os dentes duas vezes por dia, usa fio dental e mesmo assim acordou com a gengiva sangrando. Antes de entrar em panico, saiba: isso acontece com 75% dos brasileiros pelo menos uma vez na vida.
-
-**Variacao:** para artigos de opiniao, substitua "palavra-chave" por "tese principal" e peca que a IA defenda um ponto de vista. Para tutoriais, peca formato passo a passo com screenshots simulados.
-
-## Etapa 4: Transformar um conteudo em cinco formatos
-
-Aqui e onde a IA realmente brilha. Eu nunca crio conteudo do zero para cada canal — eu multiplico.
-
-**Quando usar:** depois de publicar um artigo de blog ou gravar um video.
+Para criar carrosseis que geram salvamentos e compartilhamentos.
 
 ```
-Tenho o seguinte conteudo original:
-[Cole o artigo, roteiro ou transcricao]
+Crie um carrossel de Instagram com 8 slides sobre [tema].
+Publico: [descreva].
 
-Transforme em 4 formatos, mantendo a mensagem central mas adaptando completamente para cada canal:
+Para cada slide, forneca:
+- Titulo curto (maximo 5 palavras)
+- Texto principal (maximo 30 palavras)
+- Sugestao visual (cor de fundo, icone ou tipo de imagem)
 
-1. CARROSSEL INSTAGRAM (8 slides)
-   - Slide 1: gancho visual (pergunta ou dado chocante)
-   - Slides 2-7: 1 ponto por slide, maximo 25 palavras cada
-   - Slide 8: CTA para salvar
-   - Caption: 100 palavras + 5 hashtags do nicho
+Slide 1: capa com gancho forte
+Slide 2-7: conteudo (1 ponto por slide)
+Slide 8: CTA + chamada para salvar/compartilhar
 
-2. THREAD LINKEDIN (5 posts conectados)
-   - Post 1: historia ou gancho pessoal
-   - Posts 2-4: insights com exemplos
-   - Post 5: reflexao + pergunta aberta
-
-3. ROTEIRO VIDEO CURTO (60 segundos)
-   - Gancho: 1 frase que para o scroll
-   - Corpo: 3 pontos rapidos
-   - CTA: o que fazer agora
-   - Sugestao de texto na tela
-
-4. EMAIL NEWSLETTER (300 palavras)
-   - Assunto: 2 opcoes (maximo 40 caracteres)
-   - Abertura pessoal
-   - 1 insight principal
-   - 1 link para o conteudo completo
-
-[Cole seu guia de voz]
+Caption: escreva uma legenda de 150 palavras com 5 hashtags relevantes.
 ```
 
-**Por que funciona:** o erro mais comum e pedir "adapte para Instagram" sem especificar a estrutura. A IA nao sabe que um carrossel tem slides, que cada slide tem limite de texto, que o primeiro slide precisa de gancho. Ao detalhar a estrutura de cada formato, voce garante conteudo publicavel, nao rascunho.
+### 5. Legendas para Feed
 
-**Este prompt falha quando:** o conteudo original e muito tecnico ou muito longo (acima de 3000 palavras). Nesse caso, peca primeiro um resumo em 5 bullet points e use o resumo como input.
-
-**Variacao:** adicione "SCRIPT PODCAST (5 minutos)" ou "TWEETS (5 tweets avulsos)" conforme seus canais.
-
-## Etapa 5: Criar o calendario que voce vai seguir de verdade
-
-Calendarios editoriais falham quando sao ambiciosos demais. Eu uso a IA para criar algo realista.
-
-**Quando usar:** no inicio de cada mes.
+Para criar um lote de legendas de uma vez.
 
 ```
-Crie um calendario de conteudo de 4 semanas para [negocio] nos canais: [liste seus canais reais].
+Crie 10 legendas para Instagram para uma marca de [segmento].
+Publico: [descreva].
+Mix de formatos:
+- 3 educativas (ensinar algo)
+- 3 de engajamento (perguntas/enquetes)
+- 2 de bastidores (humanizar a marca)
+- 2 de venda (promover produto/servico)
 
-Restricoes reais:
-- Capacidade de producao: [ex: 3 posts Instagram + 1 artigo + 1 email por semana]
-- Dias sem producao: [ex: segunda e sexta nao publico]
-- Evento/data importante no mes: [ex: Black Friday, lancamento de produto]
-- Objetivo principal do mes: [ex: gerar 50 leads para consultoria]
-
-Para cada conteudo planejado, inclua:
-- Dia e canal
-- Formato
-- Tema (titulo provisorio)
-- Intencao (educar/conectar/converter)
-- Tempo estimado de producao (15min/30min/1h)
-
-Regra: maximo 1 conteudo de conversao por semana. O resto e valor.
+Cada legenda: maximo 150 palavras, com CTA e 5 hashtags.
 ```
 
-**Por que funciona:** ao incluir "restricoes reais" — capacidade de producao, dias sem publicacao — voce recebe um calendario que da para cumprir, nao uma fantasia de agencia com 30 pessoas. O campo "tempo estimado" e um bonus que ajuda na organizacao da semana.
+### 6. Roteiro para Reels
 
-**Exemplo de output:**
-
-> **Semana 1 — Terca**
-> Canal: Instagram | Formato: Carrossel | Tema: "5 sinais de que voce precisa trocar sua escova" | Intencao: Educar | Tempo: 30min
-
-**Variacao:** para criadores solo, reduza para 2 canais. Para equipes, adicione coluna "responsavel".
-
-## Etapa 6: Roteiro de video que retém ate o final
-
-Videos longos (YouTube) e curtos (Reels, Shorts) precisam de estruturas diferentes. Este prompt resolve os dois.
-
-**Quando usar:** antes de gravar qualquer video.
+Para planejar videos curtos que reteem a audiencia.
 
 ```
-[Cole seu guia de voz]
+Crie um roteiro de Reels de [30/60] segundos sobre [tema].
+Formato: [talking head / tutorial / transicao / tendencia].
 
-Crie um roteiro de video de [duracao] sobre [tema].
-Canal: [YouTube/Instagram/TikTok].
+Estrutura:
+- Gancho (primeiros 2 segundos): frase que para o scroll
+- Conteudo (20-50 segundos): [3-5 pontos ou passo a passo]
+- Fechamento (3 segundos): CTA claro
+
+Inclua: texto para legenda, sugestao de audio/musica, e orientacoes de edicao.
+```
+
+## Twitter/X
+
+### 7. Thread Viral
+
+Para criar threads que geram engajamento e seguidores.
+
+```
+Crie uma thread de 10 tweets sobre [tema].
+Publico: [descreva].
+
+Tweet 1: gancho irresistivel (maximo 200 caracteres) que faca as pessoas quererem ler o resto
+Tweets 2-9: conteudo (1 ideia por tweet, maximo 280 caracteres cada)
+Tweet 10: resumo + CTA para seguir/retweetar
+
+Use frases curtas. Comece cada tweet com uma afirmacao forte. Nao use hashtags nos tweets do meio.
+```
+
+### 8. Tweets Avulsos para a Semana
+
+Para manter presenca constante na plataforma.
+
+```
+Crie 14 tweets para uma semana (2 por dia) para [perfil/marca de segmento].
+Mix:
+- 4 insights/opinioes sobre [nicho]
+- 3 dicas praticas
+- 2 perguntas para engajamento
+- 2 citacoes ou dados interessantes
+- 2 promocionais (sutil)
+- 1 pessoal/bastidores
+
+Cada tweet: maximo 240 caracteres. Tom: [autoritativo/casual/humoristico].
+```
+
+## Newsletter
+
+### 9. Newsletter Semanal Completa
+
+Para criar emails que as pessoas realmente leem.
+
+```
+Escreva uma newsletter semanal para assinantes interessados em [tema/segmento].
+Nome da newsletter: [nome].
+
+Estrutura:
+- Assunto do email (maximo 50 caracteres, gere 3 opcoes)
+- Abertura pessoal (50 palavras)
+- Conteudo principal: [insight/analise/tutorial] sobre [tema da semana] (300 palavras)
+- Secao "3 links da semana" (titulo + descricao de 20 palavras cada)
+- Fechamento com pergunta ou reflexao (30 palavras)
+
+Tom: como se estivesse escrevendo para um amigo inteligente. Maximo 500 palavras total.
+```
+
+### 10. Sequencia de Boas-Vindas
+
+Para novos assinantes de newsletter.
+
+```
+Crie uma sequencia de 5 emails de boas-vindas para novos assinantes da newsletter sobre [tema].
+
+Email 1 (imediato): Boas-vindas + o que esperar + entrega do lead magnet
+Email 2 (dia 2): Sua historia/historia da marca + por que faz isso
+Email 3 (dia 4): Melhor conteudo ja publicado (curadoria de 3 links)
+Email 4 (dia 7): Conteudo exclusivo para assinantes
+Email 5 (dia 10): Convite para comunidade/produto + CTA
+
+Para cada email: assunto, corpo (maximo 200 palavras) e CTA.
+```
+
+## YouTube
+
+### 11. Roteiro para Video de YouTube
+
+Para criar videos que reteem a audiencia ate o final.
+
+```
+Escreva um roteiro de video de YouTube de [10/15/20] minutos sobre [tema].
+Canal: [nome/nicho]. Publico: [descreva].
+
+Estrutura:
+- Gancho (30 segundos): promessa do video
+- Intro (30 segundos): contexto rapido
+- Conteudo principal (3-5 secoes com titulos)
+- Exemplo pratico ou demonstracao
+- Conclusao + CTA (inscrever-se, comentar, proximo video)
+
+Inclua: sugestoes de B-roll, graficos na tela e momentos de retencao (perguntas, teasers).
+Titulo do video (3 opcoes) e descricao otimizada para SEO.
+```
+
+### 12. Ideias de Shorts/Clips
+
+Para extrair conteudo curto de videos longos.
+
+```
+Tenho um video de YouTube sobre [tema] com os seguintes topicos abordados:
+[Liste os topicos ou cole o roteiro]
+
+Extraia 5 ideias de Shorts (menos de 60 segundos) a partir desse conteudo.
+Para cada Short:
+- Titulo chamativo
+- Trecho exato a recortar (ou roteiro novo de 100 palavras)
+- Gancho dos primeiros 3 segundos
+- Texto para sobreposicao na tela
+```
+
+## Podcast
+
+### 13. Roteiro de Episodio
+
+Para estruturar episodios de podcast solo ou com entrevista.
+
+```
+Crie o roteiro de um episodio de podcast sobre [tema].
+Formato: [solo/entrevista/painel]. Duracao: [30/45/60] minutos.
+Programa: [nome do podcast, nicho].
+
+Estrutura:
+- Intro (2 minutos): tema do dia + por que importa
+- Bloco 1 (10 min): [subtema]
+- Bloco 2 (10 min): [subtema]
+- Bloco 3 (10 min): [subtema ou caso pratico]
+- Encerramento (3 min): resumo + recomendacao + CTA
+
+[Se entrevista: inclua 10 perguntas para o convidado, ordenadas do geral ao especifico]
+```
+
+## Conteudo Educativo
+
+### 14. Mini-Curso por Email
+
+Para criar uma sequencia educativa que gera autoridade.
+
+```
+Crie um mini-curso de 7 dias por email sobre [tema].
+Cada email deve ter:
+- Assunto atrativo
+- Licao do dia (300 palavras)
+- Exercicio pratico (1 acao concreta)
+- Teaser do proximo dia
+
+Dia 1: Fundamentos de [tema]
+Dia 2-6: [defina subtemas progressivos]
+Dia 7: Revisao + proximo passo (oferta do curso/produto completo)
+```
+
+### 15. Ebook Resumido (Lead Magnet)
+
+Para criar um material rico de captura de leads.
+
+```
+Crie o conteudo de um ebook de 15 paginas sobre [tema].
+Titulo: [sugira 3 opcoes].
 Publico: [descreva].
 
 Estrutura:
-- GANCHO (primeiros 5 segundos): [pergunta provocativa OU dado surpreendente OU afirmacao controversa]
-- PROMESSA (10 segundos): o que a pessoa vai saber no final
-- CONTEUDO (corpo): [3-5 blocos, cada um com titulo, fala e sugestao visual]
-- RETENCAO: a cada 2 minutos, inclua um "momento de retencao" (pergunta, teaser do que vem, mudanca de ritmo)
-- CTA FINAL: instrucao especifica (nao "se inscreva", mas "[acao] + [motivo]")
+- Capa (titulo + subtitulo)
+- Indice
+- Introducao (por que este tema importa)
+- 5 capitulos (cada um com titulo, 500 palavras, exemplos e dica pratica)
+- Conclusao com CTA para [produto/servico/comunidade]
+- Pagina sobre o autor
 
-Para cada bloco do conteudo, inclua:
-- O que dizer (fala natural, como se fosse conversa)
-- O que mostrar na tela (texto, imagem, transicao)
-- Duracao estimada
-
-NAO escreva como roteiro de TV. Escreva como alguem falando para a camera.
+Tom: acessivel, pratico, sem jargoes desnecessarios.
 ```
 
-**Por que funciona:** "momentos de retencao" a cada 2 minutos imitam a tecnica dos maiores YouTubers brasileiros. Pedir "fala natural" evita aquele roteiro robotico que ninguem consegue ler de forma convincente. E a instrucao "nao escreva como roteiro de TV" muda completamente a saida.
+## Planejamento de Conteudo
 
-**Variacao:** para entrevistas, substitua o corpo por "10 perguntas progressivas (do geral ao pessoal)" com sugestao de follow-up para cada resposta.
+### 16. Calendario Editorial Mensal
 
-## Monte seu proprio sistema (e pare de depender de listas)
+Para planejar todo o conteudo do mes de uma vez.
 
-Depois de usar esses prompts, voce vai perceber um padrao. Todo prompt bom segue a mesma logica:
+```
+Crie um calendario editorial de 30 dias para [marca/criador de nicho].
+Canais: [Instagram, LinkedIn, YouTube, Newsletter, Blog].
 
-1. **Defina o papel da IA** ("voce e estrategista de conteudo")
-2. **De contexto especifico** (negocio, publico, objetivo)
-3. **Especifique a estrutura** (formato, numero de itens, tamanho)
-4. **Inclua restricoes negativas** (o que NAO fazer)
-5. **Cole seu guia de voz** (criado na Etapa 1)
+Para cada dia, inclua:
+- Canal
+- Formato (post, carrossel, video, artigo, email)
+- Tema/titulo
+- Pilar de conteudo (educar, entreter, vender, engajar)
 
-Com esses 5 elementos, voce monta qualquer prompt. Quer um script de podcast? Aplique os 5 elementos. Quer um case de sucesso? Os mesmos 5. E-book? Idem.
+Regras: maximo 1 post promocional por semana, alternar formatos, datas comemorativas relevantes para o nicho.
+```
 
-A diferenca entre quem copia prompts e quem cria conteudo de verdade e essa: entender o raciocinio por tras, nao memorizar templates.
+### 17. Pesquisa de Pautas
 
-## O que muda na pratica
+Para descobrir o que o publico quer consumir.
 
-A Fernanda que eu mencionei no comeco? Ela criou seu guia de voz em 15 minutos. Na semana seguinte, produziu todo o conteudo da clinica em 2 horas — algo que antes levava 6. E o conteudo finalmente soava como a clinica, nao como um chatbot.
+```
+Me ajude a encontrar pautas de conteudo para [nicho].
+Analise:
+1. 10 perguntas que o publico de [nicho] faz no Google
+2. 5 temas em alta no [nicho] em 2026
+3. 5 controversias ou debates atuais no [nicho]
+4. 5 formatos que estao performando bem nesse nicho
+5. 3 lacunas de conteudo (temas pouco explorados por criadores)
+```
 
-O que voce ganha ao adotar essa abordagem:
+## Storytelling
 
-- **Tempo:** de 6-8 horas por semana para 1-2 horas (producao de 5 canais)
-- **Consistencia:** mesmo tom de voz em todos os canais, todas as semanas
-- **Qualidade:** conteudo com angulo especifico em vez de "mais do mesmo"
-- **Autonomia:** voce cria prompts novos sozinho, sem precisar de novas listas
+### 18. Historia de Marca
 
-O conteudo generico esta morrendo. Nao porque a IA e ruim, mas porque a maioria das pessoas usa mal. Agora voce sabe usar melhor.
+Para criar uma narrativa emocional sobre seu negocio.
+
+```
+Escreva a historia da marca [nome] para usar na pagina "Sobre" do site.
+Informacoes: [fundador, ano, motivacao, desafios, conquistas].
+Estrutura da jornada do heroi:
+1. Mundo comum (como era antes)
+2. Chamado a aventura (por que criou o negocio)
+3. Desafios enfrentados
+4. Transformacao
+5. Missao atual e visao de futuro
+
+Tom: autentico, humano, inspirador. Maximo 400 palavras.
+```
+
+### 19. Case de Sucesso de Cliente
+
+Para documentar resultados e gerar prova social.
+
+```
+Escreva um case de sucesso com as seguintes informacoes:
+Cliente: [nome/perfil]
+Problema: [descreva]
+Solucao: [o que foi implementado]
+Resultado: [numeros e impacto]
+
+Estrutura: Desafio > Solucao > Resultado > Depoimento
+Formato: 500 palavras, com citacoes diretas do cliente (ficticias mas realistas).
+Inclua: headline, resumo em 1 frase e 3 metricas de destaque.
+```
+
+### 20. Manifesto da Marca
+
+Para definir o posicionamento e os valores publicamente.
+
+```
+Escreva um manifesto de marca para [empresa de segmento].
+Valores: [liste 3-5 valores].
+Publico: [descreva].
+Posicionamento: [o que a marca acredita e defende].
+
+Formato: texto corrido, 300 palavras, frases curtas e impactantes.
+Comece com "Nos acreditamos que..." e termine com um chamado a acao.
+Tom: inspirador, firme, autenticico.
+```
+
+## Como Personalizar Estes Prompts
+
+- **Defina seu tom de voz primeiro**: antes de usar qualquer prompt, crie um documento com exemplos do tom da sua marca e inclua "use este tom de voz: [descreva]" em cada prompt.
+- **Inclua exemplos de referencia**: se voce admira o estilo de alguem, adicione "escreva no estilo de [referencia]" ao prompt.
+- **Especifique restricoes**: "nao use palavras como [X, Y, Z]" ou "sempre mencione [tema/produto]" ajudam a manter a consistencia.
+- **Crie templates recorrentes**: para conteudos semanais, salve o prompt ja preenchido com as informacoes fixas e so mude o tema.
+- **Revise e humanize**: a IA gera o rascunho, mas o toque final (experiencias pessoais, opiniao genuina, humor natural) e o que diferencia seu conteudo.
+- **Peca variantes**: sempre gere 2-3 versoes e escolha a melhor. Ou combine partes de diferentes versoes.
