@@ -9,6 +9,7 @@ import { categorize } from './categorizer';
 import { generateArticle } from './content-generator';
 import { generateImage } from './image-generator';
 import { publishToSupabase, uploadImageToSupabase } from './supabase';
+import { evaluateQuality } from './quality-scorer';
 
 export default {
   async scheduled(controller: ScheduledController, env: Env, ctx: ExecutionContext): Promise<void> {
@@ -83,6 +84,15 @@ async function runContentPipeline(env: Env): Promise<{ success: boolean; article
   // 4. Process each selected item
   for (const item of selected) {
     try {
+      // Quality check BEFORE processing
+      const qualityScore = await evaluateQuality(item, env);
+      console.log(`Quality score for "${item.title}": ${qualityScore.overall}/10 (relevance: ${qualityScore.relevance}, sentiment: ${qualityScore.sentiment})`);
+
+      if (!qualityScore.shouldPublish) {
+        console.log(`Skipping low-quality content: ${item.title}`);
+        continue;
+      }
+
       const category = categorize(item);
       console.log(`Generating article for: ${item.title} (${category})`);
 
