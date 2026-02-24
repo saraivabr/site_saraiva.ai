@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Inserir Artigos OpenClaw no Supabase</title>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <style>
+    body { font-family: monospace; padding: 20px; background: #1a1a1a; color: #0f0; }
+    #log { white-space: pre-wrap; }
+    button { padding: 10px 20px; font-size: 16px; cursor: pointer; }
+  </style>
+</head>
+<body>
+  <h1>🚀 Migrar Artigos OpenClaw → Supabase</h1>
+  <button onclick="startMigration()">Iniciar Migração</button>
+  <div id="log"></div>
+
+  <script type="module">
+    const SUPABASE_URL = 'https://gefjcbigryytfsljgmae.supabase.co';
+    const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImdlZmpjYmlncnl5dGZzbGpnbWFlIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzA5NjQ3ODUsImV4cCI6MjA4NjU0MDc4NX0.D9dnIvCKqil1evvANMGX74U2v9HND2CdKOrZS7TsMoQ';
+    
+    const { createClient } = supabase;
+    const client = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+    // Dados dos artigos OpenClaw (resumidos)
+    const articles = [
+      {
+        title: "Primeiros Passos com OpenClaw: Guia de Produtividade",
+        description: "10 primeiros comandos para testar OpenClaw. Aprenda a criar tarefas, lembretes, resumos diários e automatizar sua rotina.",
+        category: "tool",
+        tags: ["openclaw", "produtividade", "comandos", "automação", "tutorial"],
+        featured: true,
+        body: "Conteúdo completo do artigo... (carregue do arquivo .md)"
+      },
+      // Adicione mais artigos aqui...
+    ];
+
+    window.startMigration = async function() {
+      const log = document.getElementById('log');
+      log.innerHTML = '🔄 Iniciando migração...\n\n';
+
+      // Tentar inserir com service role via função edge
+      log.innerHTML += '⚠️ ATENÇÃO: Esta página precisa de permissões de admin!\n';
+      log.innerHTML += '👉 Por favor, execute o SQL diretamente no Supabase Dashboard:\n\n';
+      log.innerHTML += '1. Acesse: https://supabase.com/dashboard/project/gefjcbigryytfsljgmae/editor\n';
+      log.innerHTML += '2. Abra o SQL Editor\n';
+      log.innerHTML += '3. Cole o conteúdo do arquivo: openclaw-inserts.sql\n';
+      log.innerHTML += '4. Execute o SQL\n\n';
+      log.innerHTML += '✅ Ou me passe a SUPABASE_SERVICE_KEY para eu fazer via script!\n';
+    }
+  </script>
+</body>
+</html>
