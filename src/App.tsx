@@ -6,6 +6,8 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Home from "./pages/Home";
 import CategoryPage from "./pages/CategoryPage";
 import ContentDetail from "./pages/ContentDetail";
+import Conteudo from "./pages/Conteudo";
+import ArticlePage from "./pages/ArticlePage";
 import McpDirectory from "./pages/McpDirectory";
 import McpDetail from "./pages/McpDetail";
 import TemplatesDirectory from "./pages/TemplatesDirectory";
@@ -24,6 +26,8 @@ const App = () => (
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/explore" element={<ExplorePage />} />
+          <Route path="/conteudo" element={<Conteudo />} />
+          <Route path="/conteudo/:category/:slug" element={<ArticlePage />} />
           <Route path="/mcps" element={<McpDirectory />} />
           <Route path="/mcps/:slug" element={<McpDetail />} />
           <Route path="/templates" element={<TemplatesDirectory />} />
