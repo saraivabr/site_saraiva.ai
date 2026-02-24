@@ -1,5 +1,6 @@
 import { useParams, Link } from "react-router-dom";
 import { motion } from "framer-motion";
+import { useEffect } from "react";
 import { ArrowLeft, Sparkles, Wrench, BarChart3, Brain, Calendar, ExternalLink, Star, Tag, DollarSign, Globe } from "lucide-react";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
@@ -8,6 +9,7 @@ import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import { useContent, useContents } from "@/hooks/useContents";
 import ContentCard from "@/components/ContentCard";
+import { trackContentView, trackExternalClick } from "@/lib/analytics";
 
 const categoryConfig = {
   prompt: { icon: Sparkles, label: "Prompt", color: "text-amber-600", bg: "bg-amber-100" },
@@ -22,6 +24,20 @@ const ContentDetail = () => {
   const { data: relatedContents } = useContents(content?.category);
 
   const related = relatedContents?.filter(c => c.id !== id).slice(0, 4) || [];
+
+  // Track content view
+  useEffect(() => {
+    if (content) {
+      trackContentView(content.id, content.category);
+    }
+  }, [content]);
+
+  // Handle external link click tracking
+  const handleExternalClick = (url: string) => {
+    if (content) {
+      trackExternalClick(content.id, url);
+    }
+  };
 
   if (isLoading) {
     return (
