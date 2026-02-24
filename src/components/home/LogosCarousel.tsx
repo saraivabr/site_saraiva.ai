@@ -1,15 +1,19 @@
 import { motion } from 'framer-motion'
 
-// Tech logos as SVG components
+// AI Tools logos - ferramentas que cobrimos no saraiva.ai
 const logos = [
-  { name: 'React', color: '#61DAFB', icon: '⚛️' },
-  { name: 'TypeScript', color: '#3178C6', icon: 'TS' },
-  { name: 'Vite', color: '#646CFF', icon: '⚡' },
-  { name: 'Tailwind', color: '#06B6D4', icon: '🎨' },
-  { name: 'Node.js', color: '#339933', icon: '🟢' },
-  { name: 'Python', color: '#3776AB', icon: '🐍' },
-  { name: 'AI/ML', color: '#FF6F61', icon: '🤖' },
-  { name: 'Cloud', color: '#FF9900', icon: '☁️' },
+  { name: 'ChatGPT', color: '#10A37F', icon: '🤖' },
+  { name: 'Claude', color: '#D97706', icon: '🧠' },
+  { name: 'Midjourney', color: '#7C3AED', icon: '🎨' },
+  { name: 'Cursor', color: '#00D4FF', icon: '⌨️' },
+  { name: 'Gemini', color: '#4285F4', icon: '💎' },
+  { name: 'Perplexity', color: '#20B2AA', icon: '🔍' },
+  { name: 'Notion AI', color: '#000000', icon: '📝' },
+  { name: 'GitHub Copilot', color: '#6E40C9', icon: '👨‍💻' },
+  { name: 'Stable Diffusion', color: '#FF6F61', icon: '🖼️' },
+  { name: 'ElevenLabs', color: '#F59E0B', icon: '🎙️' },
+  { name: 'Runway', color: '#EC4899', icon: '🎬' },
+  { name: 'Whisper', color: '#22C55E', icon: '👂' },
 ]
 
 interface LogosCarouselProps {
@@ -35,10 +39,10 @@ export function LogosCarousel({
         className="text-center mb-12"
       >
         <span className="text-indigo-400 text-sm font-medium uppercase tracking-wider">
-          Tecnologias
+          Ferramentas de IA
         </span>
         <h2 className="text-3xl md:text-4xl font-bold text-white mt-2">
-          Stack moderna e poderosa
+          Cobrimos as principais ferramentas
         </h2>
       </motion.div>
 
@@ -107,14 +111,14 @@ function LogoItem({ logo }: LogoItemProps) {
       transition={{ type: 'spring', stiffness: 400, damping: 17 }}
     >
       <div
-        className="w-32 h-32 rounded-2xl bg-slate-900/50 border border-slate-800 flex flex-col items-center justify-center gap-2 transition-all duration-300 group-hover:border-slate-600"
+        className="w-24 h-24 md:w-32 md:h-32 rounded-xl md:rounded-2xl bg-slate-900/50 border border-slate-800 flex flex-col items-center justify-center gap-1 md:gap-2 transition-all duration-300 group-hover:border-slate-600"
         style={{
           boxShadow: `0 0 0 0 ${logo.color}20`,
         }}
       >
         {/* Icon */}
         <motion.div
-          className="text-4xl"
+          className="text-2xl md:text-4xl"
           animate={{ rotate: [0, 0] }}
           whileHover={{ rotate: [0, -10, 10, 0], scale: 1.2 }}
           transition={{ duration: 0.5 }}
@@ -124,7 +128,7 @@ function LogoItem({ logo }: LogoItemProps) {
 
         {/* Name */}
         <span
-          className="text-sm font-medium text-slate-400 group-hover:text-white transition-colors"
+          className="text-xs md:text-sm font-medium text-slate-400 group-hover:text-white transition-colors text-center px-1"
           style={{ color: undefined }}
         >
           {logo.name}
@@ -174,7 +178,6 @@ export function FloatingLogos() {
               initial={{ x, y, opacity: 0, scale: 0 }}
               whileInView={{
                 x,
-                y,
                 opacity: 1,
                 scale: 1,
               }}
@@ -183,14 +186,14 @@ export function FloatingLogos() {
                 delay: index * 0.1,
                 duration: 0.5,
                 type: 'spring',
-                y: {
+              }}
+              animate={{
+                y: [y - 10, y + 10, y - 10],
+                transition: {
                   duration: 3 + index * 0.5,
                   repeat: Infinity,
                   ease: 'easeInOut',
                 },
-              }}
-              animate={{
-                y: [y - 10, y + 10, y - 10],
               }}
             >
               <motion.div

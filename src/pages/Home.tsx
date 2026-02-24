@@ -13,6 +13,9 @@ import { ScrollProgress } from "@/components/home/ScrollProgress";
 import { LogosCarousel } from "@/components/home/LogosCarousel";
 import { FeaturesSection } from "@/components/home/FeaturesSection";
 import { InteractiveCard, CardsGrid } from "@/components/home/InteractiveCard";
+import { TestimonialsSection } from "@/components/home/TestimonialsSection";
+import { PricingSection } from "@/components/home/PricingSection";
+import { ContactSection } from "@/components/home/ContactSection";
 
 // Loading Spinner
 function LoadingSpinner() {
@@ -249,6 +252,15 @@ export default function Home() {
             </div>
           </section>
         )}
+
+        {/* Testimonials Section */}
+        <TestimonialsSection />
+
+        {/* Pricing Section */}
+        <PricingSection />
+
+        {/* Contact Section */}
+        <ContactSection />
 
         {/* CTA Section */}
         <section className="py-20 px-4 bg-gradient-to-br from-primary/10 via-purple-500/10 to-pink-500/10">
