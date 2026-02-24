@@ -1,0 +1,34 @@
+# Development overrides
+# This file is automatically loaded by docker-compose alongside docker-compose.yml
+# Modify these settings for your local development environment
+
+version: '3.8'
+
+services:
+  redis:
+    # For development, you might want to reduce password complexity
+    command: redis-server --appendonly yes --requirepass dev_redis_pass
+    environment:
+      - REDIS_PASSWORD=dev_redis_pass
+    ports:
+      - "6379:6379"
+
+  meilisearch:
+    # Enable analytics in development for debugging
+    environment:
+      - MEILI_ENV=development
+      - MEILI_MASTER_KEY=dev_meilisearch_key
+      - MEILI_NO_ANALYTICS=false
+
+  redis-commander:
+    environment:
+      - REDIS_HOSTS=local:redis:6379:0:dev_redis_pass
+      - REDIS_PASSWORD=dev_redis_pass
+
+  nginx:
+    # In development, you might want to log more detailed information
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "50m"
+        max-file: "10"
