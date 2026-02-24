@@ -1,0 +1,21 @@
+name: Deploy Production
+
+on:
+  workflow_dispatch:
+    inputs:
+      confirm:
+        description: 'Type "deploy" to confirm'
+        required: true
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment: production
+    if: github.event.inputs.confirm == 'deploy'
+    steps:
+      - uses: actions/checkout@v4
+      - name: Deploy to Scalingo
+        uses: scalingo-community/scalingo-deploy-action@v1
+        with:
+          app-name: ${{ secrets.SCALINGO_APP_PROD }}
+          api-token: ${{ secrets.SCALINGO_API_TOKEN }}

@@ -1,0 +1,18 @@
+name: Deploy Staging
+
+on:
+  push:
+    branches: [staging]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment: staging
+    steps:
+      - uses: actions/checkout@v4
+      - name: Deploy to Scalingo
+        uses: scalingo-community/scalingo-deploy-action@v1
+        with:
+          app-name: ${{ secrets.SCALINGO_APP_STAGING }}
+          api-token: ${{ secrets.SCALINGO_API_TOKEN }}
+          region: osc-fr1
