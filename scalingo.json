@@ -1,0 +1,39 @@
+{
+  "name": "vite-react-shadcn-app",
+  "description": "Vite + React + TypeScript SPA with shadcn/ui",
+  "repository": "https://github.com/saraiva/site_saraiva.ai",
+  "keywords": [
+    "node",
+    "vite",
+    "react",
+    "typescript",
+    "spa"
+  ],
+  "buildpacks": [
+    {
+      "url": "heroku/nodejs"
+    }
+  ],
+  "env": {
+    "BUILDPACK_URL": {
+      "description": "URL for Node.js buildpack",
+      "value": "https://github.com/heroku/heroku-buildpack-nodejs.git"
+    },
+    "NODE_ENV": {
+      "description": "Node environment",
+      "value": "production"
+    },
+    "NPM_CONFIG_PRODUCTION": {
+      "description": "Install dev dependencies for build",
+      "value": "false"
+    }
+  },
+  "addons": [
+    {
+      "plan": "scalingo-postgresql"
+    }
+  ],
+  "scripts": {
+    "postdeploy": "npm run build"
+  }
+}
