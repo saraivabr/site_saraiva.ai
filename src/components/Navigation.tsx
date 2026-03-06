@@ -22,11 +22,11 @@ const Navigation = () => {
           <div className="flex items-center justify-between">
             {/* Logo */}
             <Link to="/" className="flex items-center gap-2.5 group">
-              <div className="w-8 h-8 rounded-lg bg-primary/10 border border-primary/20 flex items-center justify-center group-hover:bg-primary/20 transition-colors">
+              <div className="w-8 h-8 rounded-lg bg-primary/10 border border-primary/20 flex items-center justify-center group-hover:bg-primary/15 transition-colors">
                 <BookOpen className="w-4 h-4 text-primary" />
               </div>
               <div className="flex flex-col">
-                <span className="text-sm font-bold tracking-tight text-foreground leading-none">
+                <span className="text-sm font-bold tracking-tight text-foreground leading-none font-display">
                   Saraiva<span className="text-primary">.ai</span>
                 </span>
                 <span className="text-[9px] tracking-[0.15em] uppercase text-muted-foreground leading-none mt-0.5 hidden sm:block">
@@ -75,7 +75,7 @@ const Navigation = () => {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -10 }}
             transition={{ duration: 0.2 }}
-            className="fixed inset-0 z-40 bg-white/98 backdrop-blur-xl pt-20 px-6"
+            className="fixed inset-0 z-40 bg-background/98 backdrop-blur-xl pt-20 px-6"
           >
             <div className="flex flex-col gap-2">
               {navLinks.map((link, i) => {
