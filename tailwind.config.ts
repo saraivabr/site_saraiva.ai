@@ -47,11 +47,15 @@ export default {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
+        "text-secondary": "hsl(var(--text-secondary))",
+        "text-muted": "hsl(var(--text-muted))",
+        "text-tertiary": "hsl(var(--text-tertiary))",
+        "link-blue": "hsl(var(--link-blue))",
+        "link-blue-hover": "hsl(var(--link-blue-hover))",
       },
       fontFamily: {
-        sans: ['DM Sans', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'sans-serif'],
-        display: ['Bricolage Grotesque', 'Georgia', 'serif'],
-        mono: ['JetBrains Mono', 'monospace'],
+        sans: ['Inter', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'sans-serif'],
+        display: ['Bebas Neue', 'Impact', 'sans-serif'],
       },
       borderRadius: {
         lg: "var(--radius)",

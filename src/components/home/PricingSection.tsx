@@ -20,7 +20,7 @@ const tiers: PricingTier[] = [
     price: 'R$ 0',
     period: '/mês',
     description: 'Acesso à biblioteca básica de recursos',
-    icon: <Sparkles className="w-5 h-5" />,
+    icon: <Sparkles className="w-6 h-6" />,
     features: [
       'Acesso aos prompts públicos',
       'Ferramentas básicas',
@@ -35,7 +35,7 @@ const tiers: PricingTier[] = [
     price: 'R$ 47',
     period: '/mês',
     description: 'Para criadores e profissionais',
-    icon: <Zap className="w-5 h-5" />,
+    icon: <Zap className="w-6 h-6" />,
     highlighted: true,
     features: [
       'Tudo do plano Gratuito',
@@ -54,7 +54,7 @@ const tiers: PricingTier[] = [
     price: 'Sob consulta',
     period: '',
     description: 'Para times e empresas',
-    icon: <Crown className="w-5 h-5" />,
+    icon: <Crown className="w-6 h-6" />,
     features: [
       'Tudo do plano Pro',
       'Licença para equipe',
@@ -68,24 +68,22 @@ const tiers: PricingTier[] = [
   },
 ]
 
-const ease = [0.22, 1, 0.36, 1] as const
-
 export function PricingSection() {
   return (
-    <section className="py-24" id="pricing">
+    <section className="py-24 bg-gradient-to-b from-background to-muted/30" id="pricing">
       <div className="container mx-auto px-4">
+        {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.6, ease }}
-          className="text-center mb-14"
+          className="text-center mb-16"
         >
-          <span className="inline-flex items-center gap-2 px-4 py-1.5 bg-accent/10 border border-accent/20 rounded-full text-sm font-medium text-accent mb-4">
-            <Sparkles className="w-3.5 h-3.5" />
+          <span className="inline-flex items-center gap-2 px-4 py-2 bg-primary/10 border border-primary/20 rounded-full text-sm font-medium text-primary mb-4">
+            <Sparkles className="w-4 h-4" />
             Planos flexíveis
           </span>
-          <h2 className="text-3xl md:text-4xl font-bold font-display mb-4">
+          <h2 className="text-3xl md:text-4xl font-bold mb-4">
             Escolha seu plano
           </h2>
           <p className="text-muted-foreground max-w-2xl mx-auto">
@@ -94,49 +92,53 @@ export function PricingSection() {
         </motion.div>
 
         {/* Pricing cards */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-5 max-w-5xl mx-auto">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8 max-w-6xl mx-auto px-2">
           {tiers.map((tier, index) => (
             <motion.div
               key={tier.name}
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ delay: index * 0.08, duration: 0.6, ease }}
-              className={`relative rounded-2xl p-6 md:p-7 transition-all duration-300 ${
+              transition={{ delay: index * 0.1 }}
+              className={`relative rounded-2xl p-6 md:p-8 ${
                 tier.highlighted
-                  ? 'bg-gradient-to-b from-accent/10 to-card border-2 border-accent/30 shadow-xl shadow-accent/5 md:-mt-2 md:mb-2'
-                  : 'bg-card/60 border border-border/50 hover:border-border'
+                  ? 'bg-primary text-primary-foreground shadow-2xl shadow-primary/20 md:scale-105 z-10'
+                  : 'bg-card border border-border'
               }`}
             >
               {tier.highlighted && (
-                <div className="absolute -top-3 left-1/2 -translate-x-1/2 px-3 py-0.5 bg-accent text-accent-foreground text-xs font-bold rounded-full">
+                <div className="absolute -top-4 left-1/2 -translate-x-1/2 px-4 py-1 bg-yellow-500 text-yellow-950 text-sm font-bold rounded-full">
                   Mais popular
                 </div>
               )}
 
               {/* Icon & Name */}
-              <div className="flex items-center gap-2.5 mb-4">
-                <div className={`p-2 rounded-lg ${tier.highlighted ? 'bg-accent/15 text-accent' : 'bg-secondary text-muted-foreground'}`}>
+              <div className="flex items-center gap-3 mb-4">
+                <div className={`p-2 rounded-lg ${tier.highlighted ? 'bg-white/20' : 'bg-primary/10'}`}>
                   {tier.icon}
                 </div>
-                <h3 className="text-lg font-bold font-display">{tier.name}</h3>
+                <h3 className="text-xl font-bold">{tier.name}</h3>
               </div>
 
               {/* Price */}
-              <div className="mb-3">
-                <span className="text-3xl font-bold font-display">{tier.price}</span>
-                <span className="text-muted-foreground text-sm">{tier.period}</span>
+              <div className="mb-4">
+                <span className="text-4xl font-bold">{tier.price}</span>
+                <span className={tier.highlighted ? 'text-primary-foreground/70' : 'text-muted-foreground'}>
+                  {tier.period}
+                </span>
               </div>
 
               {/* Description */}
-              <p className="text-sm text-muted-foreground mb-6">{tier.description}</p>
+              <p className={`mb-6 ${tier.highlighted ? 'text-primary-foreground/80' : 'text-muted-foreground'}`}>
+                {tier.description}
+              </p>
 
               {/* Features */}
-              <ul className="space-y-2.5 mb-7">
+              <ul className="space-y-3 mb-8">
                 {tier.features.map((feature) => (
-                  <li key={feature} className="flex items-start gap-2.5 text-sm">
-                    <Check className={`w-4 h-4 mt-0.5 flex-shrink-0 ${tier.highlighted ? 'text-accent' : 'text-primary/70'}`} />
-                    <span className="text-foreground/80">{feature}</span>
+                  <li key={feature} className="flex items-start gap-3">
+                    <Check className={`w-5 h-5 mt-0.5 flex-shrink-0 ${tier.highlighted ? 'text-white' : 'text-primary'}`} />
+                    <span className={tier.highlighted ? 'text-primary-foreground/90' : ''}>{feature}</span>
                   </li>
                 ))}
               </ul>
@@ -147,10 +149,10 @@ export function PricingSection() {
                   href={tier.ctaLink}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className={`block w-full py-3 px-6 rounded-xl font-semibold text-center text-sm transition-all duration-200 ${
+                  className={`block w-full py-3 px-6 rounded-xl font-semibold text-center transition-all ${
                     tier.highlighted
-                      ? 'bg-accent text-accent-foreground hover:bg-accent/90 shadow-lg shadow-accent/20'
-                      : 'bg-secondary text-foreground hover:bg-secondary/80'
+                      ? 'bg-white text-primary hover:bg-white/90'
+                      : 'bg-primary text-primary-foreground hover:bg-primary/90'
                   }`}
                 >
                   {tier.cta}
@@ -158,10 +160,10 @@ export function PricingSection() {
               ) : (
                 <Link
                   to={tier.ctaLink}
-                  className={`block w-full py-3 px-6 rounded-xl font-semibold text-center text-sm transition-all duration-200 ${
+                  className={`block w-full py-3 px-6 rounded-xl font-semibold text-center transition-all ${
                     tier.highlighted
-                      ? 'bg-accent text-accent-foreground hover:bg-accent/90 shadow-lg shadow-accent/20'
-                      : 'bg-secondary text-foreground hover:bg-secondary/80'
+                      ? 'bg-white text-primary hover:bg-white/90'
+                      : 'bg-primary text-primary-foreground hover:bg-primary/90'
                   }`}
                 >
                   {tier.cta}
@@ -176,19 +178,24 @@ export function PricingSection() {
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
-          transition={{ delay: 0.3 }}
-          className="mt-12 text-center"
+          className="mt-16 text-center"
         >
-          <p className="text-xs text-muted-foreground mb-3">
-            Pagamento seguro · Cancele quando quiser · Garantia de 7 dias
+          <p className="text-sm text-muted-foreground mb-4">
+            Pagamento seguro • Cancele quando quiser • Garantia de 7 dias
           </p>
-          <div className="flex flex-wrap items-center justify-center gap-5 text-muted-foreground text-xs">
-            {['SSL Seguro', 'Suporte em português', 'Pix, cartão ou boleto'].map((badge) => (
-              <span key={badge} className="flex items-center gap-1.5">
-                <Check className="w-3.5 h-3.5 text-emerald-500" />
-                {badge}
-              </span>
-            ))}
+          <div className="flex flex-wrap items-center justify-center gap-4 md:gap-6 text-muted-foreground text-sm">
+            <span className="flex items-center gap-2">
+              <Check className="w-4 h-4 text-green-500" />
+              SSL Seguro
+            </span>
+            <span className="flex items-center gap-2">
+              <Check className="w-4 h-4 text-green-500" />
+              Suporte em português
+            </span>
+            <span className="flex items-center gap-2">
+              <Check className="w-4 h-4 text-green-500" />
+              Pix, cartão ou boleto
+            </span>
           </div>
         </motion.div>
       </div>
