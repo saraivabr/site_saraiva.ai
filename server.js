@@ -86,7 +86,7 @@ app.get('/health', (req, res) => {
 // app.use('/api', apiRouter);
 
 // SPA Fallback: Serve index.html for all unmatched routes
-app.get('*', (req, res) => {
+app.get('{*path}', (req, res) => {
   res.sendFile(path.join(distPath, 'index.html'), (err) => {
     if (err) {
       console.error('Error serving index.html:', err);
