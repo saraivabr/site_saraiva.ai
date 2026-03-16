@@ -1,306 +1,216 @@
-import { motion, AnimatePresence } from "framer-motion";
-import { useState, useEffect } from "react";
+import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
-import { Sparkles, Wrench, FileText, Brain, ArrowRight } from "lucide-react";
+import { useQuery } from "@tanstack/react-query";
+import { ArrowRight, Blocks, Package, Terminal, Server, Settings, Webhook, Zap } from "lucide-react";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
-import { useContents, type Content } from "@/hooks/useContents";
-import { useMcpServers } from "@/hooks/useMcpServers";
 
-// Dynamic Components
-import { HeroSection } from "@/components/home/HeroSection";
-import { ScrollProgress } from "@/components/home/ScrollProgress";
-import { LogosCarousel } from "@/components/home/LogosCarousel";
-import { FeaturesSection } from "@/components/home/FeaturesSection";
-import { InteractiveCard, CardsGrid } from "@/components/home/InteractiveCard";
-import { TestimonialsSection } from "@/components/home/TestimonialsSection";
-import { PricingSection } from "@/components/home/PricingSection";
-import { ContactSection } from "@/components/home/ContactSection";
-
-// Loading Spinner
-function LoadingSpinner() {
-  return (
-    <div className="fixed inset-0 bg-background flex items-center justify-center z-50">
-      <motion.div
-        className="relative"
-        initial={{ opacity: 0, scale: 0.8 }}
-        animate={{ opacity: 1, scale: 1 }}
-        exit={{ opacity: 0, scale: 0.8 }}
-      >
-        <motion.div
-          className="w-16 h-16 rounded-full border-2 border-primary/30 border-t-primary"
-          animate={{ rotate: 360 }}
-          transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
-        />
-        <motion.div
-          className="absolute inset-2 rounded-full border-2 border-purple-500/30 border-t-purple-500"
-          animate={{ rotate: -360 }}
-          transition={{ duration: 1.5, repeat: Infinity, ease: "linear" }}
-        />
-      </motion.div>
-    </div>
-  );
-}
-
-// Category icons mapping
-const categoryIcons: Record<string, typeof Sparkles> = {
-  prompt: Sparkles,
-  tool: Wrench,
-  analysis: FileText,
-  thought: Brain,
-};
-
-// Category gradients for cards
-const categoryGradients: Record<string, string> = {
-  prompt: "from-yellow-500 to-orange-500",
-  tool: "from-blue-500 to-cyan-500",
-  analysis: "from-purple-500 to-pink-500",
-  thought: "from-green-500 to-emerald-500",
-};
-
-// Convert Supabase content to card format
-function contentToCard(content: Content) {
-  const Icon = categoryIcons[content.category] ?? Sparkles;
-  return {
-    title: content.title,
-    description: content.description || "",
-    icon: <Icon className="w-6 h-6" />,
-    gradient: categoryGradients[content.category] || "from-gray-500 to-slate-500",
-    link: `/content/${content.id}`,
-    tags: content.tags?.slice(0, 2) || [],
-    featured: content.featured,
-    pricing: content.pricing,
-    category: content.category,
-  };
-}
+const typeCards = [
+  { type: "skills", label: "Skills", desc: "Habilidades especializadas para Claude Code", icon: Blocks, color: "bg-violet-500" },
+  { type: "agents", label: "Agents", desc: "Agentes autônomos para tarefas complexas", icon: Package, color: "bg-blue-500" },
+  { type: "commands", label: "Commands", desc: "Comandos slash para workflows", icon: Terminal, color: "bg-green-500" },
+  { type: "mcps", label: "MCPs", desc: "Servidores MCP para estender capacidades", icon: Server, color: "bg-teal-500" },
+  { type: "settings", label: "Settings", desc: "Configurações otimizadas", icon: Settings, color: "bg-pink-500" },
+  { type: "hooks", label: "Hooks", desc: "Hooks para automação de eventos", icon: Webhook, color: "bg-orange-500" },
+];
 
 export default function Home() {
-  const [isLoading, setIsLoading] = useState(true);
-  const { data: contents, isLoading: contentsLoading } = useContents();
-  const { data: mcpServers } = useMcpServers();
+  const { data: stats } = useQuery({
+    queryKey: ["stats"],
+    queryFn: async () => {
+      const res = await fetch("/api/stats");
+      return res.json() as Promise<Record<string, number>>;
+    },
+  });
 
-  useEffect(() => {
-    // Simulate initial load for smooth transition
-    const timer = setTimeout(() => setIsLoading(false), 800);
-    return () => clearTimeout(timer);
-  }, []);
-
-  // Get featured and recent content
-  const featuredContent = contents?.filter((c) => c.featured).slice(0, 6) || [];
-  const recentContent = contents?.slice(0, 12) || [];
-  const toolsContent = contents?.filter((c) => c.category === "tool").slice(0, 6) || [];
-
-  // Convert to card format
-  const showcaseCards = featuredContent.map(contentToCard);
+  const totalItems = stats ? Object.values(stats).reduce((a, b) => a + b, 0) : 0;
 
   return (
-    <>
-      <AnimatePresence>
-        {isLoading && <LoadingSpinner />}
-      </AnimatePresence>
+    <div className="min-h-screen bg-background">
+      <Navigation />
 
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: isLoading ? 0 : 1 }}
-        transition={{ duration: 0.5 }}
-        className="min-h-screen bg-background"
-      >
-        {/* Scroll Progress */}
-        <ScrollProgress />
+      {/* Hero */}
+      <section className="pt-32 pb-20 px-6 md:px-12">
+        <div className="max-w-5xl mx-auto text-center">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7 }}
+          >
+            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-primary/15 text-sm font-medium text-foreground mb-8">
+              <Zap className="w-4 h-4" />
+              {totalItems > 0 ? `${totalItems.toLocaleString()}+ componentes` : "Biblioteca curada"}
+            </div>
 
-        {/* Navigation */}
-        <Navigation />
+            <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold tracking-tight text-foreground leading-[0.9] mb-6">
+              Sua livraria de
+              <br />
+              <span className="text-primary">Inteligência Artificial</span>
+            </h1>
 
-        {/* Hero Section */}
-        <HeroSection />
+            <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto mb-10 leading-relaxed">
+              Skills, agents, MCPs e comandos curados para Claude Code.
+              Monte seu stack ideal e comece a criar.
+            </p>
 
-        {/* Logos Carousel */}
-        <section className="py-12 border-y border-border bg-muted/30">
-          <div className="container mx-auto px-4">
-            <motion.p
-              initial={{ opacity: 0, y: 10 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              className="text-center text-sm text-muted-foreground mb-8"
-            >
-              Cobrimos as principais ferramentas de IA
-            </motion.p>
-            <LogosCarousel />
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <Link
+                to="/directory/skills"
+                className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-foreground text-white rounded-full font-semibold hover:bg-foreground/90 transition-all hover:scale-[1.02]"
+              >
+                Explorar Diretório
+                <ArrowRight className="w-5 h-5" />
+              </Link>
+              <Link
+                to="/directory/mcps"
+                className="inline-flex items-center justify-center gap-2 px-8 py-4 border-2 border-border rounded-full font-semibold hover:bg-secondary transition-all"
+              >
+                Ver MCPs
+              </Link>
+            </div>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Stats Bar */}
+      {stats && (
+        <section className="border-y border-border bg-foreground text-white py-6 px-6">
+          <div className="max-w-5xl mx-auto">
+            <div className="flex flex-wrap justify-center gap-8 md:gap-16">
+              {typeCards.map(({ type, label, icon: Icon }) => (
+                <Link
+                  key={type}
+                  to={`/directory/${type}`}
+                  className="flex items-center gap-2 text-white/70 hover:text-white transition-colors"
+                >
+                  <Icon className="w-4 h-4" />
+                  <span className="text-2xl font-bold text-white">{stats[type]?.toLocaleString() || 0}</span>
+                  <span className="text-sm">{label}</span>
+                </Link>
+              ))}
+            </div>
           </div>
         </section>
+      )}
 
-        {/* Featured Content - Interactive Cards */}
-        {showcaseCards.length > 0 && (
-          <section className="py-20 px-4">
-            <div className="container mx-auto">
+      {/* Directory Cards */}
+      <section className="py-20 px-6 md:px-12">
+        <div className="max-w-5xl mx-auto">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="text-center mb-14"
+          >
+            <h2 className="text-3xl md:text-4xl font-bold mb-4">
+              Explore por categoria
+            </h2>
+            <p className="text-muted-foreground max-w-xl mx-auto">
+              Componentes prontos para uso, curados e organizados por tipo
+            </p>
+          </motion.div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+            {typeCards.map(({ type, label, desc, icon: Icon, color }, i) => (
               <motion.div
+                key={type}
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                className="text-center mb-12"
-              >
-                <h2 className="text-3xl md:text-4xl font-bold mb-4">
-                  Destaques da Biblioteca
-                </h2>
-                <p className="text-muted-foreground max-w-2xl mx-auto">
-                  Conteúdo curado e atualizado diariamente sobre as melhores ferramentas e práticas de IA
-                </p>
-              </motion.div>
-
-              <CardsGrid>
-                {showcaseCards.map((card, index) => (
-                  <Link key={index} to={card.link || "#"}>
-                    <InteractiveCard
-                      title={card.title}
-                      description={card.description}
-                      icon={card.icon}
-                      gradient={card.gradient}
-                    />
-                  </Link>
-                ))}
-              </CardsGrid>
-
-              <motion.div
-                initial={{ opacity: 0 }}
-                whileInView={{ opacity: 1 }}
-                viewport={{ once: true }}
-                className="text-center mt-12"
+                transition={{ delay: i * 0.08 }}
               >
                 <Link
-                  to="/explore"
-                  className="inline-flex items-center gap-2 px-6 py-3 bg-primary text-primary-foreground rounded-full font-medium hover:bg-primary/90 transition-colors"
+                  to={`/directory/${type}`}
+                  className="group block p-6 rounded-2xl border border-border bg-card hover:border-primary/40 hover:shadow-lg hover:shadow-primary/5 transition-all duration-300 hover:-translate-y-1"
                 >
-                  Explorar biblioteca
-                  <ArrowRight className="w-4 h-4" />
-                </Link>
-              </motion.div>
-            </div>
-          </section>
-        )}
-
-        {/* Features Section */}
-        <section className="py-20 bg-muted/30">
-          <div className="container mx-auto px-4">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              className="text-center mb-12"
-            >
-              <h2 className="text-3xl md:text-4xl font-bold mb-4">
-                Por que usar Saraiva.AI?
-              </h2>
-              <p className="text-muted-foreground max-w-2xl mx-auto">
-                Uma biblioteca curada de recursos sobre Inteligência Artificial para criadores e empreendedores
-              </p>
-            </motion.div>
-
-            <FeaturesSection />
-          </div>
-        </section>
-
-        {/* Recent Content Grid */}
-        {recentContent.length > 0 && (
-          <section className="py-20 px-4">
-            <div className="container mx-auto">
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                className="flex items-center justify-between mb-12"
-              >
-                <div>
-                  <h2 className="text-2xl md:text-3xl font-bold mb-2">
-                    Adicionados Recentemente
-                  </h2>
-                  <p className="text-muted-foreground">
-                    {contents?.length || 0}+ recursos disponíveis
+                  <div className={`w-12 h-12 rounded-xl ${color} flex items-center justify-center mb-4`}>
+                    <Icon className="w-6 h-6 text-white" />
+                  </div>
+                  <div className="flex items-center justify-between mb-2">
+                    <h3 className="text-lg font-bold text-foreground group-hover:text-primary transition-colors">
+                      {label}
+                    </h3>
+                    <span className="text-sm font-bold text-primary mono">
+                      {stats?.[type] || "—"}
+                    </span>
+                  </div>
+                  <p className="text-sm text-muted-foreground leading-relaxed">
+                    {desc}
                   </p>
-                </div>
-                <Link
-                  to="/explore"
-                  className="hidden md:flex items-center gap-2 text-primary hover:underline"
-                >
-                  Ver todos
-                  <ArrowRight className="w-4 h-4" />
+                  <div className="mt-4 flex items-center gap-1 text-sm text-primary font-medium opacity-0 group-hover:opacity-100 transition-opacity">
+                    Explorar <ArrowRight className="w-4 h-4" />
+                  </div>
                 </Link>
               </motion.div>
-
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-                {recentContent.map((content, index) => {
-                  const card = contentToCard(content);
-                  return (
-                    <motion.div
-                      key={content.id}
-                      initial={{ opacity: 0, y: 20 }}
-                      whileInView={{ opacity: 1, y: 0 }}
-                      viewport={{ once: true }}
-                      transition={{ delay: Math.min(index * 0.05, 0.3) }}
-                    >
-                      <Link to={card.link || "#"}>
-                        <InteractiveCard
-                          title={card.title}
-                          description={card.description}
-                          icon={card.icon}
-                          gradient={card.gradient}
-                        />
-                      </Link>
-                    </motion.div>
-                  );
-                })}
-              </div>
-            </div>
-          </section>
-        )}
-
-        {/* Testimonials Section */}
-        <TestimonialsSection />
-
-        {/* Pricing Section */}
-        <PricingSection />
-
-        {/* Contact Section */}
-        <ContactSection />
-
-        {/* CTA Section */}
-        <section className="py-20 px-4 bg-gradient-to-br from-primary/10 via-purple-500/10 to-pink-500/10">
-          <div className="container mx-auto">
-            <motion.div
-              initial={{ opacity: 0, scale: 0.95 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              viewport={{ once: true }}
-              className="text-center max-w-3xl mx-auto"
-            >
-              <h2 className="text-3xl md:text-4xl font-bold mb-6">
-                Pronto para criar com IA?
-              </h2>
-              <p className="text-lg text-muted-foreground mb-8">
-                Explore nossa biblioteca de ferramentas, prompts e recursos para acelerar seus projetos com Inteligência Artificial.
-              </p>
-              <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <Link
-                  to="/explore"
-                  className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-primary text-primary-foreground rounded-full font-semibold hover:bg-primary/90 transition-all hover:scale-105"
-                >
-                  Explorar Biblioteca
-                  <ArrowRight className="w-5 h-5" />
-                </Link>
-                <a
-                  href="https://wa.me/5511999999999"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center justify-center gap-2 px-8 py-4 border border-border rounded-full font-semibold hover:bg-muted transition-all"
-                >
-                  Falar Comigo
-                </a>
-              </div>
-            </motion.div>
+            ))}
           </div>
-        </section>
+        </div>
+      </section>
 
-        {/* Footer */}
-        <Footer />
-      </motion.div>
-    </>
+      {/* How it works */}
+      <section className="py-20 px-6 md:px-12 bg-primary/5">
+        <div className="max-w-4xl mx-auto text-center">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+          >
+            <h2 className="text-3xl md:text-4xl font-bold mb-14">
+              Como funciona
+            </h2>
+          </motion.div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {[
+              { step: "01", title: "Explore", desc: "Navegue por 1.500+ skills, agents e MCPs organizados por categoria" },
+              { step: "02", title: "Monte seu Stack", desc: "Selecione os componentes que precisa e monte sua configuração ideal" },
+              { step: "03", title: "Instale com 1 clique", desc: "Copie o comando de instalação e configure tudo direto no Claude Code" },
+            ].map((item, i) => (
+              <motion.div
+                key={i}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: i * 0.1 }}
+                className="text-center"
+              >
+                <div className="w-14 h-14 rounded-full bg-primary text-foreground font-bold text-xl flex items-center justify-center mx-auto mb-4">
+                  {item.step}
+                </div>
+                <h3 className="text-lg font-bold mb-2">{item.title}</h3>
+                <p className="text-sm text-muted-foreground leading-relaxed">{item.desc}</p>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* CTA */}
+      <section className="py-20 px-6 md:px-12 bg-foreground text-white">
+        <div className="max-w-3xl mx-auto text-center">
+          <motion.div
+            initial={{ opacity: 0, scale: 0.95 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true }}
+          >
+            <h2 className="text-3xl md:text-4xl font-bold mb-6">
+              Pronto para criar com IA?
+            </h2>
+            <p className="text-lg text-white/70 mb-10">
+              Explore nossa biblioteca e monte o stack perfeito para seus projetos.
+            </p>
+            <Link
+              to="/directory/skills"
+              className="inline-flex items-center gap-2 px-10 py-4 bg-primary text-foreground rounded-full font-bold text-lg hover:bg-primary/90 transition-all hover:scale-[1.02]"
+            >
+              Começar agora
+              <ArrowRight className="w-5 h-5" />
+            </Link>
+          </motion.div>
+        </div>
+      </section>
+
+      <Footer />
+    </div>
   );
 }

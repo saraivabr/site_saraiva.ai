@@ -1,14 +1,15 @@
 import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
-import { Menu, X, Wrench, BookOpen, Home, Server, Package, Compass } from "lucide-react";
+import { Menu, X, Blocks, Package, Terminal, Server, Settings, Webhook, Compass, Home } from "lucide-react";
 
 const navLinks = [
   { to: "/", label: "Início", icon: Home },
+  { to: "/directory/skills", label: "Skills", icon: Blocks },
+  { to: "/directory/agents", label: "Agents", icon: Package },
+  { to: "/directory/commands", label: "Commands", icon: Terminal },
+  { to: "/directory/mcps", label: "MCPs", icon: Server },
   { to: "/explore", label: "Explorar", icon: Compass },
-  { to: "/mcps", label: "MCPs", icon: Server },
-  { to: "/templates", label: "Templates", icon: Package },
-  { to: "/ferramentas", label: "Ferramentas", icon: Wrench },
 ];
 
 const Navigation = () => {
@@ -18,34 +19,29 @@ const Navigation = () => {
   return (
     <>
       <nav className="fixed top-0 left-0 right-0 z-50 nav-blur">
-        <div className="max-w-7xl mx-auto px-6 md:px-12 py-4">
+        <div className="max-w-7xl mx-auto px-6 md:px-12 py-3">
           <div className="flex items-center justify-between">
             {/* Logo */}
-            <Link to="/" className="flex items-center gap-2.5 group">
-              <div className="w-8 h-8 rounded-lg bg-primary/10 border border-primary/20 flex items-center justify-center group-hover:bg-primary/20 transition-colors">
-                <BookOpen className="w-4 h-4 text-primary" />
-              </div>
-              <div className="flex flex-col">
-                <span className="text-sm font-bold tracking-tight text-foreground leading-none">
-                  Saraiva<span className="text-primary">.ai</span>
-                </span>
-                <span className="text-[9px] tracking-[0.15em] uppercase text-muted-foreground leading-none mt-0.5 hidden sm:block">
-                  Sua livraria de IA
-                </span>
-              </div>
+            <Link to="/" className="flex items-center gap-2 group shrink-0">
+              <img
+                src="/logo.png"
+                alt="Saraiva.AI"
+                className="h-8 w-auto"
+              />
             </Link>
 
             {/* Desktop Nav */}
-            <div className="hidden md:flex items-center gap-1">
+            <div className="hidden lg:flex items-center gap-0.5">
               {navLinks.map((link) => {
-                const isActive = location.pathname === link.to;
+                const isActive = location.pathname === link.to ||
+                  (link.to !== "/" && location.pathname.startsWith(link.to));
                 return (
                   <Link
                     key={link.to}
                     to={link.to}
                     className={`flex items-center gap-1.5 px-3 py-2 rounded-lg text-sm font-medium transition-all duration-200 ${
                       isActive
-                        ? "text-primary bg-primary/10"
+                        ? "text-foreground bg-primary/15"
                         : "text-muted-foreground hover:text-foreground hover:bg-secondary"
                     }`}
                   >
@@ -59,7 +55,7 @@ const Navigation = () => {
             {/* Mobile Toggle */}
             <button
               onClick={() => setMobileOpen(!mobileOpen)}
-              className="md:hidden p-2 rounded-lg text-muted-foreground hover:text-foreground hover:bg-secondary transition-colors"
+              className="lg:hidden p-2 rounded-lg text-muted-foreground hover:text-foreground hover:bg-secondary transition-colors"
             >
               {mobileOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
             </button>
@@ -79,7 +75,8 @@ const Navigation = () => {
           >
             <div className="flex flex-col gap-2">
               {navLinks.map((link, i) => {
-                const isActive = location.pathname === link.to;
+                const isActive = location.pathname === link.to ||
+                  (link.to !== "/" && location.pathname.startsWith(link.to));
                 return (
                   <motion.div
                     key={link.to}
@@ -92,7 +89,7 @@ const Navigation = () => {
                       onClick={() => setMobileOpen(false)}
                       className={`flex items-center gap-3 px-4 py-4 rounded-xl text-lg font-medium transition-all ${
                         isActive
-                          ? "text-primary bg-primary/10"
+                          ? "text-foreground bg-primary/15"
                           : "text-muted-foreground hover:text-foreground hover:bg-secondary"
                       }`}
                     >
@@ -104,10 +101,8 @@ const Navigation = () => {
               })}
             </div>
 
-            <div className="absolute bottom-12 left-6 right-6">
-              <p className="text-xs text-muted-foreground text-center mono">
-                Saraiva.ai — Sua livraria de IA
-              </p>
+            <div className="absolute bottom-12 left-6 right-6 text-center">
+              <img src="/logo.png" alt="Saraiva.AI" className="h-6 mx-auto opacity-40" />
             </div>
           </motion.div>
         )}
