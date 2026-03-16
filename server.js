@@ -1,6 +1,7 @@
 import express from 'express';
 import path from 'path';
 import { fileURLToPath } from 'url';
+import { readFileSync } from 'fs';
 import compression from 'compression';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
@@ -8,6 +9,12 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 const HOST = process.env.HOST || '0.0.0.0';
 const NODE_ENV = process.env.NODE_ENV || 'development';
+
+// Middleware: JSON body parsing
+app.use(express.json());
+
+// Load MCP data
+const mcpData = JSON.parse(readFileSync(path.join(__dirname, 'data', 'mcps.json'), 'utf-8'));
 
 // Middleware: Logging
 app.use((req, res, next) => {
@@ -82,8 +89,38 @@ app.get('/health', (req, res) => {
   res.status(200).json({ status: 'ok', timestamp: new Date().toISOString() });
 });
 
-// API routes can be added here
-// app.use('/api', apiRouter);
+// API: List MCPs
+app.get('/api/mcps', (req, res) => {
+  let results = mcpData.filter(m => m.published);
+
+  if (req.query.category && req.query.category !== 'all') {
+    results = results.filter(m => m.category === req.query.category);
+  }
+  if (req.query.deploy_type && req.query.deploy_type !== 'all') {
+    results = results.filter(m => m.deploy_type === req.query.deploy_type);
+  }
+  if (req.query.search) {
+    const s = req.query.search.toLowerCase();
+    results = results.filter(m =>
+      m.name.toLowerCase().includes(s) ||
+      (m.description && m.description.toLowerCase().includes(s))
+    );
+  }
+
+  results.sort((a, b) => {
+    if (a.featured !== b.featured) return b.featured ? 1 : -1;
+    return b.usage_count - a.usage_count;
+  });
+
+  res.json(results);
+});
+
+// API: Get single MCP
+app.get('/api/mcps/:slug', (req, res) => {
+  const mcp = mcpData.find(m => m.slug === req.params.slug && m.published);
+  if (!mcp) return res.status(404).json({ error: 'MCP not found' });
+  res.json(mcp);
+});
 
 // SPA Fallback: Serve index.html for all unmatched routes
 app.get('{*path}', (req, res) => {
