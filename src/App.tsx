@@ -9,6 +9,7 @@ import ContentDetail from "./pages/ContentDetail";
 import Conteudo from "./pages/Conteudo";
 import ArticlePage from "./pages/ArticlePage";
 import DirectoryPage from "./pages/DirectoryPage";
+import ItemDetailPage from "./pages/ItemDetailPage";
 import McpDirectory from "./pages/McpDirectory";
 import McpDetail from "./pages/McpDetail";
 import TemplatesDirectory from "./pages/TemplatesDirectory";
@@ -30,6 +31,7 @@ const App = () => (
           <Route path="/conteudo" element={<Conteudo />} />
           <Route path="/conteudo/:category/:slug" element={<ArticlePage />} />
           <Route path="/directory/:type" element={<DirectoryPage />} />
+          <Route path="/directory/:type/:slug" element={<ItemDetailPage />} />
           <Route path="/mcps" element={<McpDirectory />} />
           <Route path="/mcps/:slug" element={<McpDetail />} />
           <Route path="/templates" element={<TemplatesDirectory />} />
