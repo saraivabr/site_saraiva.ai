@@ -54,7 +54,7 @@
     "name": "Azure Role Selector",
     "slug": "azure-role-selector",
     "description": "When user is asking for guidance for which role to assign to an identity given desired permissions, this agent helps them understand the role that will meet the requirements with least privilege access and how to apply that role.",
-    "description_pt": "When user is asking para guidance for which role para assign to an identity given desired permissions, este agent helps them understand o role esse will meet the requirements com least privilege access e how to apply that role.",
+    "description_pt": null,
     "category": "azure",
     "type": "command",
     "published": true
@@ -264,7 +264,7 @@
     "name": "Web Design Reviewer",
     "slug": "web-design-reviewer",
     "description": "This skill enables visual inspection of websites running locally or remotely to identify and fix design issues. Triggers on requests like \"review website design\", \"check the UI\", \"fix the layout\", \"find design problems\". Detects issues with responsiv",
-    "description_pt": "This skill enables visual inspection de websites running locally ou remotely para identify e fix design issues. Triggers no requests like \"review website design\", \"check o UI\", \"fix the layout\", \"find design problems\". Detects issues com responsiv",
+    "description_pt": null,
     "category": "design",
     "type": "command",
     "published": true
@@ -804,7 +804,7 @@
     "name": "GWS Modelarmor Sanitize Prompt",
     "slug": "gws-modelarmor-sanitize-prompt",
     "description": "Google Model Armor: Sanitize a user prompt through a Model Armor template.",
-    "description_pt": "Google Model Armor: Sanitize a user prompt through a Model Armor template.",
+    "description_pt": "Google modelos Armor: Sanitize a usuários prompt through a modelos Armor templates.",
     "category": "google-workspace",
     "type": "command",
     "published": true
@@ -814,7 +814,7 @@
     "name": "GWS Modelarmor Sanitize Response",
     "slug": "gws-modelarmor-sanitize-response",
     "description": "Google Model Armor: Sanitize a model response through a Model Armor template.",
-    "description_pt": "Google Model Armor: Sanitize a model response through a Model Armor template.",
+    "description_pt": "Google modelos Armor: Sanitize a modelos respostas through a modelos Armor templates.",
     "category": "google-workspace",
     "type": "command",
     "published": true
@@ -924,7 +924,7 @@
     "name": "GWS Workflow Email To Task",
     "slug": "gws-workflow-email-to-task",
     "description": "Google Workflow: Convert a Gmail message into a Google Tasks entry.",
-    "description_pt": "Google Workflow: Convert a Gmail message into a Google Tasks entry.",
+    "description_pt": "Google fluxos de trabalho: Convert a Gmail mensagens em a Google tarefas entry.",
     "category": "google-workspace",
     "type": "command",
     "published": true
@@ -954,7 +954,7 @@
     "name": "GWS Workflow Standup Report",
     "slug": "gws-workflow-standup-report",
     "description": "Google Workflow: Today's meetings + open tasks as a standup summary.",
-    "description_pt": "Google Workflow: Today's meetings + open tasks as a standup summary.",
+    "description_pt": "Google fluxos de trabalho: Today's meetings + open tarefas as a standup summary.",
     "category": "google-workspace",
     "type": "command",
     "published": true
@@ -1734,7 +1734,7 @@
     "name": "Feature Analyzer",
     "slug": "feature-analyzer",
     "description": "Turn ideas into fully formed designs and specs through natural collaborative dialogue. Use before implementing new features or making significant changes.",
-    "description_pt": "Turn ideas into fully formed designs e specs through natural collaborative dialogue. Use before implementing new features ou making significant changes.",
+    "description_pt": null,
     "category": "orchestration",
     "type": "command",
     "published": true
@@ -1934,7 +1934,7 @@
     "name": "Nuget Manager",
     "slug": "nuget-manager",
     "description": "Manage NuGet packages in .NET projects/solutions. Use this skill when adding, removing, or updating NuGet package versions. It enforces using `dotnet` CLI for package management and provides strict procedures for direct file edits only when updating ",
-    "description_pt": "Gerenciar NuGet packages em .NET projetos/solutions. Use este skill when adding, removing, ou updating NuGet package versions. It enforces usando `dotnet` CLI para package management e provides strict procedures for direct arquivo edits only when upd",
+    "description_pt": null,
     "category": "project-management",
     "type": "command",
     "published": true

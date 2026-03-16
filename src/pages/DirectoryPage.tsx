@@ -9,6 +9,7 @@ import {
 import { useQuery } from "@tanstack/react-query";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
+import SEOHead from "@/components/SEOHead";
 
 // ─── Types ───────────────────────────────────────────────
 interface DirectoryItem {
@@ -27,6 +28,11 @@ interface DirectoryItem {
   tools?: string[];
   model?: string;
   env_vars?: string[];
+}
+
+interface StackEntry {
+  item: DirectoryItem;
+  itemType: string;
 }
 
 // ─── Config ──────────────────────────────────────────────
@@ -80,10 +86,11 @@ const DirectoryPage = () => {
   const { type = "skills" } = useParams<{ type: string }>();
   const [search, setSearch] = useState("");
   const [activeCategory, setActiveCategory] = useState("all");
-  const [stack, setStack] = useState<DirectoryItem[]>([]);
+  const [stack, setStack] = useState<StackEntry[]>([]);
   const [stackOpen, setStackOpen] = useState(false);
   const [copied, setCopied] = useState(false);
   const [page, setPage] = useState(1);
+  const [activeTab, setActiveTab] = useState<'config' | 'commands'>('config');
 
   // Reset page when filters change
   const resetFilters = () => setPage(1);
@@ -117,30 +124,88 @@ const DirectoryPage = () => {
   );
 
   // Stack
-  const toggleStack = (item: DirectoryItem) => {
+  const toggleStack = (item: DirectoryItem, overrideType?: string) => {
+    const t = overrideType || type;
     setStack((prev) =>
-      prev.find((s) => s.slug === item.slug)
-        ? prev.filter((s) => s.slug !== item.slug)
-        : [...prev, item]
+      prev.find((s) => s.item.slug === item.slug && s.itemType === t)
+        ? prev.filter((s) => !(s.item.slug === item.slug && s.itemType === t))
+        : [...prev, { item, itemType: t }]
     );
   };
-  const isInStack = (slug: string) => stack.some((s) => s.slug === slug);
+  const isInStack = (slug: string) => stack.some((s) => s.item.slug === slug && s.itemType === type);
 
-  const installCommand = useMemo(() => {
-    const withCmd = stack.filter((s) => s.install_command);
-    if (withCmd.length === 0) return "";
-    return withCmd.map((s) => s.install_command).join("\n");
-  }, [stack]);
+  const generateStackConfig = (entries: StackEntry[]): string => {
+    const grouped: Record<string, StackEntry[]> = {};
+    entries.forEach(e => {
+      if (!grouped[e.itemType]) grouped[e.itemType] = [];
+      grouped[e.itemType].push(e);
+    });
 
-  const copyToClipboard = () => {
-    navigator.clipboard.writeText(installCommand);
-    setCopied(true);
-    setTimeout(() => setCopied(false), 2000);
+    const sections: string[] = [];
+
+    // MCPs -> .mcp.json format
+    if (grouped.mcps) {
+      const mcpConfig: Record<string, any> = {};
+      grouped.mcps.forEach(({ item }) => {
+        if (item.install_command) {
+          const parts = item.install_command.trim().split(/\s+/);
+          mcpConfig[item.slug] = { command: parts[0], args: parts.slice(1) };
+        } else {
+          mcpConfig[item.slug] = { command: "npx", args: [item.slug] };
+        }
+      });
+      sections.push(`// .mcp.json\n${JSON.stringify({ mcpServers: mcpConfig }, null, 2)}`);
+    }
+
+    // Skills -> CLAUDE.md entries
+    if (grouped.skills) {
+      const lines = grouped.skills.map(({ item }) =>
+        `- ${item.name}: ${item.description_pt || item.description || ''}`
+      );
+      sections.push(`// Adicionar ao CLAUDE.md\n# Skills\n${lines.join('\n')}`);
+    }
+
+    // Agents -> agent config
+    if (grouped.agents) {
+      const lines = grouped.agents.map(({ item }) =>
+        `## ${item.name}\nModelo: ${item.model || 'sonnet'}\nDescrição: ${item.description_pt || item.description || ''}`
+      );
+      sections.push(`// Configuração de Agents\n${lines.join('\n\n')}`);
+    }
+
+    // Hooks -> settings.json hooks
+    if (grouped.hooks) {
+      const hookConfig: Record<string, any> = {};
+      grouped.hooks.forEach(({ item }) => {
+        hookConfig[item.slug] = { event: item.category || "PostToolUse", command: item.name };
+      });
+      sections.push(`// hooks em settings.json\n${JSON.stringify({ hooks: hookConfig }, null, 2)}`);
+    }
+
+    // Settings -> settings.json entries
+    if (grouped.settings) {
+      const settingsConfig: Record<string, any> = {};
+      grouped.settings.forEach(({ item }) => {
+        settingsConfig[item.slug] = item.description_pt || item.description || true;
+      });
+      sections.push(`// settings.json\n${JSON.stringify(settingsConfig, null, 2)}`);
+    }
+
+    // Commands -> slash command list
+    if (grouped.commands) {
+      const lines = grouped.commands.map(({ item }) =>
+        `/${item.slug} — ${item.description_pt || item.description || ''}`
+      );
+      sections.push(`// Comandos disponíveis\n${lines.join('\n')}`);
+    }
+
+    return sections.join('\n\n---\n\n');
   };
 
   return (
     <div className="min-h-screen bg-background">
       <Navigation />
+      <SEOHead title={config.title} description={config.subtitle} path={`/directory/${type}`} />
 
       {/* ─── DARK HERO HEADER ─── */}
       <section className="relative bg-[#0a0a0a] pt-24 pb-8 overflow-hidden">
@@ -434,22 +499,25 @@ const DirectoryPage = () => {
                     <>
                       {/* Items list */}
                       <div className="space-y-1.5 mb-4 max-h-52 overflow-y-auto">
-                        {stack.map((item) => (
+                        {stack.map((entry) => (
                           <motion.div
-                            key={item.slug}
+                            key={`${entry.itemType}-${entry.item.slug}`}
                             initial={{ opacity: 0, x: -10 }}
                             animate={{ opacity: 1, x: 0 }}
                             exit={{ opacity: 0, x: 10 }}
                             className="flex items-center gap-2.5 px-3 py-2 rounded-xl bg-foreground/[0.03] border border-border/50 group/item"
                           >
-                            <div className={`w-6 h-6 rounded-md bg-gradient-to-br ${stringToColor(item.category || item.name)} flex items-center justify-center shrink-0`}>
-                              <span className="text-white text-[10px] font-bold">{item.name?.charAt(0)}</span>
+                            <div className={`w-6 h-6 rounded-md bg-gradient-to-br ${stringToColor(entry.item.category || entry.item.name)} flex items-center justify-center shrink-0`}>
+                              <span className="text-white text-[10px] font-bold">{entry.item.name?.charAt(0)}</span>
                             </div>
                             <span className="flex-1 truncate text-xs font-medium text-foreground">
-                              {item.name}
+                              {entry.item.name}
+                            </span>
+                            <span className="text-[9px] text-muted-foreground/40 font-medium">
+                              {entry.itemType}
                             </span>
                             <button
-                              onClick={() => toggleStack(item)}
+                              onClick={() => toggleStack(entry.item, entry.itemType)}
                               className="text-muted-foreground/40 hover:text-red-500 transition-colors opacity-0 group-hover/item:opacity-100"
                             >
                               <X className="w-3 h-3" />
@@ -458,25 +526,53 @@ const DirectoryPage = () => {
                         ))}
                       </div>
 
-                      {/* Install command */}
-                      {installCommand && (
-                        <div className="mb-4">
-                          <div className="flex items-center justify-between mb-2">
-                            <span className="text-[10px] font-semibold uppercase tracking-wider text-muted-foreground">
-                              Comando
-                            </span>
-                            <button
-                              onClick={copyToClipboard}
-                              className="inline-flex items-center gap-1 text-[10px] font-medium text-amber-600 hover:text-amber-700 transition-colors"
-                            >
-                              {copied ? <><Check className="w-3 h-3" /> Copiado!</> : <><Copy className="w-3 h-3" /> Copiar</>}
-                            </button>
+                      {/* Config tabs */}
+                      {(() => {
+                        const configText = generateStackConfig(stack);
+                        const commands = stack
+                          .filter(s => s.item.install_command)
+                          .map(s => s.item.install_command)
+                          .join('\n');
+                        return (
+                          <div className="mb-4">
+                            <div className="flex gap-1 mb-2">
+                              <button
+                                onClick={() => setActiveTab('config')}
+                                className={`text-[10px] font-semibold px-2.5 py-1 rounded-md transition-colors ${
+                                  activeTab === 'config' ? 'bg-amber-400/15 text-amber-700' : 'text-muted-foreground hover:text-foreground'
+                                }`}
+                              >
+                                Configuração
+                              </button>
+                              {commands && (
+                                <button
+                                  onClick={() => setActiveTab('commands')}
+                                  className={`text-[10px] font-semibold px-2.5 py-1 rounded-md transition-colors ${
+                                    activeTab === 'commands' ? 'bg-amber-400/15 text-amber-700' : 'text-muted-foreground hover:text-foreground'
+                                  }`}
+                                >
+                                  Comandos
+                                </button>
+                              )}
+                            </div>
+                            <div className="relative">
+                              <pre className="text-[11px] p-3 rounded-xl bg-[#0a0a0a] text-amber-400/90 overflow-x-auto whitespace-pre-wrap break-all max-h-48 font-mono leading-relaxed">
+                                {activeTab === 'config' ? configText : commands}
+                              </pre>
+                              <button
+                                onClick={() => {
+                                  navigator.clipboard.writeText(activeTab === 'config' ? configText : commands);
+                                  setCopied(true);
+                                  setTimeout(() => setCopied(false), 2000);
+                                }}
+                                className="absolute top-2 right-2 p-1.5 rounded-lg bg-white/10 hover:bg-white/20 transition-colors"
+                              >
+                                {copied ? <Check className="w-3 h-3 text-green-400" /> : <Copy className="w-3 h-3 text-white/60" />}
+                              </button>
+                            </div>
                           </div>
-                          <pre className="text-[11px] p-3 rounded-xl bg-[#0a0a0a] text-amber-400/90 overflow-x-auto whitespace-pre-wrap break-all max-h-28 font-mono leading-relaxed">
-                            {installCommand}
-                          </pre>
-                        </div>
-                      )}
+                        );
+                      })()}
 
                       {/* Actions */}
                       <button
@@ -492,7 +588,7 @@ const DirectoryPage = () => {
                         <Plus className="w-5 h-5 text-muted-foreground/30" />
                       </div>
                       <p className="text-xs text-muted-foreground/60 leading-relaxed">
-                        Clique no <strong className="text-muted-foreground">+</strong> nos cards para<br />montar seu stack
+                        Selecione componentes para gerar sua<br />configuração Claude Code completa
                       </p>
                     </div>
                   )}
@@ -532,23 +628,62 @@ const DirectoryPage = () => {
                 {stack.length > 0 ? (
                   <>
                     <div className="space-y-2 mb-4">
-                      {stack.map((item) => (
-                        <div key={item.slug} className="flex items-center gap-3 p-3 rounded-xl bg-card border border-border">
-                          <span className="flex-1 text-sm font-medium truncate">{item.name}</span>
-                          <button onClick={() => toggleStack(item)} className="text-muted-foreground hover:text-red-500">
+                      {stack.map((entry) => (
+                        <div key={`${entry.itemType}-${entry.item.slug}`} className="flex items-center gap-3 p-3 rounded-xl bg-card border border-border">
+                          <span className="flex-1 text-sm font-medium truncate">{entry.item.name}</span>
+                          <span className="text-[10px] text-muted-foreground/50 font-medium">{entry.itemType}</span>
+                          <button onClick={() => toggleStack(entry.item, entry.itemType)} className="text-muted-foreground hover:text-red-500">
                             <X className="w-4 h-4" />
                           </button>
                         </div>
                       ))}
                     </div>
-                    {installCommand && (
-                      <button
-                        onClick={copyToClipboard}
-                        className="w-full py-3 rounded-xl bg-amber-400 text-[#0a0a0a] font-semibold text-sm flex items-center justify-center gap-2"
-                      >
-                        {copied ? <><Check className="w-4 h-4" /> Copiado!</> : <><Copy className="w-4 h-4" /> Copiar comando</>}
-                      </button>
-                    )}
+                    {(() => {
+                      const configText = generateStackConfig(stack);
+                      const commands = stack
+                        .filter(s => s.item.install_command)
+                        .map(s => s.item.install_command)
+                        .join('\n');
+                      return (
+                        <div className="mb-4">
+                          <div className="flex gap-1 mb-2">
+                            <button
+                              onClick={() => setActiveTab('config')}
+                              className={`text-xs font-semibold px-3 py-1.5 rounded-md transition-colors ${
+                                activeTab === 'config' ? 'bg-amber-400/15 text-amber-700' : 'text-muted-foreground hover:text-foreground'
+                              }`}
+                            >
+                              Configuração
+                            </button>
+                            {commands && (
+                              <button
+                                onClick={() => setActiveTab('commands')}
+                                className={`text-xs font-semibold px-3 py-1.5 rounded-md transition-colors ${
+                                  activeTab === 'commands' ? 'bg-amber-400/15 text-amber-700' : 'text-muted-foreground hover:text-foreground'
+                                }`}
+                              >
+                                Comandos
+                              </button>
+                            )}
+                          </div>
+                          <div className="relative">
+                            <pre className="text-[11px] p-3 rounded-xl bg-[#0a0a0a] text-amber-400/90 overflow-x-auto whitespace-pre-wrap break-all max-h-48 font-mono leading-relaxed">
+                              {activeTab === 'config' ? configText : commands}
+                            </pre>
+                            <button
+                              onClick={() => {
+                                navigator.clipboard.writeText(activeTab === 'config' ? configText : commands);
+                                setCopied(true);
+                                setTimeout(() => setCopied(false), 2000);
+                              }}
+                              className="absolute top-2 right-2 p-1.5 rounded-lg bg-white/10 hover:bg-white/20 transition-colors"
+                            >
+                              {copied ? <Check className="w-3.5 h-3.5 text-green-400" /> : <Copy className="w-3.5 h-3.5 text-white/60" />}
+                            </button>
+                          </div>
+                        </div>
+                      );
+                    })()}
                   </>
                 ) : (
                   <p className="text-center text-muted-foreground py-8">Stack vazio</p>

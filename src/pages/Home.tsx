@@ -1,9 +1,10 @@
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
-import { ArrowRight, Blocks, Package, Terminal, Server, Settings, Webhook, Zap } from "lucide-react";
+import { ArrowRight, Blocks, Package, Terminal, Server, Settings, Sparkles, Webhook, Zap } from "lucide-react";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
+import SEOHead from "@/components/SEOHead";
 
 const typeCards = [
   { type: "skills", label: "Skills", desc: "Habilidades especializadas para Claude Code", icon: Blocks, color: "bg-violet-500" },
@@ -23,11 +24,27 @@ export default function Home() {
     },
   });
 
+  const { data: featuredItems = [] } = useQuery({
+    queryKey: ["featured"],
+    queryFn: async () => {
+      const types = ["mcps", "skills", "agents"];
+      const results = await Promise.all(
+        types.map(async (t) => {
+          const res = await fetch(`/api/${t}`);
+          const items = await res.json();
+          return items.slice(0, 3).map((i: any) => ({ ...i, _type: t }));
+        })
+      );
+      return results.flat().slice(0, 6);
+    },
+  });
+
   const totalItems = stats ? Object.values(stats).reduce((a, b) => a + b, 0) : 0;
 
   return (
     <div className="min-h-screen bg-background">
       <Navigation />
+      <SEOHead />
 
       {/* Hero */}
       <section className="pt-32 pb-20 px-6 md:px-12">
@@ -87,6 +104,61 @@ export default function Home() {
                   <span className="text-2xl font-bold text-white">{stats[type]?.toLocaleString() || 0}</span>
                   <span className="text-sm">{label}</span>
                 </Link>
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
+
+      {/* Featured Items */}
+      {featuredItems.length > 0 && (
+        <section className="py-16 px-6 md:px-12">
+          <div className="max-w-5xl mx-auto">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className="flex items-center justify-between mb-8"
+            >
+              <div>
+                <h2 className="text-2xl md:text-3xl font-bold mb-1">Destaques</h2>
+                <p className="text-sm text-muted-foreground">Os componentes mais populares da comunidade</p>
+              </div>
+            </motion.div>
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+              {featuredItems.map((item: any, i: number) => (
+                <motion.div
+                  key={item.slug}
+                  initial={{ opacity: 0, y: 15 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: i * 0.08 }}
+                >
+                  <Link
+                    to={`/directory/${item._type}/${item.slug}`}
+                    className="group block p-5 rounded-2xl border border-border bg-card hover:border-primary/40 hover:shadow-lg hover:shadow-primary/5 transition-all duration-300"
+                  >
+                    <div className="flex items-center gap-3 mb-3">
+                      <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-amber-500 to-orange-600 flex items-center justify-center shrink-0">
+                        <span className="text-white text-sm font-bold">
+                          {item.name?.charAt(0).toUpperCase()}
+                        </span>
+                      </div>
+                      <div className="min-w-0">
+                        <h3 className="text-sm font-semibold text-foreground truncate group-hover:text-primary transition-colors">
+                          {item.name}
+                        </h3>
+                        <span className="text-[10px] font-medium text-muted-foreground uppercase">
+                          {item._type}
+                        </span>
+                      </div>
+                    </div>
+                    <p className="text-xs text-muted-foreground line-clamp-2 leading-relaxed">
+                      {item.description_pt || item.description}
+                    </p>
+                  </Link>
+                </motion.div>
               ))}
             </div>
           </div>

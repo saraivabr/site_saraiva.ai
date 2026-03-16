@@ -29,7 +29,7 @@ const Navigation = () => {
               <img
                 src="/logo.png"
                 alt="Saraiva.AI"
-                className="h-8 w-auto"
+                className="h-10 w-auto"
               />
             </Link>
 
@@ -189,7 +189,7 @@ const Navigation = () => {
             </div>
 
             <div className="absolute bottom-12 left-6 right-6 text-center">
-              <img src="/logo.png" alt="Saraiva.AI" className="h-6 mx-auto opacity-40" />
+              <img src="/logo.png" alt="Saraiva.AI" className="h-10 mx-auto opacity-40" />
             </div>
           </motion.div>
         )}

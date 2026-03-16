@@ -1,44 +1,57 @@
-import React, { Component, ErrorInfo, ReactNode } from "react";
+import { Component, type ReactNode } from "react";
+import { Link } from "react-router-dom";
 
-interface ErrorBoundaryProps {
+interface Props {
   children: ReactNode;
-  fallback?: ReactNode;
 }
 
-interface ErrorBoundaryState {
+interface State {
   hasError: boolean;
 }
 
-class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundaryState> {
-  constructor(props: ErrorBoundaryProps) {
+class ErrorBoundary extends Component<Props, State> {
+  constructor(props: Props) {
     super(props);
     this.state = { hasError: false };
   }
 
-  static getDerivedStateFromError(): ErrorBoundaryState {
+  static getDerivedStateFromError(): State {
     return { hasError: true };
   }
 
-  componentDidCatch(error: Error, errorInfo: ErrorInfo): void {
-    console.error("[ErrorBoundary]", error, errorInfo);
+  componentDidCatch(error: Error, errorInfo: React.ErrorInfo) {
+    console.error("ErrorBoundary caught:", error, errorInfo);
   }
 
   render() {
     if (this.state.hasError) {
-      if (this.props.fallback) {
-        return this.props.fallback;
-      }
-
       return (
-        <div className="flex items-center justify-center py-20 px-4 bg-black text-white font-mono">
+        <div className="min-h-screen bg-background flex items-center justify-center px-6">
           <div className="text-center max-w-md">
-            <p className="text-lg mb-2">Algo deu errado ao carregar esta secao.</p>
-            <button
-              onClick={() => this.setState({ hasError: false })}
-              className="mt-4 px-6 py-2 border border-white text-white hover:bg-white hover:text-black transition-colors text-sm"
-            >
-              Tentar novamente
-            </button>
+            <div className="w-16 h-16 rounded-2xl bg-red-500/10 flex items-center justify-center mx-auto mb-6">
+              <span className="text-2xl">⚠️</span>
+            </div>
+            <h1 className="text-2xl font-bold text-foreground mb-3">
+              Algo deu errado
+            </h1>
+            <p className="text-sm text-muted-foreground mb-8 leading-relaxed">
+              Ocorreu um erro inesperado. Tente recarregar a página.
+            </p>
+            <div className="flex gap-3 justify-center">
+              <button
+                onClick={() => window.location.reload()}
+                className="px-6 py-3 rounded-xl bg-foreground text-white text-sm font-medium hover:bg-foreground/90 transition-colors"
+              >
+                Recarregar página
+              </button>
+              <Link
+                to="/"
+                onClick={() => this.setState({ hasError: false })}
+                className="px-6 py-3 rounded-xl border border-border text-sm font-medium text-foreground hover:bg-secondary transition-colors"
+              >
+                Voltar ao início
+              </Link>
+            </div>
           </div>
         </div>
       );

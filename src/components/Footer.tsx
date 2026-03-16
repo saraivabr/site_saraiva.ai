@@ -7,7 +7,7 @@ const Footer = () => {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-10">
           {/* Brand */}
           <div>
-            <img src="/logo.png" alt="Saraiva.AI" className="h-8 mb-4 brightness-0 invert" />
+            <img src="/logo.png" alt="Saraiva.AI" className="h-12 mb-4 brightness-0 invert" />
             <p className="text-sm text-white/60 leading-relaxed">
               Sua livraria de IA. Skills, agents, MCPs e recursos curados para Claude Code.
             </p>

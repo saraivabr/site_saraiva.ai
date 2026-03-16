@@ -24,7 +24,7 @@
     "name": "Change Logger",
     "slug": "change-logger",
     "description": "Log every file mutation to CSV for demo prep. Records timestamp, tool, file path, action, and details for Edit, MultiEdit, Write, and Bash operations. Output: .claude/critical_log_changes.csv",
-    "description_pt": "Log every arquivo mutation para CSV para demo prep. Records timestamp, tool, file path, action, e details for Edit, MultiEdit, Write, and Bash operations. Output: .claude/critical_log_changes.csv",
+    "description_pt": null,
     "category": "automation",
     "type": "hook",
     "published": true
@@ -134,7 +134,7 @@
     "name": "Telegram Error Notifications",
     "slug": "telegram-error-notifications",
     "description": "Send Telegram notifications when Claude Code encounters long-running operations or when tools take significant time. Helps monitor productivity and catch potential issues. Requires TELEGRAM_BOT_TOKEN and TELEGRAM_CHAT_ID environment variables.",
-    "description_pt": "Send Telegram notifications when Claude Code encounters long-running operations ou when tools take significant time. Helps monitor productivity e catch potential issues. Requires TELEGRAM_BOT_TOKEN and TELEGRAM_CHAT_ID environment variables.",
+    "description_pt": null,
     "category": "automation",
     "type": "hook",
     "published": true
@@ -154,7 +154,7 @@
     "name": "Telegram PR Webhook",
     "slug": "telegram-pr-webhook",
     "description": "Send Telegram notification when a new PR is created via gh pr create. Includes PR URL and Vercel preview URL. Requires TELEGRAM_BOT_TOKEN and TELEGRAM_CHAT_ID environment variables. Optionally set VERCEL_PROJECT_NAME and VERCEL_TEAM_SLUG to construct",
-    "description_pt": "Send Telegram notification when a new PR is created via gh pr create. Includes PR URL e Vercel preview URL. Requires TELEGRAM_BOT_TOKEN and TELEGRAM_CHAT_ID environment variables. Optionally set VERCEL_PROJECT_NAME and VERCEL_TEAM_SLUG para construct",
+    "description_pt": null,
     "category": "automation",
     "type": "hook",
     "published": true
@@ -164,7 +164,7 @@
     "name": "Vercel Auto Deploy",
     "slug": "vercel-auto-deploy",
     "description": "Automatically trigger Vercel deployments when code changes are committed, with environment-specific deployment strategies and rollback on failure. Setup: Export environment variables 'export VERCEL_TOKEN=your_token' and 'export VERCEL_PROJECT_ID=your",
-    "description_pt": "Automaticamente trigger Vercel implantacaos when codigo changes are committed, com environment-specific deployment strategies e rollback no failure. Setup: Export environment variables 'export VERCEL_TOKEN=your_token' and 'export VERCEL_PROJECT_ID=yo",
+    "description_pt": null,
     "category": "automation",
     "type": "hook",
     "published": true
@@ -174,7 +174,7 @@
     "name": "Vercel Environment Sync",
     "slug": "vercel-environment-sync",
     "description": "Synchronize environment variables between local development and Vercel deployments, ensuring consistency across all environments. Detects changes to .env files and provides options to sync with Vercel, validates environment variable format, and ensur",
-    "description_pt": "Synchronize environment variables between local development e Vercel implantacaos, ensuring consistency across all environments. Detects changes para .env arquivos and provides options to sync com Vercel, validates environment variable format, and en",
+    "description_pt": null,
     "category": "automation",
     "type": "hook",
     "published": true
@@ -184,7 +184,7 @@
     "name": "Change Tracker",
     "slug": "change-tracker",
     "description": "Track file changes in a simple log. Records which files were modified and when for easy tracking of Claude Code activity.",
-    "description_pt": "Rastrear arquivo changes em a simple log. Records which arquivos were modified e when para easy tracking de Claude Code activity.",
+    "description_pt": null,
     "category": "development-tools",
     "type": "hook",
     "published": true
@@ -204,7 +204,7 @@
     "name": "Debug Window",
     "slug": "debug-window",
     "description": "Auto Debug Log Viewer. Opens a live-tailing debug log window when Claude Code starts with --debug or -d flag. The window closes automatically on session end. To keep the debug window open after session ends, set DEBUG_WINDOW_AUTO_CLOSE_DISABLE=1 in y",
-    "description_pt": "Auto Depurar Log Viewer. Opens a live-tailing debug log window when Claude Code starts com --debug ou -d flag. The window closes automaticamente no session end. To keep o debug window open after session ends, set DEBUG_WINDOW_AUTO_CLOSE_DISABLE=1 em ",
+    "description_pt": "Auto Debug Log Viewer. Opens a live-tailing debug log window quando Claude código starts com --debug ou -d flag. o window closes automaticamente on session end. To keep o debug window open depois session ends, set DEBUG_WINDOW_AUTO_CLOSE_DISABLE=1 em y",
     "category": "development-tools",
     "type": "hook",
     "published": true
@@ -354,7 +354,7 @@
     "name": "Format Javascript Files",
     "slug": "format-javascript-files",
     "description": "Automatically format JavaScript/TypeScript files after any Edit operation using prettier. This hook runs 'npx prettier --write' on any .js, .ts, .jsx, or .tsx file that Claude modifies, ensuring consistent code formatting. Uses npx so prettier doesn'",
-    "description_pt": "Automaticamente format JavaScript/TypeScript arquivos after any Edit operation usando prettier. This hook runs 'npx prettier --write' no any .js, .ts, .jsx, ou .tsx file esse Claude modifies, ensuring consistent codigo formatting. Uses npx so prettie",
+    "description_pt": null,
     "category": "post-tool",
     "type": "hook",
     "published": true
@@ -364,7 +364,7 @@
     "name": "Format Python Files",
     "slug": "format-python-files",
     "description": "Automatically format Python files after any Edit operation using black formatter. This hook runs 'black' on any .py file that Claude modifies, ensuring consistent Python code formatting. Requires black to be installed ('pip install black'). The comma",
-    "description_pt": "Automaticamente format Python arquivos after any Edit operation usando black formatter. This hook runs 'black' no any .py file esse Claude modifies, ensuring consistent Python codigo formatting. Requires black para be installed ('pip install black').",
+    "description_pt": null,
     "category": "post-tool",
     "type": "hook",
     "published": true
@@ -374,7 +374,7 @@
     "name": "Git Add Changes",
     "slug": "git-add-changes",
     "description": "Automatically stage changes in git after file modifications for easier commit workflow. This hook runs 'git add' on any file that Claude edits or writes, automatically staging changes for the next commit. Includes error suppression so it won't fail i",
-    "description_pt": "Automaticamente stage changes em git after arquivo modifications para easier commit fluxo de trabalho. This hook runs 'git add' no any file esse Claude edits ou writes, automaticamente staging changes for o next commit. Includes erro suppression so i",
+    "description_pt": null,
     "category": "post-tool",
     "type": "hook",
     "published": true
@@ -394,7 +394,7 @@
     "name": "Backup Before Edit",
     "slug": "backup-before-edit",
     "description": "Create automatic backup of files before any Edit operation for safety. This hook creates a timestamped backup copy (filename.backup.timestamp) of any existing file before Claude modifies it. Provides a safety net to recover previous versions if neede",
-    "description_pt": "Criar automatic backup de arquivos before any Edit operation para safety. This hook creates a timestamped backup copy (filename.backup.timestamp) of any existing file before Claude modifies it. Provides a safety net para recover previous versions if ",
+    "description_pt": null,
     "category": "pre-tool",
     "type": "hook",
     "published": true
@@ -414,7 +414,7 @@
     "name": "Notify Before Bash",
     "slug": "notify-before-bash",
     "description": "Show notification before any Bash command execution for security awareness. This hook displays a simple echo message '🔔 About to run bash command...' before Claude executes any bash command, giving you visibility into when system commands are about t",
-    "description_pt": "Show notification before any Bash command execution para seguranca awareness. This hook displays a simple echo message '🔔 About para run bash command...' before Claude executes any bash command, giving you visibility into when system commands are abo",
+    "description_pt": null,
     "category": "pre-tool",
     "type": "hook",
     "published": true
@@ -424,7 +424,7 @@
     "name": "Update Search Year",
     "slug": "update-search-year",
     "description": "Automatically adds current year to WebSearch queries when no year is specified. This hook intercepts WebSearch tool usage and appends the current year to queries that don't already contain a year, ensuring search results are current and relevant.",
-    "description_pt": "Automaticamente adds current year para WebPesquisar queries when no year is specified. This hook intercepts WebSearch tool usage e appends o current year to queries esse don't already contain a year, ensuring search results are current and relevant.",
+    "description_pt": "Automaticamente adds atual year to WebSearch consultas quando no year é specified. This hook intercepts WebSearch ferramentas usage e appends o atual year to consultas que don't already contain a year, ensuring search resultados são atual e relevant.",
     "category": "pre-tool",
     "type": "hook",
     "published": true
@@ -444,7 +444,7 @@
     "name": "Scope Guard",
     "slug": "scope-guard",
     "description": "Scope guard that detects files modified outside the declared scope of a specification. When a .spec.md file contains a 'Files to Create/Modify' section, this hook compares git-modified files against the declared list. Files outside scope trigger a wa",
-    "description_pt": "Scope guard esse detects arquivos modified outside o declared scope de a specification. When a .spec.md file contains a 'Files para Create/Modify' section, este hook compares git-modified arquivos against the declared list. Files outside scope trigge",
+    "description_pt": "Scope guard que detects arquivos modified outside o declared scope de a specification. quando a .spec.md arquivos contains a 'arquivos to Create/Modify' section, this hook compares git-modified arquivos against o declared list. arquivos outside scope trigger a wa",
     "category": "quality-gates",
     "type": "hook",
     "published": true

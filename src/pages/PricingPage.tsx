@@ -3,9 +3,13 @@ import { motion, AnimatePresence } from "framer-motion";
 import {
   Check, Sparkles, Zap, Crown, Users, ChevronDown,
   Search, Layers, Copy, Globe, Rocket, Shield, Star,
+  QrCode, Loader2, AlertCircle, X as XIcon,
 } from "lucide-react";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
+import SEOHead from "@/components/SEOHead";
+import { useAuth } from "@/hooks/useAuth";
+import { useCheckout } from "@/hooks/useCheckout";
 
 // ─── Types ───────────────────────────────────────────────
 type Plan = "pro" | "teams";
@@ -121,15 +125,21 @@ const faqs: FaqItem[] = [
 // ─── Component ───────────────────────────────────────────
 const PricingPage = () => {
   const [openFaq, setOpenFaq] = useState<number | null>(null);
+  const { isLoggedIn, login } = useAuth();
+  const { checkout, loading: checkoutLoading, result: checkoutResult, error: checkoutError, reset: resetCheckout } = useCheckout();
 
   const handleSubscribe = (plan: Plan) => {
-    // Will be wired up to Woovi payment later
-    console.log(`Subscribe to ${plan}`);
+    if (!isLoggedIn) {
+      login();
+      return;
+    }
+    checkout(plan);
   };
 
   return (
     <div className="min-h-screen bg-background">
       <Navigation />
+      <SEOHead title="Planos e Preços" description="Escolha o melhor plano para maximizar sua produtividade com Claude Code. Comece grátis ou evolua para Pro." path="/pricing" />
 
       {/* ─── DARK HERO HEADER ─── */}
       <section className="relative bg-[#0a0a0a] pt-32 pb-20 overflow-hidden">
@@ -309,6 +319,113 @@ const PricingPage = () => {
           </div>
         </div>
       </section>
+
+      {/* Pix Payment Modal */}
+      <AnimatePresence>
+        {(checkoutResult || checkoutLoading || checkoutError) && (
+          <>
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              onClick={resetCheckout}
+              className="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm"
+            />
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95, y: 20 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.95, y: 20 }}
+              className="fixed inset-x-4 top-[15%] md:inset-x-auto md:left-1/2 md:-translate-x-1/2 md:w-full md:max-w-md z-50 bg-card rounded-3xl border border-border shadow-2xl overflow-hidden"
+            >
+              <div className="p-6">
+                <div className="flex items-center justify-between mb-6">
+                  <h3 className="text-lg font-bold text-foreground">Pagamento via Pix</h3>
+                  <button
+                    onClick={resetCheckout}
+                    className="p-2 rounded-xl hover:bg-secondary transition-colors"
+                  >
+                    <XIcon className="w-5 h-5 text-muted-foreground" />
+                  </button>
+                </div>
+
+                {checkoutLoading && (
+                  <div className="text-center py-12">
+                    <Loader2 className="w-8 h-8 text-amber-400 animate-spin mx-auto mb-4" />
+                    <p className="text-sm text-muted-foreground">Gerando QR Code Pix...</p>
+                  </div>
+                )}
+
+                {checkoutError && (
+                  <div className="text-center py-8">
+                    <div className="w-12 h-12 rounded-2xl bg-red-500/10 flex items-center justify-center mx-auto mb-4">
+                      <AlertCircle className="w-6 h-6 text-red-500" />
+                    </div>
+                    <p className="text-sm font-medium text-foreground mb-2">Erro ao gerar pagamento</p>
+                    <p className="text-xs text-muted-foreground mb-6">{checkoutError}</p>
+                    <button
+                      onClick={resetCheckout}
+                      className="px-6 py-2.5 rounded-xl bg-foreground text-white text-sm font-medium hover:bg-foreground/90 transition-colors"
+                    >
+                      Tentar novamente
+                    </button>
+                  </div>
+                )}
+
+                {checkoutResult && (
+                  <div className="text-center">
+                    {checkoutResult.qrCode && (
+                      <div className="mb-6">
+                        <div className="w-56 h-56 mx-auto rounded-2xl overflow-hidden border-2 border-amber-400/30 bg-white p-2">
+                          <img
+                            src={checkoutResult.qrCode}
+                            alt="QR Code Pix"
+                            className="w-full h-full object-contain"
+                          />
+                        </div>
+                      </div>
+                    )}
+
+                    <p className="text-sm font-medium text-foreground mb-2">
+                      Escaneie o QR Code com seu banco
+                    </p>
+                    <p className="text-xs text-muted-foreground mb-6">
+                      Aguardando confirmação do pagamento...
+                    </p>
+
+                    {checkoutResult.brCode && (
+                      <div className="mb-4">
+                        <p className="text-[10px] font-semibold text-muted-foreground uppercase tracking-wider mb-2">
+                          Ou copie o código Pix
+                        </p>
+                        <div className="relative">
+                          <input
+                            readOnly
+                            value={checkoutResult.brCode}
+                            className="w-full px-4 py-3 pr-20 rounded-xl bg-foreground/5 border border-border text-xs font-mono text-foreground truncate"
+                          />
+                          <button
+                            onClick={() => navigator.clipboard.writeText(checkoutResult.brCode)}
+                            className="absolute right-2 top-1/2 -translate-y-1/2 px-3 py-1.5 rounded-lg bg-amber-400 text-[#0a0a0a] text-xs font-semibold hover:bg-amber-300 transition-colors"
+                          >
+                            Copiar
+                          </button>
+                        </div>
+                      </div>
+                    )}
+
+                    <div className="flex items-center justify-center gap-2 py-3 rounded-xl bg-amber-400/10 border border-amber-400/20">
+                      <div className="w-2 h-2 rounded-full bg-amber-400 animate-pulse" />
+                      <span className="text-xs font-medium text-amber-700">
+                        Aguardando pagamento...
+                      </span>
+                    </div>
+                  </div>
+                )}
+              </div>
+            </motion.div>
+          </>
+        )}
+      </AnimatePresence>
 
       {/* ─── TRUST STRIP ─── */}
       <section className="pb-20 px-6 md:px-12">
