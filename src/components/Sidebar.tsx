@@ -49,7 +49,7 @@ export default function Sidebar() {
       <div className="flex items-center px-3 h-14 border-b border-[var(--color-border)] shrink-0">
         <Link to="/" className="flex items-center gap-2 group w-full">
           <img
-            src="/logo-white.png"
+            src="/logo-white.jpg"
             alt="Saraiva.AI"
             className="w-[150px] h-auto"
           />
