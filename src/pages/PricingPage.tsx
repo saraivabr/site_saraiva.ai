@@ -5,8 +5,6 @@ import {
   Search, Layers, Copy, Globe, Rocket, Shield, Star,
   QrCode, Loader2, AlertCircle, X as XIcon,
 } from "lucide-react";
-import Navigation from "@/components/Navigation";
-import Footer from "@/components/Footer";
 import SEOHead from "@/components/SEOHead";
 import { useAuth } from "@/hooks/useAuth";
 import { useCheckout } from "@/hooks/useCheckout";
@@ -137,12 +135,11 @@ const PricingPage = () => {
   };
 
   return (
-    <div className="min-h-screen bg-background">
-      <Navigation />
+    <>
       <SEOHead title="Planos e Preços" description="Escolha o melhor plano para maximizar sua produtividade com Claude Code. Comece grátis ou evolua para Pro." path="/pricing" />
 
       {/* ─── DARK HERO HEADER ─── */}
-      <section className="relative bg-[#0a0a0a] pt-32 pb-20 overflow-hidden">
+      <section className="relative bg-[var(--color-surface-0)] pt-32 pb-20 overflow-hidden">
         {/* Subtle grid pattern */}
         <div
           className="absolute inset-0 opacity-[0.04]"
@@ -193,8 +190,8 @@ const PricingPage = () => {
                   transition={{ duration: 0.5, delay: index * 0.1 }}
                   className={`relative rounded-2xl overflow-hidden transition-all duration-300 ${
                     isHighlighted
-                      ? "bg-[#0a0a0a] border-2 border-amber-400/50 shadow-2xl shadow-amber-400/10 md:-mt-4 md:mb-[-16px]"
-                      : "bg-card border border-border hover:border-foreground/15 hover:shadow-lg hover:shadow-black/5"
+                      ? "bg-[var(--color-surface-0)] border-2 border-amber-400/50 shadow-2xl shadow-amber-400/10 md:-mt-4 md:mb-[-16px]"
+                      : "bg-[var(--color-surface-1)] border border-[var(--color-border)] hover:border-[var(--color-border-hover)] hover:shadow-lg hover:shadow-black/5"
                   }`}
                 >
                   {/* Badge */}
@@ -216,18 +213,18 @@ const PricingPage = () => {
                         className={`w-10 h-10 rounded-xl flex items-center justify-center ${
                           isHighlighted
                             ? "bg-amber-400 shadow-md shadow-amber-400/20"
-                            : "bg-foreground/5 border border-border"
+                            : "bg-[var(--color-surface-2)] border border-[var(--color-border)]"
                         }`}
                       >
                         <Icon
                           className={`w-5 h-5 ${
-                            isHighlighted ? "text-[#0a0a0a]" : "text-foreground/60"
+                            isHighlighted ? "text-[#0a0a0a]" : "text-[var(--color-text-secondary)]"
                           }`}
                         />
                       </div>
                       <h3
                         className={`text-lg font-bold ${
-                          isHighlighted ? "text-white" : "text-foreground"
+                          isHighlighted ? "text-white" : "text-[var(--color-text-primary)]"
                         }`}
                       >
                         {tier.name}
@@ -238,14 +235,14 @@ const PricingPage = () => {
                     <div className="mb-4">
                       <span
                         className={`text-4xl font-extrabold tracking-tight ${
-                          isHighlighted ? "text-white" : "text-foreground"
+                          isHighlighted ? "text-white" : "text-[var(--color-text-primary)]"
                         }`}
                       >
                         {tier.price}
                       </span>
                       <span
                         className={`text-sm ml-1 ${
-                          isHighlighted ? "text-white/40" : "text-muted-foreground"
+                          isHighlighted ? "text-white/40" : "text-[var(--color-text-secondary)]"
                         }`}
                       >
                         {tier.period}
@@ -255,7 +252,7 @@ const PricingPage = () => {
                     {/* Description */}
                     <p
                       className={`text-sm leading-relaxed mb-7 ${
-                        isHighlighted ? "text-white/50" : "text-muted-foreground"
+                        isHighlighted ? "text-white/50" : "text-[var(--color-text-secondary)]"
                       }`}
                     >
                       {tier.description}
@@ -288,14 +285,14 @@ const PricingPage = () => {
                             className={`w-5 h-5 rounded-md flex items-center justify-center shrink-0 mt-0.5 ${
                               isHighlighted
                                 ? "bg-amber-400/15"
-                                : "bg-foreground/5"
+                                : "bg-[var(--color-surface-2)]"
                             }`}
                           >
                             <Check
                               className={`w-3 h-3 ${
                                 isHighlighted
                                   ? "text-amber-400"
-                                  : "text-foreground/50"
+                                  : "text-[var(--color-text-tertiary)]"
                               }`}
                               strokeWidth={3}
                             />
@@ -304,7 +301,7 @@ const PricingPage = () => {
                             className={`text-sm leading-relaxed ${
                               isHighlighted
                                 ? "text-white/70"
-                                : "text-muted-foreground"
+                                : "text-[var(--color-text-secondary)]"
                             }`}
                           >
                             {feature}
@@ -335,23 +332,23 @@ const PricingPage = () => {
               initial={{ opacity: 0, scale: 0.95, y: 20 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.95, y: 20 }}
-              className="fixed inset-x-4 top-[15%] md:inset-x-auto md:left-1/2 md:-translate-x-1/2 md:w-full md:max-w-md z-50 bg-card rounded-3xl border border-border shadow-2xl overflow-hidden"
+              className="fixed inset-x-4 top-[15%] md:inset-x-auto md:left-1/2 md:-translate-x-1/2 md:w-full md:max-w-md z-50 bg-[var(--color-surface-1)] rounded-3xl border border-[var(--color-border)] shadow-2xl overflow-hidden"
             >
               <div className="p-6">
                 <div className="flex items-center justify-between mb-6">
-                  <h3 className="text-lg font-bold text-foreground">Pagamento via Pix</h3>
+                  <h3 className="text-lg font-bold text-[var(--color-text-primary)]">Pagamento via Pix</h3>
                   <button
                     onClick={resetCheckout}
-                    className="p-2 rounded-xl hover:bg-secondary transition-colors"
+                    className="p-2 rounded-xl hover:bg-[var(--color-surface-2)] transition-colors"
                   >
-                    <XIcon className="w-5 h-5 text-muted-foreground" />
+                    <XIcon className="w-5 h-5 text-[var(--color-text-secondary)]" />
                   </button>
                 </div>
 
                 {checkoutLoading && (
                   <div className="text-center py-12">
                     <Loader2 className="w-8 h-8 text-amber-400 animate-spin mx-auto mb-4" />
-                    <p className="text-sm text-muted-foreground">Gerando QR Code Pix...</p>
+                    <p className="text-sm text-[var(--color-text-secondary)]">Gerando QR Code Pix...</p>
                   </div>
                 )}
 
@@ -360,11 +357,11 @@ const PricingPage = () => {
                     <div className="w-12 h-12 rounded-2xl bg-red-500/10 flex items-center justify-center mx-auto mb-4">
                       <AlertCircle className="w-6 h-6 text-red-500" />
                     </div>
-                    <p className="text-sm font-medium text-foreground mb-2">Erro ao gerar pagamento</p>
-                    <p className="text-xs text-muted-foreground mb-6">{checkoutError}</p>
+                    <p className="text-sm font-medium text-[var(--color-text-primary)] mb-2">Erro ao gerar pagamento</p>
+                    <p className="text-xs text-[var(--color-text-secondary)] mb-6">{checkoutError}</p>
                     <button
                       onClick={resetCheckout}
-                      className="px-6 py-2.5 rounded-xl bg-foreground text-white text-sm font-medium hover:bg-foreground/90 transition-colors"
+                      className="px-6 py-2.5 rounded-xl bg-[var(--color-surface-3)] text-white text-sm font-medium hover:bg-[var(--color-surface-3)] transition-colors"
                     >
                       Tentar novamente
                     </button>
@@ -385,23 +382,23 @@ const PricingPage = () => {
                       </div>
                     )}
 
-                    <p className="text-sm font-medium text-foreground mb-2">
+                    <p className="text-sm font-medium text-[var(--color-text-primary)] mb-2">
                       Escaneie o QR Code com seu banco
                     </p>
-                    <p className="text-xs text-muted-foreground mb-6">
+                    <p className="text-xs text-[var(--color-text-secondary)] mb-6">
                       Aguardando confirmação do pagamento...
                     </p>
 
                     {checkoutResult.brCode && (
                       <div className="mb-4">
-                        <p className="text-[10px] font-semibold text-muted-foreground uppercase tracking-wider mb-2">
+                        <p className="text-[10px] font-semibold text-[var(--color-text-secondary)] uppercase tracking-wider mb-2">
                           Ou copie o código Pix
                         </p>
                         <div className="relative">
                           <input
                             readOnly
                             value={checkoutResult.brCode}
-                            className="w-full px-4 py-3 pr-20 rounded-xl bg-foreground/5 border border-border text-xs font-mono text-foreground truncate"
+                            className="w-full px-4 py-3 pr-20 rounded-xl bg-[var(--color-surface-2)] border border-[var(--color-border)] text-xs font-mono text-[var(--color-text-primary)] truncate"
                           />
                           <button
                             onClick={() => navigator.clipboard.writeText(checkoutResult.brCode)}
@@ -445,11 +442,11 @@ const PricingPage = () => {
                 transition={{ duration: 0.4, delay: i * 0.08 }}
                 className="text-center"
               >
-                <div className="w-11 h-11 rounded-xl bg-foreground/5 border border-border flex items-center justify-center mx-auto mb-3">
-                  <item.icon className="w-5 h-5 text-foreground/50" />
+                <div className="w-11 h-11 rounded-xl bg-[var(--color-surface-2)] border border-[var(--color-border)] flex items-center justify-center mx-auto mb-3">
+                  <item.icon className="w-5 h-5 text-[var(--color-text-tertiary)]" />
                 </div>
-                <p className="text-sm font-semibold text-foreground">{item.label}</p>
-                <p className="text-xs text-muted-foreground mt-0.5">{item.sub}</p>
+                <p className="text-sm font-semibold text-[var(--color-text-primary)]">{item.label}</p>
+                <p className="text-xs text-[var(--color-text-secondary)] mt-0.5">{item.sub}</p>
               </motion.div>
             ))}
           </div>
@@ -466,10 +463,10 @@ const PricingPage = () => {
             transition={{ duration: 0.5 }}
             className="text-center mb-12"
           >
-            <h2 className="text-3xl sm:text-4xl font-bold text-foreground tracking-tight mb-3">
+            <h2 className="text-3xl sm:text-4xl font-bold text-[var(--color-text-primary)] tracking-tight mb-3">
               Perguntas frequentes
             </h2>
-            <p className="text-muted-foreground text-sm">
+            <p className="text-[var(--color-text-secondary)] text-sm">
               Tudo que você precisa saber sobre o Saraiva.AI e os planos.
             </p>
           </motion.div>
@@ -484,13 +481,13 @@ const PricingPage = () => {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.3, delay: index * 0.05 }}
-                  className="rounded-2xl border border-border bg-card overflow-hidden"
+                  className="rounded-2xl border border-[var(--color-border)] bg-[var(--color-surface-1)] overflow-hidden"
                 >
                   <button
                     onClick={() => setOpenFaq(isOpen ? null : index)}
                     className="w-full flex items-center justify-between px-6 py-5 text-left group"
                   >
-                    <span className="text-sm font-semibold text-foreground pr-4">
+                    <span className="text-sm font-semibold text-[var(--color-text-primary)] pr-4">
                       {faq.question}
                     </span>
                     <motion.div
@@ -498,7 +495,7 @@ const PricingPage = () => {
                       transition={{ duration: 0.2 }}
                       className="shrink-0"
                     >
-                      <ChevronDown className="w-4 h-4 text-muted-foreground group-hover:text-foreground transition-colors" />
+                      <ChevronDown className="w-4 h-4 text-[var(--color-text-secondary)] group-hover:text-[var(--color-text-primary)] transition-colors" />
                     </motion.div>
                   </button>
                   <AnimatePresence initial={false}>
@@ -511,7 +508,7 @@ const PricingPage = () => {
                         className="overflow-hidden"
                       >
                         <div className="px-6 pb-5">
-                          <p className="text-sm text-muted-foreground leading-relaxed">
+                          <p className="text-sm text-[var(--color-text-secondary)] leading-relaxed">
                             {faq.answer}
                           </p>
                         </div>
@@ -526,7 +523,7 @@ const PricingPage = () => {
       </section>
 
       {/* ─── BOTTOM CTA ─── */}
-      <section className="relative bg-[#0a0a0a] py-20 px-6 md:px-12 overflow-hidden">
+      <section className="relative bg-[var(--color-surface-0)] py-20 px-6 md:px-12 overflow-hidden">
         <div className="absolute inset-0 opacity-[0.03]"
           style={{
             backgroundImage: `linear-gradient(rgba(255,204,0,0.3) 1px, transparent 1px), linear-gradient(90deg, rgba(255,204,0,0.3) 1px, transparent 1px)`,
@@ -567,8 +564,7 @@ const PricingPage = () => {
         </motion.div>
       </section>
 
-      <Footer />
-    </div>
+    </>
   );
 };
 

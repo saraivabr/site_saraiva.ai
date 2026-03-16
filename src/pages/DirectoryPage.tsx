@@ -1,14 +1,7 @@
 import { useState, useMemo } from "react";
 import { useParams, Link } from "react-router-dom";
-import { motion, AnimatePresence } from "framer-motion";
-import {
-  Search, Plus, X, Copy, Check, Package, Blocks, Terminal,
-  Server, Settings, Webhook, ChevronLeft, ChevronRight,
-  Layers, Sparkles, ArrowRight, ShoppingCart,
-} from "lucide-react";
+import { AnimatePresence, motion } from "framer-motion";
 import { useQuery } from "@tanstack/react-query";
-import Navigation from "@/components/Navigation";
-import Footer from "@/components/Footer";
 import SEOHead from "@/components/SEOHead";
 
 // ─── Types ───────────────────────────────────────────────
@@ -39,45 +32,34 @@ interface StackEntry {
 const ITEMS_PER_PAGE = 24;
 
 const typeConfig: Record<string, {
-  title: string;
+  label: string;
+  color: string;
+  bgColor: string;
   subtitle: string;
-  icon: any;
-  accent: string;
-  accentBg: string;
-  count: string;
 }> = {
-  skills:   { title: "Skills",    subtitle: "Habilidades especializadas para estender o Claude Code com conhecimento e capacidades únicas", icon: Blocks,   accent: "text-amber-400",  accentBg: "bg-amber-400",  count: "672" },
-  agents:   { title: "Agents",    subtitle: "Agentes autônomos que executam tarefas complexas de forma independente com diferentes modelos", icon: Package,  accent: "text-sky-400",    accentBg: "bg-sky-400",    count: "412" },
-  commands: { title: "Commands",  subtitle: "Comandos slash prontos para automatizar fluxos de trabalho e acelerar o desenvolvimento",      icon: Terminal, accent: "text-emerald-400",accentBg: "bg-emerald-400",count: "283" },
-  mcps:     { title: "MCPs",      subtitle: "Servidores MCP para conectar APIs externas, bancos de dados e serviços ao Claude Code",        icon: Server,   accent: "text-teal-400",   accentBg: "bg-teal-400",   count: "67"  },
-  hooks:    { title: "Hooks",     subtitle: "Hooks para interceptar eventos e automatizar ações no ciclo de vida do desenvolvimento",       icon: Webhook,  accent: "text-orange-400", accentBg: "bg-orange-400", count: "51"  },
-  settings: { title: "Settings",  subtitle: "Configurações otimizadas para diferentes ambientes, modelos e fluxos de trabalho",             icon: Settings, accent: "text-rose-400",   accentBg: "bg-rose-400",   count: "67"  },
+  skills:   { label: "Skills",    color: "#f59e0b", bgColor: "rgba(245,158,11,0.08)", subtitle: "Habilidades especializadas para estender o Claude Code" },
+  agents:   { label: "Agents",    color: "#3b82f6", bgColor: "rgba(59,130,246,0.08)", subtitle: "Agentes autonomos para tarefas complexas" },
+  commands: { label: "Commands",  color: "#10b981", bgColor: "rgba(16,185,129,0.08)", subtitle: "Comandos slash para automatizar workflows" },
+  mcps:     { label: "MCPs",      color: "#06b6d4", bgColor: "rgba(6,182,212,0.08)",  subtitle: "Servidores MCP para conectar APIs e servicos" },
+  hooks:    { label: "Hooks",     color: "#8b5cf6", bgColor: "rgba(139,92,246,0.08)", subtitle: "Hooks para interceptar eventos e automatizar acoes" },
+  settings: { label: "Settings",  color: "#ec4899", bgColor: "rgba(236,72,153,0.08)", subtitle: "Configuracoes otimizadas para diferentes ambientes" },
 };
 
-// Generate a stable color from a string
-const stringToColor = (str: string): string => {
-  const colors = [
-    "from-amber-500 to-orange-600",
-    "from-sky-500 to-blue-600",
-    "from-emerald-500 to-green-600",
-    "from-violet-500 to-purple-600",
-    "from-rose-500 to-pink-600",
-    "from-teal-500 to-cyan-600",
-    "from-fuchsia-500 to-purple-600",
-    "from-lime-500 to-green-600",
-  ];
-  let hash = 0;
-  for (let i = 0; i < str.length; i++) hash = str.charCodeAt(i) + ((hash << 5) - hash);
-  return colors[Math.abs(hash) % colors.length];
+const typeIcons: Record<string, JSX.Element> = {
+  skills: <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>,
+  agents: <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><rect x="4" y="4" width="16" height="16" rx="4"/><circle cx="9" cy="12" r="1.5"/><circle cx="15" cy="12" r="1.5"/><path d="M9 17h6"/></svg>,
+  commands: <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><polyline points="4 17 10 11 4 5"/><line x1="12" y1="19" x2="20" y2="19"/></svg>,
+  mcps: <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M4 14.899A7 7 0 1115.71 8h1.79a4.5 4.5 0 012.5 8.242"/><path d="M12 12v9"/><path d="M8 17l4 4 4-4"/></svg>,
+  hooks: <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M10 13a5 5 0 007.54.54l3-3a5 5 0 00-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 00-7.54-.54l-3 3a5 5 0 007.07 7.07l1.71-1.71"/></svg>,
+  settings: <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M12.22 2h-.44a2 2 0 00-2 2v.18a2 2 0 01-1 1.73l-.43.25a2 2 0 01-2 0l-.15-.08a2 2 0 00-2.73.73l-.22.38a2 2 0 00.73 2.73l.15.1a2 2 0 011 1.72v.51a2 2 0 01-1 1.74l-.15.09a2 2 0 00-.73 2.73l.22.38a2 2 0 002.73.73l.15-.08a2 2 0 012 0l.43.25a2 2 0 011 1.73V20a2 2 0 002 2h.44a2 2 0 002-2v-.18a2 2 0 011-1.73l.43-.25a2 2 0 012 0l.15.08a2 2 0 002.73-.73l.22-.39a2 2 0 00-.73-2.73l-.15-.08a2 2 0 01-1-1.74v-.5a2 2 0 011-1.74l.15-.09a2 2 0 00.73-2.73l-.22-.38a2 2 0 00-2.73-.73l-.15.08a2 2 0 01-2 0l-.43-.25a2 2 0 01-1-1.73V4a2 2 0 00-2-2z"/><circle cx="12" cy="12" r="3"/></svg>,
 };
 
-// Clean up bad description_pt (remove "Agente de X: Name." prefix patterns)
+// Clean up bad description_pt
 const getDescription = (item: DirectoryItem): string => {
   const pt = item.description_pt;
   if (pt && !pt.startsWith("Agente de ") && !pt.startsWith("Skill para ") && !pt.startsWith("Comando de ")) {
     return pt;
   }
-  // Fall back to English description, capped
   return item.description?.slice(0, 160) || "";
 };
 
@@ -86,17 +68,15 @@ const DirectoryPage = () => {
   const { type = "skills" } = useParams<{ type: string }>();
   const [search, setSearch] = useState("");
   const [activeCategory, setActiveCategory] = useState("all");
+  const [sort, setSort] = useState("downloads");
   const [stack, setStack] = useState<StackEntry[]>([]);
   const [stackOpen, setStackOpen] = useState(false);
   const [copied, setCopied] = useState(false);
   const [page, setPage] = useState(1);
-  const [activeTab, setActiveTab] = useState<'config' | 'commands'>('config');
-
-  // Reset page when filters change
-  const resetFilters = () => setPage(1);
+  const [activeTab, setActiveTab] = useState<"config" | "commands">("config");
 
   const config = typeConfig[type] || typeConfig.skills;
-  const Icon = config.icon;
+  const icon = typeIcons[type];
 
   const { data: items = [], isLoading } = useQuery({
     queryKey: ["directory", type, activeCategory, search],
@@ -116,11 +96,18 @@ const DirectoryPage = () => {
     return ["all", ...Array.from(cats).sort()];
   }, [items]);
 
+  // Sorted items
+  const sortedItems = useMemo(() => {
+    const sorted = [...items];
+    if (sort === "name") sorted.sort((a, b) => (a.name || "").localeCompare(b.name || ""));
+    return sorted;
+  }, [items, sort]);
+
   // Pagination
-  const totalPages = Math.ceil(items.length / ITEMS_PER_PAGE);
+  const totalPages = Math.ceil(sortedItems.length / ITEMS_PER_PAGE);
   const paginatedItems = useMemo(
-    () => items.slice((page - 1) * ITEMS_PER_PAGE, page * ITEMS_PER_PAGE),
-    [items, page]
+    () => sortedItems.slice((page - 1) * ITEMS_PER_PAGE, page * ITEMS_PER_PAGE),
+    [sortedItems, page]
   );
 
   // Stack
@@ -136,14 +123,13 @@ const DirectoryPage = () => {
 
   const generateStackConfig = (entries: StackEntry[]): string => {
     const grouped: Record<string, StackEntry[]> = {};
-    entries.forEach(e => {
+    entries.forEach((e) => {
       if (!grouped[e.itemType]) grouped[e.itemType] = [];
       grouped[e.itemType].push(e);
     });
 
     const sections: string[] = [];
 
-    // MCPs -> .mcp.json format
     if (grouped.mcps) {
       const mcpConfig: Record<string, any> = {};
       grouped.mcps.forEach(({ item }) => {
@@ -157,23 +143,16 @@ const DirectoryPage = () => {
       sections.push(`// .mcp.json\n${JSON.stringify({ mcpServers: mcpConfig }, null, 2)}`);
     }
 
-    // Skills -> CLAUDE.md entries
     if (grouped.skills) {
-      const lines = grouped.skills.map(({ item }) =>
-        `- ${item.name}: ${item.description_pt || item.description || ''}`
-      );
-      sections.push(`// Adicionar ao CLAUDE.md\n# Skills\n${lines.join('\n')}`);
+      const lines = grouped.skills.map(({ item }) => `- ${item.name}: ${item.description_pt || item.description || ""}`);
+      sections.push(`// Adicionar ao CLAUDE.md\n# Skills\n${lines.join("\n")}`);
     }
 
-    // Agents -> agent config
     if (grouped.agents) {
-      const lines = grouped.agents.map(({ item }) =>
-        `## ${item.name}\nModelo: ${item.model || 'sonnet'}\nDescrição: ${item.description_pt || item.description || ''}`
-      );
-      sections.push(`// Configuração de Agents\n${lines.join('\n\n')}`);
+      const lines = grouped.agents.map(({ item }) => `## ${item.name}\nModelo: ${item.model || "sonnet"}\nDescricao: ${item.description_pt || item.description || ""}`);
+      sections.push(`// Configuracao de Agents\n${lines.join("\n\n")}`);
     }
 
-    // Hooks -> settings.json hooks
     if (grouped.hooks) {
       const hookConfig: Record<string, any> = {};
       grouped.hooks.forEach(({ item }) => {
@@ -182,7 +161,6 @@ const DirectoryPage = () => {
       sections.push(`// hooks em settings.json\n${JSON.stringify({ hooks: hookConfig }, null, 2)}`);
     }
 
-    // Settings -> settings.json entries
     if (grouped.settings) {
       const settingsConfig: Record<string, any> = {};
       grouped.settings.forEach(({ item }) => {
@@ -191,413 +169,353 @@ const DirectoryPage = () => {
       sections.push(`// settings.json\n${JSON.stringify(settingsConfig, null, 2)}`);
     }
 
-    // Commands -> slash command list
     if (grouped.commands) {
-      const lines = grouped.commands.map(({ item }) =>
-        `/${item.slug} — ${item.description_pt || item.description || ''}`
-      );
-      sections.push(`// Comandos disponíveis\n${lines.join('\n')}`);
+      const lines = grouped.commands.map(({ item }) => `/${item.slug} — ${item.description_pt || item.description || ""}`);
+      sections.push(`// Comandos disponiveis\n${lines.join("\n")}`);
     }
 
-    return sections.join('\n\n---\n\n');
+    return sections.join("\n\n---\n\n");
   };
 
   return (
-    <div className="min-h-screen bg-background">
-      <Navigation />
-      <SEOHead title={config.title} description={config.subtitle} path={`/directory/${type}`} />
+    <>
+      <SEOHead title={config.label} description={config.subtitle} path={`/directory/${type}`} />
 
-      {/* ─── DARK HERO HEADER ─── */}
-      <section className="relative bg-[#0a0a0a] pt-24 pb-8 overflow-hidden">
-        {/* Subtle grid pattern */}
-        <div
-          className="absolute inset-0 opacity-[0.04]"
-          style={{
-            backgroundImage: `linear-gradient(rgba(255,204,0,0.3) 1px, transparent 1px), linear-gradient(90deg, rgba(255,204,0,0.3) 1px, transparent 1px)`,
-            backgroundSize: "60px 60px",
-          }}
-        />
-        {/* Yellow glow */}
-        <div className="absolute top-0 left-1/4 w-96 h-96 bg-amber-500/10 rounded-full blur-[120px]" />
-
-        <div className="relative max-w-7xl mx-auto px-6 md:px-12">
-          {/* Type tabs */}
-          <div className="flex items-center gap-1 mb-8 overflow-x-auto pb-2 scrollbar-hide">
-            {Object.entries(typeConfig).map(([key, cfg]) => {
-              const TypeIcon = cfg.icon;
-              const isActive = type === key;
-              return (
-                <Link
-                  key={key}
-                  to={`/directory/${key}`}
-                  onClick={resetFilters}
-                  className={`inline-flex items-center gap-2 px-4 py-2.5 rounded-full text-sm font-medium whitespace-nowrap transition-all duration-300 ${
-                    isActive
-                      ? "bg-white text-[#0a0a0a] shadow-lg shadow-white/10"
-                      : "text-white/50 hover:text-white/80 hover:bg-white/5"
-                  }`}
-                >
-                  <TypeIcon className="w-4 h-4" />
-                  {cfg.title}
-                  <span className={`text-xs tabular-nums ${isActive ? "text-[#0a0a0a]/50" : "text-white/30"}`}>
-                    {cfg.count}
-                  </span>
-                </Link>
-              );
-            })}
+      {/* Sticky header with search */}
+      <header className="sticky top-0 z-20 bg-surface-0/80 backdrop-blur-md border-b border-[var(--color-border)]">
+        <div className="flex items-center justify-between px-6 h-12">
+          <div className="flex items-center gap-3">
+            <div className="w-7 h-7 rounded-lg flex items-center justify-center" style={{ backgroundColor: config.bgColor, color: config.color }}>
+              <span className="[&>svg]:w-4 [&>svg]:h-4">{icon}</span>
+            </div>
+            <h1 className="text-[14px] font-semibold text-[var(--color-text-primary)]">{config.label}</h1>
           </div>
-
-          {/* Title */}
-          <motion.div
-            key={type}
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.4 }}
-          >
-            <h1 className="font-display text-6xl sm:text-7xl md:text-8xl tracking-tight text-white leading-none mb-3">
-              {config.title}
-              <span className={`${config.accent} ml-3`}>.</span>
-            </h1>
-            <p className="text-white/40 text-base max-w-xl leading-relaxed">
-              {config.subtitle}
-            </p>
-          </motion.div>
+          <div className="relative">
+            <svg className="absolute left-2.5 top-1/2 -translate-y-1/2 w-3.5 h-3.5 text-[var(--color-text-tertiary)]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2"><path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+            <input
+              type="text"
+              value={search}
+              onChange={(e) => { setSearch(e.target.value); setPage(1); }}
+              placeholder={`Buscar ${config.label.toLowerCase()}...`}
+              className="w-56 bg-white/[0.04] border border-[var(--color-border)] rounded-md text-[12px] text-[var(--color-text-primary)] placeholder:text-[var(--color-text-tertiary)] pl-8 pr-3 py-1.5 outline-none focus:bg-white/[0.08] focus:ring-1 focus:ring-white/10 transition-all"
+            />
+          </div>
         </div>
-      </section>
+      </header>
 
-      {/* ─── MAIN CONTENT ─── */}
-      <main className="max-w-7xl mx-auto px-6 md:px-12 py-8">
-        <div className="flex gap-8">
-          {/* Left column */}
-          <div className="flex-1 min-w-0">
-            {/* Search bar */}
-            <div className="relative mb-6">
-              <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground/60" />
-              <input
-                type="text"
-                value={search}
-                onChange={(e) => { setSearch(e.target.value); setPage(1); }}
-                placeholder={`Buscar entre ${items.length || "..."} ${config.title.toLowerCase()}...`}
-                className="w-full pl-11 pr-4 py-3.5 rounded-2xl bg-card border border-border text-foreground text-sm placeholder:text-muted-foreground/50 focus:outline-none focus:ring-2 focus:ring-amber-400/30 focus:border-amber-400/40 transition-all"
-              />
-            </div>
-
-            {/* Category filters */}
-            <div className="flex flex-wrap gap-1.5 mb-6">
+      {/* Main content area with sidebar */}
+      <div className="flex">
+        {/* Left column - main content */}
+        <div className="flex-1 min-w-0">
+          {/* Category filter + sort row */}
+          <div className="flex items-center gap-2 px-6 py-3 border-b border-[var(--color-border)]">
+            <select
+              value={activeCategory}
+              onChange={(e) => { setActiveCategory(e.target.value); setPage(1); }}
+              className="bg-white/[0.04] border-none rounded-lg text-[12px] text-[var(--color-text-secondary)] px-2.5 py-1.5 outline-none focus:bg-white/[0.08] cursor-pointer"
+            >
               {categories.map((cat) => (
-                <button
-                  key={cat}
-                  onClick={() => { setActiveCategory(cat); setPage(1); }}
-                  className={`text-xs font-medium px-3 py-1.5 rounded-full transition-all duration-200 capitalize ${
-                    activeCategory === cat
-                      ? "bg-[#0a0a0a] text-white shadow-sm"
-                      : "bg-card border border-border text-muted-foreground hover:text-foreground hover:border-foreground/20"
-                  }`}
-                >
-                  {cat === "all" ? "Todos" : cat.replace(/-/g, " ")}
-                </button>
+                <option key={cat} value={cat}>{cat === "all" ? "Todas categorias" : cat}</option>
               ))}
-            </div>
-
-            {/* Results count + pagination info */}
-            <div className="flex items-center justify-between mb-5">
-              <p className="text-xs text-muted-foreground tabular-nums">
-                {items.length} resultado{items.length !== 1 ? "s" : ""}
-                {totalPages > 1 && <span className="ml-2">· Página {page} de {totalPages}</span>}
-              </p>
+            </select>
+            <div className="flex items-center gap-2 ml-auto">
+              <select
+                value={sort}
+                onChange={(e) => setSort(e.target.value)}
+                className="bg-white/[0.04] border-none rounded-lg text-[12px] text-[var(--color-text-secondary)] px-2.5 py-1.5 outline-none focus:bg-white/[0.08] cursor-pointer"
+              >
+                <option value="downloads">Popular</option>
+                <option value="name">A-Z</option>
+              </select>
               {stack.length > 0 && (
                 <button
                   onClick={() => setStackOpen(true)}
-                  className="lg:hidden inline-flex items-center gap-2 text-xs font-medium px-3 py-1.5 rounded-full bg-amber-400 text-[#0a0a0a]"
+                  className="lg:hidden flex items-center gap-1.5 text-[11px] font-medium px-2.5 py-1.5 rounded-md bg-amber-500/15 text-amber-400"
                 >
-                  <ShoppingCart className="w-3.5 h-3.5" />
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
                   Stack ({stack.length})
                 </button>
               )}
             </div>
+          </div>
 
-            {/* ─── GRID ─── */}
+          {/* Results count */}
+          <div className="flex items-center justify-between px-6 py-2">
+            <span className="text-[11px] text-[var(--color-text-tertiary)] tabular-nums">
+              {items.length} resultado{items.length !== 1 ? "s" : ""}
+              {totalPages > 1 && <span className="ml-2">· Pagina {page} de {totalPages}</span>}
+            </span>
+          </div>
+
+          {/* Cards grid */}
+          <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-3 px-6 pb-6">
             {isLoading ? (
-              <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-3">
-                {Array.from({ length: 12 }).map((_, i) => (
-                  <div key={i} className="h-40 rounded-2xl bg-card border border-border animate-pulse" />
-                ))}
-              </div>
+              Array.from({ length: 12 }).map((_, i) => (
+                <div key={i} className="h-32 rounded-xl bg-[var(--color-surface-2)] animate-pulse" />
+              ))
             ) : paginatedItems.length > 0 ? (
-              <motion.div
-                key={`${type}-${page}-${activeCategory}`}
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ duration: 0.3 }}
-                className="grid gap-3 sm:grid-cols-2 xl:grid-cols-3"
-              >
-                {paginatedItems.map((item, i) => {
-                  const inStack = isInStack(item.slug);
-                  const gradient = stringToColor(item.category || item.name);
-                  return (
-                    <motion.div
-                      key={item.slug}
-                      initial={{ opacity: 0, y: 12 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      transition={{ duration: 0.25, delay: Math.min(i * 0.02, 0.3) }}
-                      className={`group relative rounded-2xl border transition-all duration-300 overflow-hidden ${
-                        inStack
-                          ? "border-amber-400/60 bg-amber-400/[0.03] shadow-[0_0_0_1px_rgba(255,204,0,0.15)]"
-                          : "border-border bg-card hover:border-foreground/15 hover:shadow-lg hover:shadow-black/5"
-                      }`}
+              paginatedItems.map((item) => {
+                const inStack = isInStack(item.slug);
+                return (
+                  <div
+                    key={item.slug}
+                    className={`group relative flex items-start gap-3 p-4 rounded-xl transition-all duration-200 ${
+                      inStack
+                        ? "bg-amber-500/[0.04] border border-amber-500/30"
+                        : "bg-[#111111] border border-[#1a1a1a] hover:border-[#2a2a2a] hover:bg-[#151515]"
+                    }`}
+                  >
+                    <div
+                      className="w-9 h-9 rounded-lg flex items-center justify-center shrink-0"
+                      style={{ backgroundColor: config.bgColor, color: config.color }}
                     >
-                      {/* Top accent line */}
-                      <div className={`h-0.5 bg-gradient-to-r ${gradient} opacity-60 group-hover:opacity-100 transition-opacity`} />
-
-                      <div className="p-5">
-                        <div className="flex items-start gap-3.5">
-                          {/* Avatar */}
-                          <div className={`w-10 h-10 rounded-xl bg-gradient-to-br ${gradient} flex items-center justify-center shrink-0 shadow-sm`}>
-                            <span className="text-white text-sm font-bold drop-shadow">
-                              {item.name?.charAt(0).toUpperCase() || "?"}
-                            </span>
-                          </div>
-
-                          {/* Info */}
-                          <div className="flex-1 min-w-0">
-                            <Link
-                              to={`/directory/${type}/${item.slug}`}
-                              className="text-sm font-semibold text-foreground truncate group-hover:text-amber-600 transition-colors block"
-                            >
-                              {item.name}
-                            </Link>
-                            <p className="text-xs text-muted-foreground line-clamp-2 leading-relaxed mt-1">
-                              {getDescription(item)}
-                            </p>
-                          </div>
-
-                          {/* Add button */}
-                          <button
-                            onClick={() => toggleStack(item)}
-                            className={`shrink-0 w-8 h-8 rounded-xl flex items-center justify-center transition-all duration-200 ${
-                              inStack
-                                ? "bg-amber-400 text-[#0a0a0a] shadow-md shadow-amber-400/20"
-                                : "bg-transparent border border-border text-muted-foreground hover:border-foreground/30 hover:text-foreground"
-                            }`}
-                          >
-                            {inStack ? <Check className="w-3.5 h-3.5" strokeWidth={3} /> : <Plus className="w-3.5 h-3.5" />}
-                          </button>
-                        </div>
-
-                        {/* Tags row */}
-                        <div className="flex items-center gap-1.5 mt-3.5 flex-wrap">
-                          <span className="text-[10px] font-medium px-2 py-0.5 rounded-md bg-foreground/5 text-muted-foreground capitalize">
-                            {item.category?.replace(/-/g, " ")}
+                      <span className="[&>svg]:w-[18px] [&>svg]:h-[18px]">{icon}</span>
+                    </div>
+                    <div className="min-w-0 flex-1">
+                      <Link
+                        to={`/directory/${type}/${item.slug}`}
+                        className="text-[13px] font-medium text-[var(--color-text-primary)] group-hover:text-white transition-colors"
+                      >
+                        {item.name}
+                      </Link>
+                      <p className="text-[12px] text-[var(--color-text-tertiary)] line-clamp-2 mt-1 leading-relaxed">
+                        {getDescription(item)}
+                      </p>
+                      <div className="flex items-center gap-2 mt-2.5 flex-wrap">
+                        <span className="text-[10px] px-2 py-0.5 rounded-full bg-white/[0.06] text-[var(--color-text-tertiary)]">
+                          {item.category}
+                        </span>
+                        {item.model && (
+                          <span className={`text-[10px] px-2 py-0.5 rounded-full ${
+                            item.model === "opus" ? "bg-violet-500/10 text-violet-400" :
+                            item.model === "sonnet" ? "bg-sky-500/10 text-sky-400" :
+                            "bg-emerald-500/10 text-emerald-400"
+                          }`}>
+                            {item.model}
                           </span>
-                          {item.model && (
-                            <span className={`text-[10px] font-medium px-2 py-0.5 rounded-md ${
-                              item.model === "opus" ? "bg-violet-500/10 text-violet-600" :
-                              item.model === "sonnet" ? "bg-sky-500/10 text-sky-600" :
-                              "bg-emerald-500/10 text-emerald-600"
-                            }`}>
-                              {item.model}
-                            </span>
-                          )}
-                          {item.deploy_type && (
-                            <span className="text-[10px] font-medium px-2 py-0.5 rounded-md bg-foreground/5 text-muted-foreground">
-                              {item.deploy_type}
-                            </span>
-                          )}
-                          {item.install_command && (
-                            <span className="text-[10px] font-medium px-2 py-0.5 rounded-md bg-amber-500/10 text-amber-700">
-                              instalável
-                            </span>
-                          )}
-                        </div>
+                        )}
+                        {item.install_command && (
+                          <span className="text-[10px] px-2 py-0.5 rounded-full bg-amber-500/10 text-amber-400">
+                            instalavel
+                          </span>
+                        )}
+                        {item.usage_count != null && item.usage_count > 0 && (
+                          <span className="text-[10px] px-2 py-0.5 rounded-full bg-emerald-500/10 text-emerald-400 flex items-center gap-1">
+                            <svg className="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2"><path strokeLinecap="round" strokeLinejoin="round" d="M19 14l-7 7m0 0l-7-7m7 7V3"/></svg>
+                            {item.usage_count.toLocaleString()}
+                          </span>
+                        )}
                       </div>
-                    </motion.div>
-                  );
-                })}
-              </motion.div>
-            ) : (
-              <div className="text-center py-24">
-                <div className="w-16 h-16 rounded-2xl bg-card border border-border flex items-center justify-center mx-auto mb-4">
-                  <Search className="w-6 h-6 text-muted-foreground/40" />
-                </div>
-                <p className="text-muted-foreground font-medium">Nenhum resultado encontrado</p>
-                <p className="text-xs text-muted-foreground/60 mt-1">Tente ajustar os filtros ou busca</p>
-              </div>
-            )}
-
-            {/* ─── PAGINATION ─── */}
-            {totalPages > 1 && (
-              <div className="flex items-center justify-center gap-2 mt-8">
-                <button
-                  onClick={() => setPage((p) => Math.max(1, p - 1))}
-                  disabled={page === 1}
-                  className="w-9 h-9 rounded-xl border border-border flex items-center justify-center text-muted-foreground hover:text-foreground hover:border-foreground/20 disabled:opacity-30 disabled:pointer-events-none transition-all"
-                >
-                  <ChevronLeft className="w-4 h-4" />
-                </button>
-
-                {Array.from({ length: Math.min(totalPages, 7) }).map((_, i) => {
-                  let pageNum: number;
-                  if (totalPages <= 7) {
-                    pageNum = i + 1;
-                  } else if (page <= 4) {
-                    pageNum = i + 1;
-                  } else if (page >= totalPages - 3) {
-                    pageNum = totalPages - 6 + i;
-                  } else {
-                    pageNum = page - 3 + i;
-                  }
-                  return (
+                    </div>
+                    {/* Add to stack button */}
                     <button
-                      key={pageNum}
-                      onClick={() => setPage(pageNum)}
-                      className={`w-9 h-9 rounded-xl text-sm font-medium transition-all duration-200 ${
-                        page === pageNum
-                          ? "bg-[#0a0a0a] text-white shadow-sm"
-                          : "border border-border text-muted-foreground hover:text-foreground hover:border-foreground/20"
+                      onClick={() => toggleStack(item)}
+                      className={`shrink-0 w-7 h-7 rounded-lg flex items-center justify-center transition-all duration-200 ${
+                        inStack
+                          ? "bg-amber-500 text-black"
+                          : "bg-transparent border border-[#2a2a2a] text-[var(--color-text-tertiary)] hover:border-[#3a3a3a] hover:text-[var(--color-text-secondary)]"
                       }`}
                     >
-                      {pageNum}
+                      {inStack ? (
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                      ) : (
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+                      )}
                     </button>
-                  );
-                })}
-
-                <button
-                  onClick={() => setPage((p) => Math.min(totalPages, p + 1))}
-                  disabled={page === totalPages}
-                  className="w-9 h-9 rounded-xl border border-border flex items-center justify-center text-muted-foreground hover:text-foreground hover:border-foreground/20 disabled:opacity-30 disabled:pointer-events-none transition-all"
-                >
-                  <ChevronRight className="w-4 h-4" />
-                </button>
+                  </div>
+                );
+              })
+            ) : (
+              <div className="col-span-full text-center py-20">
+                <div className="w-14 h-14 rounded-xl bg-[var(--color-surface-1)] border border-[var(--color-border)] flex items-center justify-center mx-auto mb-3">
+                  <svg className="w-5 h-5 text-[var(--color-text-tertiary)]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="1.5"><path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+                </div>
+                <p className="text-[13px] text-[var(--color-text-secondary)]">Nenhum resultado encontrado</p>
+                <p className="text-[11px] text-[var(--color-text-tertiary)] mt-1">Tente ajustar os filtros ou busca</p>
               </div>
             )}
           </div>
 
-          {/* ─── STACK BUILDER SIDEBAR (Desktop) ─── */}
-          <div className="hidden lg:block w-80 shrink-0">
-            <div className="sticky top-24">
-              <div className="rounded-2xl border border-border bg-card overflow-hidden">
-                {/* Header */}
-                <div className="bg-[#0a0a0a] px-5 py-4">
-                  <div className="flex items-center gap-3">
-                    <div className="w-8 h-8 rounded-lg bg-amber-400 flex items-center justify-center">
-                      <Layers className="w-4 h-4 text-[#0a0a0a]" />
-                    </div>
-                    <div>
-                      <h3 className="text-sm font-bold text-white">Stack Builder</h3>
-                      <p className="text-[11px] text-white/40">
-                        {stack.length === 0
-                          ? "Nenhum item selecionado"
-                          : `${stack.length} item${stack.length > 1 ? "s" : ""} no stack`}
-                      </p>
-                    </div>
+          {/* Pagination */}
+          {totalPages > 1 && (
+            <div className="flex items-center justify-center gap-1.5 px-6 pb-6">
+              <button
+                onClick={() => setPage((p) => Math.max(1, p - 1))}
+                disabled={page === 1}
+                className="w-8 h-8 rounded-lg border border-[var(--color-border)] flex items-center justify-center text-[var(--color-text-tertiary)] hover:text-[var(--color-text-secondary)] hover:border-[var(--color-border-hover)] disabled:opacity-30 disabled:pointer-events-none transition-all"
+              >
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+              </button>
+
+              {Array.from({ length: Math.min(totalPages, 7) }).map((_, i) => {
+                let pageNum: number;
+                if (totalPages <= 7) {
+                  pageNum = i + 1;
+                } else if (page <= 4) {
+                  pageNum = i + 1;
+                } else if (page >= totalPages - 3) {
+                  pageNum = totalPages - 6 + i;
+                } else {
+                  pageNum = page - 3 + i;
+                }
+                return (
+                  <button
+                    key={pageNum}
+                    onClick={() => setPage(pageNum)}
+                    className={`w-8 h-8 rounded-lg text-[12px] font-medium transition-all duration-200 ${
+                      page === pageNum
+                        ? "bg-[var(--color-surface-2)] text-[var(--color-text-primary)]"
+                        : "border border-[var(--color-border)] text-[var(--color-text-tertiary)] hover:text-[var(--color-text-secondary)] hover:border-[var(--color-border-hover)]"
+                    }`}
+                  >
+                    {pageNum}
+                  </button>
+                );
+              })}
+
+              <button
+                onClick={() => setPage((p) => Math.min(totalPages, p + 1))}
+                disabled={page === totalPages}
+                className="w-8 h-8 rounded-lg border border-[var(--color-border)] flex items-center justify-center text-[var(--color-text-tertiary)] hover:text-[var(--color-text-secondary)] hover:border-[var(--color-border-hover)] disabled:opacity-30 disabled:pointer-events-none transition-all"
+              >
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+              </button>
+            </div>
+          )}
+        </div>
+
+        {/* ─── STACK BUILDER SIDEBAR (Desktop) ─── */}
+        <div className="hidden lg:block w-72 shrink-0 pr-6 pt-3">
+          <div className="sticky top-16">
+            <div className="rounded-xl bg-[var(--color-surface-1)] border border-[var(--color-border)] overflow-hidden">
+              {/* Header */}
+              <div className="px-4 py-3 border-b border-[var(--color-border)]">
+                <div className="flex items-center gap-2.5">
+                  <div className="w-7 h-7 rounded-lg bg-amber-500/15 flex items-center justify-center">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#f59e0b" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+                  </div>
+                  <div>
+                    <h3 className="text-[13px] font-semibold text-[var(--color-text-primary)]">Stack Builder</h3>
+                    <p className="text-[11px] text-[var(--color-text-tertiary)]">
+                      {stack.length === 0
+                        ? "Nenhum item selecionado"
+                        : `${stack.length} item${stack.length > 1 ? "s" : ""} no stack`}
+                    </p>
                   </div>
                 </div>
+              </div>
 
-                {/* Content */}
-                <div className="p-4">
-                  {stack.length > 0 ? (
-                    <>
-                      {/* Items list */}
-                      <div className="space-y-1.5 mb-4 max-h-52 overflow-y-auto">
-                        {stack.map((entry) => (
-                          <motion.div
+              {/* Content */}
+              <div className="p-3">
+                {stack.length > 0 ? (
+                  <>
+                    {/* Items list */}
+                    <div className="space-y-1 mb-3 max-h-52 overflow-y-auto">
+                      {stack.map((entry) => {
+                        const tc = typeConfig[entry.itemType] || typeConfig.skills;
+                        return (
+                          <div
                             key={`${entry.itemType}-${entry.item.slug}`}
-                            initial={{ opacity: 0, x: -10 }}
-                            animate={{ opacity: 1, x: 0 }}
-                            exit={{ opacity: 0, x: 10 }}
-                            className="flex items-center gap-2.5 px-3 py-2 rounded-xl bg-foreground/[0.03] border border-border/50 group/item"
+                            className="flex items-center gap-2 px-2.5 py-1.5 rounded-lg bg-white/[0.03] border border-[var(--color-border)] group/item"
                           >
-                            <div className={`w-6 h-6 rounded-md bg-gradient-to-br ${stringToColor(entry.item.category || entry.item.name)} flex items-center justify-center shrink-0`}>
-                              <span className="text-white text-[10px] font-bold">{entry.item.name?.charAt(0)}</span>
+                            <div
+                              className="w-5 h-5 rounded flex items-center justify-center shrink-0 text-[9px] font-bold"
+                              style={{ backgroundColor: tc.bgColor, color: tc.color }}
+                            >
+                              {entry.item.name?.charAt(0)}
                             </div>
-                            <span className="flex-1 truncate text-xs font-medium text-foreground">
+                            <span className="flex-1 truncate text-[11px] font-medium text-[var(--color-text-primary)]">
                               {entry.item.name}
                             </span>
-                            <span className="text-[9px] text-muted-foreground/40 font-medium">
+                            <span className="text-[9px] text-[var(--color-text-tertiary)]">
                               {entry.itemType}
                             </span>
                             <button
                               onClick={() => toggleStack(entry.item, entry.itemType)}
-                              className="text-muted-foreground/40 hover:text-red-500 transition-colors opacity-0 group-hover/item:opacity-100"
+                              className="text-[var(--color-text-tertiary)] hover:text-red-400 transition-colors opacity-0 group-hover/item:opacity-100"
                             >
-                              <X className="w-3 h-3" />
+                              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
                             </button>
-                          </motion.div>
-                        ))}
-                      </div>
-
-                      {/* Config tabs */}
-                      {(() => {
-                        const configText = generateStackConfig(stack);
-                        const commands = stack
-                          .filter(s => s.item.install_command)
-                          .map(s => s.item.install_command)
-                          .join('\n');
-                        return (
-                          <div className="mb-4">
-                            <div className="flex gap-1 mb-2">
-                              <button
-                                onClick={() => setActiveTab('config')}
-                                className={`text-[10px] font-semibold px-2.5 py-1 rounded-md transition-colors ${
-                                  activeTab === 'config' ? 'bg-amber-400/15 text-amber-700' : 'text-muted-foreground hover:text-foreground'
-                                }`}
-                              >
-                                Configuração
-                              </button>
-                              {commands && (
-                                <button
-                                  onClick={() => setActiveTab('commands')}
-                                  className={`text-[10px] font-semibold px-2.5 py-1 rounded-md transition-colors ${
-                                    activeTab === 'commands' ? 'bg-amber-400/15 text-amber-700' : 'text-muted-foreground hover:text-foreground'
-                                  }`}
-                                >
-                                  Comandos
-                                </button>
-                              )}
-                            </div>
-                            <div className="relative">
-                              <pre className="text-[11px] p-3 rounded-xl bg-[#0a0a0a] text-amber-400/90 overflow-x-auto whitespace-pre-wrap break-all max-h-48 font-mono leading-relaxed">
-                                {activeTab === 'config' ? configText : commands}
-                              </pre>
-                              <button
-                                onClick={() => {
-                                  navigator.clipboard.writeText(activeTab === 'config' ? configText : commands);
-                                  setCopied(true);
-                                  setTimeout(() => setCopied(false), 2000);
-                                }}
-                                className="absolute top-2 right-2 p-1.5 rounded-lg bg-white/10 hover:bg-white/20 transition-colors"
-                              >
-                                {copied ? <Check className="w-3 h-3 text-green-400" /> : <Copy className="w-3 h-3 text-white/60" />}
-                              </button>
-                            </div>
                           </div>
                         );
-                      })()}
-
-                      {/* Actions */}
-                      <button
-                        onClick={() => setStack([])}
-                        className="w-full text-xs text-muted-foreground hover:text-red-500 transition-colors py-2 rounded-xl hover:bg-red-500/5"
-                      >
-                        Limpar stack
-                      </button>
-                    </>
-                  ) : (
-                    <div className="text-center py-8">
-                      <div className="w-12 h-12 rounded-2xl bg-foreground/[0.03] border border-dashed border-border flex items-center justify-center mx-auto mb-3">
-                        <Plus className="w-5 h-5 text-muted-foreground/30" />
-                      </div>
-                      <p className="text-xs text-muted-foreground/60 leading-relaxed">
-                        Selecione componentes para gerar sua<br />configuração Claude Code completa
-                      </p>
+                      })}
                     </div>
-                  )}
-                </div>
+
+                    {/* Config tabs */}
+                    {(() => {
+                      const configText = generateStackConfig(stack);
+                      const commands = stack
+                        .filter((s) => s.item.install_command)
+                        .map((s) => s.item.install_command)
+                        .join("\n");
+                      return (
+                        <div className="mb-3">
+                          <div className="flex gap-1 mb-2">
+                            <button
+                              onClick={() => setActiveTab("config")}
+                              className={`text-[10px] font-semibold px-2 py-1 rounded-md transition-colors ${
+                                activeTab === "config" ? "bg-amber-500/15 text-amber-400" : "text-[var(--color-text-tertiary)] hover:text-[var(--color-text-secondary)]"
+                              }`}
+                            >
+                              Configuracao
+                            </button>
+                            {commands && (
+                              <button
+                                onClick={() => setActiveTab("commands")}
+                                className={`text-[10px] font-semibold px-2 py-1 rounded-md transition-colors ${
+                                  activeTab === "commands" ? "bg-amber-500/15 text-amber-400" : "text-[var(--color-text-tertiary)] hover:text-[var(--color-text-secondary)]"
+                                }`}
+                              >
+                                Comandos
+                              </button>
+                            )}
+                          </div>
+                          <div className="relative">
+                            <pre className="text-[10px] p-3 rounded-lg bg-[#0a0a0a] text-amber-400/90 overflow-x-auto whitespace-pre-wrap break-all max-h-48 font-mono leading-relaxed">
+                              {activeTab === "config" ? configText : commands}
+                            </pre>
+                            <button
+                              onClick={() => {
+                                navigator.clipboard.writeText(activeTab === "config" ? configText : commands);
+                                setCopied(true);
+                                setTimeout(() => setCopied(false), 2000);
+                              }}
+                              className="absolute top-2 right-2 p-1 rounded-md bg-white/10 hover:bg-white/20 transition-colors"
+                            >
+                              {copied ? (
+                                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#4ade80" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                              ) : (
+                                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.5)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
+                              )}
+                            </button>
+                          </div>
+                        </div>
+                      );
+                    })()}
+
+                    {/* Clear button */}
+                    <button
+                      onClick={() => setStack([])}
+                      className="w-full text-[11px] text-[var(--color-text-tertiary)] hover:text-red-400 transition-colors py-1.5 rounded-lg hover:bg-red-500/5"
+                    >
+                      Limpar stack
+                    </button>
+                  </>
+                ) : (
+                  <div className="text-center py-8">
+                    <div className="w-10 h-10 rounded-xl bg-white/[0.03] border border-dashed border-[var(--color-border)] flex items-center justify-center mx-auto mb-2.5">
+                      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--color-text-tertiary)" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+                    </div>
+                    <p className="text-[11px] text-[var(--color-text-tertiary)] leading-relaxed">
+                      Selecione componentes para gerar<br />sua configuracao completa
+                    </p>
+                  </div>
+                )}
               </div>
             </div>
           </div>
         </div>
-      </main>
+      </div>
 
       {/* ─── MOBILE STACK DRAWER ─── */}
       <AnimatePresence>
@@ -615,51 +533,60 @@ const DirectoryPage = () => {
               animate={{ y: 0 }}
               exit={{ y: "100%" }}
               transition={{ type: "spring", damping: 30, stiffness: 300 }}
-              className="fixed bottom-0 left-0 right-0 z-50 bg-background rounded-t-3xl border-t border-border max-h-[80vh] overflow-y-auto"
+              className="fixed bottom-0 left-0 right-0 z-50 bg-[var(--color-surface-1)] rounded-t-2xl border-t border-[var(--color-border)] max-h-[80vh] overflow-y-auto"
             >
-              <div className="p-6">
+              <div className="p-5">
                 <div className="flex items-center justify-between mb-4">
-                  <h3 className="text-base font-bold">Stack Builder</h3>
-                  <button onClick={() => setStackOpen(false)} className="p-2 rounded-xl hover:bg-secondary">
-                    <X className="w-5 h-5" />
+                  <h3 className="text-[14px] font-semibold text-[var(--color-text-primary)]">Stack Builder</h3>
+                  <button onClick={() => setStackOpen(false)} className="p-1.5 rounded-lg hover:bg-white/[0.06] text-[var(--color-text-tertiary)]">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
                   </button>
                 </div>
 
                 {stack.length > 0 ? (
                   <>
-                    <div className="space-y-2 mb-4">
-                      {stack.map((entry) => (
-                        <div key={`${entry.itemType}-${entry.item.slug}`} className="flex items-center gap-3 p-3 rounded-xl bg-card border border-border">
-                          <span className="flex-1 text-sm font-medium truncate">{entry.item.name}</span>
-                          <span className="text-[10px] text-muted-foreground/50 font-medium">{entry.itemType}</span>
-                          <button onClick={() => toggleStack(entry.item, entry.itemType)} className="text-muted-foreground hover:text-red-500">
-                            <X className="w-4 h-4" />
-                          </button>
-                        </div>
-                      ))}
+                    <div className="space-y-1.5 mb-4">
+                      {stack.map((entry) => {
+                        const tc = typeConfig[entry.itemType] || typeConfig.skills;
+                        return (
+                          <div key={`${entry.itemType}-${entry.item.slug}`} className="flex items-center gap-2.5 p-2.5 rounded-lg bg-white/[0.03] border border-[var(--color-border)]">
+                            <div
+                              className="w-6 h-6 rounded flex items-center justify-center shrink-0 text-[10px] font-bold"
+                              style={{ backgroundColor: tc.bgColor, color: tc.color }}
+                            >
+                              {entry.item.name?.charAt(0)}
+                            </div>
+                            <span className="flex-1 text-[12px] font-medium text-[var(--color-text-primary)] truncate">{entry.item.name}</span>
+                            <span className="text-[10px] text-[var(--color-text-tertiary)]">{entry.itemType}</span>
+                            <button onClick={() => toggleStack(entry.item, entry.itemType)} className="text-[var(--color-text-tertiary)] hover:text-red-400">
+                              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+                            </button>
+                          </div>
+                        );
+                      })}
                     </div>
                     {(() => {
                       const configText = generateStackConfig(stack);
                       const commands = stack
-                        .filter(s => s.item.install_command)
-                        .map(s => s.item.install_command)
-                        .join('\n');
+                        .filter((s) => s.item.install_command)
+                        .map((s) => s.item.install_command)
+                        .join("\n");
                       return (
                         <div className="mb-4">
                           <div className="flex gap-1 mb-2">
                             <button
-                              onClick={() => setActiveTab('config')}
-                              className={`text-xs font-semibold px-3 py-1.5 rounded-md transition-colors ${
-                                activeTab === 'config' ? 'bg-amber-400/15 text-amber-700' : 'text-muted-foreground hover:text-foreground'
+                              onClick={() => setActiveTab("config")}
+                              className={`text-[11px] font-semibold px-2.5 py-1 rounded-md transition-colors ${
+                                activeTab === "config" ? "bg-amber-500/15 text-amber-400" : "text-[var(--color-text-tertiary)] hover:text-[var(--color-text-secondary)]"
                               }`}
                             >
-                              Configuração
+                              Configuracao
                             </button>
                             {commands && (
                               <button
-                                onClick={() => setActiveTab('commands')}
-                                className={`text-xs font-semibold px-3 py-1.5 rounded-md transition-colors ${
-                                  activeTab === 'commands' ? 'bg-amber-400/15 text-amber-700' : 'text-muted-foreground hover:text-foreground'
+                                onClick={() => setActiveTab("commands")}
+                                className={`text-[11px] font-semibold px-2.5 py-1 rounded-md transition-colors ${
+                                  activeTab === "commands" ? "bg-amber-500/15 text-amber-400" : "text-[var(--color-text-tertiary)] hover:text-[var(--color-text-secondary)]"
                                 }`}
                               >
                                 Comandos
@@ -667,18 +594,22 @@ const DirectoryPage = () => {
                             )}
                           </div>
                           <div className="relative">
-                            <pre className="text-[11px] p-3 rounded-xl bg-[#0a0a0a] text-amber-400/90 overflow-x-auto whitespace-pre-wrap break-all max-h-48 font-mono leading-relaxed">
-                              {activeTab === 'config' ? configText : commands}
+                            <pre className="text-[11px] p-3 rounded-lg bg-[#0a0a0a] text-amber-400/90 overflow-x-auto whitespace-pre-wrap break-all max-h-48 font-mono leading-relaxed">
+                              {activeTab === "config" ? configText : commands}
                             </pre>
                             <button
                               onClick={() => {
-                                navigator.clipboard.writeText(activeTab === 'config' ? configText : commands);
+                                navigator.clipboard.writeText(activeTab === "config" ? configText : commands);
                                 setCopied(true);
                                 setTimeout(() => setCopied(false), 2000);
                               }}
                               className="absolute top-2 right-2 p-1.5 rounded-lg bg-white/10 hover:bg-white/20 transition-colors"
                             >
-                              {copied ? <Check className="w-3.5 h-3.5 text-green-400" /> : <Copy className="w-3.5 h-3.5 text-white/60" />}
+                              {copied ? (
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#4ade80" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                              ) : (
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.5)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
+                              )}
                             </button>
                           </div>
                         </div>
@@ -686,7 +617,7 @@ const DirectoryPage = () => {
                     })()}
                   </>
                 ) : (
-                  <p className="text-center text-muted-foreground py-8">Stack vazio</p>
+                  <p className="text-center text-[var(--color-text-tertiary)] text-[12px] py-8">Stack vazio</p>
                 )}
               </div>
             </motion.div>
@@ -700,15 +631,13 @@ const DirectoryPage = () => {
           initial={{ scale: 0 }}
           animate={{ scale: 1 }}
           onClick={() => setStackOpen(true)}
-          className="lg:hidden fixed bottom-6 right-6 z-40 h-14 px-5 rounded-full bg-amber-400 text-[#0a0a0a] shadow-xl shadow-amber-400/25 flex items-center gap-2 font-bold text-sm"
+          className="lg:hidden fixed bottom-6 right-6 z-40 h-12 px-4 rounded-full bg-amber-500 text-black shadow-xl shadow-amber-500/25 flex items-center gap-2 font-semibold text-[13px]"
         >
-          <Layers className="w-4 h-4" />
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
           Stack ({stack.length})
         </motion.button>
       )}
-
-      <Footer />
-    </div>
+    </>
   );
 };
 

@@ -1,5 +1,5 @@
-# Claude Flow V3 - Complete Capabilities Reference
-> Generated: 2026-02-22T03:35:17.331Z
+# RuFlo V3 - Complete Capabilities Reference
+> Generated: 2026-03-06T16:00:55.283Z
 > Full documentation: https://github.com/ruvnet/claude-flow
 
 ## 📋 Table of Contents
@@ -18,7 +18,7 @@
 
 ## Overview
 
-Claude Flow V3 is a domain-driven design architecture for multi-agent AI coordination with:
+RuFlo V3 is a domain-driven design architecture for multi-agent AI coordination with:
 
 - **15-Agent Swarm Coordination** with hierarchical and mesh topologies
 - **HNSW Vector Search** - 150x-12,500x faster pattern retrieval
@@ -335,8 +335,8 @@ npx @claude-flow/cli@latest hive-mind consensus --propose "task"
 ### Integrated Packages
 | Package | Version | Purpose |
 |---------|---------|---------|
-| agentic-flow | 2.0.1-alpha | Core coordination |
-| agentdb | 2.0.0-alpha.3.4 | Vector database |
+| agentic-flow | 3.0.0-alpha.1 | Core coordination + ReasoningBank + Router |
+| agentdb | 3.0.0-alpha.10 | Vector database + 8 controllers |
 | @ruvector/attention | 0.1.3 | Flash attention |
 | @ruvector/sona | 0.1.5 | Neural learning |
 

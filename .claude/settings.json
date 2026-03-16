@@ -10,6 +10,16 @@
             "timeout": 5000
           }
         ]
+      },
+      {
+        "matcher": "Write|Edit|MultiEdit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node .claude/helpers/hook-handler.cjs pre-edit",
+            "timeout": 5000
+          }
+        ]
       }
     ],
     "PostToolUse": [
@@ -20,6 +30,16 @@
             "type": "command",
             "command": "node .claude/helpers/hook-handler.cjs post-edit",
             "timeout": 10000
+          }
+        ]
+      },
+      {
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node .claude/helpers/hook-handler.cjs post-bash",
+            "timeout": 5000
           }
         ]
       }
@@ -114,7 +134,7 @@
         ]
       }
     ],
-    "TeammateIdle": [
+    "SubagentStop": [
       {
         "hooks": [
           {
@@ -125,13 +145,13 @@
         ]
       }
     ],
-    "TaskCompleted": [
+    "Notification": [
       {
         "hooks": [
           {
             "type": "command",
-            "command": "node .claude/helpers/hook-handler.cjs post-task",
-            "timeout": 5000
+            "command": "node .claude/helpers/hook-handler.cjs notify",
+            "timeout": 3000
           }
         ]
       }
@@ -139,9 +159,7 @@
   },
   "statusLine": {
     "type": "command",
-    "command": "node .claude/helpers/statusline.cjs",
-    "refreshMs": 5000,
-    "enabled": true
+    "command": "node .claude/helpers/statusline.cjs"
   },
   "permissions": {
     "allow": [
@@ -167,6 +185,11 @@
   "claudeFlow": {
     "version": "3.0.0",
     "enabled": true,
+    "platform": {
+      "os": "darwin",
+      "arch": "arm64",
+      "shell": "zsh"
+    },
     "modelPreferences": {
       "default": "claude-opus-4-6",
       "routing": "claude-haiku-4-5-20251001"
