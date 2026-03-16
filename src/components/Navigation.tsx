@@ -1,7 +1,8 @@
 import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
-import { Menu, X, Blocks, Package, Terminal, Server, Settings, Webhook, Compass, Home } from "lucide-react";
+import { Menu, X, Blocks, Package, Terminal, Server, Settings, Webhook, Home, LogIn, LogOut, Crown } from "lucide-react";
+import { useAuth } from "@/hooks/useAuth";
 
 const navLinks = [
   { to: "/", label: "Início", icon: Home },
@@ -9,12 +10,14 @@ const navLinks = [
   { to: "/directory/agents", label: "Agents", icon: Package },
   { to: "/directory/commands", label: "Commands", icon: Terminal },
   { to: "/directory/mcps", label: "MCPs", icon: Server },
-  { to: "/explore", label: "Explorar", icon: Compass },
+  { to: "/directory/hooks", label: "Hooks", icon: Webhook },
+  { to: "/directory/settings", label: "Settings", icon: Settings },
 ];
 
 const Navigation = () => {
   const [mobileOpen, setMobileOpen] = useState(false);
   const location = useLocation();
+  const { user, isLoggedIn, isPro, login, logout } = useAuth();
 
   return (
     <>
@@ -52,13 +55,59 @@ const Navigation = () => {
               })}
             </div>
 
-            {/* Mobile Toggle */}
-            <button
-              onClick={() => setMobileOpen(!mobileOpen)}
-              className="lg:hidden p-2 rounded-lg text-muted-foreground hover:text-foreground hover:bg-secondary transition-colors"
-            >
-              {mobileOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
-            </button>
+            {/* Auth + Mobile */}
+            <div className="flex items-center gap-2">
+              {/* Auth buttons (desktop) */}
+              <div className="hidden lg:flex items-center gap-2">
+                {isLoggedIn ? (
+                  <>
+                    {isPro && (
+                      <span className="text-[10px] font-bold px-2 py-0.5 rounded-md bg-amber-400/15 text-amber-700">
+                        PRO
+                      </span>
+                    )}
+                    <div className="flex items-center gap-2 pl-2 border-l border-border">
+                      {user?.avatar_url && (
+                        <img src={user.avatar_url} alt="" className="w-6 h-6 rounded-full" />
+                      )}
+                      <span className="text-xs font-medium text-muted-foreground">{user?.username}</span>
+                      <button
+                        onClick={logout}
+                        className="p-1.5 rounded-lg text-muted-foreground hover:text-foreground hover:bg-secondary transition-colors"
+                        title="Sair"
+                      >
+                        <LogOut className="w-3.5 h-3.5" />
+                      </button>
+                    </div>
+                  </>
+                ) : (
+                  <>
+                    <Link
+                      to="/pricing"
+                      className="flex items-center gap-1.5 px-3 py-2 rounded-lg text-sm font-medium text-amber-700 hover:bg-amber-400/10 transition-all"
+                    >
+                      <Crown className="w-3.5 h-3.5" />
+                      Pro
+                    </Link>
+                    <button
+                      onClick={login}
+                      className="flex items-center gap-1.5 px-4 py-2 rounded-lg text-sm font-medium bg-foreground text-white hover:bg-foreground/90 transition-all"
+                    >
+                      <LogIn className="w-3.5 h-3.5" />
+                      Entrar
+                    </button>
+                  </>
+                )}
+              </div>
+
+              {/* Mobile Toggle */}
+              <button
+                onClick={() => setMobileOpen(!mobileOpen)}
+                className="lg:hidden p-2 rounded-lg text-muted-foreground hover:text-foreground hover:bg-secondary transition-colors"
+              >
+                {mobileOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+              </button>
+            </div>
           </div>
         </div>
       </nav>
@@ -99,6 +148,44 @@ const Navigation = () => {
                   </motion.div>
                 );
               })}
+
+              {/* Mobile auth */}
+              <div className="mt-4 pt-4 border-t border-border">
+                {isLoggedIn ? (
+                  <div className="flex items-center justify-between px-4 py-3">
+                    <div className="flex items-center gap-3">
+                      {user?.avatar_url && (
+                        <img src={user.avatar_url} alt="" className="w-8 h-8 rounded-full" />
+                      )}
+                      <div>
+                        <p className="text-sm font-medium">{user?.name || user?.username}</p>
+                        {isPro && <span className="text-[10px] font-bold text-amber-700">PRO</span>}
+                      </div>
+                    </div>
+                    <button onClick={() => { logout(); setMobileOpen(false); }} className="text-muted-foreground">
+                      <LogOut className="w-5 h-5" />
+                    </button>
+                  </div>
+                ) : (
+                  <div className="flex flex-col gap-2">
+                    <Link
+                      to="/pricing"
+                      onClick={() => setMobileOpen(false)}
+                      className="flex items-center justify-center gap-2 px-4 py-3 rounded-xl text-sm font-medium bg-amber-400/10 text-amber-700"
+                    >
+                      <Crown className="w-4 h-4" />
+                      Ver planos
+                    </Link>
+                    <button
+                      onClick={() => { login(); setMobileOpen(false); }}
+                      className="flex items-center justify-center gap-2 px-4 py-3 rounded-xl text-sm font-medium bg-foreground text-white"
+                    >
+                      <LogIn className="w-4 h-4" />
+                      Entrar com GitHub
+                    </button>
+                  </div>
+                )}
+              </div>
             </div>
 
             <div className="absolute bottom-12 left-6 right-6 text-center">

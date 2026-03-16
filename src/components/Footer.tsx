@@ -26,13 +26,13 @@ const Footer = () => {
             </div>
           </div>
 
-          {/* Explorar */}
+          {/* Sobre */}
           <div>
-            <h4 className="text-sm font-semibold text-white mb-4">Explorar</h4>
+            <h4 className="text-sm font-semibold text-white mb-4">Sobre</h4>
             <div className="flex flex-col gap-2.5 text-sm">
-              <Link to="/explore" className="text-white/60 hover:text-white transition-colors">Todos os recursos</Link>
-              <Link to="/templates" className="text-white/60 hover:text-white transition-colors">Templates</Link>
-              <Link to="/conteudo" className="text-white/60 hover:text-white transition-colors">Conteúdo</Link>
+              <Link to="/pricing" className="text-white/60 hover:text-white transition-colors">Planos</Link>
+              <Link to="/directory/hooks" className="text-white/60 hover:text-white transition-colors">Hooks</Link>
+              <Link to="/directory/settings" className="text-white/60 hover:text-white transition-colors">Settings</Link>
             </div>
           </div>
 
