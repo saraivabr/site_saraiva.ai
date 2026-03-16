@@ -46,15 +46,15 @@ export default function Sidebar() {
   return (
     <aside className="hidden md:flex w-[220px] flex-col border-r border-[var(--color-border)] bg-surface-0 fixed inset-y-0 left-0 z-40">
       {/* Logo */}
-      <div className="flex items-center px-4 h-14 border-b border-[var(--color-border)] shrink-0">
-        <Link to="/" className="flex items-center gap-2.5 group">
+      <div className="flex items-center px-3 h-14 border-b border-[var(--color-border)] shrink-0">
+        <Link to="/" className="flex items-center gap-2 group w-full">
           <img
             src="/logo.png"
             alt="Saraiva.AI"
-            className="h-9 w-auto"
-            style={{ filter: "invert(1) brightness(2)" }}
+            className="w-[160px] h-auto"
+            style={{ filter: "invert(1) brightness(2) sepia(1) saturate(5) hue-rotate(10deg)" }}
           />
-          <span className="text-[9px] font-semibold uppercase tracking-wider px-1.5 py-0.5 rounded bg-[var(--color-surface-3)] text-[var(--color-text-tertiary)]">Beta</span>
+          <span className="text-[9px] font-semibold uppercase tracking-wider px-1.5 py-0.5 rounded bg-[var(--color-surface-3)] text-[var(--color-text-tertiary)] shrink-0">Beta</span>
         </Link>
       </div>
 
