@@ -50,9 +50,8 @@ export default function Sidebar() {
         <Link to="/" className="flex items-center gap-2 group">
           <div className="relative">
             <div className="absolute -inset-1 rounded-lg bg-gradient-to-r from-[#5e6ad2]/20 to-[#d57455]/20 blur-sm opacity-0 group-hover:opacity-100 transition-opacity" />
-            <img src="/logo.png" alt="Saraiva.AI" className="relative h-7 w-auto" />
+            <img src="/logo.png" alt="Saraiva.AI" className="relative h-8 w-auto brightness-0 invert" />
           </div>
-          <span className="text-[13px] font-semibold text-[var(--color-text-primary)]">Saraiva.AI</span>
           <span className="text-[9px] font-semibold uppercase tracking-wider px-1.5 py-0.5 rounded bg-[var(--color-surface-3)] text-[var(--color-text-tertiary)]">Beta</span>
         </Link>
       </div>
