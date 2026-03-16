@@ -1,0 +1,2832 @@
+[
+  {
+    "id": "cmd-001",
+    "name": "Act",
+    "slug": "act",
+    "description": "Execute GitHub Actions locally using act",
+    "description_pt": "Executar GitHub Actions locally usando act",
+    "category": "automation",
+    "type": "command",
+    "published": true
+  },
+  {
+    "id": "cmd-002",
+    "name": "CI Pipeline",
+    "slug": "ci-pipeline",
+    "description": "Manage and automate CI/CD pipeline configuration with GitHub Actions, multi-environment support, and deployment strategies",
+    "description_pt": "Gerenciar e automate CI/CD pipeline configuration com GitHub Actions, multi-environment support, and implantacao strategies",
+    "category": "automation",
+    "type": "command",
+    "published": true
+  },
+  {
+    "id": "cmd-003",
+    "name": "Husky",
+    "slug": "husky",
+    "description": "Run comprehensive CI checks and fix issues until repository is in working state",
+    "description_pt": "Executar comprehensive CI checks e fix issues until repository is em working state",
+    "category": "automation",
+    "type": "command",
+    "published": true
+  },
+  {
+    "id": "cmd-004",
+    "name": "Workflow Orchestrator",
+    "slug": "workflow-orchestrator",
+    "description": "Orchestrate complex automation workflows with task dependencies, scheduling, and cross-platform execution",
+    "description_pt": "Orchestrate complex automation fluxo de trabalhos com task dependencies, scheduling, e cross-platform execution",
+    "category": "automation",
+    "type": "command",
+    "published": true
+  },
+  {
+    "id": "cmd-005",
+    "name": "Appinsights Instrumentation",
+    "slug": "appinsights-instrumentation",
+    "description": "Instrument a webapp to send useful telemetry data to Azure App Insights",
+    "description_pt": "Instrument a webapp para send useful telemetry data to Azure App Insights",
+    "category": "azure",
+    "type": "command",
+    "published": true
+  },
+  {
+    "id": "cmd-006",
+    "name": "Azure Role Selector",
+    "slug": "azure-role-selector",
+    "description": "When user is asking for guidance for which role to assign to an identity given desired permissions, this agent helps them understand the role that will meet the requirements with least privilege access and how to apply that role.",
+    "description_pt": "When user is asking para guidance for which role para assign to an identity given desired permissions, este agent helps them understand o role esse will meet the requirements com least privilege access e how to apply that role.",
+    "category": "azure",
+    "type": "command",
+    "published": true
+  },
+  {
+    "id": "cmd-007",
+    "name": "Snowflake Semanticview",
+    "slug": "snowflake-semanticview",
+    "description": "Create, alter, and validate Snowflake semantic views using Snowflake CLI (snow). Use when asked to build or troubleshoot semantic views/semantic layer definitions with CREATE/ALTER SEMANTIC VIEW, to validate semantic-view DDL against Snowflake via CL",
+    "description_pt": "Create, alter, e validate Snowflake semantic views usando Snowflake CLI (snow). Use when asked para build ou troubleshoot semantic views/semantic layer definitions com CREATE/ALTER SEMANTIC VIEW, to validate semantic-view DDL against Snowflake via CL",
+    "category": "database",
+    "type": "command",
+    "published": true
+  },
+  {
+    "id": "cmd-008",
+    "name": "Supabase Backup Manager",
+    "slug": "supabase-backup-manager",
+    "description": "Manage Supabase database backups with automated scheduling and recovery procedures",
+    "description_pt": "Gerenciar Supabase banco de dados backups com automated scheduling e recovery procedures",
+    "category": "database",
+    "type": "command",
+    "published": true
+  },
+  {
+    "id": "cmd-009",
+    "name": "Supabase Data Explorer",
+    "slug": "supabase-data-explorer",
+    "description": "Explore and analyze Supabase database data with intelligent querying and visualization",
+    "description_pt": "Explore e analyze Supabase banco de dados data com intelligent querying and visualization",
+    "category": "database",
+    "type": "command",
+    "published": true
+  },
+  {
+    "id": "cmd-010",
+    "name": "Supabase Migration Assistant",
+    "slug": "supabase-migration-assistant",
+    "description": "Generate and manage Supabase database migrations with automated testing and validation",
+    "description_pt": "Gerar e manage Supabase banco de dados migrations com automated testes and validation",
+    "category": "database",
+    "type": "command",
+    "published": true
+  },
+  {
+    "id": "cmd-011",
+    "name": "Supabase Performance Optimizer",
+    "slug": "supabase-performance-optimizer",
+    "description": "Optimize Supabase database performance with intelligent analysis and recommendations",
+    "description_pt": "Otimizar Supabase banco de dados desempenho com intelligent analysis e recommendations",
+    "category": "database",
+    "type": "command",
+    "published": true
+  },
+  {
+    "id": "cmd-012",
+    "name": "Supabase Realtime Monitor",
+    "slug": "supabase-realtime-monitor",
+    "description": "Monitor and optimize Supabase realtime connections with performance analysis and debugging",
+    "description_pt": "Monitorar e optimize Supabase realtime connections com desempenho analysis and debugging",
+    "category": "database",
+    "type": "command",
+    "published": true
+  },
+  {
+    "id": "cmd-013",
+    "name": "Supabase Schema Sync",
+    "slug": "supabase-schema-sync",
+    "description": "Synchronize database schema with Supabase using MCP integration",
+    "description_pt": "Synchronize banco de dados schema com Supabase usando MCP integration",
+    "category": "database",
+    "type": "command",
+    "published": true
+  },
+  {
+    "id": "cmd-014",
+    "name": "Supabase Security Audit",
+    "slug": "supabase-security-audit",
+    "description": "Conduct comprehensive Supabase security audit with RLS analysis and vulnerability assessment",
+    "description_pt": "Conduct comprehensive Supabase seguranca audit com RLS analysis e vulnerability assessment",
+    "category": "database",
+    "type": "command",
+    "published": true
+  },
+  {
+    "id": "cmd-015",
+    "name": "Supabase Type Generator",
+    "slug": "supabase-type-generator",
+    "description": "Generate TypeScript types from Supabase schema with automatic synchronization and validation",
+    "description_pt": "Gerar TypeScript types de Supabase schema com automatic synchronization e validation",
+    "category": "database",
+    "type": "command",
+    "published": true
+  },
+  {
+    "id": "cmd-016",
+    "name": "Add Changelog",
+    "slug": "add-changelog",
+    "description": "Generate and maintain project changelog with Keep a Changelog format",
+    "description_pt": "Gerar e maintain projeto changelog com Keep a Changelog format",
+    "category": "deployment",
+    "type": "command",
+    "published": true
+  },
+  {
+    "id": "cmd-017",
+    "name": "Blue Green Deployment",
+    "slug": "blue-green-deployment",
+    "description": "Implement blue-green deployment strategy with zero-downtime switching, health validation, and automatic rollback",
+    "description_pt": "Implementar blue-green implantacao strategy com zero-downtime switching, health validation, e automatic rollback",
+    "category": "deployment",
+    "type": "command",
+    "published": true
+  },
+  {
+    "id": "cmd-018",
+    "name": "Changelog Demo Command",
+    "slug": "changelog-demo-command",
+    "description": "Demonstrate changelog automation features with real examples and validation",
+    "description_pt": "Demonstrate changelog automation features com real examples e validation",
+    "category": "deployment",
+    "type": "command",
+    "published": true
+  },
+  {
+    "id": "cmd-019",
+    "name": "CI Setup",
+    "slug": "ci-setup",
+    "description": "Setup comprehensive CI/CD pipeline with automated testing, building, and deployment",
+    "description_pt": "Configurar comprehensive CI/CD pipeline com automated testes, building, e implantacao",
+    "category": "deployment",
+    "type": "command",
+    "published": true
+  },
+  {
+    "id": "cmd-020",
+    "name": "Containerize Application",
+    "slug": "containerize-application",
+    "description": "Containerize application with optimized Docker configuration, security, and multi-stage builds",
+    "description_pt": "Containerize application com optimized Docker configuration, seguranca, e multi-stage builds",
+    "category": "deployment",
+    "type": "command",
+    "published": true
+  },
+  {
+    "id": "cmd-021",
+    "name": "Deployment Monitoring",
+    "slug": "deployment-monitoring",
+    "description": "Comprehensive deployment monitoring with observability, alerting, health checks, and performance tracking",
+    "description_pt": "Comprehensive implantacao monitoring com observability, alerting, health checks, e desempenho tracking",
+    "category": "deployment",
+    "type": "command",
+    "published": true
+  },
+  {
+    "id": "cmd-022",
+    "name": "Hotfix Deploy",
+    "slug": "hotfix-deploy",
+    "description": "Deploy critical hotfixes with emergency procedures, validation, and rollback capabilities",
+    "description_pt": "Implantar critical hotfixes com emergency procedures, validation, e rollback capabilities",
+    "category": "deployment",
+    "type": "command",
+    "published": true
+  },
+  {
+    "id": "cmd-023",
+    "name": "Prepare Release",
+    "slug": "prepare-release",
+    "description": "Prepare and validate release packages with comprehensive testing, documentation, and automation",
+    "description_pt": "Prepare e validate release packages com comprehensive testes, documentacao, and automation",
+    "category": "deployment",
+    "type": "command",
+    "published": true
+  },
+  {
+    "id": "cmd-024",
+    "name": "Rollback Deploy",
+    "slug": "rollback-deploy",
+    "description": "Rollback deployment to previous version with safety checks, database considerations, and monitoring",
+    "description_pt": "Rollback implantacao para previous version com safety checks, banco de dados considerations, e monitoring",
+    "category": "deployment",
+    "type": "command",
+    "published": true
+  },
+  {
+    "id": "cmd-025",
+    "name": "Setup Automated Releases",
+    "slug": "setup-automated-releases",
+    "description": "Setup automated release workflows with semantic versioning, conventional commits, and comprehensive automation",
+    "description_pt": "Configurar automated release fluxo de trabalhos com semantic versioning, conventional commits, e comprehensive automation",
+    "category": "deployment",
+    "type": "command",
+    "published": true
+  },
+  {
+    "id": "cmd-026",
+    "name": "Setup Kubernetes Deployment",
+    "slug": "setup-kubernetes-deployment",
+    "description": "Configure comprehensive Kubernetes deployment with manifests, security, scaling, and production best practices",
+    "description_pt": "Configurar comprehensive Kubernetes implantacao com manifests, seguranca, scaling, e production best practices",
+    "category": "deployment",
+    "type": "command",
+    "published": true
+  },
+  {
+    "id": "cmd-027",
+    "name": "Web Design Reviewer",
+    "slug": "web-design-reviewer",
+    "description": "This skill enables visual inspection of websites running locally or remotely to identify and fix design issues. Triggers on requests like \"review website design\", \"check the UI\", \"fix the layout\", \"find design problems\". Detects issues with responsiv",
+    "description_pt": "This skill enables visual inspection de websites running locally ou remotely para identify e fix design issues. Triggers no requests like \"review website design\", \"check o UI\", \"fix the layout\", \"find design problems\". Detects issues com responsiv",
+    "category": "design",
+    "type": "command",
+    "published": true
+  },
+  {
+    "id": "cmd-028",
+    "name": "Create Architecture Documentation",
+    "slug": "create-architecture-documentation",
+    "description": "Generate comprehensive architecture documentation with diagrams, ADRs, and interactive visualization",
+    "description_pt": "Gerar comprehensive architecture documentacao com diagrams, ADRs, e interactive visualization",
+    "category": "documentation",
+    "type": "command",
+    "published": true
+  },
+  {
+    "id": "cmd-029",
+    "name": "Create Onboarding Guide",
+    "slug": "create-onboarding-guide",
+    "description": "Create comprehensive developer onboarding guide with environment setup, workflows, and interactive tutorials",
+    "description_pt": "Criar comprehensive developer onboarding guide com environment setup, fluxo de trabalhos, e interactive tutorials",
+    "category": "documentation",
+    "type": "command",
+    "published": true
+  },
+  {
+    "id": "cmd-030",
+    "name": "Doc API",
+    "slug": "doc-api",
+    "description": "Generate comprehensive API documentation from code with interactive examples and testing capabilities",
+    "description_pt": "Gerar comprehensive API documentacao de codigo com interactive examples e testes capabilities",
+    "category": "documentation",
+    "type": "command",
+    "published": true
+  },
+  {
+    "id": "cmd-031",
+    "name": "Docs Maintenance",
+    "slug": "docs-maintenance",
+    "description": "Use PROACTIVELY to implement comprehensive documentation maintenance systems with quality assurance, validation, and automated updates",
+    "description_pt": "Use PROACTIVELY para implement comprehensive documentacao maintenance systems com quality assurance, validation, e automated updates",
+    "category": "documentation",
+    "type": "command",
+    "published": true
+  },
+  {
+    "id": "cmd-032",
+    "name": "Generate API Documentation",
+    "slug": "generate-api-documentation",
+    "description": "Auto-generate API reference documentation with multiple output formats and automated deployment",
+    "description_pt": "Auto-generate API reference documentacao com multiple output formats e automated implantacao",
+    "category": "documentation",
+    "type": "command",
+    "published": true
+  },
+  {
+    "id": "cmd-033",
+    "name": "Interactive Documentation",
+    "slug": "interactive-documentation",
+    "description": "Use PROACTIVELY to create interactive documentation platforms with live examples, code playgrounds, and user engagement features",
+    "description_pt": "Use PROACTIVELY para create interactive documentacao platforms com live examples, codigo playgrounds, e user engagement features",
+    "category": "documentation",
+    "type": "command",
+    "published": true
+  },
+  {
+    "id": "cmd-034",
+    "name": "Load Llms Txt",
+    "slug": "load-llms-txt",
+    "description": "Load and process external documentation context from llms.txt files or custom sources",
+    "description_pt": "Load e process external documentacao context de llms.txt arquivos ou custom sources",
+    "category": "documentation",
+    "type": "command",
+    "published": true
+  },
+  {
+    "id": "cmd-035",
+    "name": "Migration Guide",
+    "slug": "migration-guide",
+    "description": "Create comprehensive migration guides with step-by-step procedures, validation, and rollback strategies",
+    "description_pt": "Criar comprehensive migration guides com step-by-step procedures, validation, e rollback strategies",
+    "category": "documentation",
+    "type": "command",
+    "published": true
+  },
+  {
+    "id": "cmd-036",
+    "name": "Troubleshooting Guide",
+    "slug": "troubleshooting-guide",
+    "description": "Generate systematic troubleshooting documentation with diagnostic procedures, common issues, and automated solutions",
+    "description_pt": "Gerar systematic troubleshooting documentacao com diagnostic procedures, common issues, e automated solutions",
+    "category": "documentation",
+    "type": "command",
+    "published": true
+  },
+  {
+    "id": "cmd-037",
+    "name": "Update Docs",
+    "slug": "update-docs",
+    "description": "Systematically update project documentation with implementation status, API changes, and synchronized content",
+    "description_pt": "Systematically update projeto documentacao com implementation status, API changes, e synchronized content",
+    "category": "documentation",
+    "type": "command",
+    "published": true
+  },
+  {
+    "id": "cmd-038",
+    "name": "Game Analytics Integration",
+    "slug": "game-analytics-integration",
+    "description": "Use PROACTIVELY to implement game analytics systems with player behavior tracking, performance monitoring, and business intelligence integration",
+    "description_pt": "Use PROACTIVELY para implement game analytics systems com player behavior tracking, desempenho monitoring, e business intelligence integration",
+    "category": "game-development",
+    "type": "command",
+    "published": true
+  },
+  {
+    "id": "cmd-039",
+    "name": "Game Asset Pipeline",
+    "slug": "game-asset-pipeline",
+    "description": "Use PROACTIVELY to build automated game asset processing pipelines with optimization, validation, and multi-platform delivery systems",
+    "description_pt": "Use PROACTIVELY para build automated game asset processing pipelines com optimization, validation, e multi-platform delivery systems",
+    "category": "game-development",
+    "type": "command",
+    "published": true
+  },
+  {
+    "id": "cmd-040",
+    "name": "Game Performance Profiler",
+    "slug": "game-performance-profiler",
+    "description": "Use PROACTIVELY to analyze game performance bottlenecks and generate optimization recommendations across multiple platforms",
+    "description_pt": "Use PROACTIVELY para analyze game desempenho bottlenecks e generate optimization recommendations across multiple platforms",
+    "category": "game-development",
+    "type": "command",
+    "published": true
+  },
+  {
+    "id": "cmd-041",
+    "name": "Game Testing Framework",
+    "slug": "game-testing-framework",
+    "description": "Use PROACTIVELY to implement comprehensive game testing frameworks with automated validation, performance testing, and multi-platform verification",
+    "description_pt": "Use PROACTIVELY para implement comprehensive game testes frameworks com automated validation, desempenho testing, e multi-platform verification",
+    "category": "game-development",
+    "type": "command",
+    "published": true
+  },
+  {
+    "id": "cmd-042",
+    "name": "Unity Project Setup",
+    "slug": "unity-project-setup",
+    "description": "Use PROACTIVELY to set up professional Unity game development projects with industry-standard structure, essential packages, and platform-optimized configurations",
+    "description_pt": "Use PROACTIVELY para set up professional Unity game development projetos com industry-standard structure, essential packages, e platform-optimized configurations",
+    "category": "game-development",
+    "type": "command",
+    "published": true
+  },
+  {
+    "id": "cmd-043",
+    "name": "Feature",
+    "slug": "feature",
+    "description": "Create a new Git Flow feature branch from develop with proper naming and tracking",
+    "description_pt": "Criar a new Git Flow feature branch de develop com proper naming e tracking",
+    "category": "git",
+    "type": "command",
+    "published": true
+  },
+  {
+    "id": "cmd-044",
+    "name": "Finish",
+    "slug": "finish",
+    "description": "Complete and merge current Git Flow branch (feature/release/hotfix) with proper cleanup and tagging",
+    "description_pt": "Complete e merge current Git Flow branch (feature/release/hotfix) com proper cleanup and tagging",
+    "category": "git",
+    "type": "command",
+    "published": true
+  },
+  {
+    "id": "cmd-045",
+    "name": "Flow Status",
+    "slug": "flow-status",
+    "description": "Display comprehensive Git Flow status including branch type, sync status, changes, and merge targets",
+    "description_pt": "Display comprehensive Git Flow status including branch type, sync status, changes, e merge targets",
+    "category": "git",
+    "type": "command",
+    "published": true
+  },
+  {
+    "id": "cmd-046",
+    "name": "Hotfix",
+    "slug": "hotfix",
+    "description": "Create a new Git Flow hotfix branch from main for emergency production fixes",
+    "description_pt": "Criar a new Git Flow hotfix branch de main para emergency production fixes",
+    "category": "git",
+    "type": "command",
+    "published": true
+  },
+  {
+    "id": "cmd-047",
+    "name": "Release",
+    "slug": "release",
+    "description": "Create a new Git Flow release branch from develop with version bumping and changelog generation",
+    "description_pt": "Criar a new Git Flow release branch de develop com version bumping e changelog generation",
+    "category": "git",
+    "type": "command",
+    "published": true
+  },
+  {
+    "id": "cmd-048",
+    "name": "Branch Cleanup",
+    "slug": "branch-cleanup",
+    "description": "Use PROACTIVELY to clean up merged branches, stale remotes, and organize branch structure",
+    "description_pt": "Use PROACTIVELY para clean up merged branches, stale remotes, e organize branch structure",
+    "category": "git-workflow",
+    "type": "command",
+    "published": true
+  },
+  {
+    "id": "cmd-049",
+    "name": "Commit",
+    "slug": "commit",
+    "description": "Create well-formatted commits with conventional commit format and emoji",
+    "description_pt": "Criar well-formatted commits com conventional commit format e emoji",
+    "category": "git-workflow",
+    "type": "command",
+    "published": true
+  },
+  {
+    "id": "cmd-050",
+    "name": "Gemini Review",
+    "slug": "gemini-review",
+    "description": "Transform Gemini Code Assist PR reviews into prioritized TodoLists with automated execution",
+    "description_pt": "Transform Gemini Code Assist PR reviews into prioritized TodoLists com automated execution",
+    "category": "git-workflow",
+    "type": "command",
+    "published": true
+  },
+  {
+    "id": "cmd-051",
+    "name": "Git Bisect Helper",
+    "slug": "git-bisect-helper",
+    "description": "Use PROACTIVELY to guide automated git bisect sessions for finding regression commits with smart test execution",
+    "description_pt": "Use PROACTIVELY para guide automated git bisect sessions para finding regression commits com smart test execution",
+    "category": "git-workflow",
+    "type": "command",
+    "published": true
+  },
+  {
+    "id": "cmd-052",
+    "name": "GWS Admin Reports",
+    "slug": "gws-admin-reports",
+    "description": "Google Workspace Admin SDK: Audit logs and usage reports.",
+    "description_pt": "Google Workspace Admin SDK: Audit logs e usage reports.",
+    "category": "google-workspace",
+    "type": "command",
+    "published": true
+  },
+  {
+    "id": "cmd-053",
+    "name": "GWS Admin",
+    "slug": "gws-admin",
+    "description": "Google Workspace Admin SDK: Manage users, groups, and devices.",
+    "description_pt": "Google Workspace Admin SDK: Gerenciar users, groups, e devices.",
+    "category": "google-workspace",
+    "type": "command",
+    "published": true
+  },
+  {
+    "id": "cmd-054",
+    "name": "GWS Alertcenter",
+    "slug": "gws-alertcenter",
+    "description": "Google Workspace Alert Center: Manage Workspace security alerts.",
+    "description_pt": "Google Workspace Alert Center: Gerenciar Workspace seguranca alerts.",
+    "category": "google-workspace",
+    "type": "command",
+    "published": true
+  },
+  {
+    "id": "cmd-055",
+    "name": "GWS Apps Script Push",
+    "slug": "gws-apps-script-push",
+    "description": "Google Apps Script: Upload local files to an Apps Script project.",
+    "description_pt": "Google Apps Script: Upload local arquivos para an Apps Script projeto.",
+    "category": "google-workspace",
+    "type": "command",
+    "published": true
+  },
+  {
+    "id": "cmd-056",
+    "name": "GWS Apps Script",
+    "slug": "gws-apps-script",
+    "description": "Google Apps Script: Manage and execute Apps Script projects.",
+    "description_pt": "Google Apps Script: Gerenciar e execute Apps Script projetos.",
+    "category": "google-workspace",
+    "type": "command",
+    "published": true
+  },
+  {
+    "id": "cmd-057",
+    "name": "GWS Calendar Agenda",
+    "slug": "gws-calendar-agenda",
+    "description": "Google Calendar: Show upcoming events across all calendars.",
+    "description_pt": "Google Calendar: Show upcoming events across all calendars.",
+    "category": "google-workspace",
+    "type": "command",
+    "published": true
+  },
+  {
+    "id": "cmd-058",
+    "name": "GWS Calendar Insert",
+    "slug": "gws-calendar-insert",
+    "description": "Google Calendar: Create a new event.",
+    "description_pt": "Google Calendar: Criar a new event.",
+    "category": "google-workspace",
+    "type": "command",
+    "published": true
+  },
+  {
+    "id": "cmd-059",
+    "name": "GWS Calendar",
+    "slug": "gws-calendar",
+    "description": "Google Calendar: Manage calendars and events.",
+    "description_pt": "Google Calendar: Gerenciar calendars e events.",
+    "category": "google-workspace",
+    "type": "command",
+    "published": true
+  },
+  {
+    "id": "cmd-060",
+    "name": "GWS Chat Send",
+    "slug": "gws-chat-send",
+    "description": "Google Chat: Send a message to a space.",
+    "description_pt": "Google Chat: Send a message para a space.",
+    "category": "google-workspace",
+    "type": "command",
+    "published": true
+  },
+  {
+    "id": "cmd-061",
+    "name": "GWS Chat",
+    "slug": "gws-chat",
+    "description": "Google Chat: Manage Chat spaces and messages.",
+    "description_pt": "Google Chat: Gerenciar Chat spaces e messages.",
+    "category": "google-workspace",
+    "type": "command",
+    "published": true
+  },
+  {
+    "id": "cmd-062",
+    "name": "GWS Classroom",
+    "slug": "gws-classroom",
+    "description": "Google Classroom: Manage classes, rosters, and coursework.",
+    "description_pt": "Google Classroom: Gerenciar classes, rosters, e coursework.",
+    "category": "google-workspace",
+    "type": "command",
+    "published": true
+  },
+  {
+    "id": "cmd-063",
+    "name": "GWS Cloudidentity",
+    "slug": "gws-cloudidentity",
+    "description": "Google Cloud Identity: Manage identity groups and memberships.",
+    "description_pt": "Google Cloud Identity: Gerenciar identity groups e memberships.",
+    "category": "google-workspace",
+    "type": "command",
+    "published": true
+  },
+  {
+    "id": "cmd-064",
+    "name": "GWS Docs Write",
+    "slug": "gws-docs-write",
+    "description": "Google Docs: Append text to a document.",
+    "description_pt": "Google Docs: Append text para a document.",
+    "category": "google-workspace",
+    "type": "command",
+    "published": true
+  },
+  {
+    "id": "cmd-065",
+    "name": "GWS Docs",
+    "slug": "gws-docs",
+    "description": "Read and write Google Docs.",
+    "description_pt": "Read e write Google Docs.",
+    "category": "google-workspace",
+    "type": "command",
+    "published": true
+  },
+  {
+    "id": "cmd-066",
+    "name": "GWS Drive Upload",
+    "slug": "gws-drive-upload",
+    "description": "Google Drive: Upload a file with automatic metadata.",
+    "description_pt": "Google Drive: Upload a arquivo com automatic metadata.",
+    "category": "google-workspace",
+    "type": "command",
+    "published": true
+  },
+  {
+    "id": "cmd-067",
+    "name": "GWS Drive",
+    "slug": "gws-drive",
+    "description": "Google Drive: Manage files, folders, and shared drives.",
+    "description_pt": "Google Drive: Gerenciar arquivos, folders, e shared drives.",
+    "category": "google-workspace",
+    "type": "command",
+    "published": true
+  },
+  {
+    "id": "cmd-068",
+    "name": "GWS Events Renew",
+    "slug": "gws-events-renew",
+    "description": "Google Workspace Events: Renew/reactivate Workspace Events subscriptions.",
+    "description_pt": "Google Workspace Events: Renew/reactivate Workspace Events subscriptions.",
+    "category": "google-workspace",
+    "type": "command",
+    "published": true
+  },
+  {
+    "id": "cmd-069",
+    "name": "GWS Events Subscribe",
+    "slug": "gws-events-subscribe",
+    "description": "Google Workspace Events: Subscribe to Workspace events and stream them as NDJSON.",
+    "description_pt": "Google Workspace Events: Subscribe para Workspace events e stream them as NDJSON.",
+    "category": "google-workspace",
+    "type": "command",
+    "published": true
+  },
+  {
+    "id": "cmd-070",
+    "name": "GWS Events",
+    "slug": "gws-events",
+    "description": "Subscribe to Google Workspace events.",
+    "description_pt": "Subscribe para Google Workspace events.",
+    "category": "google-workspace",
+    "type": "command",
+    "published": true
+  },
+  {
+    "id": "cmd-071",
+    "name": "GWS Forms",
+    "slug": "gws-forms",
+    "description": "Read and write Google Forms.",
+    "description_pt": "Read e write Google Forms.",
+    "category": "google-workspace",
+    "type": "command",
+    "published": true
+  },
+  {
+    "id": "cmd-072",
+    "name": "GWS Gmail Send",
+    "slug": "gws-gmail-send",
+    "description": "Gmail: Send an email.",
+    "description_pt": "Gmail: Send an email.",
+    "category": "google-workspace",
+    "type": "command",
+    "published": true
+  },
+  {
+    "id": "cmd-073",
+    "name": "GWS Gmail Triage",
+    "slug": "gws-gmail-triage",
+    "description": "Gmail: Show unread inbox summary (sender, subject, date).",
+    "description_pt": "Gmail: Show unread inbox summary (sender, subject, date).",
+    "category": "google-workspace",
+    "type": "command",
+    "published": true
+  },
+  {
+    "id": "cmd-074",
+    "name": "GWS Gmail Watch",
+    "slug": "gws-gmail-watch",
+    "description": "Gmail: Watch for new emails and stream them as NDJSON.",
+    "description_pt": "Gmail: Watch para new emails e stream them as NDJSON.",
+    "category": "google-workspace",
+    "type": "command",
+    "published": true
+  },
+  {
+    "id": "cmd-075",
+    "name": "GWS Gmail",
+    "slug": "gws-gmail",
+    "description": "Gmail: Send, read, and manage email.",
+    "description_pt": "Gmail: Send, read, e manage email.",
+    "category": "google-workspace",
+    "type": "command",
+    "published": true
+  },
+  {
+    "id": "cmd-076",
+    "name": "GWS Groupssettings",
+    "slug": "gws-groupssettings",
+    "description": "Manage Google Groups settings.",
+    "description_pt": "Gerenciar Google Groups settings.",
+    "category": "google-workspace",
+    "type": "command",
+    "published": true
+  },
+  {
+    "id": "cmd-077",
+    "name": "GWS Keep",
+    "slug": "gws-keep",
+    "description": "Manage Google Keep notes.",
+    "description_pt": "Gerenciar Google Keep notes.",
+    "category": "google-workspace",
+    "type": "command",
+    "published": true
+  },
+  {
+    "id": "cmd-078",
+    "name": "GWS Licensing",
+    "slug": "gws-licensing",
+    "description": "Google Workspace Enterprise License Manager: Manage product licenses.",
+    "description_pt": "Google Workspace Enterprise License Manager: Gerenciar product licenses.",
+    "category": "google-workspace",
+    "type": "command",
+    "published": true
+  },
+  {
+    "id": "cmd-079",
+    "name": "GWS Meet",
+    "slug": "gws-meet",
+    "description": "Manage Google Meet conferences.",
+    "description_pt": "Gerenciar Google Meet conferences.",
+    "category": "google-workspace",
+    "type": "command",
+    "published": true
+  },
+  {
+    "id": "cmd-080",
+    "name": "GWS Modelarmor Create Template",
+    "slug": "gws-modelarmor-create-template",
+    "description": "Google Model Armor: Create a new Model Armor template.",
+    "description_pt": "Google Model Armor: Criar a new Model Armor template.",
+    "category": "google-workspace",
+    "type": "command",
+    "published": true
+  },
+  {
+    "id": "cmd-081",
+    "name": "GWS Modelarmor Sanitize Prompt",
+    "slug": "gws-modelarmor-sanitize-prompt",
+    "description": "Google Model Armor: Sanitize a user prompt through a Model Armor template.",
+    "description_pt": "Google Model Armor: Sanitize a user prompt through a Model Armor template.",
+    "category": "google-workspace",
+    "type": "command",
+    "published": true
+  },
+  {
+    "id": "cmd-082",
+    "name": "GWS Modelarmor Sanitize Response",
+    "slug": "gws-modelarmor-sanitize-response",
+    "description": "Google Model Armor: Sanitize a model response through a Model Armor template.",
+    "description_pt": "Google Model Armor: Sanitize a model response through a Model Armor template.",
+    "category": "google-workspace",
+    "type": "command",
+    "published": true
+  },
+  {
+    "id": "cmd-083",
+    "name": "GWS Modelarmor",
+    "slug": "gws-modelarmor",
+    "description": "Google Model Armor: Filter user-generated content for safety.",
+    "description_pt": "Google Model Armor: Filter user-generated content para safety.",
+    "category": "google-workspace",
+    "type": "command",
+    "published": true
+  },
+  {
+    "id": "cmd-084",
+    "name": "GWS People",
+    "slug": "gws-people",
+    "description": "Google People: Manage contacts and profiles.",
+    "description_pt": "Google People: Gerenciar contacts e proarquivos.",
+    "category": "google-workspace",
+    "type": "command",
+    "published": true
+  },
+  {
+    "id": "cmd-085",
+    "name": "GWS Reseller",
+    "slug": "gws-reseller",
+    "description": "Google Workspace Reseller: Manage Workspace subscriptions.",
+    "description_pt": "Google Workspace Reseller: Gerenciar Workspace subscriptions.",
+    "category": "google-workspace",
+    "type": "command",
+    "published": true
+  },
+  {
+    "id": "cmd-086",
+    "name": "GWS Shared",
+    "slug": "gws-shared",
+    "description": "gws CLI: Shared patterns for authentication, global flags, and output formatting.",
+    "description_pt": "gws CLI: Shared patterns para authentication, global flags, e output formatting.",
+    "category": "google-workspace",
+    "type": "command",
+    "published": true
+  },
+  {
+    "id": "cmd-087",
+    "name": "GWS Sheets Append",
+    "slug": "gws-sheets-append",
+    "description": "Google Sheets: Append a row to a spreadsheet.",
+    "description_pt": "Google Sheets: Append a row para a spreadsheet.",
+    "category": "google-workspace",
+    "type": "command",
+    "published": true
+  },
+  {
+    "id": "cmd-088",
+    "name": "GWS Sheets Read",
+    "slug": "gws-sheets-read",
+    "description": "Google Sheets: Read values from a spreadsheet.",
+    "description_pt": "Google Sheets: Read values de a spreadsheet.",
+    "category": "google-workspace",
+    "type": "command",
+    "published": true
+  },
+  {
+    "id": "cmd-089",
+    "name": "GWS Sheets",
+    "slug": "gws-sheets",
+    "description": "Google Sheets: Read and write spreadsheets.",
+    "description_pt": "Google Sheets: Read e write spreadsheets.",
+    "category": "google-workspace",
+    "type": "command",
+    "published": true
+  },
+  {
+    "id": "cmd-090",
+    "name": "GWS Slides",
+    "slug": "gws-slides",
+    "description": "Google Slides: Read and write presentations.",
+    "description_pt": "Google Slides: Read e write presentations.",
+    "category": "google-workspace",
+    "type": "command",
+    "published": true
+  },
+  {
+    "id": "cmd-091",
+    "name": "GWS Tasks",
+    "slug": "gws-tasks",
+    "description": "Google Tasks: Manage task lists and tasks.",
+    "description_pt": "Google Tasks: Gerenciar task lists e tasks.",
+    "category": "google-workspace",
+    "type": "command",
+    "published": true
+  },
+  {
+    "id": "cmd-092",
+    "name": "GWS Vault",
+    "slug": "gws-vault",
+    "description": "Google Vault: Manage eDiscovery holds and exports.",
+    "description_pt": "Google Vault: Gerenciar eDiscovery holds e exports.",
+    "category": "google-workspace",
+    "type": "command",
+    "published": true
+  },
+  {
+    "id": "cmd-093",
+    "name": "GWS Workflow Email To Task",
+    "slug": "gws-workflow-email-to-task",
+    "description": "Google Workflow: Convert a Gmail message into a Google Tasks entry.",
+    "description_pt": "Google Workflow: Convert a Gmail message into a Google Tasks entry.",
+    "category": "google-workspace",
+    "type": "command",
+    "published": true
+  },
+  {
+    "id": "cmd-094",
+    "name": "GWS Workflow File Announce",
+    "slug": "gws-workflow-file-announce",
+    "description": "Google Workflow: Announce a Drive file in a Chat space.",
+    "description_pt": "Google Workflow: Announce a Drive arquivo em a Chat space.",
+    "category": "google-workspace",
+    "type": "command",
+    "published": true
+  },
+  {
+    "id": "cmd-095",
+    "name": "GWS Workflow Meeting Prep",
+    "slug": "gws-workflow-meeting-prep",
+    "description": "Google Workflow: Prepare for your next meeting: agenda, attendees, and linked docs.",
+    "description_pt": "Google Workflow: Prepare para seu next meeting: agenda, attendees, e linked docs.",
+    "category": "google-workspace",
+    "type": "command",
+    "published": true
+  },
+  {
+    "id": "cmd-096",
+    "name": "GWS Workflow Standup Report",
+    "slug": "gws-workflow-standup-report",
+    "description": "Google Workflow: Today's meetings + open tasks as a standup summary.",
+    "description_pt": "Google Workflow: Today's meetings + open tasks as a standup summary.",
+    "category": "google-workspace",
+    "type": "command",
+    "published": true
+  },
+  {
+    "id": "cmd-097",
+    "name": "GWS Workflow Weekly Digest",
+    "slug": "gws-workflow-weekly-digest",
+    "description": "Google Workflow: Weekly summary: this week's meetings + unread email count.",
+    "description_pt": "Google Workflow: Weekly summary: este week's meetings + unread email count.",
+    "category": "google-workspace",
+    "type": "command",
+    "published": true
+  },
+  {
+    "id": "cmd-098",
+    "name": "GWS Workflow",
+    "slug": "gws-workflow",
+    "description": "Google Workflow: Cross-service productivity workflows.",
+    "description_pt": "Google Workflow: Cross-service productivity fluxo de trabalhos.",
+    "category": "google-workspace",
+    "type": "command",
+    "published": true
+  },
+  {
+    "id": "cmd-099",
+    "name": "Persona Content Creator",
+    "slug": "persona-content-creator",
+    "description": "Create, organize, and distribute content across Workspace.",
+    "description_pt": "Create, organize, e distribute content across Workspace.",
+    "category": "google-workspace",
+    "type": "command",
+    "published": true
+  },
+  {
+    "id": "cmd-100",
+    "name": "Persona Customer Support",
+    "slug": "persona-customer-support",
+    "description": "Manage customer support — track tickets, respond, escalate issues.",
+    "description_pt": "Gerenciar customer support — track tickets, respond, escalate issues.",
+    "category": "google-workspace",
+    "type": "command",
+    "published": true
+  },
+  {
+    "id": "cmd-101",
+    "name": "Persona Event Coordinator",
+    "slug": "persona-event-coordinator",
+    "description": "Plan and manage events — scheduling, invitations, and logistics.",
+    "description_pt": "Plan e manage events — scheduling, invitations, and logistics.",
+    "category": "google-workspace",
+    "type": "command",
+    "published": true
+  },
+  {
+    "id": "cmd-102",
+    "name": "Persona Exec Assistant",
+    "slug": "persona-exec-assistant",
+    "description": "Manage an executive's schedule, inbox, and communications.",
+    "description_pt": "Gerenciar an executive's schedule, inbox, e communications.",
+    "category": "google-workspace",
+    "type": "command",
+    "published": true
+  },
+  {
+    "id": "cmd-103",
+    "name": "Persona Hr Coordinator",
+    "slug": "persona-hr-coordinator",
+    "description": "Handle HR workflows — onboarding, announcements, and employee comms.",
+    "description_pt": "Handle HR fluxo de trabalhos — onboarding, announcements, e employee comms.",
+    "category": "google-workspace",
+    "type": "command",
+    "published": true
+  },
+  {
+    "id": "cmd-104",
+    "name": "Persona It Admin",
+    "slug": "persona-it-admin",
+    "description": "Administer IT — manage users, monitor security, configure Workspace.",
+    "description_pt": "Administer IT — manage users, monitor seguranca, configure Workspace.",
+    "category": "google-workspace",
+    "type": "command",
+    "published": true
+  },
+  {
+    "id": "cmd-105",
+    "name": "Persona Project Manager",
+    "slug": "persona-project-manager",
+    "description": "Coordinate projects — track tasks, schedule meetings, and share docs.",
+    "description_pt": "Coordinate projetos — track tasks, schedule meetings, e share docs.",
+    "category": "google-workspace",
+    "type": "command",
+    "published": true
+  },
+  {
+    "id": "cmd-106",
+    "name": "Persona Researcher",
+    "slug": "persona-researcher",
+    "description": "Organize research — manage references, notes, and collaboration.",
+    "description_pt": "Organize research — manage references, notes, e collaboration.",
+    "category": "google-workspace",
+    "type": "command",
+    "published": true
+  },
+  {
+    "id": "cmd-107",
+    "name": "Persona Sales Ops",
+    "slug": "persona-sales-ops",
+    "description": "Manage sales workflows — track deals, schedule calls, client comms.",
+    "description_pt": "Gerenciar sales fluxo de trabalhos — track deals, schedule calls, client comms.",
+    "category": "google-workspace",
+    "type": "command",
+    "published": true
+  },
+  {
+    "id": "cmd-108",
+    "name": "Persona Team Lead",
+    "slug": "persona-team-lead",
+    "description": "Lead a team — run standups, coordinate tasks, and communicate.",
+    "description_pt": "Lead a team — run standups, coordinate tasks, e communicate.",
+    "category": "google-workspace",
+    "type": "command",
+    "published": true
+  },
+  {
+    "id": "cmd-109",
+    "name": "Recipe Audit External Sharing",
+    "slug": "recipe-audit-external-sharing",
+    "description": "Find and review Google Drive files shared outside the organization.",
+    "description_pt": "Encontrar e review Google Drive arquivos shared outside o organization.",
+    "category": "google-workspace",
+    "type": "command",
+    "published": true
+  },
+  {
+    "id": "cmd-110",
+    "name": "Recipe Backup Sheet As CSV",
+    "slug": "recipe-backup-sheet-as-csv",
+    "description": "Export a Google Sheets spreadsheet as a CSV file for local backup or processing.",
+    "description_pt": "Export a Google Sheets spreadsheet as a CSV arquivo para local backup ou processing.",
+    "category": "google-workspace",
+    "type": "command",
+    "published": true
+  },
+  {
+    "id": "cmd-111",
+    "name": "Recipe Batch Invite To Event",
+    "slug": "recipe-batch-invite-to-event",
+    "description": "Add a list of attendees to an existing Google Calendar event and send notifications.",
+    "description_pt": "Adicionar a list de attendees para an existing Google Calendar event e send notifications.",
+    "category": "google-workspace",
+    "type": "command",
+    "published": true
+  },
+  {
+    "id": "cmd-112",
+    "name": "Recipe Batch Rename Files",
+    "slug": "recipe-batch-rename-files",
+    "description": "Rename multiple Google Drive files matching a pattern to follow a consistent naming convention.",
+    "description_pt": "Rename multiple Google Drive arquivos matching a pattern para follow a consistent naming convention.",
+    "category": "google-workspace",
+    "type": "command",
+    "published": true
+  },
+  {
+    "id": "cmd-113",
+    "name": "Recipe Batch Reply To Emails",
+    "slug": "recipe-batch-reply-to-emails",
+    "description": "Find Gmail messages matching a query and send a standard reply to each one.",
+    "description_pt": "Encontrar Gmail messages matching a query e send a standard reply para each one.",
+    "category": "google-workspace",
+    "type": "command",
+    "published": true
+  },
+  {
+    "id": "cmd-114",
+    "name": "Recipe Block Focus Time",
+    "slug": "recipe-block-focus-time",
+    "description": "Create recurring focus time blocks on Google Calendar to protect deep work hours.",
+    "description_pt": "Criar recurring focus time blocks no Google Calendar para protect deep work hours.",
+    "category": "google-workspace",
+    "type": "command",
+    "published": true
+  },
+  {
+    "id": "cmd-115",
+    "name": "Recipe Bulk Download Folder",
+    "slug": "recipe-bulk-download-folder",
+    "description": "List and download all files from a Google Drive folder.",
+    "description_pt": "Listar e download all arquivos de a Google Drive folder.",
+    "category": "google-workspace",
+    "type": "command",
+    "published": true
+  },
+  {
+    "id": "cmd-116",
+    "name": "Recipe Cancel And Notify",
+    "slug": "recipe-cancel-and-notify",
+    "description": "Delete a Google Calendar event and send a cancellation email via Gmail.",
+    "description_pt": "Excluir a Google Calendar event e send a cancellation email via Gmail.",
+    "category": "google-workspace",
+    "type": "command",
+    "published": true
+  },
+  {
+    "id": "cmd-117",
+    "name": "Recipe Collect Form Responses",
+    "slug": "recipe-collect-form-responses",
+    "description": "Retrieve and review responses from a Google Form.",
+    "description_pt": "Retrieve e review responses de a Google Form.",
+    "category": "google-workspace",
+    "type": "command",
+    "published": true
+  },
+  {
+    "id": "cmd-118",
+    "name": "Recipe Compare Sheet Tabs",
+    "slug": "recipe-compare-sheet-tabs",
+    "description": "Read data from two tabs in a Google Sheet to compare and identify differences.",
+    "description_pt": "Read data de two tabs em a Google Sheet para compare e identify differences.",
+    "category": "google-workspace",
+    "type": "command",
+    "published": true
+  },
+  {
+    "id": "cmd-119",
+    "name": "Recipe Copy Sheet For New Month",
+    "slug": "recipe-copy-sheet-for-new-month",
+    "description": "Duplicate a Google Sheets template tab for a new month of tracking.",
+    "description_pt": "Duplicate a Google Sheets template tab para a new month de tracking.",
+    "category": "google-workspace",
+    "type": "command",
+    "published": true
+  },
+  {
+    "id": "cmd-120",
+    "name": "Recipe Create Classroom Course",
+    "slug": "recipe-create-classroom-course",
+    "description": "Create a Google Classroom course and invite students.",
+    "description_pt": "Criar a Google Classroom course e invite students.",
+    "category": "google-workspace",
+    "type": "command",
+    "published": true
+  },
+  {
+    "id": "cmd-121",
+    "name": "Recipe Create Doc From Template",
+    "slug": "recipe-create-doc-from-template",
+    "description": "Copy a Google Docs template, fill in content, and share with collaborators.",
+    "description_pt": "Copy a Google Docs template, fill em content, e share com collaborators.",
+    "category": "google-workspace",
+    "type": "command",
+    "published": true
+  },
+  {
+    "id": "cmd-122",
+    "name": "Recipe Create Events From Sheet",
+    "slug": "recipe-create-events-from-sheet",
+    "description": "Read event data from a Google Sheets spreadsheet and create Google Calendar entries for each row.",
+    "description_pt": "Read event data de a Google Sheets spreadsheet e create Google Calendar entries para each row.",
+    "category": "google-workspace",
+    "type": "command",
+    "published": true
+  },
+  {
+    "id": "cmd-123",
+    "name": "Recipe Create Expense Tracker",
+    "slug": "recipe-create-expense-tracker",
+    "description": "Set up a Google Sheets spreadsheet for tracking expenses with headers and initial entries.",
+    "description_pt": "Configurar a Google Sheets spreadsheet para tracking expenses com headers e initial entries.",
+    "category": "google-workspace",
+    "type": "command",
+    "published": true
+  },
+  {
+    "id": "cmd-124",
+    "name": "Recipe Create Feedback Form",
+    "slug": "recipe-create-feedback-form",
+    "description": "Create a Google Form for feedback and share it via Gmail.",
+    "description_pt": "Criar a Google Form para feedback e share it via Gmail.",
+    "category": "google-workspace",
+    "type": "command",
+    "published": true
+  },
+  {
+    "id": "cmd-125",
+    "name": "Recipe Create Gmail Filter",
+    "slug": "recipe-create-gmail-filter",
+    "description": "Create a Gmail filter to automatically label, star, or categorize incoming messages.",
+    "description_pt": "Criar a Gmail filter para automaticamente label, star, ou categorize incoming messages.",
+    "category": "google-workspace",
+    "type": "command",
+    "published": true
+  },
+  {
+    "id": "cmd-126",
+    "name": "Recipe Create Meet Space",
+    "slug": "recipe-create-meet-space",
+    "description": "Create a Google Meet meeting space and share the join link.",
+    "description_pt": "Criar a Google Meet meeting space e share o join link.",
+    "category": "google-workspace",
+    "type": "command",
+    "published": true
+  },
+  {
+    "id": "cmd-127",
+    "name": "Recipe Create Presentation",
+    "slug": "recipe-create-presentation",
+    "description": "Create a new Google Slides presentation and add initial slides.",
+    "description_pt": "Criar a new Google Slides presentation e add initial slides.",
+    "category": "google-workspace",
+    "type": "command",
+    "published": true
+  },
+  {
+    "id": "cmd-128",
+    "name": "Recipe Create Shared Drive",
+    "slug": "recipe-create-shared-drive",
+    "description": "Create a Google Shared Drive and add members with appropriate roles.",
+    "description_pt": "Criar a Google Shared Drive e add members com appropriate roles.",
+    "category": "google-workspace",
+    "type": "command",
+    "published": true
+  },
+  {
+    "id": "cmd-129",
+    "name": "Recipe Create Task List",
+    "slug": "recipe-create-task-list",
+    "description": "Set up a new Google Tasks list with initial tasks.",
+    "description_pt": "Configurar a new Google Tasks list com initial tasks.",
+    "category": "google-workspace",
+    "type": "command",
+    "published": true
+  },
+  {
+    "id": "cmd-130",
+    "name": "Recipe Create Vacation Responder",
+    "slug": "recipe-create-vacation-responder",
+    "description": "Enable a Gmail out-of-office auto-reply with a custom message and date range.",
+    "description_pt": "Enable a Gmail out-of-office auto-reply com a custom message e date range.",
+    "category": "google-workspace",
+    "type": "command",
+    "published": true
+  },
+  {
+    "id": "cmd-131",
+    "name": "Recipe Deploy Apps Script",
+    "slug": "recipe-deploy-apps-script",
+    "description": "Push local files to a Google Apps Script project.",
+    "description_pt": "Push local arquivos para a Google Apps Script projeto.",
+    "category": "google-workspace",
+    "type": "command",
+    "published": true
+  },
+  {
+    "id": "cmd-132",
+    "name": "Recipe Draft Email From Doc",
+    "slug": "recipe-draft-email-from-doc",
+    "description": "Read content from a Google Doc and use it as the body of a Gmail message.",
+    "description_pt": "Read content de a Google Doc e use it as o body de a Gmail message.",
+    "category": "google-workspace",
+    "type": "command",
+    "published": true
+  },
+  {
+    "id": "cmd-133",
+    "name": "Recipe Email Drive Link",
+    "slug": "recipe-email-drive-link",
+    "description": "Share a Google Drive file and email the link with a message to recipients.",
+    "description_pt": "Share a Google Drive arquivo e email o link com a message para recipients.",
+    "category": "google-workspace",
+    "type": "command",
+    "published": true
+  },
+  {
+    "id": "cmd-134",
+    "name": "Recipe Find Free Time",
+    "slug": "recipe-find-free-time",
+    "description": "Query Google Calendar free/busy status for multiple users to find a meeting slot.",
+    "description_pt": "Query Google Calendar free/busy status para multiple users para find a meeting slot.",
+    "category": "google-workspace",
+    "type": "command",
+    "published": true
+  },
+  {
+    "id": "cmd-135",
+    "name": "Recipe Find Large Files",
+    "slug": "recipe-find-large-files",
+    "description": "Identify large Google Drive files consuming storage quota.",
+    "description_pt": "Identify large Google Drive arquivos consuming storage quota.",
+    "category": "google-workspace",
+    "type": "command",
+    "published": true
+  },
+  {
+    "id": "cmd-136",
+    "name": "Recipe Forward Labeled Emails",
+    "slug": "recipe-forward-labeled-emails",
+    "description": "Find Gmail messages with a specific label and forward them to another address.",
+    "description_pt": "Encontrar Gmail messages com a specific label e forward them para another address.",
+    "category": "google-workspace",
+    "type": "command",
+    "published": true
+  },
+  {
+    "id": "cmd-137",
+    "name": "Recipe Generate Report From Sheet",
+    "slug": "recipe-generate-report-from-sheet",
+    "description": "Read data from a Google Sheet and create a formatted Google Docs report.",
+    "description_pt": "Read data de a Google Sheet e create a formatted Google Docs report.",
+    "category": "google-workspace",
+    "type": "command",
+    "published": true
+  },
+  {
+    "id": "cmd-138",
+    "name": "Recipe Label And Archive Emails",
+    "slug": "recipe-label-and-archive-emails",
+    "description": "Apply Gmail labels to matching messages and archive them to keep your inbox clean.",
+    "description_pt": "Apply Gmail labels para matching messages e archive them to keep seu inbox clean.",
+    "category": "google-workspace",
+    "type": "command",
+    "published": true
+  },
+  {
+    "id": "cmd-139",
+    "name": "Recipe Log Deal Update",
+    "slug": "recipe-log-deal-update",
+    "description": "Append a deal status update to a Google Sheets sales tracking spreadsheet.",
+    "description_pt": "Append a deal status update para a Google Sheets sales tracking spreadsheet.",
+    "category": "google-workspace",
+    "type": "command",
+    "published": true
+  },
+  {
+    "id": "cmd-140",
+    "name": "Recipe Organize Drive Folder",
+    "slug": "recipe-organize-drive-folder",
+    "description": "Create a Google Drive folder structure and move files into the right locations.",
+    "description_pt": "Criar a Google Drive folder structure e move arquivos into o right locations.",
+    "category": "google-workspace",
+    "type": "command",
+    "published": true
+  },
+  {
+    "id": "cmd-141",
+    "name": "Recipe Plan Weekly Schedule",
+    "slug": "recipe-plan-weekly-schedule",
+    "description": "Review your Google Calendar week, identify gaps, and add events to fill them.",
+    "description_pt": "Revisar seu Google Calendar week, identify gaps, e add events para fill them.",
+    "category": "google-workspace",
+    "type": "command",
+    "published": true
+  },
+  {
+    "id": "cmd-142",
+    "name": "Recipe Post Mortem Setup",
+    "slug": "recipe-post-mortem-setup",
+    "description": "Create a Google Docs post-mortem, schedule a Google Calendar review, and notify via Chat.",
+    "description_pt": "Criar a Google Docs post-mortem, schedule a Google Calendar review, e notify via Chat.",
+    "category": "google-workspace",
+    "type": "command",
+    "published": true
+  },
+  {
+    "id": "cmd-143",
+    "name": "Recipe Reschedule Meeting",
+    "slug": "recipe-reschedule-meeting",
+    "description": "Move a Google Calendar event to a new time and automatically notify all attendees.",
+    "description_pt": "Move a Google Calendar event para a new time e automaticamente notify all attendees.",
+    "category": "google-workspace",
+    "type": "command",
+    "published": true
+  },
+  {
+    "id": "cmd-144",
+    "name": "Recipe Review Meet Participants",
+    "slug": "recipe-review-meet-participants",
+    "description": "Review who attended a Google Meet conference and for how long.",
+    "description_pt": "Revisar who attended a Google Meet conference e para how long.",
+    "category": "google-workspace",
+    "type": "command",
+    "published": true
+  },
+  {
+    "id": "cmd-145",
+    "name": "Recipe Review Overdue Tasks",
+    "slug": "recipe-review-overdue-tasks",
+    "description": "Find Google Tasks that are past due and need attention.",
+    "description_pt": "Encontrar Google Tasks esse are past due e need attention.",
+    "category": "google-workspace",
+    "type": "command",
+    "published": true
+  },
+  {
+    "id": "cmd-146",
+    "name": "Recipe Save Email Attachments",
+    "slug": "recipe-save-email-attachments",
+    "description": "Find Gmail messages with attachments and save them to a Google Drive folder.",
+    "description_pt": "Encontrar Gmail messages com attachments e save them para a Google Drive folder.",
+    "category": "google-workspace",
+    "type": "command",
+    "published": true
+  },
+  {
+    "id": "cmd-147",
+    "name": "Recipe Save Email To Doc",
+    "slug": "recipe-save-email-to-doc",
+    "description": "Save a Gmail message body into a Google Doc for archival or reference.",
+    "description_pt": "Save a Gmail message body into a Google Doc para archival ou reference.",
+    "category": "google-workspace",
+    "type": "command",
+    "published": true
+  },
+  {
+    "id": "cmd-148",
+    "name": "Recipe Schedule Recurring Event",
+    "slug": "recipe-schedule-recurring-event",
+    "description": "Create a recurring Google Calendar event with attendees.",
+    "description_pt": "Criar a recurring Google Calendar event com attendees.",
+    "category": "google-workspace",
+    "type": "command",
+    "published": true
+  },
+  {
+    "id": "cmd-149",
+    "name": "Recipe Search And Export Emails",
+    "slug": "recipe-search-and-export-emails",
+    "description": "Find Gmail messages matching a query and export them for review.",
+    "description_pt": "Encontrar Gmail messages matching a query e export them para review.",
+    "category": "google-workspace",
+    "type": "command",
+    "published": true
+  },
+  {
+    "id": "cmd-150",
+    "name": "Recipe Send Personalized Emails",
+    "slug": "recipe-send-personalized-emails",
+    "description": "Read recipient data from Google Sheets and send personalized Gmail messages to each row.",
+    "description_pt": "Read recipient data de Google Sheets e send personalized Gmail messages para each row.",
+    "category": "google-workspace",
+    "type": "command",
+    "published": true
+  },
+  {
+    "id": "cmd-151",
+    "name": "Recipe Send Team Announcement",
+    "slug": "recipe-send-team-announcement",
+    "description": "Send a team announcement via both Gmail and a Google Chat space.",
+    "description_pt": "Send a team announcement via both Gmail e a Google Chat space.",
+    "category": "google-workspace",
+    "type": "command",
+    "published": true
+  },
+  {
+    "id": "cmd-152",
+    "name": "Recipe Share Doc And Notify",
+    "slug": "recipe-share-doc-and-notify",
+    "description": "Share a Google Docs document with edit access and email collaborators the link.",
+    "description_pt": "Share a Google Docs document com edit access e email collaborators o link.",
+    "category": "google-workspace",
+    "type": "command",
+    "published": true
+  },
+  {
+    "id": "cmd-153",
+    "name": "Recipe Share Event Materials",
+    "slug": "recipe-share-event-materials",
+    "description": "Share Google Drive files with all attendees of a Google Calendar event.",
+    "description_pt": "Share Google Drive arquivos com all attendees de a Google Calendar event.",
+    "category": "google-workspace",
+    "type": "command",
+    "published": true
+  },
+  {
+    "id": "cmd-154",
+    "name": "Recipe Share Folder With Team",
+    "slug": "recipe-share-folder-with-team",
+    "description": "Share a Google Drive folder and all its contents with a list of collaborators.",
+    "description_pt": "Share a Google Drive folder e all its contents com a list de collaborators.",
+    "category": "google-workspace",
+    "type": "command",
+    "published": true
+  },
+  {
+    "id": "cmd-155",
+    "name": "Recipe Sync Contacts To Sheet",
+    "slug": "recipe-sync-contacts-to-sheet",
+    "description": "Export Google Contacts directory to a Google Sheets spreadsheet.",
+    "description_pt": "Export Google Contacts directory para a Google Sheets spreadsheet.",
+    "category": "google-workspace",
+    "type": "command",
+    "published": true
+  },
+  {
+    "id": "cmd-156",
+    "name": "Recipe Transfer File Ownership",
+    "slug": "recipe-transfer-file-ownership",
+    "description": "Transfer ownership of Google Drive files from one user to another.",
+    "description_pt": "Transfer ownership de Google Drive arquivos de one user para another.",
+    "category": "google-workspace",
+    "type": "command",
+    "published": true
+  },
+  {
+    "id": "cmd-157",
+    "name": "Recipe Triage Security Alerts",
+    "slug": "recipe-triage-security-alerts",
+    "description": "List and review Google Workspace security alerts from Alert Center.",
+    "description_pt": "Listar e review Google Workspace seguranca alerts de Alert Center.",
+    "category": "google-workspace",
+    "type": "command",
+    "published": true
+  },
+  {
+    "id": "cmd-158",
+    "name": "Recipe Watch Drive Changes",
+    "slug": "recipe-watch-drive-changes",
+    "description": "Subscribe to change notifications on a Google Drive file or folder.",
+    "description_pt": "Subscribe para change notifications no a Google Drive arquivo ou folder.",
+    "category": "google-workspace",
+    "type": "command",
+    "published": true
+  },
+  {
+    "id": "cmd-159",
+    "name": "Publisher All",
+    "slug": "publisher-all",
+    "description": "Generate content for ALL platforms at once (X, LinkedIn, Medium, Dev.to)",
+    "description_pt": "Gerar content para ALL platforms at once (X, LinkedIn, Medium, Dev.to)",
+    "category": "marketing",
+    "type": "command",
+    "published": true
+  },
+  {
+    "id": "cmd-160",
+    "name": "Publisher Devto",
+    "slug": "publisher-devto",
+    "description": "Generate Dev.to RSS feed from all blog posts for automatic syndication",
+    "description_pt": "Gerar Dev.to RSS feed de all blog posts para automatic syndication",
+    "category": "marketing",
+    "type": "command",
+    "published": true
+  },
+  {
+    "id": "cmd-161",
+    "name": "Publisher Linkedin",
+    "slug": "publisher-linkedin",
+    "description": "Generate LinkedIn posts from blog content with automatic media attachment via LinkedIn API",
+    "description_pt": "Gerar LinkedIn posts de blog content com automatic media attachment via LinkedIn API",
+    "category": "marketing",
+    "type": "command",
+    "published": true
+  },
+  {
+    "id": "cmd-162",
+    "name": "Publisher Medium",
+    "slug": "publisher-medium",
+    "description": "Convert blog posts to Medium-ready HTML format with image upload markers",
+    "description_pt": "Convert blog posts para Medium-ready HTML format com image upload markers",
+    "category": "marketing",
+    "type": "command",
+    "published": true
+  },
+  {
+    "id": "cmd-163",
+    "name": "Publisher X",
+    "slug": "publisher-x",
+    "description": "Generate copy-pastable X/Twitter threads from blog posts, articles, PDFs, or URLs with 3 format options",
+    "description_pt": "Gerar copy-pastable X/Twitter threads de blog posts, articles, PDFs, ou URLs com 3 format options",
+    "category": "marketing",
+    "type": "command",
+    "published": true
+  },
+  {
+    "id": "cmd-164",
+    "name": "Nextjs API Tester",
+    "slug": "nextjs-api-tester",
+    "description": "Test and validate Next.js API routes with comprehensive test scenarios",
+    "description_pt": "Testar e validate Next.js API routes com comprehensive test scenarios",
+    "category": "nextjs-vercel",
+    "type": "command",
+    "published": true
+  },
+  {
+    "id": "cmd-165",
+    "name": "Nextjs Bundle Analyzer",
+    "slug": "nextjs-bundle-analyzer",
+    "description": "Analyze and optimize Next.js bundle size with detailed recommendations",
+    "description_pt": "Analisar e optimize Next.js bundle size com detailed recommendations",
+    "category": "nextjs-vercel",
+    "type": "command",
+    "published": true
+  },
+  {
+    "id": "cmd-166",
+    "name": "Nextjs Component Generator",
+    "slug": "nextjs-component-generator",
+    "description": "Generate optimized React components for Next.js with TypeScript and best practices",
+    "description_pt": "Gerar optimized React components para Next.js com TypeScript e best practices",
+    "category": "nextjs-vercel",
+    "type": "command",
+    "published": true
+  },
+  {
+    "id": "cmd-167",
+    "name": "Nextjs Middleware Creator",
+    "slug": "nextjs-middleware-creator",
+    "description": "Create optimized Next.js middleware with authentication, rate limiting, and routing logic",
+    "description_pt": "Criar optimized Next.js middleware com authentication, rate limiting, e routing logic",
+    "category": "nextjs-vercel",
+    "type": "command",
+    "published": true
+  },
+  {
+    "id": "cmd-168",
+    "name": "Nextjs Migration Helper",
+    "slug": "nextjs-migration-helper",
+    "description": "Comprehensive Next.js migration assistant for Pages Router to App Router, JavaScript to TypeScript, and modern patterns",
+    "description_pt": "Comprehensive Next.js migration assistant para Pages Router para App Router, JavaScript to TypeScript, e modern patterns",
+    "category": "nextjs-vercel",
+    "type": "command",
+    "published": true
+  },
+  {
+    "id": "cmd-169",
+    "name": "Nextjs Performance Audit",
+    "slug": "nextjs-performance-audit",
+    "description": "Comprehensive Next.js performance audit with actionable optimization recommendations",
+    "description_pt": "Comprehensive Next.js desempenho audit com actionable optimization recommendations",
+    "category": "nextjs-vercel",
+    "type": "command",
+    "published": true
+  },
+  {
+    "id": "cmd-170",
+    "name": "Nextjs Scaffold",
+    "slug": "nextjs-scaffold",
+    "description": "Create a new Next.js application with best practices and optimal configuration",
+    "description_pt": "Criar a new Next.js application com best practices e optimal configuration",
+    "category": "nextjs-vercel",
+    "type": "command",
+    "published": true
+  },
+  {
+    "id": "cmd-171",
+    "name": "Vercel Deploy Optimize",
+    "slug": "vercel-deploy-optimize",
+    "description": "Optimize and deploy Next.js application to Vercel with performance monitoring",
+    "description_pt": "Otimizar e deploy Next.js application para Vercel com desempenho monitoring",
+    "category": "nextjs-vercel",
+    "type": "command",
+    "published": true
+  },
+  {
+    "id": "cmd-172",
+    "name": "Vercel Edge Function",
+    "slug": "vercel-edge-function",
+    "description": "Generate optimized Vercel Edge Functions with geolocation, authentication, and data transformation",
+    "description_pt": "Gerar optimized Vercel Edge Functions com geolocation, authentication, e data transformation",
+    "category": "nextjs-vercel",
+    "type": "command",
+    "published": true
+  },
+  {
+    "id": "cmd-173",
+    "name": "Vercel Env Sync",
+    "slug": "vercel-env-sync",
+    "description": "Synchronize environment variables between local development and Vercel deployments",
+    "description_pt": "Synchronize environment variables between local development e Vercel implantacaos",
+    "category": "nextjs-vercel",
+    "type": "command",
+    "published": true
+  },
+  {
+    "id": "cmd-174",
+    "name": "Feature Analyzer",
+    "slug": "feature-analyzer",
+    "description": "Turn ideas into fully formed designs and specs through natural collaborative dialogue. Use before implementing new features or making significant changes.",
+    "description_pt": "Turn ideas into fully formed designs e specs through natural collaborative dialogue. Use before implementing new features ou making significant changes.",
+    "category": "orchestration",
+    "type": "command",
+    "published": true
+  },
+  {
+    "id": "cmd-175",
+    "name": "Feature Dev",
+    "slug": "feature-dev",
+    "description": "Guided feature development with codebase understanding and architecture focus",
+    "description_pt": "Guided feature development com codigobase understanding e architecture focus",
+    "category": "orchestration",
+    "type": "command",
+    "published": true
+  },
+  {
+    "id": "cmd-176",
+    "name": "Feature Pipeline",
+    "slug": "feature-pipeline",
+    "description": "Execute implementation tasks from a design document. Tasks are tracked as markdown checkboxes directly in the design file.",
+    "description_pt": "Executar implementation tasks de a design document. Tasks are tracked as markdown checkboxes directly em o design arquivo.",
+    "category": "orchestration",
+    "type": "command",
+    "published": true
+  },
+  {
+    "id": "cmd-177",
+    "name": "Add Performance Monitoring",
+    "slug": "add-performance-monitoring",
+    "description": "Setup comprehensive application performance monitoring with metrics, alerting, and observability",
+    "description_pt": "Configurar comprehensive application desempenho monitoring com metrics, alerting, e observability",
+    "category": "performance",
+    "type": "command",
+    "published": true
+  },
+  {
+    "id": "cmd-178",
+    "name": "Implement Caching Strategy",
+    "slug": "implement-caching-strategy",
+    "description": "Design and implement comprehensive caching solutions for improved performance and scalability",
+    "description_pt": "Design e implement comprehensive caching solutions para improved desempenho and scalability",
+    "category": "performance",
+    "type": "command",
+    "published": true
+  },
+  {
+    "id": "cmd-179",
+    "name": "Optimize API Performance",
+    "slug": "optimize-api-performance",
+    "description": "Comprehensive API performance optimization with response time reduction, throughput improvement, and scalability enhancements",
+    "description_pt": "Comprehensive API desempenho optimization com response time reduction, throughput improvement, e scalability enhancements",
+    "category": "performance",
+    "type": "command",
+    "published": true
+  },
+  {
+    "id": "cmd-180",
+    "name": "Optimize Bundle Size",
+    "slug": "optimize-bundle-size",
+    "description": "Reduce and optimize bundle sizes through analysis, configuration, and code splitting strategies",
+    "description_pt": "Reduce e optimize bundle sizes through analysis, configuration, and codigo splitting strategies",
+    "category": "performance",
+    "type": "command",
+    "published": true
+  },
+  {
+    "id": "cmd-181",
+    "name": "Optimize Database Performance",
+    "slug": "optimize-database-performance",
+    "description": "Optimize database queries, indexing, and performance for improved response times and scalability",
+    "description_pt": "Otimizar banco de dados queries, indexing, e desempenho para improved response times and scalability",
+    "category": "performance",
+    "type": "command",
+    "published": true
+  },
+  {
+    "id": "cmd-182",
+    "name": "Optimize Memory Usage",
+    "slug": "optimize-memory-usage",
+    "description": "Comprehensive memory usage optimization with leak detection, garbage collection tuning, and memory profiling",
+    "description_pt": "Comprehensive memory usage optimization com leak detection, garbage collection tuning, e memory profiling",
+    "category": "performance",
+    "type": "command",
+    "published": true
+  },
+  {
+    "id": "cmd-183",
+    "name": "Performance Audit",
+    "slug": "performance-audit",
+    "description": "Comprehensive performance audit with metrics, bottleneck identification, and optimization recommendations",
+    "description_pt": "Comprehensive desempenho audit com metrics, bottleneck identification, e optimization recommendations",
+    "category": "performance",
+    "type": "command",
+    "published": true
+  },
+  {
+    "id": "cmd-184",
+    "name": "Setup CDN Optimization",
+    "slug": "setup-cdn-optimization",
+    "description": "Configure CDN for optimal content delivery, caching, and global performance optimization",
+    "description_pt": "Configurar CDN para optimal content delivery, caching, e global desempenho optimization",
+    "category": "performance",
+    "type": "command",
+    "published": true
+  },
+  {
+    "id": "cmd-185",
+    "name": "Add Package",
+    "slug": "add-package",
+    "description": "Add and configure new package to workspace with proper structure and dependencies",
+    "description_pt": "Adicionar e configure new package para workspace com proper structure and dependencies",
+    "category": "project-management",
+    "type": "command",
+    "published": true
+  },
+  {
+    "id": "cmd-186",
+    "name": "Add To Changelog",
+    "slug": "add-to-changelog",
+    "description": "Add entry to project changelog following Keep a Changelog format",
+    "description_pt": "Adicionar entry para projeto changelog following Keep a Changelog format",
+    "category": "project-management",
+    "type": "command",
+    "published": true
+  },
+  {
+    "id": "cmd-187",
+    "name": "Create Feature",
+    "slug": "create-feature",
+    "description": "Scaffold new feature with boilerplate code, tests, and documentation",
+    "description_pt": "Scaffold new feature com boilerplate codigo, tests, e documentacao",
+    "category": "project-management",
+    "type": "command",
+    "published": true
+  },
+  {
+    "id": "cmd-188",
+    "name": "Create JTBD",
+    "slug": "create-jtbd",
+    "description": "Create Jobs-to-be-Done (JTBD) analysis for product features",
+    "description_pt": "Criar Jobs-to-be-Done (JTBD) analysis para product features",
+    "category": "project-management",
+    "type": "command",
+    "published": true
+  },
+  {
+    "id": "cmd-189",
+    "name": "Create PRD",
+    "slug": "create-prd",
+    "description": "Create Product Requirements Document (PRD) for new features",
+    "description_pt": "Criar Product Requirements Document (PRD) para new features",
+    "category": "project-management",
+    "type": "command",
+    "published": true
+  },
+  {
+    "id": "cmd-190",
+    "name": "Create PRP",
+    "slug": "create-prp",
+    "description": "Create comprehensive Product Requirement Prompt (PRP) with research and validation",
+    "description_pt": "Criar comprehensive Product Requirement Prompt (PRP) com research e validation",
+    "category": "project-management",
+    "type": "command",
+    "published": true
+  },
+  {
+    "id": "cmd-191",
+    "name": "Github Issues",
+    "slug": "github-issues",
+    "description": "Create, update, and manage GitHub issues using MCP tools. Use this skill when users want to create bug reports, feature requests, or task issues, update existing issues, add labels/assignees/milestones, or manage issue workflows. Triggers on requests",
+    "description_pt": "Create, update, e manage GitHub issues usando MCP tools. Use este skill when users want para create bug reports, feature requests, ou task issues, update existing issues, add labels/assignees/milestones, or manage issue fluxo de trabalhos. Triggers n",
+    "category": "project-management",
+    "type": "command",
+    "published": true
+  },
+  {
+    "id": "cmd-192",
+    "name": "Init Project",
+    "slug": "init-project",
+    "description": "Initialize new project with essential structure, configuration, and development environment setup",
+    "description_pt": "Initialize new projeto com essential structure, configuration, e development environment setup",
+    "category": "project-management",
+    "type": "command",
+    "published": true
+  },
+  {
+    "id": "cmd-193",
+    "name": "Milestone Tracker",
+    "slug": "milestone-tracker",
+    "description": "Track and analyze project milestone progress with predictive analytics",
+    "description_pt": "Rastrear e analyze projeto milestone progress com predictive analytics",
+    "category": "project-management",
+    "type": "command",
+    "published": true
+  },
+  {
+    "id": "cmd-194",
+    "name": "Nuget Manager",
+    "slug": "nuget-manager",
+    "description": "Manage NuGet packages in .NET projects/solutions. Use this skill when adding, removing, or updating NuGet package versions. It enforces using `dotnet` CLI for package management and provides strict procedures for direct file edits only when updating ",
+    "description_pt": "Gerenciar NuGet packages em .NET projetos/solutions. Use este skill when adding, removing, ou updating NuGet package versions. It enforces usando `dotnet` CLI para package management e provides strict procedures for direct arquivo edits only when upd",
+    "category": "project-management",
+    "type": "command",
+    "published": true
+  },
+  {
+    "id": "cmd-195",
+    "name": "PAC Configure",
+    "slug": "pac-configure",
+    "description": "Initialize Product as Code (PAC) project structure with templates and configuration",
+    "description_pt": "Initialize Product as Code (PAC) projeto structure com templates e configuration",
+    "category": "project-management",
+    "type": "command",
+    "published": true
+  },
+  {
+    "id": "cmd-196",
+    "name": "PAC Create Epic",
+    "slug": "pac-create-epic",
+    "description": "Create new PAC epic following Product as Code specification",
+    "description_pt": "Criar new PAC epic following Product as Code specification",
+    "category": "project-management",
+    "type": "command",
+    "published": true
+  },
+  {
+    "id": "cmd-197",
+    "name": "PAC Create Ticket",
+    "slug": "pac-create-ticket",
+    "description": "Create new PAC ticket within an epic following Product as Code specification",
+    "description_pt": "Criar new PAC ticket within an epic following Product as Code specification",
+    "category": "project-management",
+    "type": "command",
+    "published": true
+  },
+  {
+    "id": "cmd-198",
+    "name": "PAC Update Status",
+    "slug": "pac-update-status",
+    "description": "Update PAC ticket status and track progress in Product as Code workflow",
+    "description_pt": "Atualizar PAC ticket status e track progress em Product as Code fluxo de trabalho",
+    "category": "project-management",
+    "type": "command",
+    "published": true
+  },
+  {
+    "id": "cmd-199",
+    "name": "PAC Validate",
+    "slug": "pac-validate",
+    "description": "Validate Product as Code project structure and files for PAC specification compliance",
+    "description_pt": "Validate Product as Code projeto structure e arquivos para PAC specification compliance",
+    "category": "project-management",
+    "type": "command",
+    "published": true
+  },
+  {
+    "id": "cmd-200",
+    "name": "Project Health Check",
+    "slug": "project-health-check",
+    "description": "Analyze overall project health and generate comprehensive metrics report",
+    "description_pt": "Analisar overall projeto health e generate comprehensive metrics report",
+    "category": "project-management",
+    "type": "command",
+    "published": true
+  },
+  {
+    "id": "cmd-201",
+    "name": "Project Timeline Simulator",
+    "slug": "project-timeline-simulator",
+    "description": "Simulate project outcomes with variable modeling, risk assessment, and resource optimization",
+    "description_pt": "Simulate projeto outcomes com variable modeling, risk assessment, e resource optimization",
+    "category": "project-management",
+    "type": "command",
+    "published": true
+  },
+  {
+    "id": "cmd-202",
+    "name": "Project To Linear",
+    "slug": "project-to-linear",
+    "description": "Sync project structure and requirements to Linear workspace with comprehensive task breakdown",
+    "description_pt": "Sync projeto structure e requirements para Linear workspace com comprehensive task breakdown",
+    "category": "project-management",
+    "type": "command",
+    "published": true
+  },
+  {
+    "id": "cmd-203",
+    "name": "Release",
+    "slug": "release",
+    "description": "Prepare and execute project release with version management and changelog updates",
+    "description_pt": "Prepare e execute projeto release com version management and changelog updates",
+    "category": "project-management",
+    "type": "command",
+    "published": true
+  },
+  {
+    "id": "cmd-204",
+    "name": "Todo",
+    "slug": "todo",
+    "description": "Manage project todos in todos.md file",
+    "description_pt": "Gerenciar projeto todos em todos.md arquivo",
+    "category": "project-management",
+    "type": "command",
+    "published": true
+  },
+  {
+    "id": "cmd-205",
+    "name": "Add Authentication System",
+    "slug": "add-authentication-system",
+    "description": "Implement secure user authentication system with chosen method and security best practices",
+    "description_pt": "Implementar secure user authentication system com chosen method e seguranca best practices",
+    "category": "security",
+    "type": "command",
+    "published": true
+  },
+  {
+    "id": "cmd-206",
+    "name": "Dependency Audit",
+    "slug": "dependency-audit",
+    "description": "Audit dependencies for security vulnerabilities, license compliance, and update recommendations",
+    "description_pt": "Audit dependencies para seguranca vulnerabilities, license compliance, e update recommendations",
+    "category": "security",
+    "type": "command",
+    "published": true
+  },
+  {
+    "id": "cmd-207",
+    "name": "Penetration Test",
+    "slug": "penetration-test",
+    "description": "Perform penetration testing and vulnerability assessment on application",
+    "description_pt": "Perform penetration testes e vulnerability assessment no application",
+    "category": "security",
+    "type": "command",
+    "published": true
+  },
+  {
+    "id": "cmd-208",
+    "name": "Secrets Scanner",
+    "slug": "secrets-scanner",
+    "description": "Scan codebase for exposed secrets, credentials, and sensitive information",
+    "description_pt": "Escanear codigobase para exposed secrets, credentials, e sensitive information",
+    "category": "security",
+    "type": "command",
+    "published": true
+  },
+  {
+    "id": "cmd-209",
+    "name": "Security Audit",
+    "slug": "security-audit",
+    "description": "Perform comprehensive security assessment and vulnerability analysis",
+    "description_pt": "Perform comprehensive seguranca assessment e vulnerability analysis",
+    "category": "security",
+    "type": "command",
+    "published": true
+  },
+  {
+    "id": "cmd-210",
+    "name": "Security Hardening",
+    "slug": "security-hardening",
+    "description": "Harden application security configuration with comprehensive security controls",
+    "description_pt": "Harden application seguranca configuration com comprehensive security controls",
+    "category": "security",
+    "type": "command",
+    "published": true
+  },
+  {
+    "id": "cmd-211",
+    "name": "Create Database Migrations",
+    "slug": "create-database-migrations",
+    "description": "Create and manage database migrations with proper versioning and rollback support",
+    "description_pt": "Criar e manage banco de dados migrations com proper versioning and rollback support",
+    "category": "setup",
+    "type": "command",
+    "published": true
+  },
+  {
+    "id": "cmd-212",
+    "name": "Design Database Schema",
+    "slug": "design-database-schema",
+    "description": "Design optimized database schemas with proper relationships, constraints, and performance considerations",
+    "description_pt": "Design optimized banco de dados schemas com proper relationships, constraints, e desempenho considerations",
+    "category": "setup",
+    "type": "command",
+    "published": true
+  },
+  {
+    "id": "cmd-213",
+    "name": "Design REST API",
+    "slug": "design-rest-api",
+    "description": "Design RESTful API architecture with comprehensive endpoints, authentication, and documentation",
+    "description_pt": "Design RESTful API architecture com comprehensive endpoints, authentication, e documentacao",
+    "category": "setup",
+    "type": "command",
+    "published": true
+  },
+  {
+    "id": "cmd-214",
+    "name": "Implement GRAPHQL API",
+    "slug": "implement-graphql-api",
+    "description": "Implement GraphQL API with comprehensive schema, resolvers, and real-time subscriptions",
+    "description_pt": "Implementar GraphQL API com comprehensive schema, resolvers, e real-time subscriptions",
+    "category": "setup",
+    "type": "command",
+    "published": true
+  },
+  {
+    "id": "cmd-215",
+    "name": "Migrate To Typescript",
+    "slug": "migrate-to-typescript",
+    "description": "Migrate JavaScript project to TypeScript with proper typing and tooling setup",
+    "description_pt": "Migrate JavaScript projeto para TypeScript com proper typing e tooling setup",
+    "category": "setup",
+    "type": "command",
+    "published": true
+  },
+  {
+    "id": "cmd-216",
+    "name": "Setup CI CD Pipeline",
+    "slug": "setup-ci-cd-pipeline",
+    "description": "Setup comprehensive CI/CD pipeline with automated testing, deployment, and monitoring",
+    "description_pt": "Configurar comprehensive CI/CD pipeline com automated testes, implantacao, e monitoring",
+    "category": "setup",
+    "type": "command",
+    "published": true
+  },
+  {
+    "id": "cmd-217",
+    "name": "Setup Development Environment",
+    "slug": "setup-development-environment",
+    "description": "Setup comprehensive development environment with tools, configurations, and workflows",
+    "description_pt": "Configurar comprehensive development environment com tools, configurations, e fluxo de trabalhos",
+    "category": "setup",
+    "type": "command",
+    "published": true
+  },
+  {
+    "id": "cmd-218",
+    "name": "Setup Docker Containers",
+    "slug": "setup-docker-containers",
+    "description": "Setup Docker containerization with multi-stage builds and development workflows",
+    "description_pt": "Configurar Docker containerization com multi-stage builds e development fluxo de trabalhos",
+    "category": "setup",
+    "type": "command",
+    "published": true
+  },
+  {
+    "id": "cmd-219",
+    "name": "Setup Formatting",
+    "slug": "setup-formatting",
+    "description": "Configure comprehensive code formatting tools with consistent style enforcement",
+    "description_pt": "Configurar comprehensive codigo formatting tools com consistent style enforcement",
+    "category": "setup",
+    "type": "command",
+    "published": true
+  },
+  {
+    "id": "cmd-220",
+    "name": "Setup Linting",
+    "slug": "setup-linting",
+    "description": "Configure comprehensive code linting and quality analysis tools with automated enforcement",
+    "description_pt": "Configurar comprehensive codigo linting e quality analysis tools com automated enforcement",
+    "category": "setup",
+    "type": "command",
+    "published": true
+  },
+  {
+    "id": "cmd-221",
+    "name": "Setup Monitoring Observability",
+    "slug": "setup-monitoring-observability",
+    "description": "Setup comprehensive monitoring and observability with metrics, logging, tracing, and alerting",
+    "description_pt": "Configurar comprehensive monitoring e observability com metrics, logging, tracing, and alerting",
+    "category": "setup",
+    "type": "command",
+    "published": true
+  },
+  {
+    "id": "cmd-222",
+    "name": "Setup Monorepo",
+    "slug": "setup-monorepo",
+    "description": "Configure monorepo project structure with comprehensive workspace management and build orchestration",
+    "description_pt": "Configurar monorepo projeto structure com comprehensive workspace management e build orchestration",
+    "category": "setup",
+    "type": "command",
+    "published": true
+  },
+  {
+    "id": "cmd-223",
+    "name": "Setup Rate Limiting",
+    "slug": "setup-rate-limiting",
+    "description": "Implement comprehensive API rate limiting with advanced algorithms and user-specific policies",
+    "description_pt": "Implementar comprehensive API rate limiting com advanced algorithms e user-specific policies",
+    "category": "setup",
+    "type": "command",
+    "published": true
+  },
+  {
+    "id": "cmd-224",
+    "name": "Update Dependencies",
+    "slug": "update-dependencies",
+    "description": "Update and modernize project dependencies with comprehensive testing and compatibility checks",
+    "description_pt": "Atualizar e modernize projeto dependencies com comprehensive testes and compatibility checks",
+    "category": "setup",
+    "type": "command",
+    "published": true
+  },
+  {
+    "id": "cmd-225",
+    "name": "Vercel Analytics",
+    "slug": "vercel-analytics",
+    "description": "Set up Vercel Analytics and Speed Insights for React/Vite projects",
+    "description_pt": "Configurar Vercel Analytics e Speed Insights para React/Vite projetos",
+    "category": "setup",
+    "type": "command",
+    "published": true
+  },
+  {
+    "id": "cmd-226",
+    "name": "Business Scenario Explorer",
+    "slug": "business-scenario-explorer",
+    "description": "Explore multiple business timeline scenarios with comprehensive risk analysis and strategic optimization",
+    "description_pt": "Explore multiple business timeline scenarios com comprehensive risk analysis e strategic optimization",
+    "category": "simulation",
+    "type": "command",
+    "published": true
+  },
+  {
+    "id": "cmd-227",
+    "name": "Constraint Modeler",
+    "slug": "constraint-modeler",
+    "description": "Model system constraints with validation, dependency mapping, and optimization strategies",
+    "description_pt": "Model system constraints com validation, dependency mapping, e optimization strategies",
+    "category": "simulation",
+    "type": "command",
+    "published": true
+  },
+  {
+    "id": "cmd-228",
+    "name": "Decision Tree Explorer",
+    "slug": "decision-tree-explorer",
+    "description": "Explore complex decision branches with probability analysis, expected value calculation, and optimization",
+    "description_pt": "Explore complex decision branches com probability analysis, expected value calculation, e optimization",
+    "category": "simulation",
+    "type": "command",
+    "published": true
+  },
+  {
+    "id": "cmd-229",
+    "name": "Digital Twin Creator",
+    "slug": "digital-twin-creator",
+    "description": "Create calibrated digital twins with real-world validation, scenario testing, and decision optimization",
+    "description_pt": "Criar calibrated digital twins com real-world validation, scenario testes, e decision optimization",
+    "category": "simulation",
+    "type": "command",
+    "published": true
+  },
+  {
+    "id": "cmd-230",
+    "name": "Future Scenario Generator",
+    "slug": "future-scenario-generator",
+    "description": "Generate comprehensive future scenarios with plausibility scoring, trend integration, and strategic implications",
+    "description_pt": "Gerar comprehensive future scenarios com plausibility scoring, trend integration, e strategic implications",
+    "category": "simulation",
+    "type": "command",
+    "published": true
+  },
+  {
+    "id": "cmd-231",
+    "name": "Market Response Modeler",
+    "slug": "market-response-modeler",
+    "description": "Model comprehensive market and customer responses with segment analysis, behavioral prediction, and optimization",
+    "description_pt": "Model comprehensive market e customer responses com segment analysis, behavioral prediction, and optimization",
+    "category": "simulation",
+    "type": "command",
+    "published": true
+  },
+  {
+    "id": "cmd-232",
+    "name": "Monte Carlo Simulator",
+    "slug": "monte-carlo-simulator",
+    "description": "Run Monte Carlo simulations with probability distributions, confidence intervals, and statistical analysis",
+    "description_pt": "Executar Monte Carlo simulations com probability distributions, confidence intervals, e statistical analysis",
+    "category": "simulation",
+    "type": "command",
+    "published": true
+  },
+  {
+    "id": "cmd-233",
+    "name": "Simulation Calibrator",
+    "slug": "simulation-calibrator",
+    "description": "Calibrate simulation accuracy with systematic validation, bias detection, and continuous improvement",
+    "description_pt": "Calibrate simulation accuracy com systematic validation, bias detection, e continuous improvement",
+    "category": "simulation",
+    "type": "command",
+    "published": true
+  },
+  {
+    "id": "cmd-234",
+    "name": "System Dynamics Modeler",
+    "slug": "system-dynamics-modeler",
+    "description": "Model complex system dynamics with feedback loops, delays, and emergent behavior analysis",
+    "description_pt": "Model complex system dynamics com feedback loops, delays, e emergent behavior analysis",
+    "category": "simulation",
+    "type": "command",
+    "published": true
+  },
+  {
+    "id": "cmd-235",
+    "name": "Timeline Compressor",
+    "slug": "timeline-compressor",
+    "description": "Compress real-world timelines into rapid simulation cycles with accelerated learning and decision optimization",
+    "description_pt": "Compress real-world timelines into rapid simulation cycles com accelerated learning e decision optimization",
+    "category": "simulation",
+    "type": "command",
+    "published": true
+  },
+  {
+    "id": "cmd-236",
+    "name": "Svelte Component",
+    "slug": "svelte-component",
+    "description": "Create new Svelte components with best practices, TypeScript support, and testing",
+    "description_pt": "Criar new Svelte components com best practices, TypeScript support, e testes",
+    "category": "svelte",
+    "type": "command",
+    "published": true
+  },
+  {
+    "id": "cmd-237",
+    "name": "Bidirectional Sync",
+    "slug": "bidirectional-sync",
+    "description": "Enable comprehensive bidirectional GitHub-Linear synchronization with conflict resolution",
+    "description_pt": "Enable comprehensive bidirectional GitHub-Linear synchronization com conflict resolution",
+    "category": "sync",
+    "type": "command",
+    "published": true
+  },
+  {
+    "id": "cmd-238",
+    "name": "Bulk Import Issues",
+    "slug": "bulk-import-issues",
+    "description": "Bulk import GitHub issues to Linear with comprehensive progress tracking and error handling",
+    "description_pt": "Bulk import GitHub issues para Linear com comprehensive progress tracking e erro handling",
+    "category": "sync",
+    "type": "command",
+    "published": true
+  },
+  {
+    "id": "cmd-239",
+    "name": "Cross Reference Manager",
+    "slug": "cross-reference-manager",
+    "description": "Manage cross-platform reference links between GitHub and Linear with integrity checking",
+    "description_pt": "Gerenciar cross-platform reference links between GitHub e Linear com integrity checking",
+    "category": "sync",
+    "type": "command",
+    "published": true
+  },
+  {
+    "id": "cmd-240",
+    "name": "Issue To Linear Task",
+    "slug": "issue-to-linear-task",
+    "description": "Convert individual GitHub issues to Linear tasks with comprehensive data preservation",
+    "description_pt": "Convert individual GitHub issues para Linear tasks com comprehensive data preservation",
+    "category": "sync",
+    "type": "command",
+    "published": true
+  },
+  {
+    "id": "cmd-241",
+    "name": "Linear Task To Issue",
+    "slug": "linear-task-to-issue",
+    "description": "Convert Linear tasks to GitHub issues with relationship preservation and metadata mapping",
+    "description_pt": "Convert Linear tasks para GitHub issues com relationship preservation e metadata mapping",
+    "category": "sync",
+    "type": "command",
+    "published": true
+  },
+  {
+    "id": "cmd-242",
+    "name": "Sync Automation Setup",
+    "slug": "sync-automation-setup",
+    "description": "Setup comprehensive automated synchronization workflows with monitoring and CI/CD integration",
+    "description_pt": "Configurar comprehensive automated synchronization fluxo de trabalhos com monitoring e CI/CD integration",
+    "category": "sync",
+    "type": "command",
+    "published": true
+  },
+  {
+    "id": "cmd-243",
+    "name": "Sync Conflict Resolver",
+    "slug": "sync-conflict-resolver",
+    "description": "Resolve synchronization conflicts with intelligent strategies and automated resolution",
+    "description_pt": "Resolve synchronization conflicts com intelligent strategies e automated resolution",
+    "category": "sync",
+    "type": "command",
+    "published": true
+  },
+  {
+    "id": "cmd-244",
+    "name": "Sync Health Monitor",
+    "slug": "sync-health-monitor",
+    "description": "Monitor and diagnose GitHub-Linear sync health with performance analytics and automated troubleshooting",
+    "description_pt": "Monitorar e diagnose GitHub-Linear sync health com desempenho analytics and automated troubleshooting",
+    "category": "sync",
+    "type": "command",
+    "published": true
+  },
+  {
+    "id": "cmd-245",
+    "name": "Sync Issues To Linear",
+    "slug": "sync-issues-to-linear",
+    "description": "Sync GitHub issues to Linear workspace with comprehensive field mapping and rate limit management",
+    "description_pt": "Sync GitHub issues para Linear workspace com comprehensive field mapping e rate limit management",
+    "category": "sync",
+    "type": "command",
+    "published": true
+  },
+  {
+    "id": "cmd-246",
+    "name": "Sync Linear To Issues",
+    "slug": "sync-linear-to-issues",
+    "description": "Sync Linear tasks to GitHub issues with state mapping and attachment handling",
+    "description_pt": "Sync Linear tasks para GitHub issues com state mapping e attachment handling",
+    "category": "sync",
+    "type": "command",
+    "published": true
+  },
+  {
+    "id": "cmd-247",
+    "name": "Sync Migration Assistant",
+    "slug": "sync-migration-assistant",
+    "description": "Comprehensive migration assistant for large-scale GitHub-Linear data transitions with validation and rollback",
+    "description_pt": "Comprehensive migration assistant para large-scale GitHub-Linear data transitions com validation e rollback",
+    "category": "sync",
+    "type": "command",
+    "published": true
+  },
+  {
+    "id": "cmd-248",
+    "name": "Sync PR To Task",
+    "slug": "sync-pr-to-task",
+    "description": "Link GitHub pull requests to Linear tasks with automated state synchronization and workflow integration",
+    "description_pt": "Link GitHub pull requests para Linear tasks com automated state synchronization e fluxo de trabalho integration",
+    "category": "sync",
+    "type": "command",
+    "published": true
+  },
+  {
+    "id": "cmd-249",
+    "name": "Sync Status",
+    "slug": "sync-status",
+    "description": "Monitor GitHub-Linear sync health status with performance metrics and diagnostics",
+    "description_pt": "Monitorar GitHub-Linear sync health status com desempenho metrics e diagnostics",
+    "category": "sync",
+    "type": "command",
+    "published": true
+  },
+  {
+    "id": "cmd-250",
+    "name": "Task From PR",
+    "slug": "task-from-pr",
+    "description": "Create Linear tasks from GitHub pull requests with intelligent content extraction and task sizing",
+    "description_pt": "Criar Linear tasks de GitHub pull requests com intelligent content extraction e task sizing",
+    "category": "sync",
+    "type": "command",
+    "published": true
+  },
+  {
+    "id": "cmd-251",
+    "name": "Architecture Review",
+    "slug": "architecture-review",
+    "description": "Comprehensive architecture review with design patterns analysis and improvement recommendations",
+    "description_pt": "Comprehensive architecture review com design patterns analysis e improvement recommendations",
+    "category": "team",
+    "type": "command",
+    "published": true
+  },
+  {
+    "id": "cmd-252",
+    "name": "Decision Quality Analyzer",
+    "slug": "decision-quality-analyzer",
+    "description": "Analyze team decision quality with bias detection, scenario testing, and process improvement recommendations",
+    "description_pt": "Analisar team decision quality com bias detection, scenario testes, e process improvement recommendations",
+    "category": "team",
+    "type": "command",
+    "published": true
+  },
+  {
+    "id": "cmd-253",
+    "name": "Dependency Mapper",
+    "slug": "dependency-mapper",
+    "description": "Map project and task dependencies with critical path analysis and circular dependency detection",
+    "description_pt": "Map projeto e task dependencies com critical path analysis and circular dependency detection",
+    "category": "team",
+    "type": "command",
+    "published": true
+  },
+  {
+    "id": "cmd-254",
+    "name": "Estimate Assistant",
+    "slug": "estimate-assistant",
+    "description": "Generate accurate task estimates using historical data, complexity analysis, and team velocity metrics",
+    "description_pt": "Gerar accurate task estimates usando historical data, complexity analysis, e team velocity metrics",
+    "category": "team",
+    "type": "command",
+    "published": true
+  },
+  {
+    "id": "cmd-255",
+    "name": "Issue Triage",
+    "slug": "issue-triage",
+    "description": "Intelligent issue triage with automatic categorization, prioritization, and team assignment",
+    "description_pt": "Intelligent issue triage com automatic categorization, prioritization, e team assignment",
+    "category": "team",
+    "type": "command",
+    "published": true
+  },
+  {
+    "id": "cmd-256",
+    "name": "Memory Spring Cleaning",
+    "slug": "memory-spring-cleaning",
+    "description": "Clean and organize project memory files with implementation synchronization and pattern updates",
+    "description_pt": "Clean e organize projeto memory arquivos com implementation synchronization and pattern updates",
+    "category": "team",
+    "type": "command",
+    "published": true
+  },
+  {
+    "id": "cmd-257",
+    "name": "Migration Assistant",
+    "slug": "migration-assistant",
+    "description": "Comprehensive system migration assistance with planning, analysis, execution, and rollback capabilities",
+    "description_pt": "Comprehensive system migration assistance com planning, analysis, execution, e rollback capabilities",
+    "category": "team",
+    "type": "command",
+    "published": true
+  },
+  {
+    "id": "cmd-258",
+    "name": "Retrospective Analyzer",
+    "slug": "retrospective-analyzer",
+    "description": "Analyze team retrospectives with quantitative metrics and actionable insights generation",
+    "description_pt": "Analisar team retrospectives com quantitative metrics e actionable insights generation",
+    "category": "team",
+    "type": "command",
+    "published": true
+  },
+  {
+    "id": "cmd-259",
+    "name": "Session Learning Capture",
+    "slug": "session-learning-capture",
+    "description": "Capture and document session learnings with automatic knowledge integration and memory updates",
+    "description_pt": "Capture e document session learnings com automatic knowledge integration and memory updates",
+    "category": "team",
+    "type": "command",
+    "published": true
+  },
+  {
+    "id": "cmd-260",
+    "name": "Sprint Planning",
+    "slug": "sprint-planning",
+    "description": "Plan and organize sprint workflows with Linear integration and capacity analysis",
+    "description_pt": "Plan e organize sprint fluxo de trabalhos com Linear integration and capacity analysis",
+    "category": "team",
+    "type": "command",
+    "published": true
+  },
+  {
+    "id": "cmd-261",
+    "name": "Standup Report",
+    "slug": "standup-report",
+    "description": "Generate comprehensive daily standup reports with team activity analysis and progress tracking",
+    "description_pt": "Gerar comprehensive daily standup reports com team activity analysis e progress tracking",
+    "category": "team",
+    "type": "command",
+    "published": true
+  },
+  {
+    "id": "cmd-262",
+    "name": "Team Knowledge Mapper",
+    "slug": "team-knowledge-mapper",
+    "description": "Map team knowledge and expertise with skill gap analysis and learning path recommendations",
+    "description_pt": "Map team knowledge e expertise com skill gap analysis and learning path recommendations",
+    "category": "team",
+    "type": "command",
+    "published": true
+  },
+  {
+    "id": "cmd-263",
+    "name": "Team Velocity Tracker",
+    "slug": "team-velocity-tracker",
+    "description": "Track and analyze team velocity with predictive forecasting and performance optimization recommendations",
+    "description_pt": "Rastrear e analyze team velocity com predictive forecasting and desempenho optimization recommendations",
+    "category": "team",
+    "type": "command",
+    "published": true
+  },
+  {
+    "id": "cmd-264",
+    "name": "Team Workload Balancer",
+    "slug": "team-workload-balancer",
+    "description": "Analyze and optimize team workload distribution with skill matching and capacity planning",
+    "description_pt": "Analisar e optimize team workload distribution com skill matching and capacity planning",
+    "category": "team",
+    "type": "command",
+    "published": true
+  },
+  {
+    "id": "cmd-265",
+    "name": "Add Mutation Testing",
+    "slug": "add-mutation-testing",
+    "description": "Setup comprehensive mutation testing with framework selection and CI integration",
+    "description_pt": "Configurar comprehensive mutation testes com framework selection e CI integration",
+    "category": "testing",
+    "type": "command",
+    "published": true
+  },
+  {
+    "id": "cmd-266",
+    "name": "Add Property Based Testing",
+    "slug": "add-property-based-testing",
+    "description": "Implement property-based testing with framework selection and invariant identification",
+    "description_pt": "Implementar property-based testes com framework selection e invariant identification",
+    "category": "testing",
+    "type": "command",
+    "published": true
+  },
+  {
+    "id": "cmd-267",
+    "name": "E2E Setup",
+    "slug": "e2e-setup",
+    "description": "Configure comprehensive end-to-end testing suite with framework selection and CI integration",
+    "description_pt": "Configurar comprehensive end-to-end testes suite com framework selection e CI integration",
+    "category": "testing",
+    "type": "command",
+    "published": true
+  },
+  {
+    "id": "cmd-268",
+    "name": "Generate Test Cases",
+    "slug": "generate-test-cases",
+    "description": "Generate comprehensive test cases with automatic analysis and coverage optimization",
+    "description_pt": "Gerar comprehensive test cases com automatic analysis e coverage optimization",
+    "category": "testing",
+    "type": "command",
+    "published": true
+  },
+  {
+    "id": "cmd-269",
+    "name": "Generate Tests",
+    "slug": "generate-tests",
+    "description": "Generate comprehensive test suite with unit, integration, and edge case coverage",
+    "description_pt": "Gerar comprehensive test suite com unit, integration, e edge case coverage",
+    "category": "testing",
+    "type": "command",
+    "published": true
+  },
+  {
+    "id": "cmd-270",
+    "name": "Setup Comprehensive Testing",
+    "slug": "setup-comprehensive-testing",
+    "description": "Setup complete testing infrastructure with framework configuration and CI integration",
+    "description_pt": "Configurar complete testes infrastructure com framework configuration e CI integration",
+    "category": "testing",
+    "type": "command",
+    "published": true
+  },
+  {
+    "id": "cmd-271",
+    "name": "Setup Load Testing",
+    "slug": "setup-load-testing",
+    "description": "Configure comprehensive load testing with performance metrics and bottleneck identification",
+    "description_pt": "Configurar comprehensive load testes com desempenho metrics e bottleneck identification",
+    "category": "testing",
+    "type": "command",
+    "published": true
+  },
+  {
+    "id": "cmd-272",
+    "name": "Setup Visual Testing",
+    "slug": "setup-visual-testing",
+    "description": "Setup comprehensive visual regression testing with cross-browser and responsive testing",
+    "description_pt": "Configurar comprehensive visual regression testes com cross-browser e responsive testing",
+    "category": "testing",
+    "type": "command",
+    "published": true
+  },
+  {
+    "id": "cmd-273",
+    "name": "Test Automation Orchestrator",
+    "slug": "test-automation-orchestrator",
+    "description": "Orchestrate comprehensive test automation with intelligent execution and optimization",
+    "description_pt": "Orchestrate comprehensive test automation com intelligent execution e optimization",
+    "category": "testing",
+    "type": "command",
+    "published": true
+  },
+  {
+    "id": "cmd-274",
+    "name": "Test Changelog Automation",
+    "slug": "test-changelog-automation",
+    "description": "Automate changelog testing workflow with CI integration and validation",
+    "description_pt": "Automatizar changelog testes fluxo de trabalho com CI integration e validation",
+    "category": "testing",
+    "type": "command",
+    "published": true
+  },
+  {
+    "id": "cmd-275",
+    "name": "Test Coverage",
+    "slug": "test-coverage",
+    "description": "Analyze and improve test coverage with comprehensive reporting and gap identification",
+    "description_pt": "Analisar e improve test coverage com comprehensive reporting and gap identification",
+    "category": "testing",
+    "type": "command",
+    "published": true
+  },
+  {
+    "id": "cmd-276",
+    "name": "Test Quality Analyzer",
+    "slug": "test-quality-analyzer",
+    "description": "Analyze test suite quality with comprehensive metrics and improvement recommendations",
+    "description_pt": "Analisar test suite quality com comprehensive metrics e improvement recommendations",
+    "category": "testing",
+    "type": "command",
+    "published": true
+  },
+  {
+    "id": "cmd-277",
+    "name": "Testing Plan Integration",
+    "slug": "testingplanintegration",
+    "description": "Create comprehensive integration testing plan with inline tests and refactoring recommendations",
+    "description_pt": "Criar comprehensive integration testes plan com inline tests e refactoring recommendations",
+    "category": "testing",
+    "type": "command",
+    "published": true
+  },
+  {
+    "id": "cmd-278",
+    "name": "Webapp Testing",
+    "slug": "webapp-testing",
+    "description": "Toolkit for interacting with and testing local web applications using Playwright. Supports verifying frontend functionality, debugging UI behavior, capturing browser screenshots, and viewing browser logs.",
+    "description_pt": "Toolkit para interacting com e testes local web applications usando Playwright. Supports verifying frontend functionality, debugging UI behavior, capturing browser screenshots, and viewing browser logs.",
+    "category": "testing",
+    "type": "command",
+    "published": true
+  },
+  {
+    "id": "cmd-279",
+    "name": "Write Tests",
+    "slug": "write-tests",
+    "description": "Write comprehensive unit and integration tests with proper mocking and coverage",
+    "description_pt": "Write comprehensive unit e integration tests com proper mocking and coverage",
+    "category": "testing",
+    "type": "command",
+    "published": true
+  },
+  {
+    "id": "cmd-280",
+    "name": "Cleanup Cache",
+    "slug": "cleanup-cache",
+    "description": "Clean system caches (npm, Homebrew, Yarn, browsers, Python/ML) to free disk space",
+    "description_pt": "Clean system caches (npm, Homebrew, Yarn, browsers, Python/ML) para free disk space",
+    "category": "utilities",
+    "type": "command",
+    "published": true
+  },
+  {
+    "id": "cmd-281",
+    "name": "Code Review",
+    "slug": "code-review",
+    "description": "Comprehensive code quality review with security, performance, and architecture analysis",
+    "description_pt": "Comprehensive codigo quality review com seguranca, desempenho, e architecture analysis",
+    "category": "utilities",
+    "type": "command",
+    "published": true
+  },
+  {
+    "id": "cmd-282",
+    "name": "Screenshot Analyzer",
+    "slug": "screenshot-analyzer",
+    "description": "Analyze product screenshots to extract features and generate development task lists.",
+    "description_pt": "Analisar product screenshots para extract features e generate development task lists.",
+    "category": "utilities",
+    "type": "command",
+    "published": true
+  },
+  {
+    "id": "cmd-283",
+    "name": "Ultra Think",
+    "slug": "ultra-think",
+    "description": "Deep analysis and problem solving with multi-dimensional thinking",
+    "description_pt": "Deep analysis e problem solving com multi-dimensional thinking",
+    "category": "utilities",
+    "type": "command",
+    "published": true
+  }
+]

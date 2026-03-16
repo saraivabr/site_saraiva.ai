@@ -13,8 +13,22 @@ const NODE_ENV = process.env.NODE_ENV || 'development';
 // Middleware: JSON body parsing
 app.use(express.json());
 
-// Load MCP data
+// Load all content data
 const mcpData = JSON.parse(readFileSync(path.join(__dirname, 'data', 'mcps.json'), 'utf-8'));
+const skillsData = JSON.parse(readFileSync(path.join(__dirname, 'data', 'skills.json'), 'utf-8'));
+const agentsData = JSON.parse(readFileSync(path.join(__dirname, 'data', 'agents.json'), 'utf-8'));
+const commandsData = JSON.parse(readFileSync(path.join(__dirname, 'data', 'commands.json'), 'utf-8'));
+const hooksData = JSON.parse(readFileSync(path.join(__dirname, 'data', 'hooks.json'), 'utf-8'));
+const settingsData = JSON.parse(readFileSync(path.join(__dirname, 'data', 'settings.json'), 'utf-8'));
+
+const allData = {
+  mcps: mcpData,
+  skills: skillsData,
+  agents: agentsData,
+  commands: commandsData,
+  hooks: hooksData,
+  settings: settingsData,
+};
 
 // Middleware: Logging
 app.use((req, res, next) => {
@@ -89,37 +103,71 @@ app.get('/health', (req, res) => {
   res.status(200).json({ status: 'ok', timestamp: new Date().toISOString() });
 });
 
-// API: List MCPs
-app.get('/api/mcps', (req, res) => {
-  let results = mcpData.filter(m => m.published);
+// API: Get stats for all content types
+app.get('/api/stats', (req, res) => {
+  res.json(Object.fromEntries(
+    Object.entries(allData).map(([type, data]) => [type, data.filter(i => i.published !== false).length])
+  ));
+});
+
+// API: List items by type
+app.get('/api/:type', (req, res) => {
+  const data = allData[req.params.type];
+  if (!data) return res.status(404).json({ error: 'Type not found' });
+
+  let results = data.filter(i => i.published !== false);
 
   if (req.query.category && req.query.category !== 'all') {
-    results = results.filter(m => m.category === req.query.category);
+    results = results.filter(i => i.category === req.query.category);
   }
   if (req.query.deploy_type && req.query.deploy_type !== 'all') {
-    results = results.filter(m => m.deploy_type === req.query.deploy_type);
+    results = results.filter(i => i.deploy_type === req.query.deploy_type);
   }
   if (req.query.search) {
     const s = req.query.search.toLowerCase();
-    results = results.filter(m =>
-      m.name.toLowerCase().includes(s) ||
-      (m.description && m.description.toLowerCase().includes(s))
+    results = results.filter(i =>
+      (i.name && i.name.toLowerCase().includes(s)) ||
+      (i.description && i.description.toLowerCase().includes(s)) ||
+      (i.description_pt && i.description_pt.toLowerCase().includes(s))
     );
   }
 
+  // Sort: featured first, then by usage_count or name
   results.sort((a, b) => {
     if (a.featured !== b.featured) return b.featured ? 1 : -1;
-    return b.usage_count - a.usage_count;
+    if (a.usage_count !== undefined && b.usage_count !== undefined) return b.usage_count - a.usage_count;
+    return (a.name || '').localeCompare(b.name || '');
   });
 
   res.json(results);
 });
 
-// API: Get single MCP
-app.get('/api/mcps/:slug', (req, res) => {
-  const mcp = mcpData.find(m => m.slug === req.params.slug && m.published);
-  if (!mcp) return res.status(404).json({ error: 'MCP not found' });
-  res.json(mcp);
+// API: Get single item by type and slug
+app.get('/api/:type/:slug', (req, res) => {
+  const data = allData[req.params.type];
+  if (!data) return res.status(404).json({ error: 'Type not found' });
+
+  const item = data.find(i => i.slug === req.params.slug && i.published !== false);
+  if (!item) return res.status(404).json({ error: 'Item not found' });
+  res.json(item);
+});
+
+// API: Generate install command for stack
+app.post('/api/stack/generate', (req, res) => {
+  const { items } = req.body; // Array of { type, slug }
+  if (!items || !Array.isArray(items)) return res.status(400).json({ error: 'Invalid request' });
+
+  const parts = [];
+  for (const { type, slug } of items) {
+    const data = allData[type];
+    if (!data) continue;
+    const item = data.find(i => i.slug === slug);
+    if (item && item.install_command) {
+      parts.push({ type, name: item.name, command: item.install_command });
+    }
+  }
+
+  res.json({ items: parts });
 });
 
 // SPA Fallback: Serve index.html for all unmatched routes

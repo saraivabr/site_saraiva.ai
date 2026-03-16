@@ -1,0 +1,512 @@
+[
+  {
+    "id": "hook-001",
+    "name": "Agents Md Loader",
+    "slug": "agents-md-loader",
+    "description": "Automatically loads AGENTS.md configuration file content at session start to ensure Claude Code follows project-specific agent behavior. Only loads if AGENTS.md exists, otherwise passes empty context. Supports the universal AGENTS.md standard for cro",
+    "description_pt": "Automaticamente loads AGENTS.md configuration arquivo content at session start para ensure Claude Code follows projeto-specific agent behavior. Only loads if AGENTS.md exists, otherwise passes empty context. Supports o universal AGENTS.md standard pa",
+    "category": "automation",
+    "type": "hook",
+    "published": true
+  },
+  {
+    "id": "hook-002",
+    "name": "Build On Change",
+    "slug": "build-on-change",
+    "description": "Automatically trigger build processes when source files change. Detects common build tools and runs appropriate build commands.",
+    "description_pt": "Automaticamente trigger build processes when source arquivos change. Detects common build tools e runs appropriate build commands.",
+    "category": "automation",
+    "type": "hook",
+    "published": true
+  },
+  {
+    "id": "hook-003",
+    "name": "Change Logger",
+    "slug": "change-logger",
+    "description": "Log every file mutation to CSV for demo prep. Records timestamp, tool, file path, action, and details for Edit, MultiEdit, Write, and Bash operations. Output: .claude/critical_log_changes.csv",
+    "description_pt": "Log every arquivo mutation para CSV para demo prep. Records timestamp, tool, file path, action, e details for Edit, MultiEdit, Write, and Bash operations. Output: .claude/critical_log_changes.csv",
+    "category": "automation",
+    "type": "hook",
+    "published": true
+  },
+  {
+    "id": "hook-004",
+    "name": "Dependency Checker",
+    "slug": "dependency-checker",
+    "description": "Advanced dependency analysis and security checking. Monitors for outdated packages, security vulnerabilities, and license compatibility.",
+    "description_pt": "Advanced dependency analysis e seguranca checking. Monitors para outdated packages, security vulnerabilities, and license compatibility.",
+    "category": "automation",
+    "type": "hook",
+    "published": true
+  },
+  {
+    "id": "hook-005",
+    "name": "Deployment Health Monitor",
+    "slug": "deployment-health-monitor",
+    "description": "Monitor deployment status, error rates, and performance metrics, sending notifications for failed deployments or performance degradation. Tracks Vercel deployment health, monitors build success/failure rates, and provides alerts for deployment issues",
+    "description_pt": "Monitorar implantacao status, erro rates, e desempenho metrics, sending notifications para failed deployments ou performance degradation. Tracks Vercel deployment health, monitors build success/failure rates, and provides alerts for deployment issues",
+    "category": "automation",
+    "type": "hook",
+    "published": true
+  },
+  {
+    "id": "hook-006",
+    "name": "Discord Detailed Notifications",
+    "slug": "discord-detailed-notifications",
+    "description": "Send detailed Discord notifications with session information when Claude Code finishes. Includes working directory, session duration, and system info with rich embeds. Requires DISCORD_WEBHOOK_URL environment variable.",
+    "description_pt": "Send detailed Discord notifications com session information when Claude Code finishes. Includes working directory, session duration, e system info with rich embeds. Requires DISCORD_WEBHOOK_URL environment variable.",
+    "category": "automation",
+    "type": "hook",
+    "published": true
+  },
+  {
+    "id": "hook-007",
+    "name": "Discord Error Notifications",
+    "slug": "discord-error-notifications",
+    "description": "Send Discord notifications when Claude Code encounters long-running operations or when tools take significant time. Helps monitor productivity and catch potential issues with rich embeds. Requires DISCORD_WEBHOOK_URL environment variable.",
+    "description_pt": "Send Discord notifications when Claude Code encounters long-running operations ou when tools take significant time. Helps monitor productivity e catch potential issues com rich embeds. Requires DISCORD_WEBHOOK_URL environment variable.",
+    "category": "automation",
+    "type": "hook",
+    "published": true
+  },
+  {
+    "id": "hook-008",
+    "name": "Discord Notifications",
+    "slug": "discord-notifications",
+    "description": "Send Discord notifications when Claude Code finishes working. Requires DISCORD_WEBHOOK_URL environment variable. Get webhook URL from Discord Server Settings -> Integrations -> Webhooks.",
+    "description_pt": "Send Discord notifications when Claude Code finishes working. Requires DISCORD_WEBHOOK_URL environment variable. Get webhook URL de Discord Server Settings -> Integrations -> Webhooks.",
+    "category": "automation",
+    "type": "hook",
+    "published": true
+  },
+  {
+    "id": "hook-009",
+    "name": "Simple Notifications",
+    "slug": "simple-notifications",
+    "description": "Send simple desktop notifications when Claude Code operations complete. Works on macOS and Linux systems.",
+    "description_pt": "Send simple desktop notifications when Claude Code operations complete. Works no macOS e Linux systems.",
+    "category": "automation",
+    "type": "hook",
+    "published": true
+  },
+  {
+    "id": "hook-010",
+    "name": "Slack Detailed Notifications",
+    "slug": "slack-detailed-notifications",
+    "description": "Send detailed Slack notifications with session information when Claude Code finishes. Includes working directory, session duration, and system info. Requires SLACK_WEBHOOK_URL environment variable.",
+    "description_pt": "Send detailed Slack notifications com session information when Claude Code finishes. Includes working directory, session duration, e system info. Requires SLACK_WEBHOOK_URL environment variable.",
+    "category": "automation",
+    "type": "hook",
+    "published": true
+  },
+  {
+    "id": "hook-011",
+    "name": "Slack Error Notifications",
+    "slug": "slack-error-notifications",
+    "description": "Send Slack notifications when Claude Code encounters long-running operations or when tools take significant time. Helps monitor productivity and catch potential issues. Requires SLACK_WEBHOOK_URL environment variable.",
+    "description_pt": "Send Slack notifications when Claude Code encounters long-running operations ou when tools take significant time. Helps monitor productivity e catch potential issues. Requires SLACK_WEBHOOK_URL environment variable.",
+    "category": "automation",
+    "type": "hook",
+    "published": true
+  },
+  {
+    "id": "hook-012",
+    "name": "Slack Notifications",
+    "slug": "slack-notifications",
+    "description": "Send Slack notifications when Claude Code finishes working. Requires SLACK_WEBHOOK_URL environment variable. Get webhook URL from Slack App settings -> Incoming Webhooks.",
+    "description_pt": "Send Slack notifications when Claude Code finishes working. Requires SLACK_WEBHOOK_URL environment variable. Get webhook URL de Slack App settings -> Incoming Webhooks.",
+    "category": "automation",
+    "type": "hook",
+    "published": true
+  },
+  {
+    "id": "hook-013",
+    "name": "Telegram Detailed Notifications",
+    "slug": "telegram-detailed-notifications",
+    "description": "Send detailed Telegram notifications with session information when Claude Code finishes. Includes working directory, session duration, and system info. Requires TELEGRAM_BOT_TOKEN and TELEGRAM_CHAT_ID environment variables.",
+    "description_pt": "Send detailed Telegram notifications com session information when Claude Code finishes. Includes working directory, session duration, e system info. Requires TELEGRAM_BOT_TOKEN and TELEGRAM_CHAT_ID environment variables.",
+    "category": "automation",
+    "type": "hook",
+    "published": true
+  },
+  {
+    "id": "hook-014",
+    "name": "Telegram Error Notifications",
+    "slug": "telegram-error-notifications",
+    "description": "Send Telegram notifications when Claude Code encounters long-running operations or when tools take significant time. Helps monitor productivity and catch potential issues. Requires TELEGRAM_BOT_TOKEN and TELEGRAM_CHAT_ID environment variables.",
+    "description_pt": "Send Telegram notifications when Claude Code encounters long-running operations ou when tools take significant time. Helps monitor productivity e catch potential issues. Requires TELEGRAM_BOT_TOKEN and TELEGRAM_CHAT_ID environment variables.",
+    "category": "automation",
+    "type": "hook",
+    "published": true
+  },
+  {
+    "id": "hook-015",
+    "name": "Telegram Notifications",
+    "slug": "telegram-notifications",
+    "description": "Send Telegram notifications when Claude Code finishes working. Requires TELEGRAM_BOT_TOKEN and TELEGRAM_CHAT_ID environment variables. Get bot token from @BotFather, get chat ID by messaging the bot and visiting https://api.telegram.org/bot<TOKEN>/ge",
+    "description_pt": "Send Telegram notifications when Claude Code finishes working. Requires TELEGRAM_BOT_TOKEN e TELEGRAM_CHAT_ID environment variables. Get bot token de @BotFather, get chat ID por messaging o bot and visiting https://api.telegram.org/bot<TOKEN>/ge",
+    "category": "automation",
+    "type": "hook",
+    "published": true
+  },
+  {
+    "id": "hook-016",
+    "name": "Telegram PR Webhook",
+    "slug": "telegram-pr-webhook",
+    "description": "Send Telegram notification when a new PR is created via gh pr create. Includes PR URL and Vercel preview URL. Requires TELEGRAM_BOT_TOKEN and TELEGRAM_CHAT_ID environment variables. Optionally set VERCEL_PROJECT_NAME and VERCEL_TEAM_SLUG to construct",
+    "description_pt": "Send Telegram notification when a new PR is created via gh pr create. Includes PR URL e Vercel preview URL. Requires TELEGRAM_BOT_TOKEN and TELEGRAM_CHAT_ID environment variables. Optionally set VERCEL_PROJECT_NAME and VERCEL_TEAM_SLUG para construct",
+    "category": "automation",
+    "type": "hook",
+    "published": true
+  },
+  {
+    "id": "hook-017",
+    "name": "Vercel Auto Deploy",
+    "slug": "vercel-auto-deploy",
+    "description": "Automatically trigger Vercel deployments when code changes are committed, with environment-specific deployment strategies and rollback on failure. Setup: Export environment variables 'export VERCEL_TOKEN=your_token' and 'export VERCEL_PROJECT_ID=your",
+    "description_pt": "Automaticamente trigger Vercel implantacaos when codigo changes are committed, com environment-specific deployment strategies e rollback no failure. Setup: Export environment variables 'export VERCEL_TOKEN=your_token' and 'export VERCEL_PROJECT_ID=yo",
+    "category": "automation",
+    "type": "hook",
+    "published": true
+  },
+  {
+    "id": "hook-018",
+    "name": "Vercel Environment Sync",
+    "slug": "vercel-environment-sync",
+    "description": "Synchronize environment variables between local development and Vercel deployments, ensuring consistency across all environments. Detects changes to .env files and provides options to sync with Vercel, validates environment variable format, and ensur",
+    "description_pt": "Synchronize environment variables between local development e Vercel implantacaos, ensuring consistency across all environments. Detects changes para .env arquivos and provides options to sync com Vercel, validates environment variable format, and en",
+    "category": "automation",
+    "type": "hook",
+    "published": true
+  },
+  {
+    "id": "hook-019",
+    "name": "Change Tracker",
+    "slug": "change-tracker",
+    "description": "Track file changes in a simple log. Records which files were modified and when for easy tracking of Claude Code activity.",
+    "description_pt": "Rastrear arquivo changes em a simple log. Records which arquivos were modified e when para easy tracking de Claude Code activity.",
+    "category": "development-tools",
+    "type": "hook",
+    "published": true
+  },
+  {
+    "id": "hook-020",
+    "name": "Command Logger",
+    "slug": "command-logger",
+    "description": "Log all Claude Code commands to a file for audit and debugging purposes. Simple logging that records tool usage with timestamps.",
+    "description_pt": "Log all Claude Code commands para a arquivo para audit e debugging purposes. Simple logging esse records tool usage com timestamps.",
+    "category": "development-tools",
+    "type": "hook",
+    "published": true
+  },
+  {
+    "id": "hook-021",
+    "name": "Debug Window",
+    "slug": "debug-window",
+    "description": "Auto Debug Log Viewer. Opens a live-tailing debug log window when Claude Code starts with --debug or -d flag. The window closes automatically on session end. To keep the debug window open after session ends, set DEBUG_WINDOW_AUTO_CLOSE_DISABLE=1 in y",
+    "description_pt": "Auto Depurar Log Viewer. Opens a live-tailing debug log window when Claude Code starts com --debug ou -d flag. The window closes automaticamente no session end. To keep o debug window open after session ends, set DEBUG_WINDOW_AUTO_CLOSE_DISABLE=1 em ",
+    "category": "development-tools",
+    "type": "hook",
+    "published": true
+  },
+  {
+    "id": "hook-022",
+    "name": "File Backup",
+    "slug": "file-backup",
+    "description": "Automatically backup files before editing. Creates timestamped backups in a .backups directory when files are modified.",
+    "description_pt": "Automaticamente backup arquivos before editing. Creates timestamped backups em a .backups directory when arquivos are modified.",
+    "category": "development-tools",
+    "type": "hook",
+    "published": true
+  },
+  {
+    "id": "hook-023",
+    "name": "Lint On Save",
+    "slug": "lint-on-save",
+    "description": "Automatically run linting tools after file modifications. Supports ESLint for JavaScript/TypeScript, Pylint for Python, and RuboCop for Ruby.",
+    "description_pt": "Automaticamente run linting tools after arquivo modifications. Supports ESLint para JavaScript/TypeScript, Pylint for Python, e RuboCop for Ruby.",
+    "category": "development-tools",
+    "type": "hook",
+    "published": true
+  },
+  {
+    "id": "hook-024",
+    "name": "Nextjs Code Quality Enforcer",
+    "slug": "nextjs-code-quality-enforcer",
+    "description": "Enforce Next.js best practices, proper file structure, component patterns, and TypeScript usage with automated code reviews and suggestions. Validates Next.js App Router conventions, Server/Client component patterns, proper imports, and TypeScript us",
+    "description_pt": "Enforce Next.js best practices, proper arquivo structure, component patterns, e TypeScript usage com automated codigo reviews and suggestions. Validates Next.js App Router conventions, Server/Client component patterns, proper imports, and TypeScript ",
+    "category": "development-tools",
+    "type": "hook",
+    "published": true
+  },
+  {
+    "id": "hook-025",
+    "name": "Smart Formatting",
+    "slug": "smart-formatting",
+    "description": "Smart code formatting based on file type. Automatically formats code using Prettier, Black, gofmt, rustfmt, and other language-specific formatters.",
+    "description_pt": "Smart codigo formatting based no arquivo type. Automaticamente formats code usando Prettier, Black, gofmt, rustfmt, e other language-specific formatters.",
+    "category": "development-tools",
+    "type": "hook",
+    "published": true
+  },
+  {
+    "id": "hook-026",
+    "name": "Worktree Ghostty",
+    "slug": "worktree-ghostty",
+    "description": "Worktree Ghostty Layout. Opens a 3-panel Ghostty layout when creating worktrees: Claude Code (left) | lazygit (top-right) / yazi (bottom-right). Creates worktrees in a sibling directory (../worktrees/<repo>/<name>/) and cleans up on removal. macOS on",
+    "description_pt": "Worktree Ghostty Layout. Opens a 3-panel Ghostty layout when creating worktrees: Claude Code (left) | lazygit (top-right) / yazi (bottom-right). Creates worktrees em a sibling directory (../worktrees/<repo>/<name>/) e cleans up no removal. macOS on",
+    "category": "development-tools",
+    "type": "hook",
+    "published": true
+  },
+  {
+    "id": "hook-027",
+    "name": "Conventional Commits",
+    "slug": "conventional-commits",
+    "description": "Enforce conventional commit message format for all git commits. Validates commit messages follow the pattern: type(scope): description. Supported types: feat, fix, docs, style, refactor, perf, test, chore, ci, build, revert. Ensures consistent commit",
+    "description_pt": "Enforce conventional commit message format para all git commits. Validates commit messages follow o pattern: type(scope): description. Supported types: feat, fix, docs, style, refactor, perf, test, chore, ci, build, revert. Ensures consistent commit",
+    "category": "git",
+    "type": "hook",
+    "published": true
+  },
+  {
+    "id": "hook-028",
+    "name": "Prevent Direct Push",
+    "slug": "prevent-direct-push",
+    "description": "Prevent direct pushes to protected branches (main, develop). Blocks git push commands targeting main or develop branches to enforce Git Flow workflow. Requires using feature/release/hotfix branches and pull requests instead of direct commits to prote",
+    "description_pt": "Prevent direct pushes para protected branches (main, develop). Blocks git push commands targeting main ou develop branches to enforce Git Flow fluxo de trabalho. Requires usando feature/release/hotfix branches e pull requests instead de direct commit",
+    "category": "git",
+    "type": "hook",
+    "published": true
+  },
+  {
+    "id": "hook-029",
+    "name": "Validate Branch Name",
+    "slug": "validate-branch-name",
+    "description": "Validate Git Flow branch naming conventions before checkout. Ensures branches follow the pattern: feature/*, release/v*.*.*, hotfix/*. Prevents creation of branches that don't follow Git Flow standards.",
+    "description_pt": "Validate Git Flow branch naming conventions before checkout. Ensures branches follow o pattern: feature/*, release/v*.*.*, hotfix/*. Prevents creation de branches esse don't follow Git Flow standards.",
+    "category": "git",
+    "type": "hook",
+    "published": true
+  },
+  {
+    "id": "hook-030",
+    "name": "Auto Git Add",
+    "slug": "auto-git-add",
+    "description": "Automatically stage modified files with git add after editing. Helps maintain a clean git workflow by staging changes as they're made.",
+    "description_pt": "Automaticamente stage modified arquivos com git add after editing. Helps maintain a clean git fluxo de trabalho por staging changes as they're made.",
+    "category": "git-workflow",
+    "type": "hook",
+    "published": true
+  },
+  {
+    "id": "hook-031",
+    "name": "Smart Commit",
+    "slug": "smart-commit",
+    "description": "Intelligent git commit creation with automatic message generation and validation. Creates meaningful commits based on file changes.",
+    "description_pt": "Intelligent git commit creation com automatic message generation e validation. Creates meaningful commits based no arquivo changes.",
+    "category": "git-workflow",
+    "type": "hook",
+    "published": true
+  },
+  {
+    "id": "hook-032",
+    "name": "Desktop Notification On Stop",
+    "slug": "desktop-notification-on-stop",
+    "description": "Sends a native desktop notification when Claude Code finishes responding. Uses the Stop hook event so you get a single notification per response instead of one per tool call (which is very noisy with PostToolUse). Supports macOS (osascript) and Linux",
+    "description_pt": "Sends a native desktop notification when Claude Code finishes responding. Uses o Stop hook event so you get a single notification per response instead de one per tool call (which is very noisy com PostToolUse). Supports macOS (osascript) e Linux",
+    "category": "monitoring",
+    "type": "hook",
+    "published": true
+  },
+  {
+    "id": "hook-033",
+    "name": "Langsmith Tracing",
+    "slug": "langsmith-tracing",
+    "description": "Automatically send Claude Code conversation traces to LangSmith for monitoring and analysis. Prerequisites: jq (brew install jq on macOS or sudo apt-get install jq on Linux), curl and uuidgen (usually pre-installed), LangSmith account and API key. Co",
+    "description_pt": "Automaticamente send Claude Code conversation traces para LangSmith para monitoring e analysis. Prerequisites: jq (brew install jq no macOS ou sudo apt-get install jq on Linux), curl and uuidgen (usually pre-installed), LangSmith account and API key.",
+    "category": "monitoring",
+    "type": "hook",
+    "published": true
+  },
+  {
+    "id": "hook-034",
+    "name": "Performance Budget Guard",
+    "slug": "performance-budget-guard",
+    "description": "Monitor bundle size and Core Web Vitals metrics during development, blocking deployments that exceed performance budgets with detailed reports. Automatically analyzes Next.js build output, checks bundle sizes against predefined budgets, and provides ",
+    "description_pt": "Monitorar bundle size e Core Web Vitals metrics during development, blocking implantacaos esse exceed desempenho budgets com detailed reports. Automaticamente analyzes Next.js build output, checks bundle sizes against predefined budgets, and provides",
+    "category": "performance",
+    "type": "hook",
+    "published": true
+  },
+  {
+    "id": "hook-035",
+    "name": "Performance Monitor",
+    "slug": "performance-monitor",
+    "description": "Monitor system performance during Claude Code operations. Tracks CPU, memory usage, and execution time for performance optimization.",
+    "description_pt": "Monitorar system desempenho during Claude Code operations. Tracks CPU, memory usage, e execution time para performance optimization.",
+    "category": "performance",
+    "type": "hook",
+    "published": true
+  },
+  {
+    "id": "hook-036",
+    "name": "Format Javascript Files",
+    "slug": "format-javascript-files",
+    "description": "Automatically format JavaScript/TypeScript files after any Edit operation using prettier. This hook runs 'npx prettier --write' on any .js, .ts, .jsx, or .tsx file that Claude modifies, ensuring consistent code formatting. Uses npx so prettier doesn'",
+    "description_pt": "Automaticamente format JavaScript/TypeScript arquivos after any Edit operation usando prettier. This hook runs 'npx prettier --write' no any .js, .ts, .jsx, ou .tsx file esse Claude modifies, ensuring consistent codigo formatting. Uses npx so prettie",
+    "category": "post-tool",
+    "type": "hook",
+    "published": true
+  },
+  {
+    "id": "hook-037",
+    "name": "Format Python Files",
+    "slug": "format-python-files",
+    "description": "Automatically format Python files after any Edit operation using black formatter. This hook runs 'black' on any .py file that Claude modifies, ensuring consistent Python code formatting. Requires black to be installed ('pip install black'). The comma",
+    "description_pt": "Automaticamente format Python arquivos after any Edit operation usando black formatter. This hook runs 'black' no any .py file esse Claude modifies, ensuring consistent Python codigo formatting. Requires black para be installed ('pip install black').",
+    "category": "post-tool",
+    "type": "hook",
+    "published": true
+  },
+  {
+    "id": "hook-038",
+    "name": "Git Add Changes",
+    "slug": "git-add-changes",
+    "description": "Automatically stage changes in git after file modifications for easier commit workflow. This hook runs 'git add' on any file that Claude edits or writes, automatically staging changes for the next commit. Includes error suppression so it won't fail i",
+    "description_pt": "Automaticamente stage changes em git after arquivo modifications para easier commit fluxo de trabalho. This hook runs 'git add' no any file esse Claude edits ou writes, automaticamente staging changes for o next commit. Includes erro suppression so i",
+    "category": "post-tool",
+    "type": "hook",
+    "published": true
+  },
+  {
+    "id": "hook-039",
+    "name": "Run Tests After Changes",
+    "slug": "run-tests-after-changes",
+    "description": "Automatically run quick tests after code modifications to ensure nothing breaks. This hook executes 'npm run test:quick' silently after any Edit operation and provides feedback on test status. Helps catch breaking changes immediately during developme",
+    "description_pt": "Automaticamente run quick tests after codigo modifications para ensure nothing breaks. This hook executes 'npm run test:quick' silently after any Edit operation e provides feedback no test status. Helps catch breaking changes immediately during devel",
+    "category": "post-tool",
+    "type": "hook",
+    "published": true
+  },
+  {
+    "id": "hook-040",
+    "name": "Backup Before Edit",
+    "slug": "backup-before-edit",
+    "description": "Create automatic backup of files before any Edit operation for safety. This hook creates a timestamped backup copy (filename.backup.timestamp) of any existing file before Claude modifies it. Provides a safety net to recover previous versions if neede",
+    "description_pt": "Criar automatic backup de arquivos before any Edit operation para safety. This hook creates a timestamped backup copy (filename.backup.timestamp) of any existing file before Claude modifies it. Provides a safety net para recover previous versions if ",
+    "category": "pre-tool",
+    "type": "hook",
+    "published": true
+  },
+  {
+    "id": "hook-041",
+    "name": "Console Log Cleaner",
+    "slug": "console-log-cleaner",
+    "description": "Warns about console.log statements when editing files on production branches (main/master). Helps prevent debug code from reaching production.",
+    "description_pt": "Warns about console.log statements when editing arquivos no production branches (main/master). Helps prevent debug codigo de reaching production.",
+    "category": "pre-tool",
+    "type": "hook",
+    "published": true
+  },
+  {
+    "id": "hook-042",
+    "name": "Notify Before Bash",
+    "slug": "notify-before-bash",
+    "description": "Show notification before any Bash command execution for security awareness. This hook displays a simple echo message '🔔 About to run bash command...' before Claude executes any bash command, giving you visibility into when system commands are about t",
+    "description_pt": "Show notification before any Bash command execution para seguranca awareness. This hook displays a simple echo message '🔔 About para run bash command...' before Claude executes any bash command, giving you visibility into when system commands are abo",
+    "category": "pre-tool",
+    "type": "hook",
+    "published": true
+  },
+  {
+    "id": "hook-043",
+    "name": "Update Search Year",
+    "slug": "update-search-year",
+    "description": "Automatically adds current year to WebSearch queries when no year is specified. This hook intercepts WebSearch tool usage and appends the current year to queries that don't already contain a year, ensuring search results are current and relevant.",
+    "description_pt": "Automaticamente adds current year para WebPesquisar queries when no year is specified. This hook intercepts WebSearch tool usage e appends o current year to queries esse don't already contain a year, ensuring search results are current and relevant.",
+    "category": "pre-tool",
+    "type": "hook",
+    "published": true
+  },
+  {
+    "id": "hook-044",
+    "name": "Plan Gate",
+    "slug": "plan-gate",
+    "description": "Planning gate that warns when editing production code without an approved specification. Checks for recent .spec.md files in the project directory (last 14 days). If no spec is found, shows a warning suggesting to create one first. Non-blocking (exit",
+    "description_pt": "Planning gate esse warns when editing production codigo without an approved specification. Checks para recent .spec.md arquivos em o projeto directory (last 14 days). If no spec is found, shows a warning suggesting para create one first. Non-blocking",
+    "category": "quality-gates",
+    "type": "hook",
+    "published": true
+  },
+  {
+    "id": "hook-045",
+    "name": "Scope Guard",
+    "slug": "scope-guard",
+    "description": "Scope guard that detects files modified outside the declared scope of a specification. When a .spec.md file contains a 'Files to Create/Modify' section, this hook compares git-modified files against the declared list. Files outside scope trigger a wa",
+    "description_pt": "Scope guard esse detects arquivos modified outside o declared scope de a specification. When a .spec.md file contains a 'Files para Create/Modify' section, este hook compares git-modified arquivos against the declared list. Files outside scope trigge",
+    "category": "quality-gates",
+    "type": "hook",
+    "published": true
+  },
+  {
+    "id": "hook-046",
+    "name": "TDD Gate",
+    "slug": "tdd-gate",
+    "description": "Test-Driven Development enforcement hook. Blocks editing production code files (.cs, .py, .ts, .go, .rs, .rb, .php, .java, .kt, .swift, .dart) unless a corresponding test file exists. Forces the TDD workflow: write tests first, then implement. Automa",
+    "description_pt": "Test-Driven Development enforcement hook. Blocks editing production codigo arquivos (.cs, .py, .ts, .go, .rs, .rb, .php, .java, .kt, .swift, .dart) unless a corresponding test file exists. Forces o TDD fluxo de trabalho: write tests first, then imple",
+    "category": "quality-gates",
+    "type": "hook",
+    "published": true
+  },
+  {
+    "id": "hook-047",
+    "name": "Dangerous Command Blocker",
+    "slug": "dangerous-command-blocker",
+    "description": "Advanced protection against dangerous shell commands with multi-level security. Blocks catastrophic operations (rm -rf /, dd, mkfs), protects critical paths (.claude/, .git/, node_modules/), and warns about suspicious patterns. Features: catastrophic",
+    "description_pt": "Advanced protection against dangerous shell commands com multi-level seguranca. Blocks catastrophic operations (rm -rf /, dd, mkfs), protects critical paths (.claude/, .git/, node_modules/), e warns about suspicious patterns. Features: catastrophic",
+    "category": "security",
+    "type": "hook",
+    "published": true
+  },
+  {
+    "id": "hook-048",
+    "name": "File Protection",
+    "slug": "file-protection",
+    "description": "Protect critical files from accidental modification. Prevents editing of important system files, configuration files, and production code.",
+    "description_pt": "Protect critical arquivos de accidental modification. Prevents editing de important system arquivos, configuration files, e production codigo.",
+    "category": "security",
+    "type": "hook",
+    "published": true
+  },
+  {
+    "id": "hook-049",
+    "name": "Secret Scanner",
+    "slug": "secret-scanner",
+    "description": "Automatically detects hardcoded secrets before git commits. Scans for API keys from 30+ providers (Anthropic: sk-ant-..., OpenAI: sk-..., AWS: AKIA..., Stripe: sk_live_..., Google: AIza..., GitHub: ghp_..., Vercel, Supabase, Hugging Face: hf_..., Rep",
+    "description_pt": "Automaticamente detects hardcodigod secrets before git commits. Scans para API keys de 30+ providers (Anthropic: sk-ant-..., OpenAI: sk-..., AWS: AKIA..., Stripe: sk_live_..., Google: AIza..., GitHub: ghp_..., Vercel, Supabase, Hugging Face: hf_..., ",
+    "category": "security",
+    "type": "hook",
+    "published": true
+  },
+  {
+    "id": "hook-050",
+    "name": "Security Scanner",
+    "slug": "security-scanner",
+    "description": "Scan code for security vulnerabilities and secrets after modifications. Uses multiple security tools to detect potential issues.",
+    "description_pt": "Escanear codigo para seguranca vulnerabilities e secrets after modifications. Uses multiple security tools para detect potential issues.",
+    "category": "security",
+    "type": "hook",
+    "published": true
+  },
+  {
+    "id": "hook-051",
+    "name": "Test Runner",
+    "slug": "test-runner",
+    "description": "Automatically run relevant tests after code changes. Detects test files and runs appropriate test commands based on file extensions and project structure.",
+    "description_pt": "Automaticamente run relevant tests after codigo changes. Detects test arquivos e runs appropriate test commands based no file extensions and projeto structure.",
+    "category": "testing",
+    "type": "hook",
+    "published": true
+  }
+]
