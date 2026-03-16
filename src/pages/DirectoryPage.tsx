@@ -248,17 +248,25 @@ const DirectoryPage = () => {
           </div>
 
           {/* Cards grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-3 px-6 pb-6">
+          <motion.div
+            className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-3 px-6 pb-6"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.3 }}
+          >
             {isLoading ? (
               Array.from({ length: 12 }).map((_, i) => (
                 <div key={i} className="h-32 rounded-xl bg-[var(--color-surface-2)] animate-pulse" />
               ))
             ) : paginatedItems.length > 0 ? (
-              paginatedItems.map((item) => {
+              paginatedItems.map((item, index) => {
                 const inStack = isInStack(item.slug);
                 return (
-                  <div
+                  <motion.div
                     key={item.slug}
+                    initial={{ opacity: 0, y: 12 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.25, delay: Math.min(index * 0.03, 0.4) }}
                     className={`group relative flex items-start gap-3 p-4 rounded-xl transition-all duration-200 ${
                       inStack
                         ? "bg-amber-500/[0.04] border border-amber-500/30"
@@ -274,7 +282,7 @@ const DirectoryPage = () => {
                     <div className="min-w-0 flex-1">
                       <Link
                         to={`/directory/${type}/${item.slug}`}
-                        className="text-[13px] font-medium text-[var(--color-text-primary)] group-hover:text-white transition-colors"
+                        className="card-glow text-[13px] font-medium text-[var(--color-text-primary)] group-hover:text-white transition-colors"
                       >
                         {item.name}
                       </Link>
@@ -322,7 +330,7 @@ const DirectoryPage = () => {
                         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
                       )}
                     </button>
-                  </div>
+                  </motion.div>
                 );
               })
             ) : (
@@ -334,7 +342,7 @@ const DirectoryPage = () => {
                 <p className="text-[11px] text-[var(--color-text-tertiary)] mt-1">Tente ajustar os filtros ou busca</p>
               </div>
             )}
-          </div>
+          </motion.div>
 
           {/* Pagination */}
           {totalPages > 1 && (
@@ -416,7 +424,7 @@ const DirectoryPage = () => {
                         return (
                           <div
                             key={`${entry.itemType}-${entry.item.slug}`}
-                            className="flex items-center gap-2 px-2.5 py-1.5 rounded-lg bg-white/[0.03] border border-[var(--color-border)] group/item"
+                            className="card-glow flex items-center gap-2 px-2.5 py-1.5 rounded-lg bg-white/[0.03] border border-[var(--color-border)] group/item"
                           >
                             <div
                               className="w-5 h-5 rounded flex items-center justify-center shrink-0 text-[9px] font-bold"

@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import { useState, useMemo } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import SEOHead from "@/components/SEOHead";
 
 interface DirectoryItem {
@@ -88,6 +89,7 @@ export default function Home() {
   const paginatedItems = sortedItems.slice(0, 24);
   const cfg = typeConfig[activeType] || typeConfig.skills;
   const icon = typeIcons[activeType];
+  const totalItems = stats ? Object.values(stats).reduce((a, b) => a + b, 0) : 0;
 
   const getDesc = (item: DirectoryItem) => item.description_pt || item.description || "";
 
@@ -95,18 +97,81 @@ export default function Home() {
     <>
       <SEOHead />
 
-      {/* Sticky header with search */}
+      {/* Sticky header with real search input */}
       <header className="sticky top-0 z-20 bg-surface-0/80 backdrop-blur-md border-b border-[var(--color-border)]">
         <div className="flex items-center justify-between px-6 h-12">
-          <button className="flex items-center gap-2 px-3 py-1.5 border border-[var(--color-border)] rounded-md text-[13px] text-[var(--color-text-tertiary)] hover:text-[var(--color-text-secondary)] hover:border-[var(--color-border-hover)] transition-colors w-full max-w-sm">
-            <svg className="w-3.5 h-3.5 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2"><path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
-            <span>Buscar...</span>
-            <kbd className="hidden sm:inline-flex ml-auto items-center gap-0.5 px-1.5 py-0.5 text-[10px] font-mono border border-[var(--color-border)] rounded text-[var(--color-text-tertiary)]">
-              <span>⌘</span>K
+          <div className="relative w-full max-w-sm">
+            <svg className="absolute left-3 top-1/2 -translate-y-1/2 w-3.5 h-3.5 text-[var(--color-text-tertiary)] pointer-events-none" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2"><path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+            <input
+              type="text"
+              placeholder="Buscar componentes..."
+              value={search}
+              onChange={(e) => setSearch(e.target.value)}
+              className="w-full bg-transparent border border-[var(--color-border)] rounded-md text-[13px] text-[var(--color-text-primary)] placeholder:text-[var(--color-text-tertiary)] pl-9 pr-16 py-1.5 outline-none focus:border-[var(--color-border-hover)] focus:ring-1 focus:ring-white/10 transition-all"
+            />
+            <kbd className="hidden sm:inline-flex absolute right-3 top-1/2 -translate-y-1/2 items-center gap-0.5 px-1.5 py-0.5 text-[10px] font-mono border border-[var(--color-border)] rounded text-[var(--color-text-tertiary)]">
+              <span>&#8984;</span>K
             </kbd>
-          </button>
+          </div>
         </div>
       </header>
+
+      {/* Electrifying Hero */}
+      <section className="relative px-6 pt-8 pb-6 overflow-hidden">
+        {/* Animated glow orbs */}
+        <div className="absolute top-0 right-1/4 w-[500px] h-[300px] rounded-full blur-[150px] pointer-events-none" style={{ background: 'radial-gradient(circle, rgba(94,106,210,0.12) 0%, transparent 70%)' }} />
+        <div className="absolute bottom-0 left-1/4 w-[400px] h-[250px] rounded-full blur-[120px] pointer-events-none" style={{ background: 'radial-gradient(circle, rgba(213,116,85,0.08) 0%, transparent 70%)' }} />
+
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+        >
+          {/* Badge */}
+          <motion.div
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ delay: 0.2, duration: 0.4 }}
+            className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/[0.04] border border-white/[0.06] text-[11px] font-medium text-[var(--color-text-secondary)] mb-4"
+          >
+            <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+            {totalItems > 0 ? `${totalItems.toLocaleString()}+ componentes prontos` : 'Biblioteca curada'}
+          </motion.div>
+
+          <h1 className="text-3xl sm:text-4xl font-bold text-[var(--color-text-primary)] tracking-tight leading-[1.15] mb-3 max-w-2xl">
+            Monte seu stack de IA
+            <br />
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#5e6ad2] via-[#d57455] to-[#f59e0b]">
+              em segundos, n&atilde;o em horas
+            </span>
+          </h1>
+
+          <p className="text-[15px] text-[var(--color-text-tertiary)] max-w-lg leading-relaxed mb-5">
+            Skills, agents, MCPs e comandos curados para Claude Code.
+            <span className="text-[var(--color-text-secondary)]"> Copie. Cole. Pronto.</span>
+          </p>
+
+          {/* Stats bar - animated counters */}
+          {stats && (
+            <div className="flex items-center gap-6 flex-wrap">
+              {Object.entries(typeConfig).map(([key, tcfg], i) => (
+                <motion.div
+                  key={key}
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.3 + i * 0.08, duration: 0.4 }}
+                  className="flex items-center gap-1.5"
+                >
+                  <span className="text-lg font-bold tabular-nums" style={{ color: tcfg.color }}>
+                    {stats[key]?.toLocaleString() || 0}
+                  </span>
+                  <span className="text-[11px] text-[var(--color-text-tertiary)]">{tcfg.label}</span>
+                </motion.div>
+              ))}
+            </div>
+          )}
+        </motion.div>
+      </section>
 
       {/* Featured section */}
       {featured.length > 0 && (
@@ -115,33 +180,39 @@ export default function Home() {
             <h2 className="text-sm font-semibold text-[var(--color-text-primary)]">Destaques</h2>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
-            {featured.map((item: any) => {
+            {featured.map((item: any, index: number) => {
               const tc = typeConfig[item._type];
               return (
-                <Link
+                <motion.div
                   key={item.slug}
-                  to={`/directory/${item._type}/${item.slug}`}
-                  className="group flex items-center gap-3 p-3 bg-[var(--color-surface-1)] border border-[var(--color-border)] rounded-lg hover:border-[var(--color-border-hover)] transition-all"
+                  initial={{ opacity: 0, y: 15 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.1 * index, duration: 0.4 }}
                 >
-                  <div
-                    className="w-10 h-10 rounded-lg flex items-center justify-center shrink-0 text-sm font-bold"
-                    style={{ backgroundColor: tc?.bgColor, color: tc?.color }}
+                  <Link
+                    to={`/directory/${item._type}/${item.slug}`}
+                    className="group flex items-center gap-3 p-3 bg-[var(--color-surface-1)] border border-[var(--color-border)] rounded-lg hover:border-[var(--color-border-hover)] hover:scale-[1.02] transition-all duration-300"
                   >
-                    {item.name?.charAt(0)}
-                  </div>
-                  <div className="min-w-0 flex-1">
-                    <div className="flex items-center gap-2">
-                      <span className="text-[13px] font-medium text-[var(--color-text-primary)]">{item.name}</span>
-                      <span className="text-[10px] px-1.5 py-0.5 rounded border border-[var(--color-border)] text-[var(--color-text-tertiary)]">
-                        {tc?.label}
-                      </span>
+                    <div
+                      className="w-10 h-10 rounded-lg flex items-center justify-center shrink-0 text-sm font-bold"
+                      style={{ backgroundColor: tc?.bgColor, color: tc?.color }}
+                    >
+                      {item.name?.charAt(0)}
                     </div>
-                    <p className="text-[12px] text-[var(--color-text-tertiary)] mt-0.5 truncate">
-                      {getDesc(item)}
-                    </p>
-                  </div>
-                  <svg className="w-3.5 h-3.5 text-[var(--color-text-tertiary)] opacity-0 group-hover:opacity-100 transition-opacity shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2"><path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7"/></svg>
-                </Link>
+                    <div className="min-w-0 flex-1">
+                      <div className="flex items-center gap-2">
+                        <span className="text-[13px] font-medium text-[var(--color-text-primary)]">{item.name}</span>
+                        <span className="text-[10px] px-1.5 py-0.5 rounded border border-[var(--color-border)] text-[var(--color-text-tertiary)]">
+                          {tc?.label}
+                        </span>
+                      </div>
+                      <p className="text-[12px] text-[var(--color-text-tertiary)] mt-0.5 truncate">
+                        {getDesc(item)}
+                      </p>
+                    </div>
+                    <svg className="w-3.5 h-3.5 text-[var(--color-text-tertiary)] opacity-0 group-hover:opacity-100 transition-opacity shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2"><path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7"/></svg>
+                  </Link>
+                </motion.div>
               );
             })}
           </div>
@@ -151,19 +222,28 @@ export default function Home() {
       {/* Type tabs + filters */}
       <div className="flex items-center gap-2 px-6 py-3 border-b border-[var(--color-border)]">
         <div className="flex items-center gap-1 overflow-x-auto">
-          {Object.entries(typeConfig).map(([key, cfg]) => (
+          {Object.entries(typeConfig).map(([key, tcfg]) => (
             <button
               key={key}
               onClick={() => { setActiveType(key); setCategory("all"); }}
-              className={`flex items-center gap-1.5 px-3 py-1.5 rounded-md text-[12px] font-medium whitespace-nowrap transition-colors ${
+              className={`relative flex items-center gap-1.5 px-3 py-1.5 rounded-md text-[12px] font-medium whitespace-nowrap transition-colors ${
                 activeType === key
-                  ? "bg-[var(--color-surface-2)] text-[var(--color-text-primary)]"
+                  ? "text-[var(--color-text-primary)]"
                   : "text-[var(--color-text-tertiary)] hover:text-[var(--color-text-secondary)]"
               }`}
             >
-              <span className="w-4 h-4" style={{ color: cfg.color }}>{typeIcons[key]}</span>
-              {cfg.label}
-              <span className="text-[11px] tabular-nums text-[var(--color-text-tertiary)]">{stats?.[key] || ""}</span>
+              {activeType === key && (
+                <motion.div
+                  layoutId="activeTab"
+                  className="absolute inset-0 bg-[var(--color-surface-2)] rounded-md"
+                  transition={{ type: "spring", bounce: 0.2, duration: 0.5 }}
+                />
+              )}
+              <span className="relative z-10 flex items-center gap-1.5">
+                <span className="w-4 h-4" style={{ color: tcfg.color }}>{typeIcons[key]}</span>
+                {tcfg.label}
+                <span className="text-[11px] tabular-nums text-[var(--color-text-tertiary)]">{stats?.[key] || ""}</span>
+              </span>
             </button>
           ))}
         </div>
@@ -175,7 +255,7 @@ export default function Home() {
           <svg className="absolute left-2.5 top-1/2 -translate-y-1/2 w-3.5 h-3.5 text-[var(--color-text-tertiary)]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2"><path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
           <input
             type="text"
-            placeholder="Buscar..."
+            placeholder="Filtrar..."
             value={search}
             onChange={(e) => setSearch(e.target.value)}
             className="w-44 bg-white/[0.04] border-none rounded-lg text-[12px] text-[var(--color-text-primary)] placeholder:text-[var(--color-text-tertiary)] pl-8 pr-3 py-1.5 outline-none focus:bg-white/[0.08] focus:ring-1 focus:ring-white/10 transition-all"
@@ -208,47 +288,64 @@ export default function Home() {
       </div>
 
       {/* Cards grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-3 px-6 pb-6">
-        {isLoading ? (
-          Array.from({ length: 12 }).map((_, i) => (
-            <div key={i} className="h-32 rounded-xl bg-[var(--color-surface-2)] animate-pulse" />
-          ))
-        ) : (
-          paginatedItems.map((item) => (
-            <Link
-              key={item.slug}
-              to={`/directory/${activeType}/${item.slug}`}
-              className="group flex items-start gap-3 p-4 rounded-xl bg-[#111111] border border-[#1a1a1a] hover:border-[#2a2a2a] hover:bg-[#151515] transition-all duration-200"
-            >
-              <div
-                className="w-9 h-9 rounded-lg flex items-center justify-center shrink-0"
-                style={{ backgroundColor: cfg.bgColor, color: cfg.color }}
+      <AnimatePresence mode="wait">
+        <motion.div
+          key={`${activeType}-grid`}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 0.3 }}
+          className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-3 px-6 pb-6"
+        >
+          {isLoading ? (
+            Array.from({ length: 12 }).map((_, i) => (
+              <div key={i} className="h-32 rounded-xl bg-[var(--color-surface-2)] animate-pulse relative overflow-hidden">
+                <div className="absolute inset-0 -translate-x-full animate-[shimmer_2s_infinite] bg-gradient-to-r from-transparent via-white/[0.03] to-transparent" />
+              </div>
+            ))
+          ) : (
+            paginatedItems.map((item, index) => (
+              <motion.div
+                key={item.slug}
+                initial={{ opacity: 0, y: 12 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.25, delay: Math.min(index * 0.03, 0.4) }}
               >
-                <span className="[&>svg]:w-[18px] [&>svg]:h-[18px]">{icon}</span>
-              </div>
-              <div className="min-w-0 flex-1">
-                <span className="text-[13px] font-medium text-[var(--color-text-primary)] group-hover:text-white transition-colors">
-                  {item.name}
-                </span>
-                <p className="text-[12px] text-[var(--color-text-tertiary)] line-clamp-2 mt-1 leading-relaxed">
-                  {getDesc(item)}
-                </p>
-                <div className="flex items-center gap-2 mt-2.5">
-                  <span className="text-[10px] px-2 py-0.5 rounded-full bg-white/[0.06] text-[var(--color-text-tertiary)]">
-                    {item.category}
-                  </span>
-                  {item.usage_count != null && item.usage_count > 0 && (
-                    <span className="text-[10px] px-2 py-0.5 rounded-full bg-emerald-500/10 text-emerald-400 flex items-center gap-1">
-                      <svg className="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2"><path strokeLinecap="round" strokeLinejoin="round" d="M19 14l-7 7m0 0l-7-7m7 7V3"/></svg>
-                      {item.usage_count.toLocaleString()}
+                <Link
+                  to={`/directory/${activeType}/${item.slug}`}
+                  className="group flex items-start gap-3 p-4 rounded-xl bg-[#111111] border border-[#1a1a1a] hover:border-[#2a2a2a] hover:bg-[#151515] hover:shadow-[0_0_0_1px_rgba(255,255,255,0.06)] hover:shadow-lg transition-all duration-200"
+                >
+                  <div
+                    className="w-9 h-9 rounded-lg flex items-center justify-center shrink-0"
+                    style={{ backgroundColor: cfg.bgColor, color: cfg.color }}
+                  >
+                    <span className="[&>svg]:w-[18px] [&>svg]:h-[18px]">{icon}</span>
+                  </div>
+                  <div className="min-w-0 flex-1">
+                    <span className="text-[13px] font-medium text-[var(--color-text-primary)] group-hover:text-white transition-colors">
+                      {item.name}
                     </span>
-                  )}
-                </div>
-              </div>
-            </Link>
-          ))
-        )}
-      </div>
+                    <p className="text-[12px] text-[var(--color-text-tertiary)] line-clamp-2 mt-1 leading-relaxed">
+                      {getDesc(item)}
+                    </p>
+                    <div className="flex items-center gap-2 mt-2.5">
+                      <span className="text-[10px] px-2 py-0.5 rounded-full bg-white/[0.06] text-[var(--color-text-tertiary)]">
+                        {item.category}
+                      </span>
+                      {item.usage_count != null && item.usage_count > 0 && (
+                        <span className="text-[10px] px-2 py-0.5 rounded-full bg-emerald-500/10 text-emerald-400 flex items-center gap-1">
+                          <svg className="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2"><path strokeLinecap="round" strokeLinejoin="round" d="M19 14l-7 7m0 0l-7-7m7 7V3"/></svg>
+                          {item.usage_count.toLocaleString()}
+                        </span>
+                      )}
+                    </div>
+                  </div>
+                </Link>
+              </motion.div>
+            ))
+          )}
+        </motion.div>
+      </AnimatePresence>
     </>
   );
 }
