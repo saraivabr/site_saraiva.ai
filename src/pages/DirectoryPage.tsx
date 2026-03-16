@@ -1,5 +1,6 @@
 import { useState, useMemo } from "react";
 import { useParams, Link } from "react-router-dom";
+import { useAuth } from "@/hooks/useAuth";
 import { AnimatePresence, motion } from "framer-motion";
 import { useQuery } from "@tanstack/react-query";
 import SEOHead from "@/components/SEOHead";
@@ -74,6 +75,8 @@ const DirectoryPage = () => {
   const [copied, setCopied] = useState(false);
   const [page, setPage] = useState(1);
   const [activeTab, setActiveTab] = useState<"config" | "commands">("config");
+  const { isPro, isLoggedIn, login } = useAuth();
+  const FREE_STACK_LIMIT = 3;
 
   const config = typeConfig[type] || typeConfig.skills;
   const icon = typeIcons[type];
@@ -113,11 +116,16 @@ const DirectoryPage = () => {
   // Stack
   const toggleStack = (item: DirectoryItem, overrideType?: string) => {
     const t = overrideType || type;
-    setStack((prev) =>
-      prev.find((s) => s.item.slug === item.slug && s.itemType === t)
-        ? prev.filter((s) => !(s.item.slug === item.slug && s.itemType === t))
-        : [...prev, { item, itemType: t }]
-    );
+    const isRemoving = stack.find((s) => s.item.slug === item.slug && s.itemType === t);
+    if (isRemoving) {
+      setStack((prev) => prev.filter((s) => !(s.item.slug === item.slug && s.itemType === t)));
+    } else {
+      // Free users limited to 3 items
+      if (!isPro && stack.length >= FREE_STACK_LIMIT) {
+        return; // gate will show in sidebar
+      }
+      setStack((prev) => [...prev, { item, itemType: t }]);
+    }
   };
   const isInStack = (slug: string) => stack.some((s) => s.item.slug === slug && s.itemType === type);
 
@@ -318,10 +326,13 @@ const DirectoryPage = () => {
                     {/* Add to stack button */}
                     <button
                       onClick={() => toggleStack(item)}
+                      title={!isPro && stack.length >= FREE_STACK_LIMIT && !isInStack(item.slug) ? "Limite do plano free (3 itens)" : inStack ? "Remover do stack" : "Adicionar ao stack"}
                       className={`shrink-0 w-7 h-7 rounded-lg flex items-center justify-center transition-all duration-200 ${
                         inStack
                           ? "bg-amber-500 text-black"
-                          : "bg-transparent border border-[#2a2a2a] text-[var(--color-text-tertiary)] hover:border-[#3a3a3a] hover:text-[var(--color-text-secondary)]"
+                          : !isPro && stack.length >= FREE_STACK_LIMIT
+                            ? "bg-transparent border border-[#2a2a2a] text-[var(--color-text-tertiary)] opacity-30 cursor-not-allowed"
+                            : "bg-transparent border border-[#2a2a2a] text-[var(--color-text-tertiary)] hover:border-[#3a3a3a] hover:text-[var(--color-text-secondary)]"
                       }`}
                     >
                       {inStack ? (
@@ -407,7 +418,7 @@ const DirectoryPage = () => {
                     <p className="text-[11px] text-[var(--color-text-tertiary)]">
                       {stack.length === 0
                         ? "Nenhum item selecionado"
-                        : `${stack.length} item${stack.length > 1 ? "s" : ""} no stack`}
+                        : <>{stack.length}{!isPro && ` / ${FREE_STACK_LIMIT}`} item{stack.length !== 1 ? "s" : ""}</>}
                     </p>
                   </div>
                 </div>
@@ -448,6 +459,25 @@ const DirectoryPage = () => {
                         );
                       })}
                     </div>
+
+                    {/* Free limit gate */}
+                    {!isPro && stack.length >= FREE_STACK_LIMIT && (
+                      <div className="mb-3 p-3 rounded-lg bg-[#5e6ad2]/10 border border-[#5e6ad2]/20">
+                        <p className="text-[11px] font-medium text-[#5e6ad2] mb-1.5">
+                          Limite do plano gratuito
+                        </p>
+                        <p className="text-[10px] text-[var(--color-text-tertiary)] leading-relaxed mb-2.5">
+                          O plano free permite até {FREE_STACK_LIMIT} itens no stack. Faça upgrade para Pro para stacks ilimitados + salvar na nuvem.
+                        </p>
+                        <Link
+                          to="/pricing"
+                          className="flex items-center justify-center gap-1.5 w-full px-3 py-1.5 rounded-md text-[11px] font-medium bg-[#5e6ad2] text-white hover:bg-[#4e5ac2] transition-colors"
+                        >
+                          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                          Upgrade para Pro
+                        </Link>
+                      </div>
+                    )}
 
                     {/* Config tabs */}
                     {(() => {
@@ -500,6 +530,36 @@ const DirectoryPage = () => {
                         </div>
                       );
                     })()}
+
+                    {/* Export button - Pro only */}
+                    <div className="mb-3">
+                      {isPro ? (
+                        <button
+                          onClick={() => {
+                            const configText = generateStackConfig(stack);
+                            const blob = new Blob([configText], { type: "application/json" });
+                            const url = URL.createObjectURL(blob);
+                            const a = document.createElement("a");
+                            a.href = url;
+                            a.download = "claude-stack-config.json";
+                            a.click();
+                            URL.revokeObjectURL(url);
+                          }}
+                          className="w-full flex items-center justify-center gap-1.5 px-3 py-2 rounded-lg text-[11px] font-medium bg-[var(--color-surface-3)] border border-[var(--color-border)] text-[var(--color-text-secondary)] hover:text-[var(--color-text-primary)] hover:border-[var(--color-border-hover)] transition-colors"
+                        >
+                          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                          Exportar configuração
+                        </button>
+                      ) : (
+                        <Link
+                          to="/pricing"
+                          className="w-full flex items-center justify-center gap-1.5 px-3 py-2 rounded-lg text-[11px] font-medium bg-[var(--color-surface-2)] border border-[var(--color-border)] text-[var(--color-text-tertiary)] transition-colors"
+                        >
+                          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>
+                          Exportar (Pro)
+                        </Link>
+                      )}
+                    </div>
 
                     {/* Clear button */}
                     <button

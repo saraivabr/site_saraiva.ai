@@ -38,15 +38,16 @@ const tiers: PricingTier[] = [
     name: "Gratuito",
     price: "R$0",
     period: "para sempre",
-    description: "Explore todo o diretório sem limites. Perfeito para quem está começando.",
+    description: "Explore todo o diretório e monte stacks básicos. Sem cadastro necessário.",
     icon: Zap,
     features: [
-      "Navegação completa do diretório (1.552 itens)",
+      "Navegação completa (1.552 itens)",
       "Busca, filtros e categorias",
-      "Stack Builder com cópia de comandos",
+      "Stack Builder com até 3 itens",
+      "Copiar configuração individual",
       "Páginas de detalhe completas",
     ],
-    cta: "Começar grátis",
+    cta: "Usar grátis",
     ctaStyle:
       "bg-white/10 text-white border border-white/20 hover:bg-white/20",
   },
@@ -55,34 +56,34 @@ const tiers: PricingTier[] = [
     name: "Saraiva Pro",
     price: "R$29",
     period: "/mês",
-    description: "Para desenvolvedores que querem produtividade máxima com curadoria e automação.",
+    description: "Stack Builder ilimitado, salve na nuvem e exporte configs completas.",
     icon: Crown,
     highlighted: true,
     badge: "Mais popular",
     features: [
       "Tudo do Gratuito",
-      "Stacks salvos na conta",
-      "Instalação one-click",
-      "Curadoria personalizada",
-      "Traduções pt-br profissionais",
-      "Acesso antecipado a novos itens",
-      "Badge \"Pro\" no perfil",
+      "Stack Builder ilimitado",
+      "Salvar stacks na conta (nuvem)",
+      "Exportar .mcp.json / CLAUDE.md completo",
+      "Stacks pré-montados por nicho",
+      "Badge Pro no perfil",
+      "Suporte por email",
     ],
     cta: "Assinar com Pix",
     ctaStyle:
-      "bg-amber-400 text-[#0a0a0a] hover:bg-amber-300 shadow-lg shadow-amber-400/25",
+      "bg-[#5e6ad2] text-white hover:bg-[#4e5ac2] shadow-lg shadow-[#5e6ad2]/25",
   },
   {
     id: "teams",
     name: "Saraiva Teams",
     price: "R$79",
     period: "/mês",
-    description: "Para times que precisam de colaboração, padronização e suporte dedicado.",
+    description: "Para times que precisam de stacks compartilhados e padronização.",
     icon: Users,
     features: [
       "Tudo do Pro",
       "Stacks compartilhados com o time",
-      "Dashboard de uso e métricas",
+      "Até 10 membros",
       "Configurações pré-montadas por projeto",
       "Suporte prioritário",
     ],
@@ -96,12 +97,12 @@ const faqs: FaqItem[] = [
   {
     question: "O que é o Saraiva.AI?",
     answer:
-      "Saraiva.AI é a maior livraria curada de componentes para Claude Code em português. Reunimos skills, agents, MCPs, comandos, hooks e settings — tudo organizado, traduzido e pronto para usar.",
+      "Saraiva.AI é a maior livraria curada de componentes para Claude Code em português. Explore grátis 1.552+ skills, agents, MCPs, comandos e mais. Monte stacks de até 3 itens grátis, ou faça upgrade para Pro para stacks ilimitados + exportação.",
   },
   {
-    question: "Posso usar o plano gratuito sem cadastro?",
+    question: "O que muda do Free para o Pro?",
     answer:
-      "Sim! O diretório completo, busca, filtros e o Stack Builder estão disponíveis para todos sem necessidade de criar conta. Você só precisa de uma conta para salvar stacks e acessar recursos Pro.",
+      "No Free você navega tudo e monta stacks de até 3 itens. No Pro, o Stack Builder é ilimitado, você salva stacks na nuvem, exporta arquivos .mcp.json e CLAUDE.md completos, e tem acesso a stacks pré-montados por nicho (Fullstack, Data Science, DevOps, etc).",
   },
   {
     question: "Como funciona o pagamento via Pix?",
@@ -261,7 +262,9 @@ const PricingPage = () => {
                     {/* CTA */}
                     <button
                       onClick={() => {
-                        if (tier.id === "pro" || tier.id === "teams") {
+                        if (tier.id === "free") {
+                          window.location.href = "/directory/skills";
+                        } else if (tier.id === "pro" || tier.id === "teams") {
                           handleSubscribe(tier.id);
                         }
                       }}
@@ -430,7 +433,7 @@ const PricingPage = () => {
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
             {[
               { icon: Search, label: "1.552 itens", sub: "no diretório" },
-              { icon: Globe, label: "100% pt-br", sub: "traduções curadas" },
+              { icon: Layers, label: "Stack Builder", sub: "monte e exporte" },
               { icon: Rocket, label: "Pix instantâneo", sub: "via Woovi" },
               { icon: Shield, label: "Cancele quando", sub: "quiser, sem multa" },
             ].map((item, i) => (
