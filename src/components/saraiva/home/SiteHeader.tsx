@@ -5,7 +5,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
 
-const items = [{label:"Base",href:"/"},{label:"Conteúdo",href:"/content"},{label:"Notícias",href:"/news"},{label:"Templates",href:"/templates"},{label:"Sobre",href:"/about"}];
+const items = [{label:"Base",href:"/"},{label:"Conteúdo",href:"/content"},{label:"Notícias",href:"/news"},{label:"Sobre",href:"/about"}];
 
 export function SiteHeader() {
   const [open,setOpen] = useState(false);

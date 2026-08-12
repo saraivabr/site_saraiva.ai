@@ -94,18 +94,20 @@ function provenance(row) {
   };
 }
 
-const [tools, tags, toolTags, articles, posts, templates] = await Promise.all([
+const [tools, tags, toolTags, articles, posts] = await Promise.all([
   fetchAll("tools", "?select=*&is_published=eq.true&order=created_at.asc"),
   fetchAll("tags", "?select=*&order=created_at.asc"),
   fetchAll("tool_tags", "?select=tool_id,tag_id"),
   fetchAll("articles", "?select=*&is_published=eq.true&order=created_at.asc"),
   fetchAll("blog_posts", "?select=*&is_published=eq.true&order=created_at.asc"),
-  fetchAll("templates_public", "?select=*&is_published=eq.true&order=created_at.asc"),
 ]);
 // Vídeos não são importados da base de referência. A superfície audiovisual é
 // exclusiva de canais próprios da Saraiva.AI.
 const videos = [];
 const reels = [];
+// Templates são produtos e não podem herdar nome, imagem ou oferta de outra
+// marca. Só entram por uma esteira própria da Saraiva.AI.
+const templates = [];
 
 const publishedToolIds = new Set(tools.map(({ id }) => id));
 const relatedToolTags = toolTags.filter(({ tool_id }) => publishedToolIds.has(tool_id));
