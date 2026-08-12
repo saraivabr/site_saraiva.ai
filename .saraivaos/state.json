@@ -2,7 +2,7 @@
   "framework": "SaraivaOS",
   "version": "1.0.0",
   "createdAt": "2026-08-12T17:41:16.226Z",
-  "updatedAt": "2026-08-12T21:39:46.487Z",
+  "updatedAt": "2026-08-12T21:40:01.349Z",
   "project": {
     "id": "project-20260812174116-d63169ac",
     "name": "Saraiva.AI — site e acervo próprios",
@@ -14,8 +14,8 @@
     "completedStages": []
   },
   "navigation": {
-    "currentRoute": "Versão original pronta e publicada atrás da capa temporária",
-    "nextArtifact": "Aprovação visual do usuário antes de remover SITE_COMING_SOON",
+    "currentRoute": "Nova Saraiva.AI liberada publicamente e validada em produção",
+    "nextArtifact": "Monitorar feedback e métricas da primeira semana",
     "blocker": ""
   },
   "identity": {
@@ -33,7 +33,6 @@
   },
   "methods": {
     "active": [
-      "Jobs/minimalismo",
       "Design UX/UI",
       "Interaction Design",
       "Remotion Interactivity"

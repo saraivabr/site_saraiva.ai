@@ -1,14 +1,14 @@
 # SaraivaOS — Estado atual
 
-Atualizado em: 2026-08-12T21:39:46.487Z
+Atualizado em: 2026-08-12T21:40:01.349Z
 
 ## Projeto
 
 - Nome: Saraiva.AI — site e acervo próprios
 - Objetivo: Migrar o conteúdo público para o Supabase Saraiva.AI e reconstruir o site com identidade, experiência e movimento próprios
 - Etapa: validacao
-- Rota: Versão original pronta e publicada atrás da capa temporária
-- Próximo artefato: Aprovação visual do usuário antes de remover SITE_COMING_SOON
+- Rota: Nova Saraiva.AI liberada publicamente e validada em produção
+- Próximo artefato: Monitorar feedback e métricas da primeira semana
 - Bloqueio: Nenhum
 
 ## Evidências
@@ -21,7 +21,6 @@ Atualizado em: 2026-08-12T21:39:46.487Z
 
 ## Métodos ativos
 
-- Jobs/minimalismo
 - Design UX/UI
 - Interaction Design
 - Remotion Interactivity
