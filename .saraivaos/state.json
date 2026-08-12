@@ -2,7 +2,7 @@
   "framework": "SaraivaOS",
   "version": "1.0.0",
   "createdAt": "2026-08-12T17:41:16.226Z",
-  "updatedAt": "2026-08-12T21:40:01.349Z",
+  "updatedAt": "2026-08-12T22:09:07.951Z",
   "project": {
     "id": "project-20260812174116-d63169ac",
     "name": "Saraiva.AI — site e acervo próprios",
@@ -14,8 +14,8 @@
     "completedStages": []
   },
   "navigation": {
-    "currentRoute": "Nova Saraiva.AI liberada publicamente e validada em produção",
-    "nextArtifact": "Monitorar feedback e métricas da primeira semana",
+    "currentRoute": "Saneamento audiovisual e de templates validado em produção",
+    "nextArtifact": "Cadastrar novos vídeos e templates somente por fontes próprias Saraiva.AI",
     "blocker": ""
   },
   "identity": {
@@ -25,7 +25,7 @@
     "objective": "Migrar o conteúdo público para o Supabase Saraiva.AI e reconstruir o site com identidade, experiência e movimento próprios"
   },
   "evidenceSummary": {
-    "observed": 6,
+    "observed": 9,
     "provided": 0,
     "inferred": 0,
     "hypothesis": 0,
@@ -35,7 +35,7 @@
     "active": [
       "Design UX/UI",
       "Interaction Design",
-      "Remotion Interactivity"
+      "SaraivaOS"
     ],
     "considered": []
   },
