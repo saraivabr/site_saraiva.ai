@@ -1,1 +1,2 @@
 {"event":"created","id":"action-20260812224444-0f6a64e6","title":"Publicar explorador visual com categoria clicável","owner":"Codex","deadline":"2026-08-12","metric":"produção responde com grafo-lista integrado, filtro de categoria e zero erros de console","status":"pending","createdAt":"2026-08-12T22:44:44.113Z"}
+{"event":"completed","id":"action-20260812224444-0f6a64e6","status":"completed","evidence":"Scalingo c07cddbb-aed1-4979-91e5-338765be6330; produção filtrou imagem em 101 resultados, sem erros de console","completedAt":"2026-08-12T23:00:21.000Z"}
