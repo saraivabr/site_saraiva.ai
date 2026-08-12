@@ -1,19 +1,19 @@
 # SaraivaOS — Estado atual
 
-Atualizado em: 2026-08-12T23:00:21.000Z
+Atualizado em: 2026-08-12T23:42:55.869Z
 
 ## Projeto
 
 - Nome: Saraiva.AI — site e acervo próprios
 - Objetivo: Migrar o conteúdo público para o Supabase Saraiva.AI e reconstruir o site com identidade, experiência e movimento próprios
 - Etapa: validacao
-- Rota: Explorador visual com grafo, categorias e lista publicado e validado em produção
-- Próximo artefato: Usar telemetria de busca e categorias para priorizar a próxima melhoria editorial
-- Bloqueio: Nenhum
+- Rota: Operação autoral conteúdo para negócio em piloto supervisionado
+- Próximo artefato: Roteiro final e capa composta por código após aprovação humana
+- Bloqueio: Publicação bloqueada até fechar gates P0 de autoria, proveniência, aprovação e atribuição
 
 ## Evidências
 
-- Observadas: 11
+- Observadas: 12
 - Fornecidas: 0
 - Inferidas: 0
 - Hipóteses: 0
@@ -21,13 +21,13 @@ Atualizado em: 2026-08-12T23:00:21.000Z
 
 ## Métodos ativos
 
+- Maestri
 - Design UX/UI
-- Interaction Design
 - SaraivaOS
 
 ## Ações pendentes
 
-- Nenhuma.
+- [ ] Fechar gates P0 do piloto autoral velocidade de resposta — responsável: Fellipe Saraiva + Rastro — prazo: 2026-08-13 — métrica: diferença substancial, proveniência, aprovação humana e CTA real aprovados antes de publicar
 
 ## Experimentos ativos
 
