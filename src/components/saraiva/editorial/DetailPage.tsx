@@ -6,6 +6,7 @@ import { EditorialCard } from "./EditorialCard";
 import { EditorialShell } from "./EditorialShell";
 import { formatDate } from "./format";
 import type { EditorialCardItem } from "./format";
+import { NewsArt } from "./NewsArt";
 
 export function DetailPage({
   backHref = "/content",
@@ -19,6 +20,7 @@ export function DetailPage({
   children,
   omitRelatedId,
   related = [],
+  brandedNewsArt = false,
 }: {
   backHref?: string;
   backLabel?: string;
@@ -31,6 +33,7 @@ export function DetailPage({
   children: ReactNode;
   omitRelatedId?: string;
   related?: EditorialCardItem[];
+  brandedNewsArt?: boolean;
 }) {
   const relatedItems = related.filter((item) => item.id !== omitRelatedId).slice(0, 4);
 
@@ -51,7 +54,11 @@ export function DetailPage({
         </section>
 
         <article className="mx-auto max-w-5xl px-5 py-10 sm:px-8 md:py-16">
-          {image ? (
+          {brandedNewsArt ? (
+            <div className="mb-12 overflow-hidden rounded-3xl">
+              <NewsArt title={title} priority />
+            </div>
+          ) : image ? (
             <div className="relative mb-12 aspect-video overflow-hidden rounded-3xl bg-[rgb(238,239,241)]">
               <Image src={image} alt="" fill priority sizes="(max-width: 1024px) 100vw, 960px" className="object-cover" unoptimized={image.startsWith("http")} />
             </div>

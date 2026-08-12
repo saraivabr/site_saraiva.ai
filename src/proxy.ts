@@ -1,6 +1,10 @@
 import { NextRequest, NextResponse } from "next/server";
 
 export function proxy(request: NextRequest) {
+  if (process.env.SITE_COMING_SOON === "false") {
+    return NextResponse.next();
+  }
+
   if (request.nextUrl.pathname === "/") {
     return NextResponse.next();
   }
