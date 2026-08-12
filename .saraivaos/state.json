@@ -2,7 +2,7 @@
   "framework": "SaraivaOS",
   "version": "1.0.0",
   "createdAt": "2026-08-12T17:41:16.226Z",
-  "updatedAt": "2026-08-12T18:53:17.393Z",
+  "updatedAt": "2026-08-12T21:39:46.487Z",
   "project": {
     "id": "project-20260812174116-d63169ac",
     "name": "Saraiva.AI — site e acervo próprios",
@@ -25,7 +25,7 @@
     "objective": "Migrar o conteúdo público para o Supabase Saraiva.AI e reconstruir o site com identidade, experiência e movimento próprios"
   },
   "evidenceSummary": {
-    "observed": 4,
+    "observed": 6,
     "provided": 0,
     "inferred": 0,
     "hypothesis": 0,

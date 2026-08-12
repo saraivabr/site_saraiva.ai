@@ -1,6 +1,6 @@
 # SaraivaOS — Estado atual
 
-Atualizado em: 2026-08-12T18:53:17.393Z
+Atualizado em: 2026-08-12T21:39:46.487Z
 
 ## Projeto
 
@@ -13,7 +13,7 @@ Atualizado em: 2026-08-12T18:53:17.393Z
 
 ## Evidências
 
-- Observadas: 4
+- Observadas: 6
 - Fornecidas: 0
 - Inferidas: 0
 - Hipóteses: 0
