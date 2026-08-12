@@ -33,4 +33,7 @@ jobs:
         run: npm run typecheck
 
       - name: Build
+        env:
+          SUPABASE_CATALOG_URL: ${{ secrets.SUPABASE_CATALOG_URL }}
+          SUPABASE_CATALOG_ANON_KEY: ${{ secrets.SUPABASE_CATALOG_ANON_KEY }}
         run: npm run build
