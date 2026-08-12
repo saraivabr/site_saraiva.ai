@@ -2,7 +2,7 @@
   "framework": "SaraivaOS",
   "version": "1.0.0",
   "createdAt": "2026-08-12T17:41:16.226Z",
-  "updatedAt": "2026-08-12T17:50:45.937Z",
+  "updatedAt": "2026-08-12T18:53:17.393Z",
   "project": {
     "id": "project-20260812174116-d63169ac",
     "name": "Saraiva.AI — site e acervo próprios",
@@ -10,12 +10,12 @@
     "objective": "Migrar o conteúdo público para o Supabase Saraiva.AI e reconstruir o site com identidade, experiência e movimento próprios"
   },
   "cycle": {
-    "currentStage": "arquitetura",
+    "currentStage": "validacao",
     "completedStages": []
   },
   "navigation": {
-    "currentRoute": "Dados próprios concluídos; construir experiência editorial original sobre contratos do Supabase Saraiva.AI",
-    "nextArtifact": "Nova home e hubs editoriais",
+    "currentRoute": "Versão original pronta e publicada atrás da capa temporária",
+    "nextArtifact": "Aprovação visual do usuário antes de remover SITE_COMING_SOON",
     "blocker": ""
   },
   "identity": {
@@ -25,7 +25,7 @@
     "objective": "Migrar o conteúdo público para o Supabase Saraiva.AI e reconstruir o site com identidade, experiência e movimento próprios"
   },
   "evidenceSummary": {
-    "observed": 2,
+    "observed": 4,
     "provided": 0,
     "inferred": 0,
     "hypothesis": 0,
@@ -56,6 +56,13 @@
       "type": "migration-script",
       "proof": "Importação idempotente e manifesto gerado",
       "createdAt": "2026-08-12T17:50:45.893Z"
+    },
+    {
+      "id": "artifact-20260812185317-0b2bf528",
+      "path": ".saraivaos/proof/supabase-public-assets-verification.json",
+      "type": "proof",
+      "proof": "1267 mídias próprias e zero referências ao Storage de origem",
+      "createdAt": "2026-08-12T18:53:17.350Z"
     }
   ],
   "sessions": [
