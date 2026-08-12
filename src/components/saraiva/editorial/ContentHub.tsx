@@ -108,8 +108,8 @@ export function ContentHub({
     <>
       <div className="signal-shell space-y-14 py-12 md:space-y-20 md:py-20">
         <ProgressiveRail title="Artigos e colunas" items={articles} renderItem={(item) => <EditorialCard key={item.id} item={item} compact />} />
-        <ProgressiveRail title="Vídeos longos" items={videoItems} renderItem={(video) => <VideoCard key={video.id} video={video} />} />
-        <ProgressiveRail title="Vídeos curtos" items={reelItems} initial={16} renderItem={(video) => <ReelCard key={video.id} video={video} onOpen={setSelectedReel} />} />
+        {videoItems.length ? <ProgressiveRail title="Vídeos longos Saraiva.AI" items={videoItems} renderItem={(video) => <VideoCard key={video.id} video={video} />} /> : null}
+        <div id="instagram"><ProgressiveRail title="Reels do @saraiva.ai" items={reelItems} initial={16} renderItem={(video) => <ReelCard key={video.id} video={video} onOpen={setSelectedReel} />} /></div>
       </div>
 
       {selectedReel ? (

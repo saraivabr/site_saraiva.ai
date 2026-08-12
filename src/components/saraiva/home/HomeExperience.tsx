@@ -5,7 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useDeferredValue, useEffect, useMemo, useRef, useState } from "react";
 
-import type { Article, CatalogTag, CatalogTool, CatalogVideo } from "@/components/saraiva/catalog/data";
+import type { Article, CatalogTag, CatalogTool, InstagramVideo } from "@/components/saraiva/catalog/data";
 import { NewsArt } from "@/components/saraiva/editorial/NewsArt";
 import { SiteFooter } from "./SiteFooter";
 import { SiteHeader } from "./SiteHeader";
@@ -33,7 +33,7 @@ function ToolResult({ tool, index }: { tool: CatalogTool; index: number }) {
   );
 }
 
-export function HomeExperience({ tools, tags, articles, videos, catalogAvailable }: { tools: CatalogTool[]; tags: CatalogTag[]; articles: Article[]; videos: CatalogVideo[]; catalogAvailable: boolean }) {
+export function HomeExperience({ tools, tags, articles, reels, catalogAvailable }: { tools: CatalogTool[]; tags: CatalogTag[]; articles: Article[]; reels: InstagramVideo[]; catalogAvailable: boolean }) {
   const [query, setQuery] = useState("");
   const [activeTag, setActiveTag] = useState<string | null>(null);
   const [visibleCount, setVisibleCount] = useState(INITIAL_COUNT);
@@ -80,7 +80,7 @@ export function HomeExperience({ tools, tags, articles, videos, catalogAvailable
             <div className="border-l border-[var(--signal-border)] pl-6 md:pl-10">
               <div className="flex items-center justify-between border-b border-[var(--signal-border)] pb-3 font-mono text-[10px] uppercase tracking-[0.12em] text-[var(--signal-muted)]"><span>Base própria</span><span className="text-[var(--signal-blue)]">Atualizada</span></div>
               <dl className="divide-y divide-[var(--signal-border)]">
-                {[{value: tools.length,label:"ferramentas"},{value: articles.length,label:"sinais recentes"},{value: videos.length,label:"vídeos em foco"},{value: tags.length,label:"territórios"}].map((item) => <div key={item.label} className="flex items-end justify-between py-5"><dt className="text-sm text-[var(--signal-muted)]">{item.label}</dt><dd className="font-mono text-3xl tracking-[-0.05em]">{item.value}</dd></div>)}
+                {[{value: tools.length,label:"ferramentas"},{value: articles.length,label:"sinais recentes"},{value: reels.length,label:"reels Saraiva.AI"},{value: tags.length,label:"territórios"}].map((item) => <div key={item.label} className="flex items-end justify-between py-5"><dt className="text-sm text-[var(--signal-muted)]">{item.label}</dt><dd className="font-mono text-3xl tracking-[-0.05em]">{item.value}</dd></div>)}
               </dl>
             </div>
           </div>
@@ -116,7 +116,7 @@ export function HomeExperience({ tools, tags, articles, videos, catalogAvailable
           </div>
         </section>
 
-        <section className="signal-shell py-16 md:py-24" aria-labelledby="aprofundar-title"><div className="mb-8"><p className="signal-kicker">03 · Aprofundar</p><h2 id="aprofundar-title" className="signal-section-title">Veja a inteligência em movimento.</h2></div><div className="grid gap-px bg-[var(--signal-border)] md:grid-cols-3">{videos.slice(0,3).map((video) => <Link key={video.id} href={`/video/${video.slug}`} className="group bg-[var(--signal-paper)]"><div className="relative aspect-video overflow-hidden bg-[var(--signal-ink)]"><Image src={video.thumbnail_url} alt="" fill sizes="(max-width: 768px) 100vw, 33vw" unoptimized className="object-cover grayscale transition-[filter,scale] duration-300 group-hover:scale-[1.02] group-hover:grayscale-0" /><span className="absolute inset-0 grid place-items-center"><span className="grid size-12 place-items-center bg-[var(--signal-blue)] text-white"><CirclePlay className="size-5" /></span></span></div><div className="p-5"><p className="signal-kicker">Vídeo</p><h3 className="mt-3 text-xl font-semibold leading-tight tracking-[-0.035em]">{video.title}</h3></div></Link>)}</div></section>
+        {reels.length ? <section className="signal-shell py-16 md:py-24" aria-labelledby="aprofundar-title"><div className="mb-8 flex items-end justify-between gap-6"><div><p className="signal-kicker">03 · Aprofundar</p><h2 id="aprofundar-title" className="signal-section-title">Direto do Instagram.</h2></div><Link href="/content#instagram" className="signal-text-link">Ver todos <ArrowRight className="size-4" /></Link></div><div className="grid gap-px bg-[var(--signal-border)] md:grid-cols-3">{reels.slice(0,3).map((reel) => <a key={reel.id} href={reel.url} target="_blank" rel="noreferrer" className="group bg-[var(--signal-paper)]"><div className="relative aspect-[9/12] overflow-hidden bg-[var(--signal-ink)]"><Image src={reel.thumbnail_url} alt="" fill sizes="(max-width: 768px) 100vw, 33vw" unoptimized className="object-cover transition-[filter,scale] duration-300 group-hover:scale-[1.02]" /><span className="absolute inset-0 grid place-items-center"><span className="grid size-12 place-items-center bg-[var(--signal-blue)] text-white"><CirclePlay className="size-5" /></span></span></div><div className="p-5"><p className="signal-kicker">@saraiva.ai</p><h3 className="mt-3 line-clamp-3 text-xl font-semibold leading-tight tracking-[-0.035em]">{reel.caption}</h3></div></a>)}</div></section> : null}
       </main>
       <SiteFooter />
     </div>
