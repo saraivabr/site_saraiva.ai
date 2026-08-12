@@ -2,7 +2,7 @@
   "framework": "SaraivaOS",
   "version": "1.0.0",
   "createdAt": "2026-08-12T17:41:16.226Z",
-  "updatedAt": "2026-08-12T22:09:07.951Z",
+  "updatedAt": "2026-08-12T22:44:44.114Z",
   "project": {
     "id": "project-20260812174116-d63169ac",
     "name": "Saraiva.AI — site e acervo próprios",
@@ -25,7 +25,7 @@
     "objective": "Migrar o conteúdo público para o Supabase Saraiva.AI e reconstruir o site com identidade, experiência e movimento próprios"
   },
   "evidenceSummary": {
-    "observed": 9,
+    "observed": 10,
     "provided": 0,
     "inferred": 0,
     "hypothesis": 0,
@@ -39,7 +39,17 @@
     ],
     "considered": []
   },
-  "actions": [],
+  "actions": [
+    {
+      "id": "action-20260812224444-0f6a64e6",
+      "title": "Publicar explorador visual com categoria clicável",
+      "owner": "Codex",
+      "deadline": "2026-08-12",
+      "metric": "produção responde com grafo-lista integrado, filtro de categoria e zero erros de console",
+      "status": "pending",
+      "createdAt": "2026-08-12T22:44:44.113Z"
+    }
+  ],
   "experiments": [],
   "artifacts": [
     {

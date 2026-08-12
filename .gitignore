@@ -52,4 +52,6 @@ temp/
 data/
 supabase/.temp/
 qa-artifacts/
+output/
+.playwright-cli/
 !.env.example

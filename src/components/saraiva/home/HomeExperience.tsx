@@ -9,6 +9,9 @@ import type { Article, CatalogTag, CatalogTool, InstagramVideo } from "@/compone
 import { NewsArt } from "@/components/saraiva/editorial/NewsArt";
 import { SiteFooter } from "./SiteFooter";
 import { SiteHeader } from "./SiteHeader";
+import { SiteIntro } from "./SiteIntro";
+import { StackingToolCards } from "./StackingToolCards";
+import { ToolGraph } from "./ToolGraph";
 
 const INITIAL_COUNT = 12;
 const PAGE_SIZE = 12;
@@ -19,16 +22,19 @@ function normalize(value: string) {
 
 function ToolResult({ tool, index }: { tool: CatalogTool; index: number }) {
   return (
-    <Link href={`/tool/${tool.slug}`} className="group grid min-h-40 border-t border-[var(--signal-border)] py-5 transition-colors duration-200 hover:bg-[var(--signal-soft)] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[var(--signal-blue)] md:grid-cols-[52px_1fr_160px_32px] md:items-center md:gap-5">
-      <span className="hidden font-mono text-xs tabular-nums text-[var(--signal-muted)] md:block">{String(index + 1).padStart(2, "0")}</span>
-      <div>
+    <Link href={`/tool/${tool.slug}`} className="group grid min-h-40 overflow-hidden border border-[var(--signal-border)] bg-white transition-[background-color,border-color,transform] duration-200 hover:-translate-y-1 hover:border-[var(--signal-ink)] hover:bg-[var(--signal-soft)] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[var(--signal-blue)] sm:grid-cols-[170px_1fr]">
+      <div className="relative aspect-[16/10] overflow-hidden bg-[var(--signal-soft)] sm:aspect-auto">
+        {tool.screenshot_url ? <Image src={tool.screenshot_url} alt={`Tela de ${tool.name}`} fill unoptimized sizes="(max-width: 640px) 100vw, 170px" className="object-cover object-top transition-transform duration-500 ease-out group-hover:scale-[1.035]" /> : <div className="absolute inset-0 grid place-items-center"><Sparkles className="size-6 text-[var(--signal-blue)]" /></div>}
+        <span className="absolute left-3 top-3 bg-[var(--signal-ink)] px-2 py-1 font-mono text-[9px] tabular-nums text-white">{String(index + 1).padStart(2, "0")}</span>
+      </div>
+      <div className="flex min-w-0 flex-col p-5">
         <h3 className="text-xl font-semibold tracking-[-0.035em] text-[var(--signal-ink)] transition-colors group-hover:text-[var(--signal-blue)]">{tool.name}</h3>
-        <p className="mt-1 max-w-2xl text-sm leading-6 text-[var(--signal-muted)]">{tool.short_description || tool.description.replace(/<[^>]+>/g, " ").slice(0, 180)}</p>
+        <p className="mt-2 line-clamp-3 text-sm leading-6 text-[var(--signal-muted)]">{tool.short_description || tool.description.replace(/<[^>]+>/g, " ").slice(0, 180)}</p>
+        <div className="mt-auto flex items-end justify-between gap-3 pt-5">
+          <div className="flex min-w-0 flex-wrap gap-1.5">{tool.tags.slice(0, 2).map((tag) => <span key={tag.id} className="border border-[var(--signal-border)] px-2 py-1 font-mono text-[9px] uppercase tracking-[0.08em] text-[var(--signal-muted)]">{tag.name}</span>)}</div>
+          <ArrowRight className="size-4 shrink-0 text-[var(--signal-muted)] transition-[translate,color] duration-150 group-hover:translate-x-1 group-hover:text-[var(--signal-blue)]" aria-hidden="true" />
+        </div>
       </div>
-      <div className="mt-4 flex flex-wrap gap-1.5 md:mt-0 md:justify-end">
-        {tool.tags.slice(0, 2).map((tag) => <span key={tag.id} className="border border-[var(--signal-border)] px-2 py-1 font-mono text-[10px] uppercase tracking-[0.08em] text-[var(--signal-muted)]">{tag.name}</span>)}
-      </div>
-      <ArrowRight className="mt-4 size-4 text-[var(--signal-muted)] transition-[translate,color] duration-150 group-hover:translate-x-1 group-hover:text-[var(--signal-blue)] md:mt-0" aria-hidden="true" />
     </Link>
   );
 }
@@ -67,6 +73,7 @@ export function HomeExperience({ tools, tags, articles, reels, catalogAvailable 
 
   return (
     <div className="signal-site min-h-screen bg-[var(--signal-paper)] text-[var(--signal-ink)]">
+      <SiteIntro />
       <SiteHeader />
       <main>
         <section className="border-b border-[var(--signal-border)]">
@@ -101,18 +108,20 @@ export function HomeExperience({ tools, tags, articles, reels, catalogAvailable 
 
         <section id="explorar" className="border-y border-[var(--signal-border)] bg-white py-16 md:py-24" aria-labelledby="explorar-title">
           <div className="signal-shell">
-            <div className="grid gap-8 md:grid-cols-[.65fr_1.35fr]">
-              <div><p className="signal-kicker">02 · Aplicar</p><h2 id="explorar-title" className="signal-section-title">Encontre pelo trabalho que precisa fazer.</h2><p className="mt-5 max-w-sm text-sm leading-6 text-[var(--signal-muted)]">Busque por nome, tarefa ou território. O resultado responde enquanto você digita.</p></div>
-              <div>
+            <div className="grid min-w-0 gap-8 md:grid-cols-[minmax(0,.65fr)_minmax(0,1.35fr)]">
+              <div className="min-w-0"><p className="signal-kicker">02 · Aplicar</p><h2 id="explorar-title" className="signal-section-title">Encontre pelo trabalho que precisa fazer.</h2><p className="mt-5 max-w-sm text-sm leading-6 text-[var(--signal-muted)]">Busque por nome, tarefa ou território. O resultado responde enquanto você digita.</p></div>
+              <div className="min-w-0">
                 <label htmlFor="signal-search" className="sr-only">Buscar ferramentas</label>
                 <div className="flex min-h-16 items-center border-b-2 border-[var(--signal-ink)] focus-within:border-[var(--signal-blue)]"><Search className="mr-4 size-5" aria-hidden="true" /><input ref={searchInputRef} id="signal-search" value={query} onChange={(event) => {setQuery(event.target.value);setVisibleCount(INITIAL_COUNT);}} className="min-w-0 flex-1 bg-transparent text-xl tracking-[-0.025em] outline-none placeholder:text-black/30 md:text-2xl" type="search" placeholder="Ex.: criar vídeo, vender, pesquisar..." /><span className="hidden items-center gap-1 border border-[var(--signal-border)] px-2 py-1 font-mono text-[10px] text-[var(--signal-muted)] sm:flex"><Command className="size-3" /> K</span></div>
                 <div className="mt-5 flex gap-2 overflow-x-auto pb-2 [scrollbar-width:none]" aria-label="Filtrar por território">{tags.slice(0, 12).map((tag) => <button key={tag.id} type="button" aria-pressed={activeTag === tag.slug} onClick={() => {setActiveTag((current) => current === tag.slug ? null : tag.slug);setVisibleCount(INITIAL_COUNT);}} className={`shrink-0 border px-3 py-2 font-mono text-[10px] uppercase tracking-[0.08em] transition-colors duration-150 ${activeTag === tag.slug ? "border-[var(--signal-blue)] bg-[var(--signal-blue)] text-white" : "border-[var(--signal-border)] text-[var(--signal-muted)] hover:border-[var(--signal-ink)] hover:text-[var(--signal-ink)]"}`}>{tag.name}</button>)}</div>
               </div>
             </div>
-            <div className="mt-12" aria-live="polite" aria-atomic="true"><div className="flex items-center justify-between pb-4 font-mono text-[10px] uppercase tracking-[0.1em] text-[var(--signal-muted)]"><span>{filteredTools.length} resultados</span><span>{activeTag ? `Filtro: ${activeTag}` : "Todos os territórios"}</span></div>
-              {!catalogAvailable ? <div role="alert" className="border border-[var(--signal-border)] p-8"><h3 className="font-semibold">A base está se reconectando.</h3><p className="mt-2 text-sm text-[var(--signal-muted)]">Nenhum dado privado é usado como fallback. Tente novamente em instantes.</p></div> : visibleTools.length ? visibleTools.map((tool,index) => <ToolResult key={tool.id} tool={tool} index={index} />) : <div className="border-t border-[var(--signal-border)] py-14 text-center"><Sparkles className="mx-auto size-5 text-[var(--signal-blue)]" /><h3 className="mt-4 font-semibold">Nada com essa combinação.</h3><p className="mt-1 text-sm text-[var(--signal-muted)]">Limpe o filtro ou tente descrever a tarefa com outras palavras.</p></div>}
+            {catalogAvailable && filteredTools.length ? <ToolGraph tools={filteredTools} onSelectTag={(tagSlug) => { setActiveTag(tagSlug); setVisibleCount(INITIAL_COUNT); }} /> : null}
+            <div id="lista-completa" className="mt-12 scroll-mt-24" aria-live="polite" aria-atomic="true"><div className="mb-5 flex flex-wrap items-end justify-between gap-4 border-b border-[var(--signal-border)] pb-4"><div><p className="signal-kicker">Lista completa</p><h3 className="mt-2 text-3xl font-semibold tracking-[-0.05em]">Todas as ferramentas, com tela e contexto.</h3></div><div className="font-mono text-[10px] uppercase tracking-[0.1em] text-[var(--signal-muted)]"><span>{filteredTools.length} resultados</span><span className="ml-6">{activeTag ? `Filtro: ${activeTag}` : "Todos os territórios"}</span></div></div>
+              {!catalogAvailable ? <div role="alert" className="border border-[var(--signal-border)] p-8"><h3 className="font-semibold">A base está se reconectando.</h3><p className="mt-2 text-sm text-[var(--signal-muted)]">Nenhum dado privado é usado como fallback. Tente novamente em instantes.</p></div> : visibleTools.length ? <div className="grid gap-4 lg:grid-cols-2">{visibleTools.map((tool,index) => <ToolResult key={tool.id} tool={tool} index={index} />)}</div> : <div className="border-t border-[var(--signal-border)] py-14 text-center"><Sparkles className="mx-auto size-5 text-[var(--signal-blue)]" /><h3 className="mt-4 font-semibold">Nada com essa combinação.</h3><p className="mt-1 text-sm text-[var(--signal-muted)]">Limpe o filtro ou tente descrever a tarefa com outras palavras.</p></div>}
             </div>
             {visibleCount < filteredTools.length ? <button type="button" onClick={() => setVisibleCount((value) => Math.min(value + PAGE_SIZE, filteredTools.length))} className="mt-8 min-h-12 w-full border border-[var(--signal-ink)] text-sm font-semibold transition-colors hover:bg-[var(--signal-ink)] hover:text-white focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[var(--signal-blue)]">Mostrar mais {Math.min(PAGE_SIZE, filteredTools.length - visibleCount)}</button> : null}
+            {catalogAvailable ? <StackingToolCards tools={tools} /> : null}
           </div>
         </section>
 

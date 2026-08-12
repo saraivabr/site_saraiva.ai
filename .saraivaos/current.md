@@ -1,6 +1,6 @@
 # SaraivaOS — Estado atual
 
-Atualizado em: 2026-08-12T22:09:07.951Z
+Atualizado em: 2026-08-12T22:44:44.114Z
 
 ## Projeto
 
@@ -13,7 +13,7 @@ Atualizado em: 2026-08-12T22:09:07.951Z
 
 ## Evidências
 
-- Observadas: 9
+- Observadas: 10
 - Fornecidas: 0
 - Inferidas: 0
 - Hipóteses: 0
@@ -27,7 +27,7 @@ Atualizado em: 2026-08-12T22:09:07.951Z
 
 ## Ações pendentes
 
-- Nenhum.
+- [ ] Publicar explorador visual com categoria clicável — responsável: Codex — prazo: 2026-08-12 — métrica: produção responde com grafo-lista integrado, filtro de categoria e zero erros de console
 
 ## Experimentos ativos
 
