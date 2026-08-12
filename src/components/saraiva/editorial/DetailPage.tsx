@@ -40,26 +40,26 @@ export function DetailPage({
   return (
     <EditorialShell>
       <main>
-        <section className="bg-[rgb(8,10,12)]">
-          <div className="mx-auto max-w-5xl px-5 py-12 sm:px-8 md:py-16">
-            <Link href={backHref} className="text-sm font-medium text-[rgb(148,151,158)] transition-colors hover:text-white">
+        <section className="border-b border-[var(--signal-border)]">
+          <div className="signal-shell py-12 md:py-20">
+            <Link href={backHref} className="text-sm font-semibold text-[var(--signal-muted)] transition-colors hover:text-[var(--signal-blue)]">
               ← {backLabel}
             </Link>
-            <p className="mt-10 font-mono text-[11px] font-bold uppercase tracking-[0.18em] text-[#66b7ff]">{label}</p>
-            <h1 className="mt-3 max-w-4xl text-4xl font-bold tracking-[-0.045em] text-[rgb(245,245,245)] sm:text-5xl md:text-6xl md:leading-[1.05]">
+            <p className="signal-kicker mt-10">{label}</p>
+            <h1 className="mt-5 max-w-5xl text-[clamp(2.8rem,6.5vw,7rem)] font-semibold leading-[.9] tracking-[-0.065em]">
               {title}
             </h1>
-            {date ? <p className="mt-5 text-sm text-[rgb(148,151,158)]">{formatDate(date, true)}</p> : null}
+            {date ? <p className="mt-6 font-mono text-[10px] uppercase tracking-[.12em] text-[var(--signal-muted)]">{formatDate(date, true)}</p> : null}
           </div>
         </section>
 
         <article className="mx-auto max-w-5xl px-5 py-10 sm:px-8 md:py-16">
           {brandedNewsArt ? (
-            <div className="mb-12 overflow-hidden rounded-3xl">
+            <div className="mb-12 overflow-hidden border border-[var(--signal-border)]">
               <NewsArt title={title} priority />
             </div>
           ) : image ? (
-            <div className="relative mb-12 aspect-video overflow-hidden rounded-3xl bg-[rgb(238,239,241)]">
+            <div className="relative mb-12 aspect-video overflow-hidden border border-[var(--signal-border)] bg-[var(--signal-soft)]">
               <Image src={image} alt="" fill priority sizes="(max-width: 1024px) 100vw, 960px" className="object-cover" unoptimized={image.startsWith("http")} />
             </div>
           ) : null}
@@ -68,7 +68,7 @@ export function DetailPage({
               href={externalUrl}
               target="_blank"
               rel="noreferrer"
-              className="mb-10 inline-flex rounded-full bg-[#0085FE] px-5 py-2.5 text-sm font-bold text-white transition-transform hover:scale-[1.02]"
+              className="mb-10 inline-flex bg-[var(--signal-blue)] px-5 py-3 text-sm font-bold text-white transition-colors hover:bg-[var(--signal-ink)]"
             >
               {externalLabel ?? "Ler publicação original"} ↗
             </a>
@@ -76,9 +76,9 @@ export function DetailPage({
           <div className="mx-auto max-w-3xl">{children}</div>
         </article>
 
-        <section className="border-t border-[rgb(226,228,232)] bg-[rgb(248,248,249)]">
+        <section className="border-t border-[var(--signal-border)] bg-[var(--signal-soft)]">
           <div className="mx-auto max-w-7xl px-5 py-14 sm:px-8 md:py-20">
-            <h2 className="mb-7 text-2xl font-bold uppercase tracking-[-0.03em]">Continue explorando</h2>
+            <p className="signal-kicker">Próximo sinal</p><h2 className="mb-8 mt-3 text-4xl font-semibold tracking-[-0.05em]">Continue explorando</h2>
             <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
               {relatedItems.map((item) => <EditorialCard key={item.id} item={item} />)}
             </div>

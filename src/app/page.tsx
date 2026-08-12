@@ -1,11 +1,9 @@
-import styles from "./coming-soon.module.css";
+import { HomeExperience } from "@/components/saraiva/home/HomeExperience";
+import { getHomeData } from "@/lib/catalog.server";
 
-export default function Home() {
-  return (
-    <main className={styles.page}>
-      <h1 className={styles.title} aria-label="Saraiva.AI is coming.">
-        Saraiva.AI is coming<span aria-hidden="true">.</span>
-      </h1>
-    </main>
-  );
+export const revalidate = 300;
+
+export default async function Home() {
+  const { tools, tags, articles, videos, available } = await getHomeData();
+  return <HomeExperience tools={tools} tags={tags} articles={articles} videos={videos} catalogAvailable={available} />;
 }

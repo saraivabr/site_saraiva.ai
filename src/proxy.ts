@@ -5,11 +5,11 @@ export function proxy(request: NextRequest) {
     return NextResponse.next();
   }
 
-  if (request.nextUrl.pathname === "/") {
+  if (request.nextUrl.pathname === "/coming-soon") {
     return NextResponse.next();
   }
 
-  return NextResponse.redirect(new URL("/", request.url), 307);
+  return NextResponse.rewrite(new URL("/coming-soon", request.url));
 }
 
 export const config = {

@@ -22,7 +22,7 @@ export async function POST(request: Request) {
   }
   const response = await fetch(`${url.replace(/\/$/, "")}/rest/v1/newsletter_subscribers?on_conflict=email`, {
     method: "POST",
-    headers: { apikey: key, Authorization: `Bearer ${key}`, "content-type": "application/json", Prefer: "resolution=merge-duplicates,return=minimal" },
+    headers: { apikey: key, Authorization: `Bearer ${key}`, "content-type": "application/json", Prefer: "resolution=ignore-duplicates,return=representation" },
     body: JSON.stringify({ email, source, status: "active", updated_at: new Date().toISOString() }),
     cache: "no-store",
   });
@@ -30,5 +30,9 @@ export async function POST(request: Request) {
     console.error("Newsletter falhou", response.status);
     return NextResponse.json({ ok: false, message: "Não foi possível confirmar agora. Tente novamente." }, { status: 502 });
   }
-  return NextResponse.json({ ok: true, message: "Inscrição confirmada. Bem-vindo à curadoria Saraiva.AI!" });
+  const inserted = await response.json() as Array<{ email?: string }>;
+  if (inserted.length === 0) {
+    return NextResponse.json({ ok: true, duplicate: true, message: "Esse e-mail já recebe os sinais da Saraiva.AI." });
+  }
+  return NextResponse.json({ ok: true, duplicate: false, message: "Inscrição confirmada. Bem-vindo à curadoria Saraiva.AI!" }, { status: 201 });
 }

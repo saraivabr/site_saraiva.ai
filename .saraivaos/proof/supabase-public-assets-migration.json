@@ -1,0 +1,10 @@
+{
+  "generated_at": "2026-08-12T18:31:51.074Z",
+  "destination_bucket": "editorial-public",
+  "source_objects": 34,
+  "copied_objects": 34,
+  "copied_bytes": 18229491,
+  "updated_rows": 34,
+  "failures": [],
+  "sha256": "12594bca098e8b07c1b518eeeb493338b9bd9e025ede0360107e44990a60b014"
+}

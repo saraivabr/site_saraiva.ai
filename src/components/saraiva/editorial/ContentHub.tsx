@@ -52,6 +52,11 @@ function Rail({ title, children }: { title: string; children: React.ReactNode })
   );
 }
 
+function ProgressiveRail<T extends { id: string }>({ title, items, renderItem, initial = 12 }: { title: string; items: T[]; renderItem: (item: T) => React.ReactNode; initial?: number }) {
+  const [visible, setVisible] = useState(initial);
+  return <div><Rail title={title}>{items.slice(0, visible).map(renderItem)}</Rail>{visible < items.length ? <button type="button" onClick={() => setVisible((value) => Math.min(value + initial, items.length))} className="mt-2 min-h-11 border border-[var(--signal-border)] px-5 text-xs font-semibold uppercase tracking-[.08em] hover:border-[var(--signal-ink)]">Mais {title.toLocaleLowerCase("pt-BR")}</button> : null}</div>;
+}
+
 function VideoCard({ video }: { video: ContentVideoItem }) {
   return (
     <Link href={`/video/${video.slug}`} className="group w-[300px] shrink-0 snap-start overflow-hidden rounded-2xl border border-[rgb(226,228,232)] bg-white sm:w-[360px]">
@@ -101,16 +106,10 @@ export function ContentHub({
 
   return (
     <>
-      <div className="mx-auto max-w-7xl space-y-14 px-5 py-12 sm:px-8 md:space-y-16 md:py-16">
-        <Rail title="Artigos e colunas">
-          {articles.map((item) => <EditorialCard key={item.id} item={item} compact />)}
-        </Rail>
-        <Rail title="Vídeos longos">
-          {videoItems.map((video) => <VideoCard key={video.id} video={video} />)}
-        </Rail>
-        <Rail title="Vídeos curtos">
-          {reelItems.map((video) => <ReelCard key={video.id} video={video} onOpen={setSelectedReel} />)}
-        </Rail>
+      <div className="signal-shell space-y-14 py-12 md:space-y-20 md:py-20">
+        <ProgressiveRail title="Artigos e colunas" items={articles} renderItem={(item) => <EditorialCard key={item.id} item={item} compact />} />
+        <ProgressiveRail title="Vídeos longos" items={videoItems} renderItem={(video) => <VideoCard key={video.id} video={video} />} />
+        <ProgressiveRail title="Vídeos curtos" items={reelItems} initial={16} renderItem={(video) => <ReelCard key={video.id} video={video} onOpen={setSelectedReel} />} />
       </div>
 
       {selectedReel ? (

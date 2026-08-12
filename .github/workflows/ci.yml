@@ -34,6 +34,6 @@ jobs:
 
       - name: Build
         env:
-          SUPABASE_CATALOG_URL: ${{ secrets.SUPABASE_CATALOG_URL }}
-          SUPABASE_CATALOG_ANON_KEY: ${{ secrets.SUPABASE_CATALOG_ANON_KEY }}
+          SUPABASE_APP_URL: ${{ secrets.SUPABASE_APP_URL }}
+          SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
         run: npm run build

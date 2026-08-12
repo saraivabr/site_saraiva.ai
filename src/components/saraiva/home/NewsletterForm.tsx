@@ -27,8 +27,8 @@ export function NewsletterForm({ idPrefix = "newsletter" }: { idPrefix?: string 
     <form onSubmit={submit} className="space-y-3" aria-busy={status === "loading"}>
       <label className="sr-only" htmlFor={`${idPrefix}-email`}>Seu melhor e-mail</label>
       <div className="flex flex-col gap-3 sm:flex-row">
-        <input id={`${idPrefix}-email`} name="email" type="email" inputMode="email" autoComplete="email" required maxLength={254} placeholder="voce@empresa.com" className="h-12 min-w-0 flex-1 rounded-xl border border-white/15 bg-white/[0.06] px-4 text-sm text-white outline-none placeholder:text-white/30 focus:border-[#0085FE]" />
-        <button disabled={status === "loading"} className="h-12 rounded-xl bg-[#0085FE] px-6 text-sm font-bold text-white disabled:opacity-60" type="submit">{status === "loading" ? "Confirmando…" : "Quero receber"}</button>
+        <input id={`${idPrefix}-email`} name="email" type="email" inputMode="email" autoComplete="email" required maxLength={254} placeholder="voce@empresa.com" className="h-12 min-w-0 flex-1 border border-white/20 bg-white/[0.06] px-4 text-sm text-white outline-none placeholder:text-white/30 focus:border-[var(--signal-sky)]" />
+        <button disabled={status === "loading"} className="h-12 bg-[var(--signal-blue)] px-6 text-sm font-bold text-white transition-colors hover:bg-[var(--signal-sky)] hover:text-[var(--signal-ink)] disabled:opacity-60" type="submit">{status === "loading" ? "Confirmando…" : "Quero receber"}</button>
       </div>
       {message ? <p role="status" className={`text-sm ${status === "error" ? "text-red-300" : "text-[#79e56b]"}`}>{message}</p> : null}
     </form>

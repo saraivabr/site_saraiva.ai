@@ -1,0 +1,45 @@
+{
+  "generated_at": "2026-08-12T18:32:30.541Z",
+  "destination_project": "saraiva-ai-production",
+  "destination_bucket": "editorial-public",
+  "tables": {
+    "editorial_tools": {
+      "rows": 809,
+      "own_references": 807,
+      "old_references": 0
+    },
+    "editorial_posts": {
+      "rows": 5,
+      "own_references": 3,
+      "old_references": 0
+    },
+    "editorial_videos": {
+      "rows": 66,
+      "own_references": 34,
+      "old_references": 0
+    },
+    "editorial_reels": {
+      "rows": 419,
+      "own_references": 419,
+      "old_references": 0
+    },
+    "editorial_templates": {
+      "rows": 4,
+      "own_references": 4,
+      "old_references": 0
+    }
+  },
+  "own_references": 1267,
+  "remaining_old_references": 0,
+  "first_pass": {
+    "copied_objects": 1233,
+    "copied_bytes": 378748274
+  },
+  "retry_pass": {
+    "copied_objects": 34,
+    "copied_bytes": 18229491
+  },
+  "total_copied_objects": 1267,
+  "total_copied_bytes": 396977765,
+  "sha256": "c5ebca5c545f653853490a9f01a26357c6dceb6f4006467894790156831ceb2f"
+}

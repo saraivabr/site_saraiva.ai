@@ -1,0 +1,17 @@
+{
+  "generated_at": "2026-08-12T18:32:29.895Z",
+  "source_system": "creative-ai-public",
+  "destination_project": "saraiva-ai-production",
+  "privacy_scope": "Somente tabelas e registros públicos publicados; perfis, sessões, e-mails e dados de alunos excluídos.",
+  "counts": {
+    "editorial_tools": 809,
+    "editorial_tags": 60,
+    "editorial_tool_tags": 978,
+    "editorial_articles": 123,
+    "editorial_posts": 5,
+    "editorial_videos": 66,
+    "editorial_reels": 419,
+    "editorial_templates": 4
+  },
+  "sha256": "53ab8b45b616551636a179d7bd16e80d3879a59b2dc25ec97716b265cabbce51"
+}

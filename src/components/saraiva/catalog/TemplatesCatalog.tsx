@@ -13,28 +13,24 @@ interface TemplatesCatalogProps {
 
 export function TemplatesCatalog({ templates }: TemplatesCatalogProps) {
   return (
-    <div className="saraiva-site min-h-screen bg-background">
+    <div className="signal-site min-h-screen bg-[var(--signal-paper)]">
       <SiteHeader />
-      <main className="mx-auto max-w-6xl px-6 pb-24 pt-20 md:px-8">
-        <header className="mb-16 text-center">
-          <p className="mb-4 font-mono text-xs uppercase tracking-[0.22em] text-primary">
-            Sistemas prontos para usar
-          </p>
-          <h1 className="text-4xl font-semibold tracking-tight text-foreground md:text-6xl">
-            Templates
-          </h1>
-          <p className="mx-auto mt-4 max-w-2xl text-base leading-relaxed text-muted-foreground md:text-lg">
+      <main className="signal-shell pb-24 pt-14 md:pt-20">
+        <header className="mb-14 grid gap-6 border-b border-[var(--signal-border)] pb-12 md:grid-cols-[180px_1fr]">
+          <p className="signal-kicker pt-2">03 · Sistemas</p>
+          <div><h1 className="text-[clamp(3rem,7vw,7.5rem)] font-semibold leading-[.84] tracking-[-0.07em]">Templates</h1>
+          <p className="mt-7 max-w-2xl text-base leading-7 text-[var(--signal-muted)] md:text-lg">
             Projetos completos com inteligência artificial, documentação e uma
             base pronta para você adaptar ao seu negócio.
-          </p>
+          </p></div>
         </header>
 
-        <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="grid grid-cols-1 gap-px bg-[var(--signal-border)] sm:grid-cols-2 lg:grid-cols-3">
           {templates.map((template) => (
             <Link
               key={template.id}
               href={`/template/${template.slug}`}
-              className="group flex h-full flex-col overflow-hidden rounded-2xl border border-border bg-card transition-colors hover:border-primary/50"
+              className="group flex h-full flex-col overflow-hidden bg-[var(--signal-paper)] transition-colors hover:bg-white"
             >
               <div className="relative aspect-video overflow-hidden bg-muted">
                 {template.image_url ? (
@@ -50,19 +46,19 @@ export function TemplatesCatalog({ templates }: TemplatesCatalogProps) {
               </div>
               <div className="flex flex-1 flex-col p-5">
                 {template.category ? (
-                  <p className="mb-2 font-mono text-[11px] uppercase tracking-widest text-primary">
+                  <p className="mb-3 font-mono text-[10px] uppercase tracking-[.14em] text-[var(--signal-blue)]">
                     {template.category}
                   </p>
                 ) : null}
-                <h2 className="text-xl font-semibold leading-tight text-foreground">
+                <h2 className="text-2xl font-semibold leading-[1.05] tracking-[-.04em] group-hover:text-[var(--signal-blue)]">
                   {template.name}
                 </h2>
                 {template.tagline ? (
-                  <p className="mt-2 line-clamp-3 text-sm leading-relaxed text-muted-foreground">
+                  <p className="mt-3 line-clamp-3 text-sm leading-6 text-[var(--signal-muted)]">
                     {template.tagline}
                   </p>
                 ) : null}
-                <span className="mt-5 inline-flex items-center gap-2 text-sm font-semibold text-primary">
+                <span className="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-[var(--signal-blue)]">
                   Conhecer template
                   <ArrowUpRight
                     aria-hidden="true"

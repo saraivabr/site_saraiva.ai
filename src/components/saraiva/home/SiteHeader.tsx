@@ -1,36 +1,16 @@
 "use client";
 
-import Image from "next/image";
+import { Menu, X } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
-import { CloseIcon, MenuIcon } from "@/components/saraiva/shared/icons";
 
-const navigationItems = [
-  { label: "GUIA", href: "/" },
-  { label: "CONTEÚDO", href: "/content" },
-  { label: "NOTÍCIAS", href: "/news" },
-  { label: "TEMPLATES", href: "/templates" },
-  { label: "SOBRE", href: "/about" },
-] as const;
+const items = [{label:"Base",href:"/"},{label:"Conteúdo",href:"/content"},{label:"Notícias",href:"/news"},{label:"Templates",href:"/templates"},{label:"Sobre",href:"/about"}];
 
 export function SiteHeader() {
-  const [open, setOpen] = useState(false);
+  const [open,setOpen] = useState(false);
   const pathname = usePathname();
-  const active = (href: string) => href === "/" ? pathname === "/" || pathname.startsWith("/tool/") : pathname === href || pathname.startsWith(`${href}/`);
-  return (
-    <header className={`sticky top-0 z-50 overflow-hidden border-b border-white/10 bg-[#07090d]/95 backdrop-blur-2xl transition-[height] ${open ? "h-[420px]" : "h-[72px]"} md:h-[72px]`}>
-      <div className="mx-auto flex h-[72px] max-w-[1400px] items-center justify-between px-6 md:px-8">
-        <Link href="/" onClick={() => setOpen(false)} aria-label="Saraiva.AI — página inicial" className="flex items-center">
-          <Image src="/brand/saraiva-ai-logo.png" alt="Saraiva.AI" width={190} height={56} className="h-10 w-auto brightness-0 invert" priority />
-        </Link>
-        <nav aria-label="Navegação principal" className="hidden items-center gap-1 md:flex">
-          {navigationItems.map((item) => <Link key={item.href} href={item.href} className={`rounded-full px-3 py-2 text-xs font-semibold tracking-[0.04em] transition-colors ${active(item.href) ? "bg-white/10 text-white" : "text-white/45 hover:text-white"}`}>{item.label}</Link>)}
-          <Link href="/#newsletter" className="ml-2 rounded-full bg-[#0085FE] px-4 py-2 text-xs font-bold text-white hover:bg-[#1b91ff]">NEWSLETTER</Link>
-        </nav>
-        <button type="button" className="grid size-10 place-items-center text-white/70 md:hidden" aria-label={open ? "Fechar menu" : "Abrir menu"} aria-expanded={open} aria-controls="mobile-menu" onClick={() => setOpen((value) => !value)}>{open ? <CloseIcon className="size-5" /> : <MenuIcon className="size-5" />}</button>
-      </div>
-      {open ? <nav id="mobile-menu" aria-label="Navegação móvel" className="space-y-1 px-5 pt-3 md:hidden">{navigationItems.map((item) => <Link key={item.href} href={item.href} onClick={() => setOpen(false)} className={`block rounded-2xl px-4 py-3 text-sm font-semibold ${active(item.href) ? "bg-white/10 text-white" : "text-white/50"}`}>{item.label}</Link>)}<Link href="/#newsletter" onClick={() => setOpen(false)} className="mt-4 block rounded-2xl bg-[#0085FE] px-4 py-3 text-center text-sm font-bold text-white">Assinar newsletter</Link></nav> : null}
-    </header>
-  );
+  return <header className="sticky top-0 z-50 border-b border-[var(--signal-border)] bg-[color:var(--signal-paper)]/95 backdrop-blur-xl"><div className="signal-shell flex h-16 items-center justify-between"><Link href="/" onClick={() => setOpen(false)} className="text-xl font-semibold tracking-[-0.055em]">saraiva<span className="text-[var(--signal-blue)]">.ai</span></Link><nav className="hidden h-full items-center md:flex" aria-label="Navegação principal">{items.map((item) => <Link key={item.href} href={item.href} className={`grid h-full place-items-center border-l border-[var(--signal-border)] px-4 text-[11px] font-semibold uppercase tracking-[0.08em] transition-colors hover:bg-[var(--signal-soft)] ${pathname === item.href ? "text-[var(--signal-blue)]" : "text-[var(--signal-muted)]"}`}>{item.label}</Link>)}<Link href="/#newsletter" className="grid h-full place-items-center bg-[var(--signal-ink)] px-5 text-[11px] font-semibold uppercase tracking-[0.08em] text-white hover:bg-[var(--signal-blue)]">Receber sinais</Link></nav><button type="button" onClick={() => setOpen((value) => !value)} className="grid size-11 place-items-center md:hidden" aria-expanded={open} aria-controls="signal-mobile-nav" aria-label={open ? "Fechar menu" : "Abrir menu"}>{open ? <X className="size-5" /> : <Menu className="size-5" />}</button></div>{open ? <nav id="signal-mobile-nav" className="border-t border-[var(--signal-border)] bg-[var(--signal-paper)] px-5 py-4 md:hidden">{items.map((item) => <Link key={item.href} href={item.href} onClick={() => setOpen(false)} className="flex min-h-12 items-center justify-between border-b border-[var(--signal-border)] text-sm font-semibold">{item.label}<ArrowRight /></Link>)}<Link href="/#newsletter" onClick={() => setOpen(false)} className="mt-4 flex min-h-12 items-center justify-between bg-[var(--signal-ink)] px-4 text-sm font-semibold text-white">Receber sinais<ArrowRight /></Link></nav> : null}</header>;
 }
+
+function ArrowRight() { return <span aria-hidden="true">↗</span>; }

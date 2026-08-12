@@ -1,0 +1,71 @@
+{
+  "framework": "SaraivaOS",
+  "version": "1.0.0",
+  "createdAt": "2026-08-12T17:41:16.226Z",
+  "updatedAt": "2026-08-12T17:50:45.937Z",
+  "project": {
+    "id": "project-20260812174116-d63169ac",
+    "name": "Saraiva.AI — site e acervo próprios",
+    "root": "/Users/saraiva/Saraiva.AI/_laboratorio/esteiradeconteúdo/site-saraiva-ai",
+    "objective": "Migrar o conteúdo público para o Supabase Saraiva.AI e reconstruir o site com identidade, experiência e movimento próprios"
+  },
+  "cycle": {
+    "currentStage": "arquitetura",
+    "completedStages": []
+  },
+  "navigation": {
+    "currentRoute": "Dados próprios concluídos; construir experiência editorial original sobre contratos do Supabase Saraiva.AI",
+    "nextArtifact": "Nova home e hubs editoriais",
+    "blocker": ""
+  },
+  "identity": {
+    "business": "",
+    "offer": "",
+    "audience": "",
+    "objective": "Migrar o conteúdo público para o Supabase Saraiva.AI e reconstruir o site com identidade, experiência e movimento próprios"
+  },
+  "evidenceSummary": {
+    "observed": 2,
+    "provided": 0,
+    "inferred": 0,
+    "hypothesis": 0,
+    "unknown": 0
+  },
+  "methods": {
+    "active": [
+      "Jobs/minimalismo",
+      "Design UX/UI",
+      "Interaction Design",
+      "Remotion Interactivity"
+    ],
+    "considered": []
+  },
+  "actions": [],
+  "experiments": [],
+  "artifacts": [
+    {
+      "id": "artifact-20260812175045-4ea49b38",
+      "path": "supabase/migrations/202608120002_editorial_catalog.sql",
+      "type": "migration",
+      "proof": "Supabase db push concluído",
+      "createdAt": "2026-08-12T17:50:45.847Z"
+    },
+    {
+      "id": "artifact-20260812175045-faf92fb2",
+      "path": "scripts/migrate-public-catalog.mjs",
+      "type": "migration-script",
+      "proof": "Importação idempotente e manifesto gerado",
+      "createdAt": "2026-08-12T17:50:45.893Z"
+    }
+  ],
+  "sessions": [
+    {
+      "id": "session-20260812174116-96c6293e",
+      "mode": "multimodal",
+      "objective": "Inventariar, migrar o acervo público e construir a nova experiência Saraiva.AI mantendo a capa temporária",
+      "status": "active",
+      "startedAt": "2026-08-12T17:41:16.278Z"
+    }
+  ],
+  "learnings": []
+}

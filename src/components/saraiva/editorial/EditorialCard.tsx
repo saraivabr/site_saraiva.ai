@@ -5,12 +5,12 @@ import { type EditorialCardItem, formatDate, sourceLabel } from "./format";
 import { NewsArt } from "./NewsArt";
 
 export function EditorialCard({ item, compact = false }: { item: EditorialCardItem; compact?: boolean }) {
-  const isNews = item.href.startsWith("/news/");
+  const isNews = item.href.startsWith("/news/") || item.href.startsWith("/blog/");
 
   return (
     <Link
       href={item.href}
-      className={`group flex h-full flex-col overflow-hidden rounded-2xl border border-[rgb(226,228,232)] bg-white transition-all duration-300 hover:-translate-y-1 hover:border-[#0085FE] hover:shadow-xl hover:shadow-black/5 ${compact ? "w-[300px] shrink-0 snap-start sm:w-[360px]" : ""}`}
+      className={`group flex h-full flex-col overflow-hidden border border-[var(--signal-border)] bg-[var(--signal-paper)] transition-colors duration-200 hover:border-[var(--signal-blue)] hover:bg-white ${compact ? "w-[300px] shrink-0 snap-start sm:w-[360px]" : ""}`}
     >
       {isNews ? (
         <NewsArt title={item.title} />
@@ -34,14 +34,14 @@ export function EditorialCard({ item, compact = false }: { item: EditorialCardIt
         </div>
       )}
       <div className="flex flex-1 flex-col p-5">
-        <h2 className="line-clamp-2 text-lg font-semibold leading-snug tracking-[-0.02em] text-[rgb(18,20,24)]">
+        <h2 className="line-clamp-2 text-xl font-semibold leading-[1.08] tracking-[-0.035em] text-[var(--signal-ink)] group-hover:text-[var(--signal-blue)]">
           {item.title}
         </h2>
         {item.summary ? (
-          <p className="mt-2 line-clamp-3 text-sm leading-6 text-[rgb(93,98,108)]">{item.summary}</p>
+          <p className="mt-3 line-clamp-3 text-sm leading-6 text-[var(--signal-muted)]">{item.summary}</p>
         ) : null}
         {item.publishedAt ? (
-          <span className="mt-auto pt-4 text-[10px] font-medium uppercase tracking-[0.1em] text-[rgb(113,118,128)]">
+          <span className="mt-auto pt-5 font-mono text-[10px] uppercase tracking-[0.12em] text-[var(--signal-muted)]">
             {formatDate(item.publishedAt)}
           </span>
         ) : null}
