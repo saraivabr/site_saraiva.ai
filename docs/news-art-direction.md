@@ -17,11 +17,11 @@ O título é renderizado como HTML sobre a arte. Isso mantém legibilidade, aces
 
 ## Arquivos-base
 
-- `editorial-truth-v1.png`
-- `editorial-growth-v1.png`
-- `editorial-tools-v1.png`
-- `editorial-creative-v1.png`
-- `editorial-future-v1.png`
-- `editorial-story-v1.png`
+- `editorial-truth-v1.webp`
+- `editorial-growth-v1.webp`
+- `editorial-tools-v1.webp`
+- `editorial-creative-v1.webp`
+- `editorial-future-v1.webp`
+- `editorial-story-v1.webp`
 
 As páginas ficam protegidas pela capa temporária enquanto `SITE_COMING_SOON` não for definido como `false`.

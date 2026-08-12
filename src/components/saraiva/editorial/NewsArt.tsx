@@ -3,12 +3,12 @@ import Image from "next/image";
 type NewsVisualFamily = "creative" | "future" | "growth" | "story" | "tools" | "truth";
 
 const FAMILY_ASSETS: Record<NewsVisualFamily, string> = {
-  creative: "/news/brand-system/editorial-creative-v1.png",
-  future: "/news/brand-system/editorial-future-v1.png",
-  growth: "/news/brand-system/editorial-growth-v1.png",
-  story: "/news/brand-system/editorial-story-v1.png",
-  tools: "/news/brand-system/editorial-tools-v1.png",
-  truth: "/news/brand-system/editorial-truth-v1.png",
+  creative: "/news/brand-system/editorial-creative-v1.webp",
+  future: "/news/brand-system/editorial-future-v1.webp",
+  growth: "/news/brand-system/editorial-growth-v1.webp",
+  story: "/news/brand-system/editorial-story-v1.webp",
+  tools: "/news/brand-system/editorial-tools-v1.webp",
+  truth: "/news/brand-system/editorial-truth-v1.webp",
 };
 
 const FAMILY_LABELS: Record<NewsVisualFamily, string> = {
