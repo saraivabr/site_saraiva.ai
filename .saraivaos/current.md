@@ -1,19 +1,19 @@
 # SaraivaOS — Estado atual
 
-Atualizado em: 2026-08-13T02:56:40.933Z
+Atualizado em: 2026-08-13T03:01:45.504Z
 
 ## Projeto
 
 - Nome: Saraiva.AI — site e acervo próprios
 - Objetivo: Migrar o conteúdo público para o Supabase Saraiva.AI e reconstruir o site com identidade, experiência e movimento próprios
 - Etapa: validacao
-- Rota: Airtable Produtos e Ofertas -> gate Publicar no site -> sync administrativo -> Supabase/RLS -> /news + /content + /solution/[slug] -> WhatsApp
-- Próximo artefato: Commit, deploy Scalingo e QA de produção
+- Rota: Airtable Produtos e Ofertas -> gate Publicar no site -> RPC transacional -> Supabase/RLS -> /news + /content + /solution/[slug] -> WhatsApp
+- Próximo artefato: Commit corretivo, deploy Scalingo e QA de produção
 - Bloqueio: Nenhum
 
 ## Evidências
 
-- Observadas: 15
+- Observadas: 16
 - Fornecidas: 0
 - Inferidas: 0
 - Hipóteses: 0
@@ -22,7 +22,7 @@ Atualizado em: 2026-08-13T02:56:40.933Z
 ## Métodos ativos
 
 - Airtable
-- Supabase
+- Supabase RPC
 - Next.js
 - Playwright
 - Scalingo
@@ -45,4 +45,4 @@ Atualizado em: 2026-08-13T02:56:40.933Z
 
 ## Aprendizados recentes
 
-- Nenhum.
+- Publicação derivada de uma fonte operacional deve reconciliar inclusões e despublicações na mesma transação; falha parcial não pode manter uma oferta fora do gate visível. — evidência: Review independente e rollback observado com RPC sync_editorial_offers

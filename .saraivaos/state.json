@@ -2,7 +2,7 @@
   "framework": "SaraivaOS",
   "version": "1.0.0",
   "createdAt": "2026-08-12T17:41:16.226Z",
-  "updatedAt": "2026-08-13T02:56:40.933Z",
+  "updatedAt": "2026-08-13T03:01:45.504Z",
   "project": {
     "id": "project-20260812174116-d63169ac",
     "name": "Saraiva.AI — site e acervo próprios",
@@ -14,8 +14,8 @@
     "completedStages": []
   },
   "navigation": {
-    "currentRoute": "Airtable Produtos e Ofertas -> gate Publicar no site -> sync administrativo -> Supabase/RLS -> /news + /content + /solution/[slug] -> WhatsApp",
-    "nextArtifact": "Commit, deploy Scalingo e QA de produção",
+    "currentRoute": "Airtable Produtos e Ofertas -> gate Publicar no site -> RPC transacional -> Supabase/RLS -> /news + /content + /solution/[slug] -> WhatsApp",
+    "nextArtifact": "Commit corretivo, deploy Scalingo e QA de produção",
     "blocker": ""
   },
   "identity": {
@@ -25,7 +25,7 @@
     "objective": "Migrar o conteúdo público para o Supabase Saraiva.AI e reconstruir o site com identidade, experiência e movimento próprios"
   },
   "evidenceSummary": {
-    "observed": 15,
+    "observed": 16,
     "provided": 0,
     "inferred": 0,
     "hypothesis": 0,
@@ -34,7 +34,7 @@
   "methods": {
     "active": [
       "Airtable",
-      "Supabase",
+      "Supabase RPC",
       "Next.js",
       "Playwright",
       "Scalingo"
@@ -119,5 +119,12 @@
       "startedAt": "2026-08-13T02:38:22.961Z"
     }
   ],
-  "learnings": []
+  "learnings": [
+    {
+      "id": "learning-20260813030145-0272df93",
+      "statement": "Publicação derivada de uma fonte operacional deve reconciliar inclusões e despublicações na mesma transação; falha parcial não pode manter uma oferta fora do gate visível.",
+      "evidence": "Review independente e rollback observado com RPC sync_editorial_offers",
+      "createdAt": "2026-08-13T03:01:45.467Z"
+    }
+  ]
 }

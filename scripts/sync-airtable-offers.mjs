@@ -68,38 +68,21 @@ function sanitize(record) {
     problem: String(value[fields.problem] ?? "").trim(),
     delivery: String(value[fields.delivery] ?? "").trim(),
     public_status: publicStatus(selectedName(value[fields.status])),
-    is_published: true,
-    source_system: "airtable-products-offers",
-    updated_at: new Date().toISOString(),
   };
 }
 
-async function upsert(rows) {
-  const response = await fetch(`${SUPABASE_URL.replace(/\/$/, "")}/rest/v1/editorial_offers?on_conflict=source_record_id`, {
+async function reconcile(rows) {
+  const response = await fetch(`${SUPABASE_URL.replace(/\/$/, "")}/rest/v1/rpc/sync_editorial_offers`, {
     method: "POST",
     headers: {
       apikey: SUPABASE_KEY,
       Authorization: `Bearer ${SUPABASE_KEY}`,
       "Content-Type": "application/json",
-      Prefer: "resolution=merge-duplicates,return=minimal",
     },
-    body: JSON.stringify(rows),
+    body: JSON.stringify({ p_rows: rows }),
   });
-  if (!response.ok) throw new Error(`Supabase indisponível (${response.status}): ${await response.text()}`);
-
-  const liveIds = rows.map((row) => row.source_record_id);
-  const filter = liveIds.length ? `source_record_id=not.in.(${liveIds.join(",")})` : "source_record_id=not.is.null";
-  const hide = await fetch(`${SUPABASE_URL.replace(/\/$/, "")}/rest/v1/editorial_offers?source_system=eq.airtable-products-offers&${filter}`, {
-    method: "PATCH",
-    headers: {
-      apikey: SUPABASE_KEY,
-      Authorization: `Bearer ${SUPABASE_KEY}`,
-      "Content-Type": "application/json",
-      Prefer: "return=minimal",
-    },
-    body: JSON.stringify({ is_published: false, updated_at: new Date().toISOString() }),
-  });
-  if (!hide.ok) throw new Error(`Falha ao ocultar registros fora do gate (${hide.status})`);
+  if (!response.ok) throw new Error(`Reconciliação Supabase indisponível (${response.status}): ${await response.text()}`);
+  return response.json();
 }
 
 const records = await getAirtableRecords();
@@ -108,5 +91,5 @@ if (!records.length && process.env.AIRTABLE_OFFERS_ALLOW_EMPTY !== "true") {
 }
 const rows = records.map(sanitize).filter((row) => row.name && row.slug && row.problem && row.buyer && row.delivery);
 if (rows.length !== records.length) throw new Error("Há registros marcados para publicação sem campos públicos obrigatórios");
-await upsert(rows);
-console.log(JSON.stringify({ source: `${AIRTABLE_BASE_ID}/${AIRTABLE_TABLE_ID}`, selected: records.length, published: rows.length }, null, 2));
+const result = await reconcile(rows);
+console.log(JSON.stringify({ source: `${AIRTABLE_BASE_ID}/${AIRTABLE_TABLE_ID}`, selected: records.length, published: rows.length, reconciliation: result[0] }, null, 2));

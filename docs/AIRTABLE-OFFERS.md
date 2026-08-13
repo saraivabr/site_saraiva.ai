@@ -23,4 +23,4 @@ Preço, potencial comercial, projeto/repositório de origem, observações e pr�
 npm run sync:offers
 ```
 
-O comando exige `AIRTABLE_TOKEN`, `SUPABASE_APP_URL` e `SUPABASE_SERVICE_ROLE_KEY` apenas no ambiente administrativo. Se o gate retornar zero registros, a execução falha por segurança. Para despublicar todos intencionalmente, use `AIRTABLE_OFFERS_ALLOW_EMPTY=true` em uma única execução supervisionada.
+O comando exige `AIRTABLE_TOKEN`, `SUPABASE_APP_URL` e `SUPABASE_SERVICE_ROLE_KEY` apenas no ambiente administrativo. O upsert e a despublicação são reconciliados por uma única função SQL transacional: ou a projeção inteira é atualizada, ou nada muda. Se o gate retornar zero registros, a execução falha por segurança. Para despublicar todos intencionalmente, use `AIRTABLE_OFFERS_ALLOW_EMPTY=true` em uma única execução supervisionada.
