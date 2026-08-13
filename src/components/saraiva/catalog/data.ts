@@ -93,17 +93,6 @@ export interface InstagramVideo {
   posted_at: string;
 }
 
-export interface PublicOffer {
-  slug: string;
-  name: string;
-  offer_type: string;
-  buyer: string;
-  problem: string;
-  delivery: string;
-  public_status: string;
-  updated_at: string;
-}
-
 export interface ToolContext {
   founders?: string;
   funding?: string;

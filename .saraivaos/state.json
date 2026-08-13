@@ -2,7 +2,7 @@
   "framework": "SaraivaOS",
   "version": "1.0.0",
   "createdAt": "2026-08-12T17:41:16.226Z",
-  "updatedAt": "2026-08-13T02:56:40.933Z",
+  "updatedAt": "2026-08-12T23:42:55.869Z",
   "project": {
     "id": "project-20260812174116-d63169ac",
     "name": "Saraiva.AI — site e acervo próprios",
@@ -14,9 +14,9 @@
     "completedStages": []
   },
   "navigation": {
-    "currentRoute": "Airtable Produtos e Ofertas -> gate Publicar no site -> sync administrativo -> Supabase/RLS -> /news + /content + /solution/[slug] -> WhatsApp",
-    "nextArtifact": "Commit, deploy Scalingo e QA de produção",
-    "blocker": ""
+    "currentRoute": "Operação autoral conteúdo para negócio em piloto supervisionado",
+    "nextArtifact": "Roteiro final e capa composta por código após aprovação humana",
+    "blocker": "Publicação bloqueada até fechar gates P0 de autoria, proveniência, aprovação e atribuição"
   },
   "identity": {
     "business": "",
@@ -25,7 +25,7 @@
     "objective": "Migrar o conteúdo público para o Supabase Saraiva.AI e reconstruir o site com identidade, experiência e movimento próprios"
   },
   "evidenceSummary": {
-    "observed": 15,
+    "observed": 12,
     "provided": 0,
     "inferred": 0,
     "hypothesis": 0,
@@ -33,11 +33,9 @@
   },
   "methods": {
     "active": [
-      "Airtable",
-      "Supabase",
-      "Next.js",
-      "Playwright",
-      "Scalingo"
+      "Maestri",
+      "Design UX/UI",
+      "SaraivaOS"
     ],
     "considered": []
   },
@@ -61,15 +59,6 @@
       "metric": "diferença substancial, proveniência, aprovação humana e CTA real aprovados antes de publicar",
       "status": "pending",
       "createdAt": "2026-08-12T23:42:55.819Z"
-    },
-    {
-      "id": "action-20260813023835-7e9b8b04",
-      "title": "Integrar Produtos e Ofertas ao site com projeção pública segura",
-      "owner": "Codex",
-      "deadline": "",
-      "metric": "Soluções reais aparecem em /news e /content, detalhes abrem, dados internos não vazam e produção passa QA",
-      "status": "pending",
-      "createdAt": "2026-08-13T02:38:35.674Z"
     }
   ],
   "experiments": [],
@@ -94,13 +83,6 @@
       "type": "proof",
       "proof": "1267 mídias próprias e zero referências ao Storage de origem",
       "createdAt": "2026-08-12T18:53:17.350Z"
-    },
-    {
-      "id": "artifact-20260813025640-b50171e9",
-      "path": "docs/AIRTABLE-OFFERS.md",
-      "type": "documentation",
-      "proof": "Contrato do gate, campos públicos e operação de sincronização",
-      "createdAt": "2026-08-13T02:56:40.894Z"
     }
   ],
   "sessions": [
@@ -110,13 +92,6 @@
       "objective": "Inventariar, migrar o acervo público e construir a nova experiência Saraiva.AI mantendo a capa temporária",
       "status": "active",
       "startedAt": "2026-08-12T17:41:16.278Z"
-    },
-    {
-      "id": "session-20260813023822-6bb13cd0",
-      "mode": "text",
-      "objective": "Integrar a tabela Airtable Produtos e Ofertas ao site Saraiva.AI como catálogo público sanitizado, com detalhe próprio, QA e deploy",
-      "status": "active",
-      "startedAt": "2026-08-13T02:38:22.961Z"
     }
   ],
   "learnings": []
