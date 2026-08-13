@@ -9,6 +9,7 @@ import type {
   InstagramVideo,
 } from "@/components/saraiva/catalog/data";
 import { sanitizeLegacyBrandText } from "@/components/saraiva/catalog/data";
+import { OWNED_ARTICLE_SLUG, ownedArticlePilot } from "@/lib/owned-article-pilot";
 
 const REVALIDATE_SECONDS = 300;
 
@@ -47,6 +48,23 @@ function encodeSlug(slug: string) {
   return encodeURIComponent(slug.replace(/[^a-z0-9-]/gi, ""));
 }
 
+function ownedImageUrl(imageUrl: string | null) {
+  return imageUrl?.startsWith("/images/news/") ? imageUrl : null;
+}
+
+function normalizeArticle(article: Article): Article {
+  const isOwned = article.source_system === "saraiva-owned";
+  return {
+    ...article,
+    title: sanitizeLegacyBrandText(article.title),
+    summary: sanitizeLegacyBrandText(article.summary),
+    image_url: isOwned ? ownedImageUrl(article.image_url) : null,
+    story_content: null,
+    content_text: isOwned ? article.content_text : "",
+    url: isOwned ? "" : article.url,
+  };
+}
+
 function normalizeTool(tool: ToolWithRelations): CatalogTool {
   const { editorial_tool_tags: relations = [], ...fields } = tool;
   return {
@@ -80,10 +98,10 @@ export async function getHomeData() {
     const [tools, tags, articles, reels] = await Promise.all([
       query<ToolSummaryWithRelations>("editorial_tools?select=id,name,slug,short_description,screenshot_url,editorial_tool_tags(editorial_tags(id,name,slug))&is_published=eq.true&order=is_featured.desc,created_at.desc"),
       query<CatalogTag>("editorial_tags?select=id,name,slug&order=name.asc"),
-      query<Article>("editorial_articles?select=id,slug,title,summary,source_name,published_at&is_published=eq.true&order=published_at.desc.nullslast,display_order.asc&limit=6"),
+      query<Article>("editorial_articles?select=id,slug,title,summary,image_url,author,source_name,source_system,published_at&is_published=eq.true&order=published_at.desc.nullslast,display_order.asc&limit=6"),
       query<InstagramVideo>("editorial_reels?select=id,url,caption,thumbnail_url,video_url,username,duration,posted_at&is_published=eq.true&source_system=eq.saraiva-instagram&order=posted_at.desc.nullslast,display_order.asc&limit=6"),
     ]);
-    return { tools: tools.map(normalizeToolSummary), tags, articles: articles.map((article) => ({ ...article, image_url: null })), reels, available: true };
+    return { tools: tools.map(normalizeToolSummary), tags, articles: articles.map(normalizeArticle), reels, available: true };
   } catch (error) {
     console.error("Falha ao carregar catálogo público", error instanceof Error ? error.message : "erro desconhecido");
     return { tools: [] as CatalogTool[], tags: [] as CatalogTag[], articles: [] as Article[], reels: [] as InstagramVideo[], available: false };
@@ -97,13 +115,13 @@ export async function getToolBySlug(slug: string) {
 
 export async function getEditorialData() {
   const [articles, posts, videos, reels] = await Promise.all([
-    query<Pick<Article, "id" | "slug" | "title" | "summary" | "source_name" | "published_at">>("editorial_articles?select=id,slug,title,summary,source_name,published_at&is_published=eq.true&order=published_at.desc.nullslast,display_order.asc"),
+    query<Pick<Article, "id" | "slug" | "title" | "summary" | "image_url" | "author" | "source_name" | "source_system" | "published_at">>("editorial_articles?select=id,slug,title,summary,image_url,author,source_name,source_system,published_at&is_published=eq.true&order=published_at.desc.nullslast,display_order.asc"),
     query<Pick<BlogPost, "id" | "slug" | "title" | "excerpt" | "published_at">>("editorial_posts?select=id,slug,title,excerpt,published_at&is_published=eq.true&order=published_at.desc.nullslast"),
     query<CatalogVideo>("editorial_videos?select=*&is_published=eq.true&source_system=eq.saraiva-video&order=published_at.desc.nullslast,display_order.asc"),
     query<InstagramVideo>("editorial_reels?select=*&is_published=eq.true&source_system=eq.saraiva-instagram&order=posted_at.desc.nullslast,display_order.asc"),
   ]);
   return {
-    articles: articles.map((article) => ({ ...article, title: sanitizeLegacyBrandText(article.title), summary: sanitizeLegacyBrandText(article.summary), image_url: null, story_content: null, content_text: "", url: "" })),
+    articles: articles.map((article) => normalizeArticle({ ...article, story_content: null, content_text: "", url: "" })),
     posts: posts.map((post) => ({ ...post, title: sanitizeLegacyBrandText(post.title), excerpt: sanitizeLegacyBrandText(post.excerpt), cover_image_url: null, content_html: "", tags: [] })),
     videos: videos.map((video) => ({ ...video, title: sanitizeLegacyBrandText(video.title), description: sanitizeLegacyBrandText(video.description), story_content: sanitizeLegacyBrandText(video.story_content) })),
     reels: reels.map((reel) => ({ ...reel, caption: sanitizeLegacyBrandText(reel.caption), username: sanitizeLegacyBrandText(`@${reel.username}`).replace(/^@/, "") })),
@@ -111,9 +129,18 @@ export async function getEditorialData() {
 }
 
 export async function getArticleBySlug(slug: string) {
-  const rows = await query<Article>(`editorial_articles?select=id,slug,title,summary,source_name,published_at,url&is_published=eq.true&slug=eq.${encodeSlug(slug)}&limit=1`);
+  const isPreview = process.env.OWNED_ARTICLE_PREVIEW === "true" && slug === OWNED_ARTICLE_SLUG;
+  let rows: Article[];
+  try {
+    rows = await query<Article>(`editorial_articles?select=id,slug,title,summary,image_url,author,source_name,source_system,published_at,url,content_text&is_published=eq.true&slug=eq.${encodeSlug(slug)}&limit=1`);
+  } catch (error) {
+    if (isPreview) return normalizeArticle(ownedArticlePilot);
+    throw error;
+  }
   const article = rows[0];
-  return article ? { ...article, title: sanitizeLegacyBrandText(article.title), summary: sanitizeLegacyBrandText(article.summary), image_url: null, story_content: null, content_text: "" } : null;
+  if (article) return normalizeArticle(article);
+  if (isPreview) return normalizeArticle(ownedArticlePilot);
+  return null;
 }
 
 export async function getPostBySlug(slug: string) {

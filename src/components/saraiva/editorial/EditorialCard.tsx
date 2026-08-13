@@ -13,7 +13,7 @@ export function EditorialCard({ item, compact = false }: { item: EditorialCardIt
       className={`group flex h-full flex-col overflow-hidden border border-[var(--signal-border)] bg-[var(--signal-paper)] transition-colors duration-200 hover:border-[var(--signal-blue)] hover:bg-white ${compact ? "w-[300px] shrink-0 snap-start sm:w-[360px]" : ""}`}
     >
       {isNews ? (
-        <NewsArt title={item.title} />
+        <NewsArt title={item.title} image={item.image} />
       ) : (
         <div className="relative aspect-video overflow-hidden bg-[rgb(238,239,241)]">
           {item.image ? (

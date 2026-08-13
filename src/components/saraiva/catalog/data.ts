@@ -50,6 +50,8 @@ export interface Article {
   summary: string;
   image_url: string | null;
   source_name: string;
+  author: string | null;
+  source_system: string;
   published_at: string | null;
   story_content: string | null;
   content_text: string;

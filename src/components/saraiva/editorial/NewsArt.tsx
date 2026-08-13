@@ -33,30 +33,31 @@ export function newsVisualFamily(title: string): NewsVisualFamily {
   return KEYWORDS.find(([, pattern]) => pattern.test(title))?.[0] ?? "truth";
 }
 
-export function NewsArt({ title, priority = false }: { title: string; priority?: boolean }) {
+export function NewsArt({ title, image, priority = false }: { title: string; image?: string | null; priority?: boolean }) {
   const family = newsVisualFamily(title);
   const issue = String([...title].reduce((total, character) => total + character.charCodeAt(0), 0) % 100).padStart(2, "0");
+  const safeImage = image?.startsWith("/images/news/") ? image : null;
 
   return (
     <div className={`news-art news-art--${family} relative aspect-video overflow-hidden bg-[var(--signal-paper)]`} data-news-family={family}>
       <Image
-        src={FAMILY_ASSETS[family]}
+        src={safeImage || FAMILY_ASSETS[family]}
         alt=""
         fill
         priority={priority}
         sizes="(max-width: 768px) 100vw, 50vw"
         className="object-cover"
       />
-      <div className="absolute inset-y-0 left-0 w-[61%] bg-[linear-gradient(90deg,rgba(243,241,234,.98)_0%,rgba(243,241,234,.95)_72%,rgba(243,241,234,0)_100%)]" />
+      <div className={`absolute inset-y-0 left-0 w-[61%] ${safeImage ? "bg-[linear-gradient(90deg,rgba(17,19,21,.94)_0%,rgba(17,19,21,.76)_72%,rgba(17,19,21,0)_100%)]" : "bg-[linear-gradient(90deg,rgba(243,241,234,.98)_0%,rgba(243,241,234,.95)_72%,rgba(243,241,234,0)_100%)]"}`} />
       <div aria-hidden="true" className="news-art__signal absolute left-0 top-0 h-2 w-[42%] bg-[var(--signal-blue)]" />
-      <div className="absolute inset-0 flex max-w-[61%] flex-col justify-between p-[5%] text-[var(--signal-ink)]">
+      <div className={`absolute inset-0 flex max-w-[61%] flex-col justify-between p-[5%] ${safeImage ? "text-white" : "text-[var(--signal-ink)]"}`}>
         <div className="flex items-center justify-between gap-3 font-mono text-[clamp(7px,0.7vw,10px)] font-bold uppercase tracking-[0.16em] text-[var(--signal-blue)]">
           <span>Saraiva.AI · {FAMILY_LABELS[family]}</span><span>#{issue}</span>
         </div>
         <p className="line-clamp-4 text-[clamp(14px,1.8vw,30px)] font-semibold leading-[.96] tracking-[-0.055em]">
           {title}
         </p>
-        <p className="font-mono text-[clamp(6px,.6vw,9px)] uppercase tracking-[.15em] text-[var(--signal-muted)]">Sinal para quem precisa decidir</p>
+        <p className={`font-mono text-[clamp(6px,.6vw,9px)] uppercase tracking-[.15em] ${safeImage ? "text-white/65" : "text-[var(--signal-muted)]"}`}>Sinal para quem precisa decidir</p>
       </div>
     </div>
   );

@@ -97,7 +97,7 @@ export function HomeExperience({ tools, tags, articles, reels, catalogAvailable 
           <div className="mb-8 flex items-end justify-between gap-6"><div><p className="signal-kicker">01 · Agora</p><h2 id="agora-title" className="signal-section-title">O que merece atenção.</h2></div><Link href="/news" className="signal-text-link">Todas as notícias <ArrowRight className="size-4" /></Link></div>
           <div className="grid gap-px bg-[var(--signal-border)] lg:grid-cols-[1.6fr_.8fr]">
             <Link href={`/news/${featuredArticle.slug}`} className="group bg-[var(--signal-paper)]">
-              <NewsArt title={featuredArticle.title} priority />
+              <NewsArt title={featuredArticle.title} image={featuredArticle.image_url} priority />
               <div className="grid gap-4 p-6 md:grid-cols-[1fr_180px] md:p-8"><h3 className="text-3xl font-semibold leading-[1.02] tracking-[-0.05em] md:text-5xl">{featuredArticle.title}</h3><p className="text-sm leading-6 text-[var(--signal-muted)]">{featuredArticle.summary}</p></div>
             </Link>
             <div className="bg-[var(--signal-paper)]">

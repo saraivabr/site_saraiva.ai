@@ -13,10 +13,12 @@ export function DetailPage({
   backLabel = "Voltar para conteúdo",
   label,
   title,
+  author,
   date,
   image,
   externalUrl,
   externalLabel,
+  cta,
   children,
   omitRelatedId,
   related = [],
@@ -26,10 +28,12 @@ export function DetailPage({
   backLabel?: string;
   label: string;
   title: string;
+  author?: string | null;
   date: string | null;
   image?: string | null;
   externalUrl?: string;
   externalLabel?: string;
+  cta?: { href: string; label: string; description: string };
   children: ReactNode;
   omitRelatedId?: string;
   related?: EditorialCardItem[];
@@ -49,14 +53,14 @@ export function DetailPage({
             <h1 className="mt-5 max-w-5xl text-[clamp(2.8rem,6.5vw,7rem)] font-semibold leading-[.9] tracking-[-0.065em]">
               {title}
             </h1>
-            {date ? <p className="mt-6 font-mono text-[10px] uppercase tracking-[.12em] text-[var(--signal-muted)]">{formatDate(date, true)}</p> : null}
+            {(date || author) ? <p className="mt-6 font-mono text-[10px] uppercase tracking-[.12em] text-[var(--signal-muted)]">{author ? `Por ${author}` : null}{author && date ? " · " : null}{date ? formatDate(date, true) : null}</p> : null}
           </div>
         </section>
 
         <article className="mx-auto max-w-5xl px-5 py-10 sm:px-8 md:py-16">
           {brandedNewsArt ? (
             <div className="mb-12 overflow-hidden border border-[var(--signal-border)]">
-              <NewsArt title={title} priority />
+              <NewsArt title={title} image={image} priority />
             </div>
           ) : image ? (
             <div className="relative mb-12 aspect-video overflow-hidden border border-[var(--signal-border)] bg-[var(--signal-soft)]">
@@ -74,6 +78,7 @@ export function DetailPage({
             </a>
           ) : null}
           <div className="mx-auto max-w-3xl">{children}</div>
+          {cta ? <aside className="mx-auto mt-14 max-w-3xl border-l-4 border-[var(--signal-blue)] bg-[var(--signal-ink)] p-7 text-white md:p-9"><p className="signal-kicker text-[var(--signal-sky)]">Próxima ação</p><h2 className="mt-4 text-3xl font-semibold tracking-[-0.045em]">Diagnosticar antes de automatizar.</h2><p className="mt-4 max-w-2xl text-sm leading-6 text-white/65">{cta.description}</p><a href={cta.href} target="_blank" rel="noopener noreferrer" className="mt-7 inline-flex min-h-12 items-center bg-[var(--signal-blue)] px-5 text-sm font-bold text-white transition-colors hover:bg-white hover:text-[var(--signal-ink)]">{cta.label} ↗</a></aside> : null}
         </article>
 
         <section className="border-t border-[var(--signal-border)] bg-[var(--signal-soft)]">
