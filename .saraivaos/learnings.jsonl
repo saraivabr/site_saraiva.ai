@@ -1,1 +1,0 @@
-{"id":"learning-20260813030145-0272df93","statement":"Publicação derivada de uma fonte operacional deve reconciliar inclusões e despublicações na mesma transação; falha parcial não pode manter uma oferta fora do gate visível.","evidence":"Review independente e rollback observado com RPC sync_editorial_offers","createdAt":"2026-08-13T03:01:45.467Z"}

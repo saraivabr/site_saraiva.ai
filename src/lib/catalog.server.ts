@@ -171,6 +171,11 @@ export async function getPublicOffers() {
 }
 
 export async function getPublicOfferBySlug(slug: string) {
-  const rows = await query<PublicOffer>(`editorial_offers?select=slug,name,offer_type,buyer,problem,delivery,public_status,updated_at&is_published=eq.true&slug=eq.${encodeSlug(slug)}&limit=1`);
-  return rows[0] ?? null;
+  try {
+    const rows = await query<PublicOffer>(`editorial_offers?select=slug,name,offer_type,buyer,problem,delivery,public_status,updated_at&is_published=eq.true&slug=eq.${encodeSlug(slug)}&limit=1`);
+    return rows[0] ?? null;
+  } catch (error) {
+    console.error("Falha ao carregar solução pública", error instanceof Error ? error.message : "erro desconhecido");
+    return null;
+  }
 }
