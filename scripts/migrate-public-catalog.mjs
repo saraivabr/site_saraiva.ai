@@ -171,7 +171,7 @@ await upsert("editorial_articles", articles.map((row) => ({
   reading_time_minutes: row.reading_time_minutes,
   story_content: row.story_content,
   story_generated_at: row.story_generated_at,
-  is_published: true,
+  is_published: false,
   ...provenance(row),
 })));
 
@@ -184,7 +184,7 @@ await upsert("editorial_posts", posts.map((row) => ({
   cover_image_url: preserveMigratedMedia(existingPosts.get(row.id), "cover_image_url", row.cover_image_url),
   language: row.language,
   published_at: row.published_at,
-  is_published: true,
+  is_published: false,
   ...provenance(row),
 })));
 
