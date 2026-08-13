@@ -81,14 +81,14 @@ export function DetailPage({
           {cta ? <aside className="mx-auto mt-14 max-w-3xl border-l-4 border-[var(--signal-blue)] bg-[var(--signal-ink)] p-7 text-white md:p-9"><p className="signal-kicker text-[var(--signal-sky)]">Próxima ação</p><h2 className="mt-4 text-3xl font-semibold tracking-[-0.045em]">{cta.title ?? "Transforme leitura em aplicação."}</h2><p className="mt-4 max-w-2xl text-sm leading-6 text-white/65">{cta.description}</p><a href={cta.href} target="_blank" rel="noopener noreferrer" className="mt-7 inline-flex min-h-12 items-center bg-[var(--signal-blue)] px-5 text-sm font-bold text-white transition-colors hover:bg-white hover:text-[var(--signal-ink)]">{cta.label} ↗</a></aside> : null}
         </article>
 
-        <section className="border-t border-[var(--signal-border)] bg-[var(--signal-soft)]">
+        {relatedItems.length ? <section className="border-t border-[var(--signal-border)] bg-[var(--signal-soft)]">
           <div className="mx-auto max-w-7xl px-5 py-14 sm:px-8 md:py-20">
             <p className="signal-kicker">Próximo sinal</p><h2 className="mb-8 mt-3 text-4xl font-semibold tracking-[-0.05em]">Continue explorando</h2>
             <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
               {relatedItems.map((item) => <EditorialCard key={item.id} item={item} />)}
             </div>
           </div>
-        </section>
+        </section> : null}
       </main>
     </EditorialShell>
   );

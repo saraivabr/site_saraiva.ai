@@ -19,6 +19,7 @@
     "check": "npm run lint && npm run typecheck && npm run build",
     "migrate:catalog": "node scripts/migrate-public-catalog.mjs",
     "migrate:assets": "node scripts/migrate-public-assets.mjs",
+    "sync:offers": "node scripts/sync-airtable-offers.mjs",
     "motion:studio": "remotion studio src/remotion/index.ts",
     "motion:render": "remotion render src/remotion/index.ts SaraivaSignalStory output/saraiva-signal-story.mp4"
   },

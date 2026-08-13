@@ -7,6 +7,7 @@ import type {
   CatalogTool,
   CatalogVideo,
   InstagramVideo,
+  PublicOffer,
 } from "@/components/saraiva/catalog/data";
 import { sanitizeLegacyBrandText } from "@/components/saraiva/catalog/data";
 import { OWNED_ARTICLE_SLUG, ownedArticlePilot } from "@/lib/owned-article-pilot";
@@ -158,4 +159,23 @@ export async function getVideoBySlug(slug: string) {
   const rows = await query<CatalogVideo>(`editorial_videos?select=*&is_published=eq.true&source_system=eq.saraiva-video&slug=eq.${encodeSlug(slug)}&limit=1`);
   const video = rows[0];
   return video ? { ...video, title: sanitizeLegacyBrandText(video.title), description: sanitizeLegacyBrandText(video.description), story_content: sanitizeLegacyBrandText(video.story_content) } : null;
+}
+
+export async function getPublicOffers() {
+  try {
+    return await query<PublicOffer>("editorial_offers?select=slug,name,offer_type,buyer,problem,delivery,public_status,updated_at&is_published=eq.true&order=updated_at.desc");
+  } catch (error) {
+    console.error("Falha ao carregar soluções públicas", error instanceof Error ? error.message : "erro desconhecido");
+    return [] as PublicOffer[];
+  }
+}
+
+export async function getPublicOfferBySlug(slug: string) {
+  try {
+    const rows = await query<PublicOffer>(`editorial_offers?select=slug,name,offer_type,buyer,problem,delivery,public_status,updated_at&is_published=eq.true&slug=eq.${encodeSlug(slug)}&limit=1`);
+    return rows[0] ?? null;
+  } catch (error) {
+    console.error("Falha ao carregar solução pública", error instanceof Error ? error.message : "erro desconhecido");
+    return null;
+  }
 }
