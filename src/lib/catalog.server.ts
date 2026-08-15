@@ -119,18 +119,28 @@ export async function getToolBySlug(slug: string) {
 }
 
 export async function getEditorialData() {
-  const [articles, posts, videos, reels] = await Promise.all([
-    query<ArticleRow>("editorial_articles?select=id,slug,title,summary,image_url,author,source_name,source_system,published_at&is_published=eq.true&source_system=eq.saraiva-owned&order=published_at.desc.nullslast,display_order.asc"),
-    Promise.resolve([] as Array<Pick<BlogPost, "id" | "slug" | "title" | "excerpt" | "published_at">>),
-    query<CatalogVideo>("editorial_videos?select=*&is_published=eq.true&source_system=eq.saraiva-video&order=published_at.desc.nullslast,display_order.asc"),
-    query<InstagramVideo>("editorial_reels?select=*&is_published=eq.true&source_system=eq.saraiva-instagram&order=posted_at.desc.nullslast,display_order.asc"),
-  ]);
-  return {
-    articles: articles.map((article) => normalizeArticle({ ...article, story_content: null, content_text: "", url: "" })),
-    posts: posts.map((post) => ({ ...post, title: sanitizeLegacyBrandText(post.title), excerpt: sanitizeLegacyBrandText(post.excerpt), cover_image_url: null, content_html: "", tags: [] })),
-    videos: videos.map((video) => ({ ...video, title: sanitizeLegacyBrandText(video.title), description: sanitizeLegacyBrandText(video.description), story_content: sanitizeLegacyBrandText(video.story_content) })),
-    reels: reels.map((reel) => ({ ...reel, caption: sanitizeLegacyBrandText(reel.caption), username: sanitizeLegacyBrandText(`@${reel.username}`).replace(/^@/, "") })),
-  };
+  try {
+    const [articles, posts, videos, reels] = await Promise.all([
+      query<ArticleRow>("editorial_articles?select=id,slug,title,summary,image_url,author,source_name,source_system,published_at&is_published=eq.true&source_system=eq.saraiva-owned&order=published_at.desc.nullslast,display_order.asc"),
+      Promise.resolve([] as Array<Pick<BlogPost, "id" | "slug" | "title" | "excerpt" | "published_at">>),
+      query<CatalogVideo>("editorial_videos?select=*&is_published=eq.true&source_system=eq.saraiva-video&order=published_at.desc.nullslast,display_order.asc"),
+      query<InstagramVideo>("editorial_reels?select=*&is_published=eq.true&source_system=eq.saraiva-instagram&order=posted_at.desc.nullslast,display_order.asc"),
+    ]);
+    return {
+      articles: articles.map((article) => normalizeArticle({ ...article, story_content: null, content_text: "", url: "" })),
+      posts: posts.map((post) => ({ ...post, title: sanitizeLegacyBrandText(post.title), excerpt: sanitizeLegacyBrandText(post.excerpt), cover_image_url: null, content_html: "", tags: [] })),
+      videos: videos.map((video) => ({ ...video, title: sanitizeLegacyBrandText(video.title), description: sanitizeLegacyBrandText(video.description), story_content: sanitizeLegacyBrandText(video.story_content) })),
+      reels: reels.map((reel) => ({ ...reel, caption: sanitizeLegacyBrandText(reel.caption), username: sanitizeLegacyBrandText(`@${reel.username}`).replace(/^@/, "") })),
+    };
+  } catch (error) {
+    console.error("Falha ao carregar conteúdo público", error instanceof Error ? error.message : "erro desconhecido");
+    return {
+      articles: [] as Article[],
+      posts: [] as BlogPost[],
+      videos: [] as CatalogVideo[],
+      reels: [] as InstagramVideo[],
+    };
+  }
 }
 
 export async function getArticleBySlug(slug: string) {
