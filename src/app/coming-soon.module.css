@@ -4,13 +4,13 @@
   place-items: center;
   overflow: hidden;
   padding: 2rem;
-  background: #050505;
+  background: var(--color-ink, #000000);
 }
 
 .title {
   margin: 0;
-  color: #f6f5f1;
-  font-family: Inter, "Helvetica Neue", Helvetica, Arial, sans-serif;
+  color: var(--color-cream, #fff8e6);
+  font-family: var(--font-sans, Inter, "Helvetica Neue", Helvetica, Arial, sans-serif);
   font-size: clamp(2.2rem, 7.5vw, 7.5rem);
   font-weight: 650;
   line-height: 0.95;
@@ -21,7 +21,7 @@
 }
 
 .title span {
-  color: #0085fe;
+  color: var(--color-lime, #f5ff6b);
 }
 
 @keyframes reveal {
