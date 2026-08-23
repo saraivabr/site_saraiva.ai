@@ -1,154 +1,38 @@
 @import "tailwindcss";
 @import "tw-animate-css";
 @import "shadcn/tailwind.css";
+@import "./brand/tokens.css";
 
-@custom-variant dark (&:is(.dark *));
+/* ═══════════════════════════════════════════════════════════════
+   saraiva.ai — o que é só deste site.
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: Inter, "Helvetica Neue", Helvetica, Arial, sans-serif;
-  --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
-  --font-heading: var(--font-sans);
-  --color-sidebar-ring: var(--sidebar-ring);
-  --color-sidebar-border: var(--sidebar-border);
-  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
-  --color-sidebar-accent: var(--sidebar-accent);
-  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
-  --color-sidebar-primary: var(--sidebar-primary);
-  --color-sidebar-foreground: var(--sidebar-foreground);
-  --color-sidebar: var(--sidebar);
-  --color-chart-5: var(--chart-5);
-  --color-chart-4: var(--chart-4);
-  --color-chart-3: var(--chart-3);
-  --color-chart-2: var(--chart-2);
-  --color-chart-1: var(--chart-1);
-  --color-ring: var(--ring);
-  --color-input: var(--input);
-  --color-border: var(--border);
-  --color-destructive: var(--destructive);
-  --color-accent-foreground: var(--accent-foreground);
-  --color-accent: var(--accent);
-  --color-muted-foreground: var(--muted-foreground);
-  --color-muted: var(--muted);
-  --color-secondary-foreground: var(--secondary-foreground);
-  --color-secondary: var(--secondary);
-  --color-primary-foreground: var(--primary-foreground);
-  --color-primary: var(--primary);
-  --color-popover-foreground: var(--popover-foreground);
-  --color-popover: var(--popover);
-  --color-card-foreground: var(--card-foreground);
-  --color-card: var(--card);
-  --radius-sm: calc(var(--radius) * 0.6);
-  --radius-md: calc(var(--radius) * 0.8);
-  --radius-lg: var(--radius);
-  --radius-xl: calc(var(--radius) * 1.4);
-  --radius-2xl: calc(var(--radius) * 1.8);
-  --radius-3xl: calc(var(--radius) * 2.2);
-  --radius-4xl: calc(var(--radius) * 2.6);
-}
+   A paleta, a tipografia, o grid e os utilitários da marca vivem em
+   ./brand/tokens.css, sincronizado de ~/Saraiva.AI/marcas/saraiva-ai/design.
+   Editar lá, rodar sync.sh, não editar a cópia.
+
+   Os nomes --signal-* continuam existindo como PONTE: 100+ usos nos
+   componentes apontam para eles. Aqui eles deixam de ser uma paleta
+   própria e passam a ser apelidos dos tokens da marca.
+   ═══════════════════════════════════════════════════════════════ */
 
 :root {
-  --background: hsl(0 0% 100%);
-  --foreground: hsl(220 20% 8%);
-  --card: hsl(0 0% 100%);
-  --card-foreground: hsl(220 20% 8%);
-  --popover: hsl(0 0% 100%);
-  --popover-foreground: hsl(220 20% 8%);
-  --primary: #0085fe;
-  --primary-foreground: #ffffff;
-  --secondary: hsl(220 10% 95%);
-  --secondary-foreground: hsl(220 15% 30%);
-  --muted: hsl(220 10% 94%);
-  --muted-foreground: hsl(220 12% 35%);
-  --accent: hsl(220 10% 94%);
-  --accent-foreground: hsl(220 20% 8%);
-  --destructive: oklch(0.577 0.245 27.325);
-  --border: hsl(220 10% 90%);
-  --input: hsl(220 10% 90%);
-  --ring: #0085fe;
-  --chart-1: oklch(0.87 0 0);
-  --chart-2: oklch(0.556 0 0);
-  --chart-3: oklch(0.439 0 0);
-  --chart-4: oklch(0.371 0 0);
-  --chart-5: oklch(0.269 0 0);
-  --radius: 0.75rem;
-  --saraiva-dark-bg: hsl(220 20% 4%);
-  --saraiva-dark-card: hsl(220 18% 7%);
-  --saraiva-dark-border: hsl(220 15% 15%);
-  --saraiva-dark-fg: hsl(0 0% 96%);
-  --saraiva-dark-muted: hsl(220 10% 70%);
-  --sidebar: oklch(0.985 0 0);
-  --sidebar-foreground: oklch(0.145 0 0);
-  --sidebar-primary: oklch(0.205 0 0);
-  --sidebar-primary-foreground: oklch(0.985 0 0);
-  --sidebar-accent: oklch(0.97 0 0);
-  --sidebar-accent-foreground: oklch(0.205 0 0);
-  --sidebar-border: oklch(0.922 0 0);
-  --sidebar-ring: oklch(0.708 0 0);
-  --signal-paper: #f3f1ea;
-  --signal-soft: #e9e6dc;
-  --signal-ink: #111315;
-  --signal-muted: #656866;
-  --signal-border: #cfcdc5;
-  --signal-blue: #206ff6;
-  --signal-sky: #4dcffb;
-}
+  --signal-paper: var(--color-cream);
+  --signal-soft: var(--color-cream-deep);
+  --signal-ink: var(--color-ink);
+  --signal-muted: var(--color-ink-muted);
+  --signal-border: var(--border);
 
-.dark {
-  --background: oklch(0.145 0 0);
-  --foreground: oklch(0.985 0 0);
-  --card: oklch(0.205 0 0);
-  --card-foreground: oklch(0.985 0 0);
-  --popover: oklch(0.205 0 0);
-  --popover-foreground: oklch(0.985 0 0);
-  --primary: oklch(0.922 0 0);
-  --primary-foreground: oklch(0.205 0 0);
-  --secondary: oklch(0.269 0 0);
-  --secondary-foreground: oklch(0.985 0 0);
-  --muted: oklch(0.269 0 0);
-  --muted-foreground: oklch(0.708 0 0);
-  --accent: oklch(0.269 0 0);
-  --accent-foreground: oklch(0.985 0 0);
-  --destructive: oklch(0.704 0.191 22.216);
-  --border: oklch(1 0 0 / 10%);
-  --input: oklch(1 0 0 / 15%);
-  --ring: oklch(0.556 0 0);
-  --chart-1: oklch(0.87 0 0);
-  --chart-2: oklch(0.556 0 0);
-  --chart-3: oklch(0.439 0 0);
-  --chart-4: oklch(0.371 0 0);
-  --chart-5: oklch(0.269 0 0);
-  --sidebar: oklch(0.205 0 0);
-  --sidebar-foreground: oklch(0.985 0 0);
-  --sidebar-primary: oklch(0.488 0.243 264.376);
-  --sidebar-primary-foreground: oklch(0.985 0 0);
-  --sidebar-accent: oklch(0.269 0 0);
-  --sidebar-accent-foreground: oklch(0.985 0 0);
-  --sidebar-border: oklch(1 0 0 / 10%);
-  --sidebar-ring: oklch(0.556 0 0);
-}
+  /* Era a cor de ação (azul). Vira tinta: serve de fundo com texto claro,
+     de traço e de foco. Para ACENTO sobre fundo escuro existe --signal-sky. */
+  --signal-blue: var(--color-ink);
 
-@layer base {
-  * {
-    @apply border-border outline-ring/50;
-  }
-  body {
-    @apply bg-background text-foreground;
-    margin: 0;
-  }
-  html {
-    @apply font-sans;
-  }
+  /* Acento sobre fundo escuro — lima sobre tinta dá 16:1. É o gesto da marca. */
+  --signal-sky: var(--color-lime);
 }
 
 @keyframes saraiva-marquee-scroll {
-  from {
-    transform: translateX(0);
-  }
-  to {
-    transform: translateX(-25%);
-  }
+  from { transform: translateX(0); }
+  to { transform: translateX(-25%); }
 }
 
 @keyframes signal-intro-letter-in {
@@ -161,11 +45,20 @@
   to { opacity: 0; filter: blur(12px); transform: translateY(-16px); }
 }
 
+@keyframes signal-title-in {
+  from { opacity: 0; translate: 0 18px; }
+  to { opacity: 1; translate: 0 0; }
+}
+
+@keyframes signal-fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
 @layer components {
   .saraiva-site {
     min-width: 320px;
     overflow-x: clip;
-    font-family: Inter, "Helvetica Neue", Helvetica, Arial, sans-serif;
   }
 
   .saraiva-container {
@@ -187,7 +80,21 @@
   .signal-site {
     min-width: 320px;
     overflow-x: clip;
-    background: var(--signal-paper);
+    background-color: var(--signal-paper);
+    background-image:
+      repeating-linear-gradient(
+        to right,
+        var(--grid-line) 0px,
+        var(--grid-line) 1px,
+        transparent 1px,
+        transparent var(--grid-cell)
+      ),
+      repeating-linear-gradient(
+        var(--grid-line) 0px,
+        var(--grid-line) 1px,
+        transparent 1px,
+        transparent var(--grid-cell)
+      );
   }
 
   .signal-shell {
@@ -195,13 +102,14 @@
     margin-inline: auto;
   }
 
+  /* rótulo curto acima de um título — a marca usa mono, caixa alta, tinta */
   .signal-kicker {
-    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    font-family: var(--font-mono);
     font-size: 10px;
     font-weight: 700;
     letter-spacing: 0.14em;
     text-transform: uppercase;
-    color: var(--signal-blue);
+    color: var(--color-ink-muted);
   }
 
   .signal-section-title {
@@ -220,8 +128,18 @@
     min-height: 44px;
     font-size: 13px;
     font-weight: 650;
+    text-decoration: underline;
+    text-decoration-thickness: 2px;
+    text-underline-offset: 5px;
+    text-decoration-color: var(--color-lime);
+    transition: text-decoration-color 150ms ease-out;
   }
 
+  .signal-text-link:hover {
+    text-decoration-color: var(--color-ink);
+  }
+
+  /* cortina de abertura */
   .signal-intro {
     position: fixed;
     inset: 0;
@@ -273,8 +191,11 @@
     animation-delay: calc(var(--intro-index) * 24ms);
   }
 
+  /* o ".ai" da abertura: grifo lima, não cor de texto — lima sobre creme some */
   .signal-intro__word span:nth-last-child(-n + 2) {
-    color: var(--signal-blue);
+    background: var(--color-lime);
+    box-decoration-break: clone;
+    -webkit-box-decoration-break: clone;
   }
 
   .signal-intro__rule {
@@ -283,7 +204,7 @@
     bottom: 28px;
     left: 28px;
     right: 28px;
-    height: 1px;
+    height: 3px;
     overflow: hidden;
     background: var(--signal-border);
   }
@@ -293,7 +214,7 @@
     display: block;
     width: 100%;
     height: 100%;
-    background: var(--signal-blue);
+    background: var(--color-lime);
     transform-origin: left;
     transform: scaleX(0);
     transition: transform 900ms cubic-bezier(.16,1,.3,1);
@@ -305,13 +226,15 @@
     transform: scaleX(1);
   }
 
-  .news-art--creative { --news-accent: #f45d9d; }
-  .news-art--future { --news-accent: #4dcffb; }
-  .news-art--growth { --news-accent: #59d499; }
-  .news-art--story { --news-accent: #ff8c42; }
-  .news-art--tools { --news-accent: #206ff6; }
-  .news-art--truth { --news-accent: #111315; }
-  .news-art__signal { background: var(--news-accent, var(--signal-blue)); }
+  /* famílias editoriais — a distinção agora acontece dentro da paleta da marca.
+     --news-accent é sempre FUNDO (a barra do topo), nunca texto. */
+  .news-art--creative { --news-accent: var(--color-price); }
+  .news-art--future   { --news-accent: var(--color-lime); }
+  .news-art--growth   { --news-accent: var(--color-ink); }
+  .news-art--story    { --news-accent: var(--color-lime-soft); }
+  .news-art--tools    { --news-accent: var(--color-ink-soft); }
+  .news-art--truth    { --news-accent: var(--color-cream-deep); }
+  .news-art__signal   { background: var(--news-accent, var(--color-lime)); }
 }
 
 @media (prefers-reduced-motion: no-preference) {
@@ -335,22 +258,21 @@
   }
 }
 
-@keyframes signal-title-in {
-  from { opacity: 0; translate: 0 18px; }
-  to { opacity: 1; translate: 0 0; }
-}
-
-@keyframes signal-fade-in {
-  from { opacity: 0; }
-  to { opacity: 1; }
-}
-
-.prose-saraiva { color: rgb(55 59 66); font-size: 17px; line-height: 2; }
-.prose-saraiva h1, .prose-saraiva h2, .prose-saraiva h3 { color: #0a0b0f; font-weight: 700; letter-spacing: -.035em; margin-block: 1.6em .6em; }
+/* corpo editorial longo */
+.prose-saraiva { color: var(--color-ink-muted); font-size: 17px; line-height: 2; }
+.prose-saraiva h1, .prose-saraiva h2, .prose-saraiva h3 { color: var(--color-ink); font-weight: 700; letter-spacing: -.035em; margin-block: 1.6em .6em; }
 .prose-saraiva h2 { font-size: 2rem; }
 .prose-saraiva h3 { font-size: 1.5rem; }
 .prose-saraiva p { margin-bottom: 1.4em; }
-.prose-saraiva a { color: #0085fe; text-decoration: underline; }
+.prose-saraiva a {
+  color: var(--color-ink);
+  font-weight: 600;
+  text-decoration: underline;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 3px;
+  text-decoration-color: var(--color-lime);
+}
+.prose-saraiva a:hover { text-decoration-color: var(--color-ink); }
 .prose-saraiva ul, .prose-saraiva ol { padding-left: 1.5rem; margin-bottom: 1.4em; }
 
 @media (max-width: 639px) {

@@ -1,5 +1,20 @@
 import type { Metadata } from "next";
+import { Inter, IBM_Plex_Mono } from "next/font/google";
 import "./globals.css";
+
+// As duas famílias que os tokens da marca esperam (ver src/app/brand/tokens.css).
+const inter = Inter({
+  variable: "--font-inter",
+  subsets: ["latin"],
+  display: "swap",
+});
+
+const mono = IBM_Plex_Mono({
+  variable: "--font-mono-stack",
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
+  display: "swap",
+});
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://saraiva.ai"),
@@ -12,5 +27,9 @@ export const metadata: Metadata = {
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
-  return <html lang="pt-BR" className="h-full antialiased"><body className="min-h-full">{children}</body></html>;
+  return (
+    <html lang="pt-BR" className={`${inter.variable} ${mono.variable} h-full antialiased`}>
+      <body className="min-h-full">{children}</body>
+    </html>
+  );
 }

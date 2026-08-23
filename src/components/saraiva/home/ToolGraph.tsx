@@ -134,9 +134,9 @@ export function ToolGraph({ tools, onSelectTag }: { tools: CatalogTool[]; onSele
     context.setTransform(dpr, 0, 0, dpr, 0, 0);
     context.clearRect(0, 0, width, height);
     const gradient = context.createRadialGradient(width * 0.5, height * 0.48, 0, width * 0.5, height * 0.48, width * 0.65);
-    gradient.addColorStop(0, "#142c4a");
-    gradient.addColorStop(0.46, "#0c1827");
-    gradient.addColorStop(1, "#090d13");
+    gradient.addColorStop(0, "#1c1c1c");
+    gradient.addColorStop(0.46, "#0d0d0d");
+    gradient.addColorStop(1, "#000000");
     context.fillStyle = gradient;
     context.fillRect(0, 0, width, height);
 
@@ -152,7 +152,7 @@ export function ToolGraph({ tools, onSelectTag }: { tools: CatalogTool[]; onSele
       context.beginPath();
       context.moveTo(source.x, source.y);
       context.lineTo(target.x, target.y);
-      context.strokeStyle = isActive ? "rgba(77, 207, 251, .8)" : "rgba(147, 173, 205, .14)";
+      context.strokeStyle = isActive ? "rgba(245, 255, 107, .85)" : "rgba(255, 248, 230, .16)";
       context.lineWidth = isActive ? 1.25 : 0.65;
       context.stroke();
     }
@@ -165,17 +165,17 @@ export function ToolGraph({ tools, onSelectTag }: { tools: CatalogTool[]; onSele
       if (active) {
         context.beginPath();
         context.arc(node.x, node.y, radius + 7, 0, Math.PI * 2);
-        context.fillStyle = "rgba(32, 111, 246, .17)";
+        context.fillStyle = "rgba(245, 255, 107, .18)";
         context.fill();
       }
       context.beginPath();
       context.arc(node.x, node.y, radius, 0, Math.PI * 2);
-      context.fillStyle = node.kind === "root" ? "#206ff6" : node.kind === "tag" ? "#4dcffb" : active ? "#ffffff" : "rgba(225, 237, 250, .78)";
+      context.fillStyle = node.kind === "root" ? "#f5ff6b" : node.kind === "tag" ? "#f9ffa6" : active ? "#ffffff" : "rgba(255, 248, 230, .78)";
       context.fill();
 
       if (node.kind !== "tool" || active) {
         context.font = `${node.kind === "root" ? 700 : 600} ${node.kind === "root" ? 14 : 10}px Inter, sans-serif`;
-        context.fillStyle = node.kind === "root" ? "#ffffff" : active ? "#ffffff" : "rgba(217, 231, 247, .72)";
+        context.fillStyle = node.kind === "root" ? "#ffffff" : active ? "#ffffff" : "rgba(255, 248, 230, .74)";
         context.textAlign = "center";
         context.textBaseline = "top";
         context.fillText(node.label, node.x, node.y + radius + 7, node.kind === "root" ? 140 : 120);
@@ -318,16 +318,16 @@ export function ToolGraph({ tools, onSelectTag }: { tools: CatalogTool[]; onSele
   const activeTool = selectedNode?.tool ?? graph.tools[0];
 
   return (
-    <section className="mt-10 overflow-hidden border border-[#25354a] bg-[#090d13] text-white" aria-labelledby="tool-map-title">
+    <section className="mt-10 overflow-hidden border border-white/15 bg-[var(--color-ink)] text-white" aria-labelledby="tool-map-title">
       <div className="flex flex-wrap items-end justify-between gap-4 border-b border-white/10 px-5 py-5 md:px-7">
         <div>
-          <p className="font-mono text-[10px] uppercase tracking-[0.14em] text-[#4dcffb]">Mapa vivo da base</p>
+          <p className="font-mono text-[10px] uppercase tracking-[0.14em] text-[var(--color-lime)]">Mapa vivo da base</p>
           <h3 id="tool-map-title" className="mt-2 text-2xl font-semibold tracking-[-0.04em] md:text-3xl">Clique num território. Abra a categoria.</h3>
         </div>
         <div className="flex items-center gap-4">
           <span className="hidden font-mono text-[10px] uppercase tracking-[0.1em] text-white/50 sm:block">{graph.tools.length} ferramentas · {graph.tagCount} territórios</span>
-          <a href="#lista-completa" className="inline-flex min-h-11 items-center px-1 text-xs font-semibold text-white/70 transition-colors hover:text-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#4dcffb]">Ver lista completa ↓</a>
-          <button type="button" onClick={reorganize} className="inline-flex min-h-11 items-center gap-2 border border-white/20 px-3 font-mono text-[10px] uppercase tracking-[0.1em] transition-colors hover:border-[#4dcffb] hover:text-[#4dcffb] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#4dcffb]">
+          <a href="#lista-completa" className="inline-flex min-h-11 items-center px-1 text-xs font-semibold text-white/70 transition-colors hover:text-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--color-lime)]">Ver lista completa ↓</a>
+          <button type="button" onClick={reorganize} className="inline-flex min-h-11 items-center gap-2 border border-white/20 px-3 font-mono text-[10px] uppercase tracking-[0.1em] transition-colors hover:border-[var(--color-lime)] hover:text-[var(--color-lime)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--color-lime)]">
             <Maximize2 className="size-3.5" aria-hidden="true" /> Reorganizar
           </button>
         </div>
@@ -346,16 +346,16 @@ export function ToolGraph({ tools, onSelectTag }: { tools: CatalogTool[]; onSele
             onPointerCancel={onPointerUp}
           />
           <div className="pointer-events-none absolute bottom-4 left-4 flex items-center gap-2 bg-black/40 px-3 py-2 font-mono text-[9px] uppercase tracking-[0.12em] text-white/55 backdrop-blur-sm">
-            <Network className="size-3 text-[#4dcffb]" aria-hidden="true" /> Círculo azul filtra a lista · centro mostra tudo
+            <Network className="size-3 text-[var(--color-lime)]" aria-hidden="true" /> Círculo em lima filtra a lista · centro mostra tudo
           </div>
           {hoveredId ? <span className="sr-only" aria-live="polite">{graph.nodes.find((node) => node.id === hoveredId)?.label}</span> : null}
         </div>
-        <aside className="order-1 flex h-[500px] min-h-[430px] flex-col bg-[#0d131d] lg:order-2 lg:h-[610px]" aria-label="Lista integrada ao mapa">
+        <aside className="order-1 flex h-[500px] min-h-[430px] flex-col bg-[#0f0f0f] lg:order-2 lg:h-[610px]" aria-label="Lista integrada ao mapa">
           <div className="border-b border-white/10 p-5 md:p-6">
-            <p className="font-mono text-[9px] uppercase tracking-[0.14em] text-[#4dcffb]">Selecionada no mapa</p>
+            <p className="font-mono text-[9px] uppercase tracking-[0.14em] text-[var(--color-lime)]">Selecionada no mapa</p>
             <div className="mt-4 grid grid-cols-[96px_1fr] gap-4">
               <div className="relative min-h-24 overflow-hidden border border-white/10 bg-white/5">
-                {activeTool.screenshot_url ? <Image src={activeTool.screenshot_url} alt={`Tela de ${activeTool.name}`} fill unoptimized sizes="96px" className="object-cover object-top" /> : <Network className="absolute inset-0 m-auto size-7 text-[#4dcffb]" />}
+                {activeTool.screenshot_url ? <Image src={activeTool.screenshot_url} alt={`Tela de ${activeTool.name}`} fill unoptimized sizes="96px" className="object-cover object-top" /> : <Network className="absolute inset-0 m-auto size-7 text-[var(--color-lime)]" />}
               </div>
               <div className="min-w-0">
                 <p className="truncate font-mono text-[9px] uppercase tracking-[0.1em] text-white/45">{activeTool.tags.slice(0, 2).map((tag) => tag.name).join(" · ") || "Ferramenta"}</p>
@@ -363,18 +363,18 @@ export function ToolGraph({ tools, onSelectTag }: { tools: CatalogTool[]; onSele
                 <p className="mt-2 line-clamp-2 text-xs leading-5 text-white/55">{activeTool.short_description || activeTool.description.replace(/<[^>]+>/g, " ").slice(0, 150)}</p>
               </div>
             </div>
-            <Link href={`/tool/${activeTool.slug}`} className="mt-4 inline-flex min-h-10 w-full items-center justify-between border-t border-white/15 pt-3 text-sm font-semibold text-white transition-colors hover:text-[#4dcffb] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#4dcffb]">
+            <Link href={`/tool/${activeTool.slug}`} className="mt-4 inline-flex min-h-10 w-full items-center justify-between border-t border-white/15 pt-3 text-sm font-semibold text-white transition-colors hover:text-[var(--color-lime)] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[var(--color-lime)]">
               Abrir página completa <ArrowRight className="size-4" />
             </Link>
           </div>
           <div className="flex items-center justify-between border-b border-white/10 px-5 py-3 font-mono text-[9px] uppercase tracking-[0.12em] text-white/45">
             <span>Ferramentas neste mapa</span><span>{graph.tools.length}</span>
           </div>
-          <div className="min-h-0 flex-1 overflow-y-auto overscroll-contain [scrollbar-color:#31445d_transparent]" role="list" aria-label="Ferramentas exibidas no grafo">
+          <div className="min-h-0 flex-1 overflow-y-auto overscroll-contain [scrollbar-color:#3a3a3a_transparent]" role="list" aria-label="Ferramentas exibidas no grafo">
             {graph.tools.map((tool, index) => {
               const selected = activeTool.id === tool.id;
               return (
-                <button key={tool.id} type="button" aria-pressed={selected} onClick={() => selectTool(tool)} className={`group grid w-full grid-cols-[56px_1fr_22px] items-center gap-3 border-b border-white/[.07] p-3 text-left transition-colors focus-visible:outline-2 focus-visible:outline-inset focus-visible:outline-[#4dcffb] ${selected ? "bg-[#206ff6] text-white" : "text-white/65 hover:bg-white/[.05] hover:text-white"}`}>
+                <button key={tool.id} type="button" aria-pressed={selected} onClick={() => selectTool(tool)} className={`group grid w-full grid-cols-[56px_1fr_22px] items-center gap-3 border-b border-white/[.07] p-3 text-left transition-colors focus-visible:outline-2 focus-visible:outline-inset focus-visible:outline-[var(--color-lime)] ${selected ? "bg-[var(--color-lime)] text-[var(--color-ink)]" : "text-white/65 hover:bg-white/[.05] hover:text-white"}`}>
                   <span className="relative aspect-[16/11] overflow-hidden bg-white/5">
                     {tool.screenshot_url ? <Image src={tool.screenshot_url} alt="" fill unoptimized sizes="56px" className="object-cover object-top" /> : <Network className="absolute inset-0 m-auto size-4" />}
                   </span>

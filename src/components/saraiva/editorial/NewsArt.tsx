@@ -48,10 +48,10 @@ export function NewsArt({ title, image, priority = false }: { title: string; ima
         sizes="(max-width: 768px) 100vw, 50vw"
         className="object-cover"
       />
-      <div className={`absolute inset-y-0 left-0 w-[61%] ${safeImage ? "bg-[linear-gradient(90deg,rgba(17,19,21,.94)_0%,rgba(17,19,21,.76)_72%,rgba(17,19,21,0)_100%)]" : "bg-[linear-gradient(90deg,rgba(243,241,234,.98)_0%,rgba(243,241,234,.95)_72%,rgba(243,241,234,0)_100%)]"}`} />
-      <div aria-hidden="true" className="news-art__signal absolute left-0 top-0 h-2 w-[42%] bg-[var(--signal-blue)]" />
+      <div className={`absolute inset-y-0 left-0 w-[61%] ${safeImage ? "bg-[linear-gradient(90deg,rgba(0,0,0,.94)_0%,rgba(0,0,0,.76)_72%,rgba(0,0,0,0)_100%)]" : "bg-[linear-gradient(90deg,rgba(255,248,230,.98)_0%,rgba(255,248,230,.95)_72%,rgba(255,248,230,0)_100%)]"}`} />
+      <div aria-hidden="true" className="news-art__signal absolute left-0 top-0 h-2 w-[42%]" />
       <div className={`absolute inset-0 flex max-w-[61%] flex-col justify-between p-[5%] ${safeImage ? "text-white" : "text-[var(--signal-ink)]"}`}>
-        <div className="flex items-center justify-between gap-3 font-mono text-[clamp(7px,0.7vw,10px)] font-bold uppercase tracking-[0.16em] text-[var(--signal-blue)]">
+        <div className={`flex items-center justify-between gap-3 font-mono text-[clamp(7px,0.7vw,10px)] font-bold uppercase tracking-[0.16em] ${safeImage ? "text-[var(--color-lime)]" : "text-[var(--color-ink)]"}`}>
           <span>Saraiva.AI · {FAMILY_LABELS[family]}</span><span>#{issue}</span>
         </div>
         <p className="line-clamp-4 text-[clamp(14px,1.8vw,30px)] font-semibold leading-[.96] tracking-[-0.055em]">

@@ -71,7 +71,7 @@ export function StackingToolCards({ tools }: { tools: CatalogTool[] }) {
           return (
             <div key={tool.id} ref={(element) => { cardRefs.current[index] = element; }} className="sticky mb-4" style={{ top: STICKY_TOP + index * STICKY_STEP, zIndex: 10 + index }}>
               <div style={{ transform: `scale(${1 - currentDepth * 0.035}) translateY(${currentDepth * 7}px)`, transformOrigin: "top center", transition: "transform 300ms cubic-bezier(.16,1,.3,1)" }}>
-                <Link href={`/tool/${tool.slug}`} className="group grid min-h-[340px] overflow-hidden border border-[var(--signal-border)] bg-[var(--signal-paper)] shadow-[0_18px_70px_rgba(17,19,21,.08)] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[var(--signal-blue)] md:grid-cols-[.85fr_1.15fr]">
+                <Link href={`/tool/${tool.slug}`} className="group grid min-h-[340px] overflow-hidden border border-[var(--signal-border)] bg-[var(--signal-paper)] shadow-[0_18px_70px_rgba(0,0,0,.08)] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[var(--signal-blue)] md:grid-cols-[.85fr_1.15fr]">
                   <div className="flex flex-col p-6 md:p-9">
                     <div className="flex items-center justify-between gap-4 font-mono text-[10px] uppercase tracking-[0.12em] text-[var(--signal-muted)]"><span>{String(index + 1).padStart(2, "0")} · {tool.tags[0]?.name || "Ferramenta"}</span><ArrowUpRight className="size-4 transition-transform group-hover:-translate-y-1 group-hover:translate-x-1" /></div>
                     <h4 className="mt-14 max-w-xl text-4xl font-semibold leading-[.95] tracking-[-0.055em] md:text-6xl">{tool.name}</h4>

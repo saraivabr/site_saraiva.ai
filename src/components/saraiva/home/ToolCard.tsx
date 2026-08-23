@@ -36,17 +36,17 @@ export function ToolCard({ tool }: ToolCardProps) {
             unoptimized={tool.imageSrc?.startsWith("http")}
           />
 
-          <span className="absolute bottom-3 left-3 flex translate-y-1 items-center gap-1.5 rounded-full bg-[rgba(16,19,24,0.82)] px-3 py-1.5 text-xs font-medium text-white opacity-0 backdrop-blur-sm transition-[opacity,transform] duration-300 group-hover:translate-y-0 group-hover:opacity-100 group-focus-visible:translate-y-0 group-focus-visible:opacity-100">
+          <span className="absolute bottom-3 left-3 flex translate-y-1 items-center gap-1.5 rounded-full bg-[rgba(0,0,0,0.82)] px-3 py-1.5 text-xs font-medium text-white opacity-0 backdrop-blur-sm transition-[opacity,transform] duration-300 group-hover:translate-y-0 group-hover:opacity-100 group-focus-visible:translate-y-0 group-focus-visible:opacity-100">
             Ver ferramenta
             <ExternalLinkIcon aria-hidden="true" className="size-3.5" strokeWidth={1.75} />
           </span>
         </div>
 
-        <div className="min-h-[168px] rounded-b-[24px] p-6 transition-colors duration-500 group-hover:bg-[rgba(16,19,24,0.965)]">
+        <div className="min-h-[168px] rounded-b-[24px] p-6 transition-colors duration-500 group-hover:bg-[rgba(0,0,0,0.965)]">
           <h3 className="text-[18px]/[24.75px] font-medium tracking-[-0.45px] text-foreground transition-colors duration-500 group-hover:text-primary">
             {tool.name}
           </h3>
-          <p className="mt-[10px] overflow-hidden text-[14px]/[22.75px] text-[rgb(79,86,100)] transition-colors duration-500 [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:2] group-hover:text-[rgb(233,234,236)]">
+          <p className="mt-[10px] overflow-hidden text-[14px]/[22.75px] text-[var(--color-ink-muted)] transition-colors duration-500 [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:2] group-hover:text-[var(--color-cream)]">
             {tool.description}
           </p>
 
@@ -54,7 +54,7 @@ export function ToolCard({ tool }: ToolCardProps) {
             <div className="mt-4 flex flex-wrap gap-1.5">
               {tags.map((tag) => (
                 <span
-                  className="rounded-full bg-black/[0.05] px-2.5 py-1 text-[10px]/[14px] font-medium text-[rgb(79,86,100)] transition-colors duration-500 group-hover:bg-white/10 group-hover:text-[rgb(233,234,236)]"
+                  className="rounded-full bg-black/[0.05] px-2.5 py-1 text-[10px]/[14px] font-medium text-[var(--color-ink-muted)] transition-colors duration-500 group-hover:bg-white/10 group-hover:text-[var(--color-cream)]"
                   key={tag}
                 >
                   {tag}
@@ -68,7 +68,7 @@ export function ToolCard({ tool }: ToolCardProps) {
       <button
         aria-label={isFavorite ? `Remover ${tool.name} dos favoritos` : `Favoritar ${tool.name}`}
         aria-pressed={isFavorite}
-        className="absolute right-3 top-3 z-10 flex size-9 items-center justify-center rounded-full bg-[rgba(16,19,24,0.62)] text-white backdrop-blur-sm transition-colors duration-300 hover:bg-[rgba(16,19,24,0.82)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
+        className="absolute right-3 top-3 z-10 flex size-9 items-center justify-center rounded-full bg-[rgba(0,0,0,0.62)] text-white backdrop-blur-sm transition-colors duration-300 hover:bg-[rgba(0,0,0,0.82)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
         onClick={() => setIsFavorite((favorite) => !favorite)}
         type="button"
       >

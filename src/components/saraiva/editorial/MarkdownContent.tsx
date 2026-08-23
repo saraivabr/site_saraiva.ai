@@ -15,19 +15,19 @@ export function MarkdownContent({ content }: { content: string }) {
   const blocks = content.trim().split(/\n{2,}/);
 
   return (
-    <div className="space-y-6 text-[17px] leading-8 text-[rgb(55,59,66)]">
+    <div className="space-y-6 text-[17px] leading-8 text-[var(--color-ink-muted)]">
       {blocks.map((rawBlock, index) => {
         const block = rawBlock.trim();
         if (block.startsWith("### ")) {
           return (
-            <h3 key={index} className="pt-3 text-2xl font-bold tracking-[-0.03em] text-[rgb(18,20,24)]">
+            <h3 key={index} className="pt-3 text-2xl font-bold tracking-[-0.03em] text-[var(--color-ink)]">
               {inlineMarkdown(block.slice(4))}
             </h3>
           );
         }
         if (block.startsWith("## ")) {
           return (
-            <h2 key={index} className="pt-6 text-3xl font-bold tracking-[-0.035em] text-[rgb(18,20,24)]">
+            <h2 key={index} className="pt-6 text-3xl font-bold tracking-[-0.035em] text-[var(--color-ink)]">
               {inlineMarkdown(block.slice(3))}
             </h2>
           );
@@ -35,7 +35,7 @@ export function MarkdownContent({ content }: { content: string }) {
         const lines = block.split("\n");
         if (lines.every((line) => /^[-*] /.test(line))) {
           return (
-            <ul key={index} className="list-disc space-y-2 pl-6 marker:text-[#0085FE]">
+            <ul key={index} className="list-disc space-y-2 pl-6 marker:text-[var(--color-ink)]">
               {lines.map((line) => <li key={line}>{inlineMarkdown(line.slice(2))}</li>)}
             </ul>
           );

@@ -15,7 +15,7 @@ export function EditorialCard({ item, compact = false }: { item: EditorialCardIt
       {isNews ? (
         <NewsArt title={item.title} image={item.image} />
       ) : (
-        <div className="relative aspect-video overflow-hidden bg-[rgb(238,239,241)]">
+        <div className="relative aspect-video overflow-hidden bg-[var(--color-cream-deep)]">
           {item.image ? (
             <Image
               src={item.image}
@@ -26,9 +26,9 @@ export function EditorialCard({ item, compact = false }: { item: EditorialCardIt
               unoptimized={item.image.startsWith("http")}
             />
           ) : (
-            <div className="absolute inset-0 bg-gradient-to-br from-[rgb(224,226,230)] to-[rgb(245,245,246)]" />
+            <div className="absolute inset-0 bg-gradient-to-br from-[var(--color-cream-deep)] to-[var(--color-cream)]" />
           )}
-          <span className="absolute left-3 top-3 rounded-md bg-white/95 px-2 py-1 text-[10px] font-bold uppercase tracking-[0.1em] text-[rgb(35,38,44)] shadow-sm backdrop-blur">
+          <span className="absolute left-3 top-3 rounded-md bg-white/95 px-2 py-1 text-[10px] font-bold uppercase tracking-[0.1em] text-[var(--color-ink)] shadow-sm backdrop-blur">
             {sourceLabel(item.label)}
           </span>
         </div>

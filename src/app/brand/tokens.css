@@ -1,0 +1,228 @@
+/* ═══════════════════════════════════════════════════════════════
+   Saraiva.AI — tokens da marca
+   capability: brand.design_system · canônico eleito em 2026-08-23
+
+   Origem: a landing do Método 1K (1k.saraiva.ai). Creme, lima e tinta.
+   Consome-se importando este arquivo DEPOIS do tailwindcss.
+
+   REGRA DE CONTRASTE — a armadilha número um deste sistema:
+   lima é FUNDO, nunca texto. #F5FF6B sobre creme dá 1.1:1 e some.
+   Precisa de cor em texto? Use --color-ink (preto) com peso, ou
+   --color-price (#CC3366, 5.6:1 sobre creme) para ênfase pontual.
+   ═══════════════════════════════════════════════════════════════ */
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+
+  /* paleta da marca */
+  --color-cream: #fff8e6;
+  --color-cream-deep: #fdf3d8;
+  --color-lime: #f5ff6b;
+  --color-lime-soft: #f9ffa6;
+  --color-lime-pale: #ffffc5;
+  --color-ink: #000000;
+  --color-ink-soft: #171717;
+  --color-ink-muted: #383737;
+  --color-price: #cc3366;
+
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-mono-stack), ui-monospace, monospace;
+  --font-heading: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+
+  /* ponte para os primitivos shadcn/base-ui */
+  --color-ring: var(--ring);
+  --color-input: var(--input);
+  --color-border: var(--border);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-popover: var(--card);
+  --color-popover-foreground: var(--card-foreground);
+
+  --radius-sm: calc(var(--radius) * 0.6);
+  --radius-md: calc(var(--radius) * 0.8);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) * 1.4);
+  --radius-2xl: calc(var(--radius) * 1.8);
+  --radius-3xl: calc(var(--radius) * 2.2);
+  --radius-4xl: calc(var(--radius) * 2.6);
+}
+
+:root {
+  color-scheme: light;
+
+  --background: #fff8e6;
+  --foreground: #000000;
+  --card: #ffffff;
+  --card-foreground: #000000;
+  --primary: #000000;
+  --primary-foreground: #fff8e6;
+  --secondary: #f5ff6b;
+  --secondary-foreground: #000000;
+  --muted: rgba(0, 0, 0, 0.05);
+  --muted-foreground: rgba(0, 0, 0, 0.62);
+  --accent: #f5ff6b;
+  --accent-foreground: #000000;
+  --destructive: #cc3366;
+  --border: rgba(0, 0, 0, 0.1);
+  --input: rgba(0, 0, 0, 0.12);
+  --ring: rgba(0, 0, 0, 0.35);
+  --radius: 0.625rem;
+
+  /* medidas */
+  --grid-cell: 55px;
+  --grid-line: rgba(35, 35, 35, 0.03);
+  --shell: 1140px;
+  --shell-wide: 1320px;
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+
+  html {
+    @apply font-sans;
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    margin: 0;
+    background-color: var(--color-cream);
+    color: var(--color-ink);
+    background-image:
+      repeating-linear-gradient(
+        to right,
+        var(--grid-line) 0px,
+        var(--grid-line) 1px,
+        transparent 1px,
+        transparent var(--grid-cell)
+      ),
+      repeating-linear-gradient(
+        var(--grid-line) 0px,
+        var(--grid-line) 1px,
+        transparent 1px,
+        transparent var(--grid-cell)
+      );
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    overflow-x: clip;
+  }
+
+  ::selection {
+    background: var(--color-lime);
+    color: var(--color-ink);
+  }
+}
+
+@layer components {
+  /* trecho grifado no título — o gesto que identifica a marca */
+  .mark {
+    background: var(--color-lime);
+    box-decoration-break: clone;
+    -webkit-box-decoration-break: clone;
+    padding: 0 0.06em;
+  }
+
+  /* o botão: pill com gradiente radial claro no topo */
+  .btn-lime {
+    background-image:
+      radial-gradient(
+        89.05% 36.95% at 50% 1.43%,
+        rgba(245, 255, 107, 0) 0%,
+        #f5ff6b 100%
+      ),
+      linear-gradient(0deg, #f9ffa6, #f9ffa6);
+    box-shadow:
+      0 1px 0 rgba(255, 255, 255, 0.6) inset,
+      0 8px 24px -12px rgba(120, 130, 20, 0.55);
+  }
+
+  .btn-lime:hover {
+    filter: brightness(1.04);
+    transform: translateY(-1px);
+  }
+
+  .btn-lime:active {
+    transform: translateY(0);
+  }
+
+  /* rótulo curto acima de um título — mono, caixa alta, tinta */
+  .kicker {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--color-ink-muted);
+  }
+
+  /* faixa de conteúdo na largura do sistema */
+  .shell {
+    width: 100%;
+    max-width: var(--shell);
+    margin-inline: auto;
+    padding-inline: 1.25rem;
+  }
+
+  @media (min-width: 640px) {
+    .shell {
+      padding-inline: 2rem;
+    }
+  }
+
+  .shell--wide {
+    max-width: var(--shell-wide);
+  }
+}
+
+/* reveal na entrada — nativo onde houver suporte, sem JS */
+@media (prefers-reduced-motion: no-preference) {
+  @supports (animation-timeline: view()) {
+    .reveal {
+      animation: reveal-in linear both;
+      animation-timeline: view();
+      animation-range: entry 4% cover 26%;
+    }
+  }
+}
+
+@keyframes reveal-in {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes marquee-x {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.marquee-track {
+  animation: marquee-x 32s linear infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .marquee-track {
+    animation: none;
+  }
+}
