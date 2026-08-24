@@ -7,6 +7,7 @@ import type {
   CatalogTool,
   CatalogVideo,
   InstagramVideo,
+  PublicOffer,
 } from "@/components/saraiva/catalog/data";
 import { sanitizeLegacyBrandText } from "@/components/saraiva/catalog/data";
 import { OWNED_ARTICLE_SLUG, ownedArticlePilot } from "@/lib/owned-article-pilot";
@@ -17,12 +18,6 @@ type ToolWithRelations = Omit<CatalogTool, "tags"> & {
   editorial_tool_tags?: Array<{ editorial_tags: CatalogTag | null }>;
 };
 
-type ToolSummaryWithRelations = Pick<
-  CatalogTool,
-  "id" | "name" | "slug" | "short_description" | "screenshot_url"
-> & {
-  editorial_tool_tags?: Array<{ editorial_tags: CatalogTag | null }>;
-};
 
 type ArticleRow = Pick<
   Article,
@@ -79,37 +74,17 @@ function normalizeTool(tool: ToolWithRelations): CatalogTool {
   };
 }
 
-function normalizeToolSummary(tool: ToolSummaryWithRelations): CatalogTool {
-  return {
-    id: tool.id,
-    name: tool.name,
-    slug: tool.slug,
-    short_description: tool.short_description,
-    description: "",
-    url: "",
-    screenshot_url: tool.screenshot_url,
-    video_url: null,
-    pricing_type: null,
-    additional_context: null,
-    headquarters: null,
-    country_code: null,
-    user_reviews: null,
-    tags: (tool.editorial_tool_tags ?? []).flatMap((relation) => relation.editorial_tags ? [relation.editorial_tags] : []),
-  };
-}
 
 export async function getHomeData() {
   try {
-    const [tools, tags, articles, reels] = await Promise.all([
-      query<ToolSummaryWithRelations>("editorial_tools?select=id,name,slug,short_description,screenshot_url,editorial_tool_tags(editorial_tags(id,name,slug))&is_published=eq.true&order=is_featured.desc,created_at.desc"),
-      query<CatalogTag>("editorial_tags?select=id,name,slug&order=name.asc"),
+    const [articles, reels] = await Promise.all([
       query<ArticleRow>("editorial_articles?select=id,slug,title,summary,image_url,author,source_name,source_system,published_at&is_published=eq.true&source_system=eq.saraiva-owned&order=published_at.desc.nullslast,display_order.asc&limit=6"),
       query<InstagramVideo>("editorial_reels?select=id,url,caption,thumbnail_url,video_url,username,duration,posted_at&is_published=eq.true&source_system=eq.saraiva-instagram&order=posted_at.desc.nullslast,display_order.asc&limit=6"),
     ]);
-    return { tools: tools.map(normalizeToolSummary), tags, articles: articles.map((article) => normalizeArticle(article)), reels, available: true };
+    return { articles: articles.map((article) => normalizeArticle(article)), reels, available: true };
   } catch (error) {
     console.error("Falha ao carregar catálogo público", error instanceof Error ? error.message : "erro desconhecido");
-    return { tools: [] as CatalogTool[], tags: [] as CatalogTag[], articles: [] as Article[], reels: [] as InstagramVideo[], available: false };
+    return { articles: [] as Article[], reels: [] as InstagramVideo[], available: false };
   }
 }
 
@@ -158,4 +133,18 @@ export async function getVideoBySlug(slug: string) {
   const rows = await query<CatalogVideo>(`editorial_videos?select=*&is_published=eq.true&source_system=eq.saraiva-video&slug=eq.${encodeSlug(slug)}&limit=1`);
   const video = rows[0];
   return video ? { ...video, title: sanitizeLegacyBrandText(video.title), description: sanitizeLegacyBrandText(video.description), story_content: sanitizeLegacyBrandText(video.story_content) } : null;
+}
+
+export async function getPublicOffers() {
+  try {
+    return await query<PublicOffer>("editorial_offers?select=slug,name,offer_type,buyer,problem,delivery,public_status,price_range,updated_at&is_published=eq.true&order=updated_at.desc");
+  } catch (error) {
+    console.error("Falha ao carregar soluções públicas", error instanceof Error ? error.message : "erro desconhecido");
+    return [] as PublicOffer[];
+  }
+}
+
+export async function getPublicOfferBySlug(slug: string) {
+  const rows = await query<PublicOffer>(`editorial_offers?select=slug,name,offer_type,buyer,problem,delivery,public_status,price_range,updated_at&is_published=eq.true&slug=eq.${encodeSlug(slug)}&limit=1`);
+  return rows[0] ?? null;
 }
