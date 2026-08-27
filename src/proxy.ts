@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 
 export function proxy(request: NextRequest) {
-  if (process.env.SITE_COMING_SOON === "false") {
+  if (process.env.SITE_COMING_SOON !== "true") {
     return NextResponse.next();
   }
 

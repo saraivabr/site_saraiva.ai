@@ -1,31 +1,25 @@
-import Image from "next/image";
 import Link from "next/link";
 
-const pillars = [
-  { number: "01", title: "Entenda", text: "Curadoria editorial que traduz movimentos de IA sem transformar novidade em espetáculo." },
-  { number: "02", title: "Construa", text: "Ferramentas e sistemas selecionados para sair da pesquisa e chegar a um fluxo funcional." },
-  { number: "03", title: "Venda", text: "Aplicações orientadas a negócio, aquisição, atendimento e operação com prova observável." },
-  { number: "04", title: "Implemente", text: "A Saraiva.AI conecta estratégia, software e automação no ambiente real da empresa." },
+const principles = [
+  { number: "01", title: "Comece pelo desafio", text: "A pessoa não precisa aprender nossa arquitetura. Ela precisa explicar, em linguagem normal, o que quer conseguir." },
+  { number: "02", title: "Construa durante o caminho", text: "Conhecimento aparece quando é necessário e imediatamente vira decisão, ação ou artefato." },
+  { number: "03", title: "Termine com prova", text: "Uma boa resposta não basta. O desafio termina quando existe algo criado, decidido, aprendido ou resolvido." },
 ] as const;
 
 export function AboutPage() {
   return (
-    <main className="bg-[var(--color-cream)] text-[var(--color-ink)]">
-      <section className="relative overflow-hidden bg-[var(--color-ink)] px-6 py-24 text-white md:py-32">
-        <div aria-hidden="true" className="absolute inset-0 bg-[radial-gradient(circle_at_20%_20%,rgba(245,255,107,0.18),transparent_38%)]" />
-        <div className="relative mx-auto max-w-6xl">
-          <Image src="/brand/saraiva-ai-logo.png" alt="Saraiva.AI" width={220} height={64} className="h-12 w-auto brightness-0 invert" priority />
-          <p className="mt-12 text-xs font-bold uppercase tracking-[0.2em] text-[var(--color-lime)]">Sobre a Saraiva.AI</p>
-          <h1 className="mt-5 max-w-5xl text-5xl font-semibold uppercase leading-[0.98] tracking-[-0.055em] md:text-7xl lg:text-8xl">Conhecimento de IA só vale quando vira capacidade.</h1>
-          <p className="mt-8 max-w-2xl text-lg leading-8 text-white/55">A Saraiva.AI é uma camada de curadoria, construção e implementação para pessoas e empresas que querem usar inteligência artificial com direção.</p>
+    <main className="product-page">
+      <section className="product-shell py-20 md:py-32">
+        <span className="product-kicker">Sobre a Saraiva.AI</span>
+        <h1 className="mt-7 max-w-5xl text-[clamp(3.8rem,9vw,8.5rem)] font-semibold leading-[.82] tracking-[-.078em]">IA deveria aumentar aquilo que você consegue <span className="text-[var(--product-blue)]">fazer.</span></h1>
+        <p className="mt-10 max-w-2xl text-lg leading-8 text-[var(--product-muted)]">A Saraiva.AI é um ambiente de resolução de desafios. Ela entende o objetivo, cria um caminho, ensina o necessário e executa junto até existir um resultado.</p>
+      </section>
+      <section className="border-y border-[var(--product-line)] bg-white py-20 md:py-28">
+        <div className="product-shell grid gap-px bg-[var(--product-line)] md:grid-cols-3">
+          {principles.map((principle) => <article key={principle.number} className="min-h-80 bg-white p-8"><span className="font-mono text-[10px] font-bold text-[var(--product-blue)]">{principle.number}</span><h2 className="mt-24 text-3xl font-semibold tracking-[-.05em]">{principle.title}</h2><p className="mt-4 text-sm leading-6 text-[var(--product-muted)]">{principle.text}</p></article>)}
         </div>
       </section>
-      <section className="mx-auto max-w-6xl px-6 py-20 md:py-28">
-        <div className="grid gap-6 md:grid-cols-2">
-          {pillars.map((pillar) => <article key={pillar.number} className="rounded-3xl border border-black/8 bg-white p-8 md:p-10"><span className="mark text-5xl font-semibold tracking-[-0.06em] text-[var(--color-ink)]">{pillar.number}</span><h2 className="mt-8 text-3xl font-semibold tracking-[-0.04em]">{pillar.title}</h2><p className="mt-3 max-w-lg leading-7 text-black/55">{pillar.text}</p></article>)}
-        </div>
-      </section>
-      <section className="border-t border-black/10 px-6 py-20"><div className="mx-auto grid max-w-6xl gap-8 md:grid-cols-[1fr_auto] md:items-end"><div><p className="text-xs font-bold uppercase tracking-[0.18em] text-[var(--color-ink-muted)]">O que defendemos</p><h2 className="mt-4 max-w-3xl text-4xl font-semibold tracking-[-0.045em] md:text-6xl">Menos operação repetitiva. Mais direção humana.</h2></div><Link href="/#newsletter" className="btn-lime rounded-full px-7 py-4 text-center text-sm font-bold text-[var(--color-ink)]">Receber a curadoria</Link></div></section>
+      <section className="product-shell py-20 md:py-28"><span className="product-kicker">Nossa promessa</span><h2 className="mt-5 max-w-4xl text-[clamp(3rem,7vw,7rem)] font-semibold leading-[.87] tracking-[-.075em]">Comece com um desafio. Termine com algo resolvido.</h2><Link href="/#novo" className="challenge-primary-button mt-10">Resolver meu desafio →</Link></section>
     </main>
   );
 }

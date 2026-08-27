@@ -1,17 +1,5 @@
-import { HomeExperience } from "@/components/saraiva/home/HomeExperience";
-import { getHomeData, getPublicOffers } from "@/lib/catalog.server";
+import { PublicHome } from "@/components/saraiva/challenge/PublicHome";
 
-export const revalidate = 300;
-
-export default async function Home() {
-  const [{ articles, reels }, offers] = await Promise.all([getHomeData(), getPublicOffers()]);
-  const cards = offers.map(({ slug, name, problem, offer_type, price_range, public_status }) => ({
-    slug,
-    name,
-    problem,
-    offer_type,
-    price_range,
-    public_status,
-  }));
-  return <HomeExperience offers={cards} articles={articles} reels={reels} />;
+export default function Home() {
+  return <PublicHome />;
 }

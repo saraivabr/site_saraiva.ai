@@ -2,7 +2,7 @@
   "framework": "SaraivaOS",
   "version": "1.0.0",
   "createdAt": "2026-08-12T17:41:16.226Z",
-  "updatedAt": "2026-08-12T23:42:55.869Z",
+  "updatedAt": "2026-08-27T00:30:57.675Z",
   "project": {
     "id": "project-20260812174116-d63169ac",
     "name": "Saraiva.AI — site e acervo próprios",
@@ -14,9 +14,9 @@
     "completedStages": []
   },
   "navigation": {
-    "currentRoute": "Operação autoral conteúdo para negócio em piloto supervisionado",
-    "nextArtifact": "Roteiro final e capa composta por código após aprovação humana",
-    "blocker": "Publicação bloqueada até fechar gates P0 de autoria, proveniência, aprovação e atribuição"
+    "currentRoute": "Provar o loop desafio -> interpretacao -> execucao -> artefato -> resultado",
+    "nextArtifact": "Canario com usuarios reais apos autorizacao de deploy",
+    "blocker": ""
   },
   "identity": {
     "business": "",
@@ -25,7 +25,7 @@
     "objective": "Migrar o conteúdo público para o Supabase Saraiva.AI e reconstruir o site com identidade, experiência e movimento próprios"
   },
   "evidenceSummary": {
-    "observed": 12,
+    "observed": 15,
     "provided": 0,
     "inferred": 0,
     "hypothesis": 0,
@@ -33,8 +33,7 @@
   },
   "methods": {
     "active": [
-      "Maestri",
-      "Design UX/UI",
+      "Jobs/minimalismo",
       "SaraivaOS"
     ],
     "considered": []
@@ -83,6 +82,20 @@
       "type": "proof",
       "proof": "1267 mídias próprias e zero referências ao Storage de origem",
       "createdAt": "2026-08-12T18:53:17.350Z"
+    },
+    {
+      "id": "artifact-20260827003057-51b565bf",
+      "path": "src/components/saraiva/challenge/PublicHome.tsx",
+      "type": "product-home",
+      "proof": "Home centrada em desafio validada em desktop e mobile",
+      "createdAt": "2026-08-27T00:30:57.613Z"
+    },
+    {
+      "id": "artifact-20260827003057-e9d9cc9c",
+      "path": "src/components/saraiva/challenge/ChallengeWorkspace.tsx",
+      "type": "challenge-workspace",
+      "proof": "Conversa, artefato, progresso e registro de resultado validados ponta a ponta",
+      "createdAt": "2026-08-27T00:30:57.675Z"
     }
   ],
   "sessions": [

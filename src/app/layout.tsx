@@ -18,12 +18,12 @@ const mono = IBM_Plex_Mono({
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://saraiva.ai"),
-  title: { default: "Saraiva.AI — Sinal para quem precisa decidir", template: "%s — Saraiva.AI" },
-  description: "Notícias, ferramentas e sistemas organizados para transformar inteligência artificial em repertório, trabalho e resultado.",
+  title: { default: "Saraiva.AI — Comece com um desafio", template: "%s — Saraiva.AI" },
+  description: "Transforme desafios em soluções reais usando inteligência artificial. Entenda, construa, teste e chegue a um resultado.",
   authors: [{ name: "Saraiva.AI" }],
   icons: { icon: "/brand/favicon.png", apple: "/brand/favicon.png" },
-  openGraph: { title: "Saraiva.AI — Sinal para quem precisa decidir", description: "Inteligência artificial organizada para virar decisão.", type: "website", locale: "pt_BR", siteName: "Saraiva.AI", url: "https://saraiva.ai" },
-  twitter: { card: "summary", title: "Saraiva.AI", description: "Inteligência artificial organizada para virar decisão." },
+  openGraph: { title: "Saraiva.AI — Comece com um desafio", description: "Comece com um desafio. Termine com algo resolvido.", type: "website", locale: "pt_BR", siteName: "Saraiva.AI", url: "https://saraiva.ai" },
+  twitter: { card: "summary", title: "Saraiva.AI", description: "Comece com um desafio. Termine com algo resolvido." },
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
