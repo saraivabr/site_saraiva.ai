@@ -10,43 +10,23 @@ import type {
   PublicOffer,
 } from "@/components/saraiva/catalog/data";
 import { sanitizeLegacyBrandText } from "@/components/saraiva/catalog/data";
+import { sql } from "@/lib/db";
 import { OWNED_ARTICLE_SLUG, ownedArticlePilot } from "@/lib/owned-article-pilot";
 
-const REVALIDATE_SECONDS = 300;
-
-type ToolWithRelations = Omit<CatalogTool, "tags"> & {
-  editorial_tool_tags?: Array<{ editorial_tags: CatalogTag | null }>;
-};
-
+type ToolWithRelations = Omit<CatalogTool, "tags"> & { tags?: CatalogTag[] | null };
 
 type ArticleRow = Pick<
   Article,
   "id" | "slug" | "title" | "summary" | "image_url" | "author" | "source_name" | "source_system" | "published_at"
 > & Partial<Pick<Article, "story_content" | "content_text" | "url">>;
 
-function catalogConfig() {
-  const url = process.env.SUPABASE_APP_URL;
-  const key = process.env.SUPABASE_SERVICE_ROLE_KEY;
-  if (!url || !key) throw new Error("Catálogo indisponível: configuração ausente");
-  return { url: url.replace(/\/$/, ""), key };
-}
+// Colunas públicas das ofertas. O SELECT é explícito de propósito: campos
+// internos como potential e source_record_id nunca devem sair daqui.
+const COLUNAS_OFERTA =
+  "slug, name, offer_type, buyer, problem, delivery, public_status, price_range, updated_at";
 
-async function query<T>(path: string): Promise<T[]> {
-  if (process.env.CATALOG_FORCE_FAILURE === "true") {
-    throw new Error("Falha controlada do catálogo");
-  }
-  const { url, key } = catalogConfig();
-  const response = await fetch(`${url}/rest/v1/${path}`, {
-    headers: { apikey: key, Authorization: `Bearer ${key}` },
-    next: { revalidate: REVALIDATE_SECONDS, tags: ["catalogo-publico"] },
-  });
-  if (!response.ok) throw new Error(`Catálogo indisponível (${response.status})`);
-  return (await response.json()) as T[];
-}
-
-function encodeSlug(slug: string) {
-  return encodeURIComponent(slug.replace(/[^a-z0-9-]/gi, ""));
-}
+const ARTIGO_PUBLICADO =
+  "is_published = true and source_system = 'saraiva-owned'";
 
 function ownedImageUrl(imageUrl: string | null) {
   return imageUrl?.startsWith("/images/news/") ? imageUrl : null;
@@ -66,20 +46,27 @@ function normalizeArticle(article: ArticleRow): Article {
 }
 
 function normalizeTool(tool: ToolWithRelations): CatalogTool {
-  const { editorial_tool_tags: relations = [], ...fields } = tool;
-  return {
-    ...fields,
-    url: fields.url,
-    tags: relations.flatMap((relation) => relation.editorial_tags ? [relation.editorial_tags] : []),
-  };
+  return { ...tool, tags: tool.tags ?? [] };
 }
 
 
 export async function getHomeData() {
   try {
     const [articles, reels] = await Promise.all([
-      query<ArticleRow>("editorial_articles?select=id,slug,title,summary,image_url,author,source_name,source_system,published_at&is_published=eq.true&source_system=eq.saraiva-owned&order=published_at.desc.nullslast,display_order.asc&limit=6"),
-      query<InstagramVideo>("editorial_reels?select=id,url,caption,thumbnail_url,video_url,username,duration,posted_at&is_published=eq.true&source_system=eq.saraiva-instagram&order=posted_at.desc.nullslast,display_order.asc&limit=6"),
+      sql<ArticleRow>(
+        `select id, slug, title, summary, image_url, author, source_name, source_system, published_at
+           from editorial_articles
+          where ${ARTIGO_PUBLICADO}
+          order by published_at desc nulls last, display_order asc
+          limit 6`,
+      ),
+      sql<InstagramVideo>(
+        `select id, url, caption, thumbnail_url, video_url, username, duration, posted_at
+           from editorial_reels
+          where is_published = true and source_system = 'saraiva-instagram'
+          order by posted_at desc nulls last, display_order asc
+          limit 6`,
+      ),
     ]);
     return { articles: articles.map((article) => normalizeArticle(article)), reels, available: true };
   } catch (error) {
@@ -89,17 +76,42 @@ export async function getHomeData() {
 }
 
 export async function getToolBySlug(slug: string) {
-  const rows = await query<ToolWithRelations>(`editorial_tools?select=*,editorial_tool_tags(editorial_tags(id,name,slug))&is_published=eq.true&slug=eq.${encodeSlug(slug)}&limit=1`);
+  const rows = await sql<ToolWithRelations>(
+    `select t.*,
+            coalesce((
+              select json_agg(json_build_object('id', g.id, 'name', g.name, 'slug', g.slug) order by g.name)
+                from editorial_tool_tags tt
+                join editorial_tags g on g.id = tt.tag_id
+               where tt.tool_id = t.id
+            ), '[]'::json) as tags
+       from editorial_tools t
+      where t.is_published = true and t.slug = $1
+      limit 1`,
+    [slug],
+  );
   return rows[0] ? normalizeTool(rows[0]) : null;
 }
 
 export async function getEditorialData() {
   try {
     const [articles, posts, videos, reels] = await Promise.all([
-      query<ArticleRow>("editorial_articles?select=id,slug,title,summary,image_url,author,source_name,source_system,published_at&is_published=eq.true&source_system=eq.saraiva-owned&order=published_at.desc.nullslast,display_order.asc"),
+      sql<ArticleRow>(
+        `select id, slug, title, summary, image_url, author, source_name, source_system, published_at
+           from editorial_articles
+          where ${ARTIGO_PUBLICADO}
+          order by published_at desc nulls last, display_order asc`,
+      ),
       Promise.resolve([] as Array<Pick<BlogPost, "id" | "slug" | "title" | "excerpt" | "published_at">>),
-      query<CatalogVideo>("editorial_videos?select=*&is_published=eq.true&source_system=eq.saraiva-video&order=published_at.desc.nullslast,display_order.asc"),
-      query<InstagramVideo>("editorial_reels?select=*&is_published=eq.true&source_system=eq.saraiva-instagram&order=posted_at.desc.nullslast,display_order.asc"),
+      sql<CatalogVideo>(
+        `select * from editorial_videos
+          where is_published = true and source_system = 'saraiva-video'
+          order by published_at desc nulls last, display_order asc`,
+      ),
+      sql<InstagramVideo>(
+        `select * from editorial_reels
+          where is_published = true and source_system = 'saraiva-instagram'
+          order by posted_at desc nulls last, display_order asc`,
+      ),
     ]);
     return {
       articles: articles.map((article) => normalizeArticle({ ...article, story_content: null, content_text: "", url: "" })),
@@ -117,7 +129,13 @@ export async function getArticleBySlug(slug: string) {
   const isPreview = process.env.OWNED_ARTICLE_PREVIEW === "true" && slug === OWNED_ARTICLE_SLUG;
   let rows: ArticleRow[];
   try {
-    rows = await query<ArticleRow>(`editorial_articles?select=id,slug,title,summary,image_url,author,source_name,source_system,published_at,url,content_text&is_published=eq.true&source_system=eq.saraiva-owned&slug=eq.${encodeSlug(slug)}&limit=1`);
+    rows = await sql<ArticleRow>(
+      `select id, slug, title, summary, image_url, author, source_name, source_system, published_at, url, content_text
+         from editorial_articles
+        where ${ARTIGO_PUBLICADO} and slug = $1
+        limit 1`,
+      [slug],
+    );
   } catch (error) {
     if (isPreview) return normalizeArticle(ownedArticlePilot);
     throw error;
@@ -129,20 +147,32 @@ export async function getArticleBySlug(slug: string) {
 }
 
 export async function getPostBySlug(slug: string) {
-  const rows = await query<Omit<BlogPost, "tags">>(`editorial_posts?select=*&is_published=eq.true&source_system=eq.saraiva-owned&slug=eq.${encodeSlug(slug)}&limit=1`);
+  const rows = await sql<Omit<BlogPost, "tags">>(
+    `select * from editorial_posts where ${ARTIGO_PUBLICADO} and slug = $1 limit 1`,
+    [slug],
+  );
   const post = rows[0];
   return post ? { ...post, title: sanitizeLegacyBrandText(post.title), excerpt: sanitizeLegacyBrandText(post.excerpt), content_html: sanitizeLegacyBrandText(post.content_html), tags: [] } : null;
 }
 
 export async function getVideoBySlug(slug: string) {
-  const rows = await query<CatalogVideo>(`editorial_videos?select=*&is_published=eq.true&source_system=eq.saraiva-video&slug=eq.${encodeSlug(slug)}&limit=1`);
+  const rows = await sql<CatalogVideo>(
+    `select * from editorial_videos
+      where is_published = true and source_system = 'saraiva-video' and slug = $1
+      limit 1`,
+    [slug],
+  );
   const video = rows[0];
   return video ? { ...video, title: sanitizeLegacyBrandText(video.title), description: sanitizeLegacyBrandText(video.description), story_content: sanitizeLegacyBrandText(video.story_content) } : null;
 }
 
 export async function getPublicOffers() {
   try {
-    return await query<PublicOffer>("editorial_offers?select=slug,name,offer_type,buyer,problem,delivery,public_status,price_range,updated_at&is_published=eq.true&order=updated_at.desc");
+    return await sql<PublicOffer>(
+      `select ${COLUNAS_OFERTA} from editorial_offers
+        where is_published = true
+        order by updated_at desc`,
+    );
   } catch (error) {
     console.error("Falha ao carregar soluções públicas", error instanceof Error ? error.message : "erro desconhecido");
     return [] as PublicOffer[];
@@ -150,6 +180,11 @@ export async function getPublicOffers() {
 }
 
 export async function getPublicOfferBySlug(slug: string) {
-  const rows = await query<PublicOffer>(`editorial_offers?select=slug,name,offer_type,buyer,problem,delivery,public_status,price_range,updated_at&is_published=eq.true&slug=eq.${encodeSlug(slug)}&limit=1`);
+  const rows = await sql<PublicOffer>(
+    `select ${COLUNAS_OFERTA} from editorial_offers
+      where is_published = true and slug = $1
+      limit 1`,
+    [slug],
+  );
   return rows[0] ?? null;
 }
