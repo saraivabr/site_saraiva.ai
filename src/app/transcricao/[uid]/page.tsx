@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { notFound } from "next/navigation";
 import type { ReactNode } from "react";
 import styles from "./page.module.css";
@@ -125,7 +126,7 @@ export default async function TranscricaoPage({ params }: Props) {
   return (
     <main className={styles.page}>
       <header className={styles.topbar}>
-        <a href="/" className={styles.brand}>SARAIVA<span>.AI</span></a>
+        <Link href="/" className={styles.brand}>SARAIVA<span>.AI</span></Link>
         <span className={styles.lab}>REEL LAB / REGRAVAÇÃO</span>
         <a href={reel.reel_url} target="_blank" rel="noreferrer" className={styles.originalLink}>
           abrir original ↗
